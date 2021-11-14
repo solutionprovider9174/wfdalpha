@@ -757,7 +757,7 @@ export default () => {
                                                         setBuyNow(!buyNow)
                                                     }
                                                 >
-                                                    Back Crypto of Duty
+                                                    Back Call of Duty
                                                 </button>
                                                 <small
                                                     style={{
