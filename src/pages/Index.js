@@ -650,7 +650,7 @@ export default () => {
                                         zIndex: '1',
                                     }}
                                 />
-                                <h1>We Fund Projects Baked</h1> 
+                                <h1>WeFund Projects Baked</h1>
                                 <h3></h3>
                                 <h2>
                                     {numeral(jackpot)
@@ -702,7 +702,7 @@ export default () => {
                                                             <div className="col-8 text-center d-flex text-md-start">
                                                                 <h3 className="align-self-center">
                                                                     <span>
-                                                                        PROJECT BAKED
+                                                                        PROJECTS BACKED
                                                                     </span>
                                                                     {players ? (
                                                                         players
@@ -728,7 +728,7 @@ export default () => {
                                                             <div className="col-8 text-center d-flex text-md-start">
                                                                 <h3 className="align-self-center">
                                                                     <span>
-                                                                        PROJECT TO BACK
+                                                                        PROJECTS TO BACK
                                                                     </span>
                                                                     {tickets ? (
                                                                         tickets

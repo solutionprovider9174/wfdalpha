@@ -594,7 +594,7 @@ export default function ConnectWallet() {
                                 }}
                             />{' '}
                             Create a Project
-                            <span className="item-label">Make Real Your Dream</span>
+                            <span className="item-label">Make Your Dream A Reality</span>
                         </a>
                     </li>
                     <li className="nav-item">
@@ -612,7 +612,7 @@ export default function ConnectWallet() {
                                 }}
                             />{' '}
                             View Projects
-                            <span className="item-label">Viev Amazing Projects</span>
+                            <span className="item-label">View Amazing Projects</span>
                             <span
                                 className="badge"
                                 style={{
@@ -667,10 +667,10 @@ export default function ConnectWallet() {
                             />{' '}
                             DAO
                             <span className="item-label">
-                                Together we decide
+                                Together We Decide
                             </span>
                         </a>
-                    </li>                    
+                    </li>
                 </nav>
 
                 <div className="navbar-nav ms-auto">
