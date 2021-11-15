@@ -593,8 +593,8 @@ export default function ConnectWallet() {
                                     top: '-1px',
                                 }}
                             />{' '}
-                            Create a Project
-                            <span className="item-label">Make Your Dream A Reality</span>
+                            WeFund
+                            <span className="item-label">WeFund Explanation</span>
                         </a>
                     </li>
                     <li className="nav-item">
@@ -611,8 +611,8 @@ export default function ConnectWallet() {
                                     top: '-1px',
                                 }}
                             />{' '}
-                            View Projects
-                            <span className="item-label">View Amazing Projects</span>
+                            Create a new Project
+                            <span className="item-label">Make Real Your Dream</span>
                             <span
                                 className="badge"
                                 style={{
@@ -645,9 +645,9 @@ export default function ConnectWallet() {
                                     top: '-1px',
                                 }}
                             />{' '}
-                           Sponsor
+                           Platform
                             <span className="item-label">
-                                Buy NFTs, SPONSOR PROJECTS
+                                View and Back amazing project
                             </span>
                         </a>
                     </li>
@@ -667,10 +667,10 @@ export default function ConnectWallet() {
                             />{' '}
                             DAO
                             <span className="item-label">
-                                Together We Decide
+                                Together we decide
                             </span>
                         </a>
-                    </li>
+                    </li>                    
                 </nav>
 
                 <div className="navbar-nav ms-auto">
