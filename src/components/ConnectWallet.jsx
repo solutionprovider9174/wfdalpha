@@ -593,8 +593,8 @@ export default function ConnectWallet() {
                                     top: '-1px',
                                 }}
                             />{' '}
-                            Create a Project
-                            <span className="item-label">Make Real Your Dream</span>
+                            WeFund
+                            <span className="item-label">WeFund Explanation</span>
                         </a>
                     </li>
                     <li className="nav-item">
@@ -611,8 +611,8 @@ export default function ConnectWallet() {
                                     top: '-1px',
                                 }}
                             />{' '}
-                            View Projects
-                            <span className="item-label">Viev Amazing Projects</span>
+                            Create a new Project
+                            <span className="item-label">Make Real Your Dream</span>
                             <span
                                 className="badge"
                                 style={{
@@ -645,9 +645,9 @@ export default function ConnectWallet() {
                                     top: '-1px',
                                 }}
                             />{' '}
-                           Sponsor
+                           Platform
                             <span className="item-label">
-                                Buy NFT, SPONSOR PROJECT
+                                View and Back amazing project
                             </span>
                         </a>
                     </li>
