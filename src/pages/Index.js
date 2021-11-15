@@ -650,7 +650,7 @@ export default () => {
                                         zIndex: '1',
                                     }}
                                 />
-                                <h1>WeFund Projects Baked</h1>
+                                <h1>WeFund Projects Backed</h1>
                                 <h3></h3>
                                 <h2>
                                     {numeral(jackpot)
@@ -767,7 +767,7 @@ export default () => {
                                                         opacity: '0.6',
                                                     }}
                                                 >
-                                                    You can Back Projects with{' '}
+                                                    You can back projects with{' '}
                                                     <strong>UST</strong> and{' '}
                                                     <strong>WFD</strong>
                                                 </small>

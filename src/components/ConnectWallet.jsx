@@ -647,7 +647,7 @@ export default function ConnectWallet() {
                             />{' '}
                            Sponsor
                             <span className="item-label">
-                                Buy NFT, SPONSOR PROJECT
+                                Buy NFTs, SPONSOR PROJECTS
                             </span>
                         </a>
                     </li>
