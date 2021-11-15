@@ -14,7 +14,7 @@ import { BsArrow90DegRight, BsFillBriefcaseFill } from "react-icons/bs";
 const Projectfeature = () => {
   return (
     <Flex
-      bg={useColorModeValue("#F9FAFB")}
+      bg={"#F9FAFB"}
       p={50}
       w="full"
       alignItems="center"
