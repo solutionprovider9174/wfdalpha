@@ -637,10 +637,17 @@ export default () => {
                 className="container"
                 style={{ marginTop: '12rem' }}
             >
-                <div className="card lota-card">
+                <div className="card lota-card"style={{
+                    
+                    backgroundImage: 'url(bg.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
                     <div className="card-header text-center">
-                        <div className="card-header-icon">
-                            <ChartPie size={90} color="#FFFFFF" />
+                        <div className="card-header-icon"style={{
+                    
+                    backgroundImage: 'url(bgflip.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
                         </div>
                         <h3>Crypto of Duty</h3>
                     </div>
@@ -746,10 +753,17 @@ export default () => {
                 className="container"
                 style={{ marginTop: '12rem' }}
             >
-                <div className="card lota-card">
+                <div className="card lota-card"style={{
+                    
+                    backgroundImage: 'url(bgflip.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
                     <div className="card-header text-center">
-                        <div className="card-header-icon">
-                            <ChartPie size={90} color="#FFFFFF" />
+                        <div className="card-header-icon"style={{
+                    
+                    backgroundImage: 'url(bgflip.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
                         </div>
                         <h3>ChainJob</h3>
                     </div>
@@ -856,10 +870,17 @@ export default () => {
                 className="container"
                 style={{ marginTop: '12rem' }}
             >
-                <div className="card lota-card">
+                <div className="card lota-card" style={{
+                    
+                    backgroundImage: 'url(bg.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
                     <div className="card-header text-center">
-                        <div className="card-header-icon">
-                            <ChartPie size={90} color="#FFFFFF" />
+                        <div className="card-header-icon"style={{
+                    
+                    backgroundImage: 'url(bgflip.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
                         </div>
                         <h3>CryptoBank</h3>
                     </div>
@@ -938,6 +959,7 @@ export default () => {
 
 
 
+
                                             
                       
                     </div>
@@ -962,11 +984,18 @@ export default () => {
                 className="container"
                 style={{ marginTop: '12rem' }}
             >
-                <div className="card lota-card">
+                <div className="card lota-card" style={{
+                    
+                    backgroundImage: 'url(bgflip.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
                     <div className="card-header text-center">
-                        <div className="card-header-icon">
-                            <ChartPie size={90} color="#FFFFFF" />
-                        </div>
+                        <div className="card-header-icon"
+                        style={{
+                    
+                            backgroundImage: 'url(bgflip.svg)', 
+                            backgroundPosition: 'center center',
+                        }}></div>
                         <h3>LinkxVR</h3>
                     <div className="card-body">
                         <div className="row">
@@ -1070,7 +1099,11 @@ Sharing is caring, we want to help people and share love to the other that “yo
                 className="container"
                 style={{ marginTop: '12rem' }}
             >
-                <div className="card lota-card">
+                <div className="card lota-card" style={{
+                    
+                    backgroundImage: 'url(bg.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
                     <div className="card-header text-center">
                         <div className="card-header-icon">
                             <ChartPie size={90} color="#FFFFFF" />
@@ -1175,10 +1208,17 @@ Sharing is caring, we want to help people and share love to the other that “yo
                 className="container"
                 style={{ marginTop: '12rem' }}
             >
-                <div className="card lota-card">
+                <div className="card lota-card" style={{
+                    
+                    backgroundImage: 'url(bgflip.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
                     <div className="card-header text-center">
-                        <div className="card-header-icon">
-                            <ChartPie size={90} color="#FFFFFF" />
+                        <div className="card-header-icon"style={{
+                    
+                    backgroundImage: 'url(bgflip.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
                         </div>
                         <h3>SIMBA</h3>
                     </div>
@@ -1192,7 +1232,7 @@ Sharing is caring, we want to help people and share love to the other that “yo
                                     <p>Total Backed</p>
                                     <h5>
                                         {
-                                            <p> 2'000 </p>
+                                            <h3 color="#000FFF"> 2'000 </h3>
 
                                         }
                                         <span>UST</span>
@@ -1273,7 +1313,7 @@ Sharing is caring, we want to help people and share love to the other that “yo
                     </div>
                 </div>
             </div> */}
-
+{/*---------BUTTON PART-------------------------*/}
 <div className="container">
                 <div className="row">
                     <div className="col-12">
@@ -1435,115 +1475,7 @@ Sharing is caring, we want to help people and share love to the other that “yo
                                     </>
                                 )}
 
-                                {payWith == 'ust' && (
-                                    <>
-                                        <p
-                                            style={{
-                                                marginBottom: '7px',
-                                                fontSize: '14px',
-                                                opacity: '0.3',
-                                            }}
-                                        >
-                                            Boost this project GOLD{' '}
-                                            <a
-                                                style={{ color: '#fff' }}
-                                                href="https://app.WFDredprotocol.com"
-                                                target="_blank"
-                                            >
-                                                WFD Gold
-                                            </a>
-                                        </p>
-                                        <label className="bonus-label">
-                                            <input
-                                                type="checkbox"
-                                                ref={bonusToggle}
-                                                checked={WFDBonus}
-                                                className="switch"
-                                                name="WFD_bonus"
-                                                onChange={(e, checked) =>
-                                                    bonusCheckbox(e, checked)
-                                                }
-                                            />
-                                            <label
-                                                className="switch-label"
-                                                onClick={() =>
-                                                    clickElement(bonusToggle)
-                                                }
-                                            ></label>
-                                            <Fire size={24} weight="fill" />{' '}
-                                            BOOST GOLD
-                                            <span
-                                                style={{
-                                                    color: '#FFD700',
-                                                    fontFamily: 'Cosmos',
-                                                    fontSize: '1.2em',
-                                                    padding: '4px 8px',
-                                                    background:
-                                                        'linear-gradient(228.88deg,rgba(0,0,0,.2) 18.2%,hsla(0,0%,69%,.107292) 77.71%,rgba(0,0,0,.0885417) 99.78%,transparent 146.58%),#171717',
-                                                    borderRadius: '25px',
-                                                }}
-                                            >
-                                                WFD
-                                            </span>
-                                            <span className="badge rounded-pill">
-                                                BOOST
-                                            </span>
-                                        </label>
-                                    </>
-                                )}
-                                {payWith !== 'ust' && (
-                                    <span className="info mb-2">
-                                        <Info
-                                            size={14}
-                                            style={{ marginTop: '-2px' }}
-                                            weight="fill"
-                                            className="me-1"
-                                        />
-                                        No WFD? you can buy WFD on the{' '}
-                                        <a
-                                            href="https://app.WFDredprotocol.com"
-                                            target="_blank"
-                                        >
-                                            WFDred website
-                                        </a>
-                                    </span>
-                                )}
-
-                                <label className="gift-label">
-                                    <input
-                                        type="checkbox"
-                                        ref={friendsToggle}
-                                        checked={giftFriend.active}
-                                        className="switch"
-                                        name="gift_friend"
-                                        onChange={(e, checked) =>
-                                            giftCheckbox(e, checked)
-                                        }
-                                    />
-                                    <label
-                                        className="switch-label"
-                                        onClick={() =>
-                                            clickElement(friendsToggle)
-                                        }
-                                    ></label>
-                                    <Gift size={24} weight="fill" /> BOOST SILVER
-                                    <span className="badge rounded-pill">
-                                        BOOST
-                                    </span>
-                                </label>
-                                {giftFriend.active && (
-                                    <>
-                                        <p className="m-0">
-                                        </p>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="yourfriendswalletaddress"
-                                            name="gift_wallet"
-                                            onChange={(e) => giftAddress(e)}
-                                        />
-                                    </>
-                                )}
+                                
                                 <div className="text-sm">{result}</div>
 
                                 <button
