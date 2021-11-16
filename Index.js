@@ -63,7 +63,6 @@ const loterra_pool_address = 'terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta'
 
 const BURNED_LOTA = 4301383550000
 
-
 export default () => {
     const [jackpot, setJackpot] = useState(0)
     const [jackpotWFDred, setWFDredJackpot] = useState(0)
@@ -261,8 +260,6 @@ export default () => {
     const [combo, setCombo] = useState('')
     const [result, setResult] = useState('')
     const [amount, setAmount] = useState(0)
-    const [name, setName] = useState(0)
-    const [description, setDescription] = useState(0)
 
     function checkIfDuplicateExists(w) {
         return new Set(w).size !== w.length
@@ -653,65 +650,112 @@ export default () => {
                                         zIndex: '1',
                                     }}
                                 />
-                                <h1>Create a New Project</h1> 
+                                <h1>We Fund Projects Baked</h1> 
                                 <h3></h3>
-                         
+                                <h2>
+                                    {numeral(jackpot)
+                                        .format('0,0.00')
+                                        .split('')
+                                        .map((obj) => {
+                                            return (
+                                                <div className="roller">
+                                                    {obj}
+                                                </div>
+                                            )
+                                        })}
+                                    <div className="roller">
+                                        <span>UST</span>
+                                    </div>
+                                </h2>
+                                <div className="combine-jackpot">
+                                    <PlusCircle size={28} weight="fill" />
+                                </div>
+                                <h2 className="WFD-jackpot">
+                                    {numeral(jackpotWFDred)
+                                        .format('0,0.00')
+                                        .split('')
+                                        .map((obj) => {
+                                            return (
+                                                <div className="roller">
+                                                    {obj}
+                                                </div>
+                                            )
+                                        })}
+                                    <div className="roller">
+                                        <span>WFD</span>
+                                    </div>
+                                </h2>
                             </div>
                             <div className="row">
                                 <div className="col-md-8 mx-auto">
                                     <div className="countdown-holder">
                                         <div className="row">
-                                                
-
-                                          
-                                           
-                                            <div className="col-12 text-center mt-4 mb-4">
-                                                <button
-                                                    className={
-                                                        'btn btn-special'
-                                                    }
-                                                    onClick={() =>
-                                                        setBuyNow(!buyNow)
-                                                    }
-                                                >
-                                                    Create New Project
-                                                </button>
-                                                <small
-                                                    style={{
-                                                        display: 'block',
-                                                        marginTop: '10px',
-                                                        fontSize: '12px',
-                                                        opacity: '0.6',
-                                                    }}
-                                                >
-                                                    You can Create Projects with{' '}
-                                                    <strong>UST</strong> and{' '}
-                                                    <strong>WFD</strong>
-                                                </small>
+                                            <div className="col-6">
+                                                <div className="card stats-card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-4 text-center svg-rotate">
+                                                                <UserFocus
+                                                                    size={36}
+                                                                />
+                                                            </div>
+                                                            <div className="col-8 text-center d-flex text-md-start">
+                                                                <h3 className="align-self-center">
+                                                                    <span>
+                                                                        PROJECT BAKED
+                                                                    </span>
+                                                                    {players ? (
+                                                                        players
+                                                                    ) : (
+                                                                        <PriceLoader />
+                                                                    )}
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
+
+                                            <div className="col-6">
+                                                <div className="card stats-card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-4 text-center svg-rotate">
+                                                                <Ticket
+                                                                    size={36}
+                                                                />
+                                                            </div>
+                                                            <div className="col-8 text-center d-flex text-md-start">
+                                                                <h3 className="align-self-center">
+                                                                    <span>
+                                                                        PROJECT TO BACK
+                                                                    </span>
+                                                                    {tickets ? (
+                                                                        tickets
+                                                                    ) : (
+                                                                        <PriceLoader />
+                                                                    )}
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-8 mx-auto">
+                                                <Countdown
+                                                    expiryTimestamp={
+                                                        expiryTimestamp
+                                                    }
+                                                />
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="col-12 col-md-8 mx-auto">
-                            <div className="row">
-                                <div className="col-12 col-md-8 mx-auto">
-                                    <div className="card stats-card-special latest-draw">
-                                        <div className="card-header text-center">
-                                            <h3 style={{ fontSize: '21px' }}>
-                                                Next Project Coming Soon
-                                            </h3>
-                                        </div>
-                                        <div className="card-body text-center">
-                                          
-                                          
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
 
@@ -719,343 +763,7 @@ export default () => {
              <div className="mt-4">contract-v2.0.1</div>
                 <div className="text-sm">terra14mevcmeqt0n4myggt7c56l5fl0xw2hwa2mhlg0</div> */}
             </div>
-            <div className="container">
-                <div className="row">
-                    <div className="col-12">
-                        <div
-                            className={
-                                'card amount-block' + (buyNow ? ' active' : '')
-                            }
-                        >
-                            <div className="card-header">
-                                <h3>Create a New Project</h3>
-                                <button
-                                    className="toggle"
-                                    onClick={() => setBuyNow(!buyNow)}
-                                >
-                                    <X size={36} />
-                                </button>
-                            </div>
-                            <div className="card-body">
-                                <p
-                                    style={{
-                                        marginBottom: 0,
-                                    }}
-                                >
-                                    Collect with:
-                                </p>
-                                <div className="btn-group w-100 mb-2">
-                                    <button
-                                        className={
-                                            'btn btn-default' +
-                                            (payWith == 'ust'
-                                                ? ' active'
-                                                : ' inactive')
-                                        }
-                                        onClick={() => setPayWith('ust')}
-                                    >
-                                        <img
-                                            src={'/UST.svg'}
-                                            className="me-2"
-                                            width="20px"
-                                        />
-                                        UST
-                                    </button>
-                                    <button
-                                        className={
-                                            'btn btn-default' +
-                                            (payWith == 'WFD'
-                                                ? ' active'
-                                                : ' inactive')
-                                        }
-                                        onClick={() => setPayWith('WFD')}
-                                    >
-                                        <img
-                                            src={'/WFD.png'}
-                                            className="me-2"
-                                            width="20px"
-                                        />
-                                        WFD
-                                    </button>
-                                </div>
-                              
-                                <h4>Amount Required</h4>
-                                    <button
-                                        className="btn btn-default"
-                                        onClick={() => amountChange('down')}
-                                    >
-                                        <MinusCircle
-                                            size={31}
-                                            color={'#9183d4'}
-                                        />
-                                    </button>
-                               
-                                
-                                <h4>Amount Required</h4>
-                                <div className="input-group mt-3 mb-2">
-                                    <button
-                                        className="btn btn-default"
-                                        onClick={() => amountChange('down')}
-                                    >
-                                        <MinusCircle
-                                            size={31}
-                                            color={'#9183d4'}
-                                        />
-                                    </button>
-                                    <input
-                                        type="number"
-                                        className="form-control amount-control"
-                                        value={amount}
-                                        min="1"
-                                        max="200"
-                                        step="1"
-                                        onChange={(e) => inputChange(e)}
-                                    />
-                                    <button
-                                        className="btn btn-default"
-                                        onClick={() => amountChange('up')}
-                                    >
-                                        <PlusCircle
-                                            size={31}
-                                            color={'#9183d4'}
-                                        />
-                                    </button>
-                                </div>
-                                {/* <p className="mb-2">Total: <strong>{numeral((amount * price) / 1000000).format("0,0.00")} UST</strong></p> */}
-                                {!WFDBonus || payWith == 'WFD' ? (
-                                    <p className="mb-2">
-                                        Total:{' '}
-                                        <strong>
-                                            {numeral(
-                                                (amount * price) / 1000000
-                                            ).format('0,0.00')}{' '}
-                                            {payWith == 'ust' ? 'UST' : 'WFD'}
-                                        </strong>
-                                    </p>
-                                ) : (
-                                    <>
-                                        <p
-                                            className="mb-0"
-                                            style={{
-                                                textDecoration: 'line-through',
-                                            }}
-                                        >
-                                            Total:{' '}
-                                            <strong>
-                                                {numeral(
-                                                    (amount * price) / 1000000
-                                                ).format('0,0.00')}{' '}
-                                                UST
-                                            </strong>
-                                        </p>
-                                        <p
-                                            className="mb-2"
-                                            style={{ color: '#4ee19b' }}
-                                        >
-                                            Total:{' '}
-                                            <strong>
-                                                {' '}
-                                                {numeral(
-                                                    (amount * price) / 1000000 -
-                                                        (amount * price) /
-                                                            1000000 /
-                                                            state.config
-                                                                .bonus_burn_rate
-                                                ).format('0,0.00')}{' '}
-                                                UST{' '}
-                                                <span>
-                                                    +{' '}
-                                                    {numeral(
-                                                        (amount * price) /
-                                                            1000000 /
-                                                            state.config
-                                                                .bonus_burn_rate
-                                                    ).format('0,0.00')}{' '}
-                                                    WFD
-                                                </span>
-                                            </strong>
-                                        </p>
-                                        <span className="info mb-2">
-                                            <Info
-                                                size={14}
-                                                style={{ marginTop: '-2px' }}
-                                                weight="fill"
-                                                className="me-1"
-                                            />
-                                            No WFD? you can buy WFD on the{' '}
-                                            <a
-                                                href="https://app.WFDredprotocol.com"
-                                                target="_blank"
-                                            >
-                                                WFDred website
-                                            </a>
-                                        </span>
-                                    </>
-                                )}
-
-                                {payWith == 'ust' && (
-                                    <>
-                                        <p
-                                            style={{
-                                                marginBottom: '7px',
-                                                fontSize: '14px',
-                                                opacity: '0.3',
-                                            }}
-                                        >
-                                            Boost this project GOLD{' '}
-                                            <a
-                                                style={{ color: '#fff' }}
-                                                href="https://app.WFDredprotocol.com"
-                                                target="_blank"
-                                            >
-                                                WFD Gold
-                                            </a>
-                                        </p>
-                                        <label className="bonus-label">
-                                            <input
-                                                type="checkbox"
-                                                ref={bonusToggle}
-                                                checked={WFDBonus}
-                                                className="switch"
-                                                name="WFD_bonus"
-                                                onChange={(e, checked) =>
-                                                    bonusCheckbox(e, checked)
-                                                }
-                                            />
-                                            <label
-                                                className="switch-label"
-                                                onClick={() =>
-                                                    clickElement(bonusToggle)
-                                                }
-                                            ></label>
-                                            <Fire size={24} weight="fill" />{' '}
-                                            BOOST GOLD
-                                            <span
-                                                style={{
-                                                    color: '#FFD00',
-                                                    fontFamily: 'Cosmos',
-                                                    fontSize: '1.2em',
-                                                    padding: '4px 8px',
-                                                    background:
-                                                        'linear-gradient(228.88deg,rgba(1,0,0,.2) 18.2%,hsla(0,0%,69%,.107292) 77.71%,rgba(0,0,0,.0885417) 93.78%,transparent 146.58%),#271717',
-                                                    borderRadius: '25px',
-                                                }}
-                                            >
-                                                WFD
-                                            </span>
-                                            <span className="badge rounded-pill">
-                                                BOOST
-                                            </span>
-                                        </label>
-                                    </>
-                                )}
-                                {payWith !== 'ust' && (
-                                    <span className="info mb-2">
-                                        <Info
-                                            size={14}
-                                            style={{ marginTop: '-2px' }}
-                                            weight="fill"
-                                            className="me-1"
-                                        />
-                                        No WFD? you can buy WFD on the{' '}
-                                        <a
-                                            href="https://app.WFDredprotocol.com"
-                                            target="_blank"
-                                        >
-                                            WFDred website
-                                        </a>
-                                    </span>
-                                )}
-
-                                <label className="gift-label">
-                                    <input
-                                        type="checkbox"
-                                        ref={friendsToggle}
-                                        checked={giftFriend.active}
-                                        className="switch"
-                                        name="gift_friend"
-                                        onChange={(e, checked) =>
-                                            giftCheckbox(e, checked)
-                                        }
-                                    />
-                                    <label
-                                        className="switch-label"
-                                        onClick={() =>
-                                            clickElement(friendsToggle)
-                                        }
-                                    ></label>
-                                    <Gift size={24} weight="fill" /> BOOST SILVER
-                                    <span className="badge rounded-pill">
-                                        BOOST
-                                    </span>
-                                </label>
-                                {giftFriend.active && (
-                                    <>
-                                        <p className="m-0">
-                                        </p>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="yourfriendswalletaddress"
-                                            name="gift_wallet"
-                                            onChange={(e) => giftAddress(e)}
-                                        />
-                                    </>
-                                )}
-                                <div className="text-sm">{result}</div>
-
-                                <button
-                                    onClick={() => setTicketModal(!ticketModal)}
-                                    className="btn btn-default w-100 mb-3 mt-3"
-                                    style={{
-                                        fontSize: '18px',
-                                        fontWeight: 'bold',
-                                        padding: '11px 5px',
-                                        borderBottom: '4px solid #10003b',
-                                    }}
-                                >
-                                    <PencilLine
-                                        size={24}
-                                        color={'#ff36ff'}
-                                        style={{
-                                            marginTop: '-1px',
-                                            marginRight: '5px',
-                                        }}
-                                    />
-                                    Help to create your idea
-                                </button>
-                                <button
-                                    onClick={() => execute()}
-                                    className="btn btn-special w-100"
-                                    disabled={amount <= 0}
-                                >
-                                    {!buyLoader ? (
-                                        <>Create {} Crypto Of Duty</>
-                                    ) : (
-                                        <div
-                                            className="spinner-border spinner-border-sm"
-                                            role="status"
-                                            style={{
-                                                position: 'relative',
-                                                top: '-3px',
-                                            }}
-                                        >
-                                            <span className="visually-hidden">
-                                                Loading...
-                                            </span>
-                                        </div>
-                                    )}
-                                </button>
-                            </div>
-                        </div>
-                        <div
-                            className={'backdrop' + (buyNow ? ' show' : '')}
-                            onClick={() => setBuyNow(!buyNow)}
-                        ></div>
-                        {/* <SocialShare /> */}
-                    </div>
-                </div>
-            </div>
+                
 
             <div
                 className="how"
@@ -1076,28 +784,28 @@ export default () => {
                         <div className="col-md-4 my-2">
                             <div className="step">
                                 <label>Step 1</label>
-                                <h3>Participate In Lottery</h3>
-                                <p>Buy max 200 tickets per transaction</p>
+                                <h3>Create a Project</h3>
+                                <p>Make Real your dream with Us</p>
                             </div>
                         </div>
                         <div className="col-md-4 my-2">
                             <div className="step">
                                 <label>Step 2</label>
-                                <h3>Wait For Draw</h3>
-                                <p>The contract draw a lottery every 3 days</p>
+                                <h3>Waiting For Approval</h3>
+                                <p>Our Specialist and the Voitng Power decide</p>
                             </div>
                         </div>
                         <div className="col-md-4 my-2">
                             <div className="step">
                                 <label>Step 3</label>
-                                <h3>Check Your Prizes</h3>
+                                <h3>View Our Project</h3>
                                 <p>
-                                    Prizes automatically deposited into wallet
+                                    The project is ready to be back
                                 </p>
                             </div>
                         </div>
                         <div className="col-12 text-center">
-                            <h5 className="mt-4 mb-1">Learn more?</h5>
+                            <h5 className="mt-4 mb-1">How it s work the process?</h5>
                             <a
                                 className="btn btn-plain"
                                 href="https://docs.loterra.io/products/lottery"
@@ -1136,6 +844,8 @@ export default () => {
                             <ChartPie size={90} color="#20FF93" />
                         </div>
                         <h3>WeFund Stats</h3>
+
+                        
                     </div>
                     <div className="card-body">
                         <div className="row">
@@ -1206,6 +916,7 @@ export default () => {
                                 </div>
                             </div>
                             <div className="col-md-12 text-center">
+                        
                                 <a
                                     href="https://coinhall.org/charts/terra/terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta"
                                     target="_blank"
@@ -1252,7 +963,6 @@ export default () => {
             <TicketModal
                 open={ticketModal}
                 amount={amount}
-               
                 updateCombos={(new_code, index) =>
                     updateCombos(new_code, index)
                 }
@@ -1275,4 +985,3 @@ export default () => {
         </>
     )
 }
-
