@@ -107,6 +107,7 @@ export default function Hero() {
               size={'lg'}
               fontWeight={'normal'}
               px={6}
+              colorScheme={'purple'}
               leftIcon={<PlayIcon h={4} w={4} color={'gray.300'} />}>
               How It Works
             </Button>

@@ -14,8 +14,15 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  Portal,
   Image
 } from '@chakra-ui/react';
+
 import {
   HamburgerIcon,
   CloseIcon,
@@ -32,14 +39,14 @@ export default function WithSubnavigation() {
   return (
     <Box width="100%">
       <Flex
-        bg={useColorModeValue('white', 'gray.800')}
-        color={useColorModeValue('gray.600', 'white')}
+        bg= {'gray.800'}
+        color={ 'white'}
         minH={'60px'}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
         borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.900')}
+        borderColor={ 'gray.900'}
         align={'center'}>
         <Flex
           flex={{ base: 1, md: 'auto' }}
@@ -58,7 +65,7 @@ export default function WithSubnavigation() {
           <Text
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
             fontFamily={'heading'}
-            color={useColorModeValue('gray.800', 'white')}>
+            color={ 'white'}>
             
           </Text>
           <Image
@@ -99,19 +106,39 @@ export default function WithSubnavigation() {
             }}>
             Create your project
           </Button>
-          <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'purple.400'}
-            href={'#'}
-            _hover={{
-              bg: 'blue.300',
-            }}
-            rightIcon={<AddIcon />}>
-            Connect Wallet
-          </Button>
+                <Popover >
+                  <PopoverTrigger>
+                      <Button
+                      display={{ base: 'none', md: 'inline-flex' }}
+                      fontSize={'sm'}
+                      fontWeight={600}
+                      color={'white'}
+                      bg={'purple.400'}
+                      href={'#'}
+                      _hover={{
+                        bg: 'blue.300',
+                      }}
+                      rightIcon={<AddIcon />}>
+                      Connect Wallet
+                    </Button>
+              </PopoverTrigger>
+                <Portal >
+                      <PopoverContent bg={'gray.800'} color={'white'} boxShadow={'md'}>
+                      <PopoverArrow />
+                        <PopoverHeader border={'none'}>
+                        Connect your wallet
+                        </PopoverHeader>
+                      <PopoverCloseButton />
+                <PopoverBody>
+                  <Stack>
+                    <Button colorScheme="purple">Station</Button>
+                    <Button colorScheme="purple">Browser Extension</Button>
+                    </Stack>
+                  </PopoverBody>
+                        </PopoverContent>
+                      </Portal>
+                 </Popover>
+          
         </Stack>
       </Flex>
 
@@ -123,9 +150,9 @@ export default function WithSubnavigation() {
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200');
-  const linkHoverColor = useColorModeValue('gray.800', 'white');
-  const popoverContentBgColor = useColorModeValue('white', 'gray.800');
+  const linkColor = 'gray.200';
+  const linkHoverColor = 'gray.200';
+  const popoverContentBgColor ='gray.800';
 
   return (
     <Stack direction={'row'} spacing={8} mt={2}>
@@ -177,12 +204,12 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
       display={'block'}
       p={2}
       rounded={'md'}
-      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
+      _hover={{ bg: 'gray.900' }}>
       <Stack direction={'row'} align={'center'}>
         <Box>
           <Text
             transition={'all .3s ease'}
-            _groupHover={{ color: 'pink.400' }}
+            _groupHover={{ color: 'purple.400' }}
             fontWeight={500}>
             {label}
           </Text>
@@ -196,7 +223,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
           justify={'flex-end'}
           align={'center'}
           flex={1}>
-          <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={'purple.400'} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Link>
@@ -206,7 +233,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
 const MobileNav = () => {
   return (
     <Stack
-      bg={useColorModeValue('white', 'gray.800')}
+      bg={'gray.800'}
       p={4}
       display={{ md: 'none' }}>
       {NAV_ITEMS.map((navItem) => (
@@ -232,7 +259,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         }}>
         <Text
           fontWeight={600}
-          color={useColorModeValue('gray.600', 'gray.200')}>
+          color={'gray.400'}>
           {label}
         </Text>
         {children && (
@@ -252,7 +279,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           pl={4}
           borderLeft={1}
           borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.200', 'gray.700')}
+          borderColor={'gray.700'}
           align={'start'}>
           {children &&
             children.map((child) => (

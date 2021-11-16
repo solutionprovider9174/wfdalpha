@@ -26,11 +26,12 @@ export default function Emailsub() {
       justify={'center'}
       w={'100%'}
 
-      bg={useColorModeValue('white', 'whiteAlpha.100')}>
+      bg={'whiteAlpha.100'}>
       <Container
         boxShadow={'xl'}
         rounded={'lg'}
         p={6}
+        bg={'purple.900'}
         direction={'column'}
         >
         <Heading
