@@ -63,7 +63,6 @@ const loterra_pool_address = 'terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta'
 
 const BURNED_LOTA = 4301383550000
 
-
 export default () => {
     const [jackpot, setJackpot] = useState(0)
     const [jackpotWFDred, setWFDredJackpot] = useState(0)
@@ -633,9 +632,674 @@ export default () => {
        
         
 
-     
+            <div
+                ref={loterraStats}
+                className="container"
+                style={{ marginTop: '12rem' }}
+            >
+                <div className="card lota-card"style={{
+                    
+                    backgroundImage: 'url(bg.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
+                    <div className="card-header text-center">
+                        <div className="card-header-icon"style={{
+                    
+                    backgroundImage: 'url(bgflip.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
+                        </div>
+                        <h3>Crypto of Duty</h3>
+                    </div>
+                    <div className="card-body">
+                        <div className="row">
+                        <p>This multi Chain global war project will have a token and its distribution in each ecosystem, based on play to earn technology and on buying game Assets to give to players to improve the gaming experience.</p>
+                        <p>Based on NFT technology, each ecosystem will have specific weapons sold in the form of NFTs, specific characters and abilities Once the game is set (similar to Call of Duty) the war between ecosystems will begin, where the rewards will be based on the strength of the ecosystem in which they are located and there will be only one winning ecosystem .</p>
+                           
+                        <h5>We Offering</h5>
+                        <p>10% Token Allocation</p>
+                        
+
+                            <div className="col-md-6 mb-3">
+                                <div className="lota-stats">
+                                    <p>Total Backed</p>
+                                    <h5>
+                                        {
+                                            <p>10 000</p>
+                                        }
+                                        <span>UST</span>
+                                    </h5>
+                                </div>
+                            </div>
+
+                            
+                            <div className="col-md-6 mb-3">
+                                <div className="lota-stats">
+                                    <p>Total of The project</p>
+                                    <h5>
+                                        {
+                                            <p> 12'000'000</p>
+                                        }
+                                        <span>UST</span>
+                                    </h5>
+                                </div>
+                            </div>
+                           
+                           
+                                            </div>
 
 
+
+
+
+
+
+                                            <div className="col-12 text-center mt-4 mb-4">
+                                                <button
+                                                    className={
+                                                        'btn btn-special'
+                                                    }
+                                                    onClick={() =>
+                                                        setBuyNow(!buyNow)
+                                                    }
+                                                >
+                                                    Back Call of Duty on SOL
+                                                </button>
+                                                <small
+                                                    style={{
+                                                        display: 'block',
+                                                        marginTop: '10px',
+                                                        fontSize: '12px',
+                                                        opacity: '0.6',
+                                                    }}
+                                                >
+                                                    You can Back Projects with{' '}
+                                                    <strong>UST</strong> and{' '}
+                                                    <strong>WFD</strong>
+                                                </small>
+                                            </div>
+
+
+
+
+
+
+
+
+
+                                            
+                      
+                    </div>
+                </div>
+            </div>
+            {/* <div className="container" style={{ marginTop: '2rem' }}>
+                <div className="card lota-card">
+                    <div className="card-body">
+                        <coingecko-coin-price-chart-widget
+                            currency="usd"
+                            coin-id="WeFund"
+                            locale="en"
+                            height="300"
+                        ></coingecko-coin-price-chart-widget>
+                    </div>
+                </div>
+            </div> */}
+
+
+
+
+<div
+                ref={loterraStats}
+                className="container"
+                style={{ marginTop: '12rem' }}
+            >
+                <div className="card lota-card"style={{
+                    
+                    backgroundImage: 'url(bgflip.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
+                    <div className="card-header text-center">
+                        <div className="card-header-icon"style={{
+                    
+                    backgroundImage: 'url(bgflip.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
+                        </div>
+                        <h3>ChainJob</h3>
+                    </div>
+                    <div className="card-body">
+                        <div className="row">
+                        <p>ChainJob is a job portal to connect the Project creator to the developer, Hire in smart and simple way using milestone and smart contract to pay and transfer without any porblem or discussion based on performance and simple to connect project creator to dev/marketing etc</p>
+                        <h5>We Offering</h5>
+                        <p>10% Token Allocation</p>
+                        <p>5% Profit Sharing</p>
+                         
+
+                            <div className="col-md-6 mb-3">
+                                <div className="lota-stats">
+                                    <p>Total Backed</p>
+                                    <h5>
+                                        {
+                                            <p>1'000</p>
+
+                                        }
+                                        <span>UST</span>
+                                    </h5>
+                                </div>
+                            </div>
+
+                            
+                            <div className="col-md-6 mb-3">
+                                <div className="lota-stats">
+                                    <p>Total of The project</p>
+                                    <h5>
+                                        {<p>1'000'000</p>
+                                        }
+                                        <span>UST</span>
+                                    </h5>
+                                </div>
+                            </div>
+                           
+                           
+                                            </div>
+
+
+
+
+
+
+
+                                            <div className="col-12 text-center mt-4 mb-4">
+                                                <button
+                                                    className={
+                                                        'btn btn-special'
+                                                    }
+                                                    onClick={() =>
+                                                        setBuyNow(!buyNow)
+                                                    }
+                                                >
+                                                    Back ChainJob
+                                                </button>
+                                                <small
+                                                    style={{
+                                                        display: 'block',
+                                                        marginTop: '10px',
+                                                        fontSize: '12px',
+                                                        opacity: '0.6',
+                                                    }}
+                                                >
+                                                    You can Back Projects with{' '}
+                                                    <strong>UST</strong> and{' '}
+                                                    <strong>WFD</strong>
+                                                </small>
+                                            </div>
+
+
+
+
+
+
+
+
+
+                                            
+                      
+                    </div>
+                </div>
+            </div>
+            {/* <div className="container" style={{ marginTop: '2rem' }}>
+                <div className="card lota-card
+                
+                
+                ">
+                    <div className="card-body">
+                        <coingecko-coin-price-chart-widget
+                            currency="usd"
+                            coin-id="WeFund"
+                            locale="en"
+                            height="300"
+                        ></coingecko-coin-price-chart-widget>
+                    </div>
+                </div>
+            </div> */}
+
+
+
+<div
+                ref={loterraStats}
+                className="container"
+                style={{ marginTop: '12rem' }}
+            >
+                <div className="card lota-card" style={{
+                    
+                    backgroundImage: 'url(bg.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
+                    <div className="card-header text-center">
+                        <div className="card-header-icon"style={{
+                    
+                    backgroundImage: 'url(bgflip.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
+                        </div>
+                        <h3>CryptoBank</h3>
+                    </div>
+                    <div className="card-body">
+                        <div className="row">
+                        <p>CryptoBank is a decentralize bank, this bank proviede 15% interesse guaranteed with a minimum 1 Year allocation , this project is 100% based on Anchor protocol and is integrate with SecurityApp and Mina Protocol</p>
+                        <h5>We Offering</h5>
+                        <p>15% Token Allocation</p>
+                        <p>3% Profit Sharing</p>
+                            <div className="col-md-6 mb-3">
+                                <div className="lota-stats">
+                                    <p>Total Backed</p>
+                                    <h5>
+                                        {
+                                            <p> 5'000 </p>
+
+                                        }
+                                        <span>UST</span>
+                                    </h5>
+                                </div>
+                            </div>
+
+                            
+                            <div className="col-md-6 mb-3">
+                                <div className="lota-stats">
+                                    <p>Total of The project</p>
+                                    <h5>
+                                        {
+
+                                            <p> 4'000'000</p>
+                                        }
+                                        <span>UST</span>
+                                    </h5>
+                                </div>
+                            </div>
+                           
+                           
+                                            </div>
+
+
+
+
+
+
+
+                                            <div className="col-12 text-center mt-4 mb-4">
+                                                <button
+                                                    className={
+                                                        'btn btn-special'
+                                                    }
+                                                    onClick={() =>
+                                                        setBuyNow(!buyNow)
+                                                    }
+                                                >
+                                                    Back CryptoBank
+                                                </button>
+                                                <small
+                                                    style={{
+                                                        display: 'block',
+                                                        marginTop: '10px',
+                                                        fontSize: '12px',
+                                                        opacity: '0.6',
+                                                    }}
+                                                >
+                                                    You can Back Projects with{' '}
+                                                    <strong>UST</strong> and{' '}
+                                                    <strong>WFD</strong>
+                                                </small>
+                                            </div>
+
+
+
+
+
+
+
+
+
+                                            
+                      
+                    </div>
+                </div>
+            </div>
+            {/* <div className="container" style={{ marginTop: '2rem' }}>
+                <div className="card lota-card">
+                    <div className="card-body">
+                        <coingecko-coin-price-chart-widget
+                            currency="usd"
+                            coin-id="WeFund"
+                            locale="en"
+                            height="300"
+                        ></coingecko-coin-price-chart-widget>
+                    </div>
+                </div>
+            </div> */}
+
+
+<div
+                ref={loterraStats}
+                className="container"
+                style={{ marginTop: '12rem' }}
+            >
+                <div className="card lota-card" style={{
+                    
+                    backgroundImage: 'url(bgflip.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
+                    <div className="card-header text-center">
+                        <div className="card-header-icon"
+                        style={{
+                    
+                            backgroundImage: 'url(bgflip.svg)', 
+                            backgroundPosition: 'center center',
+                        }}></div>
+                        <h3>LinkxVR</h3>
+                    <div className="card-body">
+                        <div className="row">
+                        <p>Lynx VR: A charity project of a simulation game (play2earn) based on Virtual Reality which helped user to stimulus the perception based on Cognitive Behavioral Therapy (CBT) to help mental illness victim.
+Sharing is caring, we want to help people and share love to the other that “you are not alone, we are here to help you”. People are actually can earn while trying fixing their illness. The player will received $Lynx token after they finish the session. .</p>
+                            
+                        <p>20% Token Allocation</p>
+                        
+                            <div className="col-md-6 mb-3">
+                                <div className="lota-stats">
+                                    <p>Total Backed</p>
+                                    <h5>
+                                        {numeral(circulatingSupply()).format(
+                                            '0,0.00'
+                                        )}
+                                        <span>UST</span>
+                                    </h5>
+                                </div>
+                            </div>
+
+                            
+                            <div className="col-md-6 mb-3">
+                                <div className="lota-stats">
+                                    <p>Total of The project</p>
+                                    <h5>
+                                        {
+
+                                            <p>50'000'000</p>
+                                        }
+                                        <span>UST</span>
+                                    </h5>
+                                </div>
+                            </div>
+                           
+                           
+                                            </div>
+
+
+
+
+
+
+
+                                            <div className="col-12 text-center mt-4 mb-4">
+                                                <button
+                                                    className={
+                                                        'btn btn-special'
+                                                    }
+                                                    onClick={() =>
+                                                        setBuyNow(!buyNow)
+                                                    }
+                                                >
+                                                    Back LinkxVR
+                                                </button>
+                                                <small
+                                                    style={{
+                                                        display: 'block',
+                                                        marginTop: '10px',
+                                                        fontSize: '12px',
+                                                        opacity: '0.6',
+                                                    }}
+                                                >
+                                                    You can Back Projects with{' '}
+                                                    <strong>UST</strong> and{' '}
+                                                    <strong>WFD</strong>
+                                                </small>
+                                            </div>
+
+
+
+
+
+
+
+
+
+                                            
+                      
+                    </div>
+                </div>
+            </div>
+            {/* <div className="container" style={{ marginTop: '2rem' }}>
+                <div className="card lota-card">
+                    <div className="card-body">
+                        <coingecko-coin-price-chart-widget
+                            currency="usd"
+                            coin-id="WeFund"
+                            locale="en"
+                            height="300"
+                        ></coingecko-coin-price-chart-widget>
+                    </div>
+                </div>
+            </div> */}
+
+
+</div>
+
+
+<div
+                ref={loterraStats}
+                className="container"
+                style={{ marginTop: '12rem' }}
+            >
+                <div className="card lota-card" style={{
+                    
+                    backgroundImage: 'url(bg.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
+                    <div className="card-header text-center">
+                        <div className="card-header-icon">
+                            <ChartPie size={90} color="#FFFFFF" />
+                        </div>
+                        <h3>SHEEP</h3>
+                    </div>
+                    <div className="card-body">
+                        <div className="row">
+                        <p>Sheep: The vision of Sheep is to share awareness of Covid-19, hopefully together we can destroy it. Sheep is a meme token & NFTs based project, our token named $HT</p>
+                        <p>12 Token Allocation</p>
+                        <p>4% Profit Sharing</p>
+                        <div className="col-md-6 mb-3">
+                                <div className="lota-stats">
+                                    <p>Total Backed</p>
+                                    <h5>
+                                        {
+                                            <p> 1'000 </p>
+
+                                        }
+                                        <span>UST</span>
+                                    </h5>
+                                </div>
+                            </div>
+
+                            
+                            <div className="col-md-6 mb-3">
+                                <div className="lota-stats">
+                                    <p>Total of The project</p>
+                                    <h5>
+                                        {
+
+                                            <p> 500'000</p>
+                                        }
+                                        <span>UST</span>
+                                    </h5>
+                                </div>
+                            </div>
+                           
+                           
+                                            </div>
+
+
+
+
+
+
+
+                                            <div className="col-12 text-center mt-4 mb-4">
+                                                <button
+                                                    className={
+                                                        'btn btn-special'
+                                                    }
+                                                    onClick={() =>
+                                                        setBuyNow(!buyNow)
+                                                    }
+                                                >
+                                                    Back SHEEP
+                                                </button>
+                                                <small
+                                                    style={{
+                                                        display: 'block',
+                                                        marginTop: '10px',
+                                                        fontSize: '12px',
+                                                        opacity: '0.6',
+                                                    }}
+                                                >
+                                                    You can Back Projects with{' '}
+                                                    <strong>UST</strong> and{' '}
+                                                    <strong>WFD</strong>
+                                                </small>
+                                            </div>
+
+
+
+
+
+
+
+
+
+                                            
+                      
+                    </div>
+                </div>
+            </div>
+            {/* <div className="container" style={{ marginTop: '2rem' }}>
+                <div className="card lota-card">
+                    <div className="card-body">
+                        <coingecko-coin-price-chart-widget
+                            currency="usd"
+                            coin-id="WeFund"
+                            locale="en"
+                            height="300"
+                        ></coingecko-coin-price-chart-widget>
+                    </div>
+                </div>
+            </div> */}
+
+
+<div
+                ref={loterraStats}
+                className="container"
+                style={{ marginTop: '12rem' }}
+            >
+                <div className="card lota-card" style={{
+                    
+                    backgroundImage: 'url(bgflip.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
+                    <div className="card-header text-center">
+                        <div className="card-header-icon"style={{
+                    
+                    backgroundImage: 'url(bgflip.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
+                        </div>
+                        <h3>SIMBA</h3>
+                    </div>
+                    <div className="card-body">
+                        <div className="row">
+                        <p>TSimba: A charity project based where the 50% profit by selling the NFTs and Token ($MB) will goes to animal rescue, zoo, conservative, national park etc. Simba aims to help the nature and its ecosystem. .</p>
+                        <p>18% Token Allocation</p>
+                        <p>5% Profit Sharing</p>
+                        <div className="col-md-6 mb-3">
+                                <div className="lota-stats">
+                                    <p>Total Backed</p>
+                                    <h5>
+                                        {
+                                            <h3 color="#000FFF"> 2'000 </h3>
+
+                                        }
+                                        <span>UST</span>
+                                    </h5>
+                                </div>
+                            </div>
+
+                            
+                            <div className="col-md-6 mb-3">
+                                <div className="lota-stats">
+                                    <p>Total of The project</p>
+                                    <h5>
+                                        {
+
+                                            <p> 500'000</p>
+                                        }
+                                        <span>UST</span>
+                                    </h5>
+                                </div>
+                            </div>
+                           
+                           
+                                            </div>
+
+
+
+
+
+
+
+                                            <div className="col-12 text-center mt-4 mb-4">
+                                                <button
+                                                    className={
+                                                        'btn btn-special'
+                                                    }
+                                                    onClick={() =>
+                                                        setBuyNow(!buyNow)
+                                                    }
+                                                >
+                                                    Back SIMBA
+                                                </button>
+                                                <small
+                                                    style={{
+                                                        display: 'block',
+                                                        marginTop: '10px',
+                                                        fontSize: '12px',
+                                                        opacity: '0.6',
+                                                    }}
+                                                >
+                                                    You can Back Projects with{' '}
+                                                    <strong>UST</strong> and{' '}
+                                                    <strong>WFD</strong>
+                                                </small>
+                                            </div>
+
+
+
+
+
+
+
+
+
+                                            
+                      
+                    </div>
+                </div>
+            </div>
             {/* <div className="container" style={{ marginTop: '2rem' }}>
                 <div className="card lota-card">
                     <div className="card-body">
@@ -654,32 +1318,25 @@ export default () => {
                     <div className="col-12">
                         <div
                             className={
-                                'hero' + (buyNow ? ' active' : '')
-                            }  style={{
-                    
-                                backgroundImage: 'url(bgflip.svg)', 
-                                backgroundPosition: 'center center',
-                            }}
+                                'card amount-block' + (buyNow ? ' active' : '')
+                            }
                         >
                             <div className="card-header">
-                                <h1>Create a New Project </h1>
+                                <h3>Back Crypto Of Duty</h3>
                                 <button
                                     className="toggle"
                                     onClick={() => setBuyNow(!buyNow)}
                                 >
-                                   
+                                    <X size={36} />
                                 </button>
                             </div>
-
-
-
                             <div className="card-body">
                                 <p
                                     style={{
                                         marginBottom: 0,
                                     }}
                                 >
-                                    Back On:
+                                    Pay with:
                                 </p>
                                 <div className="btn-group w-100 mb-2">
                                     <button
@@ -716,77 +1373,7 @@ export default () => {
                                     </button>
                                 </div>
                                 
-                                <div className="Project name">
-                                <h2>Project name </h2>
-                                    <input
-                                        type="Text"
-                                        className="form-control amount-control"
-                                        
-                                        
-                                        onChange={(e) => inputChange(e)}
-                                    />
-
-
-                                </div>
-                                <div className="Project Description">
-                                <h2>Project Description </h2>
-                                    <input
-                                        type="Text"
-                                        className="form-control amount-control"
-                                        
-                                        
-                                        onChange={(e) => inputChange(e)}
-                                    />
-
-
-                                </div>
-
-                                <div className="Project WebSite">
-                                <h2>Project WebSite </h2>
-                                    <input
-                                        type="Text"
-                                        className="form-control amount-control"
-                                        
-                                        
-                                        onChange={(e) => inputChange(e)}
-                                    />
-
-
-                                </div>
-
-
-                                <div className="Project Team">
-                                <h2>Project Team Description </h2>
-                                    <input
-                                        type="Text"
-                                        className="form-control amount-control"
-                                        
-                                        
-                                        onChange={(e) => inputChange(e)}
-                                    />
-
-
-                                </div>
-                                <div className="Email">
-                                <h2>Email</h2>
-                                    <input
-                                        type="Text"
-                                        className="form-control amount-control"
-                                        
-                                        
-                                        onChange={(e) => inputChange(e)}
-                                    />
-
-
-                                </div>
-
-                                
-
-                                
-                                
-
                                 <div className="input-group mt-3 mb-2">
-                                <h2>Amount Required </h2>
                                     <button
                                         className="btn btn-default"
                                         onClick={() => amountChange('down')}
@@ -796,15 +1383,12 @@ export default () => {
                                             color={'#9183d4'}
                                         />
                                     </button>
-                                  
-
-
                                     <input
                                         type="number"
                                         className="form-control amount-control"
                                         value={amount}
                                         min="1"
-                                        max="1000000000000"
+                                        max="200"
                                         step="1"
                                         onChange={(e) => inputChange(e)}
                                     />
@@ -818,9 +1402,6 @@ export default () => {
                                         />
                                     </button>
                                 </div>
-
-
-
                                 {/* <p className="mb-2">Total: <strong>{numeral((amount * price) / 1000000).format("0,0.00")} UST</strong></p> */}
                                 {!WFDBonus || payWith == 'WFD' ? (
                                     <p className="mb-2">
@@ -1030,7 +1611,7 @@ export default () => {
                                     disabled={amount <= 0}
                                 >
                                     {!buyLoader ? (
-                                        <>Back Crypto Of Duty</>
+                                        <>Back {amount} Crypto Of Duty</>
                                     ) : (
                                         <div
                                             className="spinner-border spinner-border-sm"

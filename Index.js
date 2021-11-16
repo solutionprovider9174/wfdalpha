@@ -632,12 +632,13 @@ export default () => {
             <div
                 className="hero"
                 style={{
-                    backgroundImage:
-                        'linear-gradient(0deg, #160150, #170f5300, #17095200),radial-gradient(#f23bf23b , #160150ad), url(rays.svg)',
+                    
+                    backgroundImage: 'url(bg.svg)', 
                     backgroundPosition: 'center center',
                 }}
             >
                 <div className="container-fluid container-md">
+                    
                     <div className="row">
                         <div className="col-lg-12 col-xl-8 mx-auto text-center">
                             <div className="jackpot">
@@ -768,9 +769,11 @@ export default () => {
             <div
                 className="how"
                 style={{
-                    padding: '125px 0',
-                }}
-            >
+                    
+                    backgroundImage: 'url(bgflip.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
+            
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
@@ -940,6 +943,42 @@ export default () => {
                         </div>
                     </div>
                 </div>
+            </div>
+
+
+
+
+            <div
+                ref={loterraStats}
+                className="container"
+                style={{ marginTop: '8rem' }}
+            >
+                <div className="card lota-card">
+                    <div className="card-header text-center"style={{
+                    
+                    backgroundImage: 'url(Roadmap1.png)', 
+                    backgroundPosition: 'center center',
+                }}>
+                        <div className="card-header-icon">
+                            <ChartPie size={90} color="#20FF93" />
+                        </div>
+                        <h3>RoadMap</h3>
+
+                        
+                    </div>
+                    <div className="card-body">
+                        <div className="row">
+                            <div className="col-md-6 mb-3"style={{
+                    
+                    backgroundImage: 'url(Roadmap1.png)', 
+                    backgroundPosition: 'center center',
+                }}>
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             </div>
             {/* <div className="container" style={{ marginTop: '2rem' }}>
                 <div className="card lota-card">
