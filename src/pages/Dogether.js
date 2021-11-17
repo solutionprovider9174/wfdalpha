@@ -72,23 +72,57 @@ const chaindetail_options =[
     {value: 'Game', label: 'Game'}, {value: 'Other', label: 'Other'}
 ]
 
-const select_style= {
+const select_style_1= {
     control: (provided, state) => ({
         ...provided,
         background: "#10003b",
-        backgroundColor:"#10003b",
-        color: "black"
+        color: "white"
       }),
       option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-        
         return {
           ...styles,
-          backgroundColor: isDisabled ? 'red' : 'blue',
-          color: 'black',
-        //   cursor: isDisabled ? 'not-allowed' : 'default',
-          
+        color: 'black',
         };
-      }
+      },
+      singleValue: (provided) => ({
+        ...provided,
+        color: 'white'
+      })
+}
+const select_style_2= {
+    control: (provided, state) => ({
+        ...provided,
+        background: "#10003b",
+        color: "white"
+      }),
+      option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+        return {
+          ...styles,
+        color: 'black',
+        };
+      },
+      singleValue: (provided) => ({
+        ...provided,
+        color: 'white'
+      })
+}
+const select_style_3= {
+    control: (provided, state) => ({
+        ...provided,
+        background: "#10003b",
+        color: "white",
+        zIndex: "3"
+      }),
+      option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+        return {
+          ...styles,
+        color: 'black',
+        };
+      },
+      singleValue: (provided) => ({
+        ...provided,
+        color: 'white'
+      })
 }
 const loterra_contract_address = 'terra1q2k29wwcz055q4ftx4eucsq6tg9wtulprjg75w'
 const loterra_pool_address = 'terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta'
@@ -656,26 +690,28 @@ export default () => {
         return count
     }
 
-    const [selected, setSelected] = useState("")
+    const [selected1, setSelected1] = useState("")
+    const [selected2, setSelected2] = useState("")
+    const [selected3, setSelected3] = useState("")
     const categoryhandleChange = e =>{
-        setSelected(e.value);
+        setSelected1(e.value);
     }
-    const categoryItem = selected =>{
-        const item = catego_options.find(x => x.value === selected);
+    const categoryItem = selected1 =>{
+        const item = catego_options.find(x => x.value === selected1);
         return item ? item : {value : "", label : ""}
     }
     const subcategoryhandleChange = e =>{
-        setSelected(e.value);
+        setSelected2(e.value);
     }
-    const subcategoryitem = selected =>{
-        const item = subcatego_options.find(x => x.value === selected);
+    const subcategoryitem = selected2 =>{
+        const item = subcatego_options.find(x => x.value === selected2);
         return item ? item : {value : "", label : ""}
     }
     const chaindetailshandleChange = e =>{
-        setSelected(e.value);
+        setSelected3(e.value);
     }
-    const chaindetailsitem = selected =>{
-        const item = chaindetail_options.find(x => x.value === selected);
+    const chaindetailsitem = selected3 =>{
+        const item = chaindetail_options.find(x => x.value === selected3);
         return item ? item : {value : "", label : ""}
     }
 
@@ -845,8 +881,8 @@ export default () => {
                                     options={catego_options}
                                     onChange={(e) => categoryhandleChange(e)}
                                     name="category"
-                                    styles={select_style}
-                                    value={categoryItem(selected)}
+                                    styles={select_style_1}
+                                    value={categoryItem(selected1)}
                                     />
                                 </div>
                                 <div className="Project SubCategory col-md-4">
@@ -855,9 +891,9 @@ export default () => {
                                         defaultValue={''}
                                         onChange={(e) => subcategoryhandleChange(e)}
                                         name="subcategory"
-                                        styles={select_style}
+                                        styles={select_style_2}
                                         options={subcatego_options}
-                                        value={subcategoryitem(selected)}
+                                        value={subcategoryitem(selected2)}
                                     />
                                         
                                 </div>
@@ -867,10 +903,10 @@ export default () => {
                                         defaultValue={''}
                                         onChange={(e) => chaindetailshandleChange(e)}
                                         name="chain_details"
-                                        styles={select_style}
+                                        styles={select_style_3}
                                         required
                                         options={chaindetail_options}
-                                        value={chaindetailsitem(selected)}
+                                        value={chaindetailsitem(selected3)}
                                     />
                                 </div>
                                 </div>    
