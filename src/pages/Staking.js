@@ -71,6 +71,7 @@ export default () => {
     const [recentPlayers, setRecentPlayers] = useState(0)
     const [payWith, setPayWith] = useState('ust')
     const [buyNow, setBuyNow] = useState(false)
+    const [viewdetails, setViewdetails] = useState(false)
     const [buyLoader, setBuyLoader] = useState(false)
     const [WFDBonus, setWFDBonus] = useState(false)
     const [giftFriend, setGiftFriend] = useState({ active: false, wallet: '' })
@@ -624,15 +625,7 @@ export default () => {
     }
 
     return (
-        <>
-            {/* <img src={'/confetti.webp'} style={{
-            position:'absolute',
-            maxWidth:'100%'
-            }}/> */}
-       
-        
-
-            <div
+        <><div
                 ref={loterraStats}
                 className="container"
                 style={{ marginTop: '12rem' }}
@@ -643,112 +636,80 @@ export default () => {
                     backgroundPosition: 'center center',
                 }}>
                     <div className="card-header text-center">
-                        <div className="card-header-icon"style={{
-                    
-                    backgroundImage: 'url(bgflip.svg)', 
-                    backgroundPosition: 'center center',
-                }}>
+                        <div className="card-header-icon" style={{
+                            backgroundImage: 'url(bgflip.svg)',
+                            backgroundPosition: 'center center',
+                        }}>
                         </div>
                         <h3>Crypto of Duty</h3>
                     </div>
                     <div className="card-body">
                         <div className="row">
                         <p>This multi Chain global war project will have a token and its distribution in each ecosystem, based on play to earn technology and on buying game Assets to give to players to improve the gaming experience.</p>
-                        <p>Based on NFT technology, each ecosystem will have specific weapons sold in the form of NFTs, specific characters and abilities Once the game is set (similar to Call of Duty) the war between ecosystems will begin, where the rewards will be based on the strength of the ecosystem in which they are located and there will be only one winning ecosystem .</p>
-                           
+                        <p>Based on NFT technology, each ecosystem will have specific weapons sold in the form of NFTs, specific characters and abilities Once the game is set (similar to Call of Duty) the war between ecosystems will begin, where the rewards will be based on the strength of the ecosystem in which they are located and there will be only one winning ecosystem.</p>
                         <h5>We Offering</h5>
                         <p>10% Token Allocation</p>
-                        
-
-                            <div className="col-md-6 mb-3">
-                                <div className="lota-stats">
-                                    <p>Total Backed</p>
-                                    <h5>
-                                        {
-                                            <p>10 000</p>
-                                        }
-                                        <span>UST</span>
-                                    </h5>
-                                </div>
+                        <div className="col-md-6 mb-3">
+                            <div className="lota-stats">
+                                <p>Total Backed</p>
+                                <h5>
+                                    {
+                                        <p>10 000</p>
+                                    }
+                                    <span>UST</span>
+                                </h5>
                             </div>
-
-                            
-                            <div className="col-md-6 mb-3">
-                                <div className="lota-stats">
-                                    <p>Total of The project</p>
-                                    <h5>
-                                        {
-                                            <p> 12'000'000</p>
-                                        }
-                                        <span>UST</span>
-                                    </h5>
-                                </div>
+                        </div>
+                        <div className="col-md-6 mb-3">
+                            <div className="lota-stats">
+                                <p>Total of The project</p>
+                                <h5>
+                                    {
+                                        <p> 12'000'000</p>
+                                    }
+                                    <span>UST</span>
+                                </h5>
                             </div>
-                           
-                           
-                                            </div>
-
-
-
-
-
-
-
-                                            <div className="col-12 text-center mt-4 mb-4">
-                                                <button
-                                                    className={
-                                                        'btn btn-special'
-                                                    }
-                                                    onClick={() =>
-                                                        setBuyNow(!buyNow)
-                                                    }
-                                                >
-                                                    Back Call of Duty on SOL
-                                                </button>
-                                                <small
-                                                    style={{
-                                                        display: 'block',
-                                                        marginTop: '10px',
-                                                        fontSize: '12px',
-                                                        opacity: '0.6',
-                                                    }}
-                                                >
-                                                    You can Back Projects with{' '}
-                                                    <strong>UST</strong> and{' '}
-                                                    <strong>WFD</strong>
-                                                </small>
-                                            </div>
-
-
-
-
-
-
-
-
-
-                                            
-                      
+                        </div>
                     </div>
-                </div>
+                    <div className="col-12 text-center mt-4 mb-4">
+                        <button
+                            className={
+                                'btn btn-viewdetails'
+                            }
+                            onClick={() =>
+                                setViewdetails(!viewdetails)
+                            }
+                        >
+                            View Details of This Project
+                        </button></div>
+                    <div className="col-12 text-center mt-4 mb-4">
+                        <button
+                            className={
+                                'btn btn-special'
+                            }
+                            onClick={() =>
+                                setBuyNow(!buyNow)
+                            }
+                        >
+                            Back Call of Duty on SOL
+                        </button>
+                        <small
+                            style={{
+                                display: 'block',
+                                marginTop: '10px',
+                                fontSize: '12px',
+                                opacity: '0.6',
+                            }}
+                        >
+                            You can Back Projects with{' '}
+                            <strong>UST</strong> and{' '}
+                            <strong>WFD</strong>
+                        </small>
+                    </div>
+                    </div></div>
             </div>
-            {/* <div className="container" style={{ marginTop: '2rem' }}>
-                <div className="card lota-card">
-                    <div className="card-body">
-                        <coingecko-coin-price-chart-widget
-                            currency="usd"
-                            coin-id="WeFund"
-                            locale="en"
-                            height="300"
-                        ></coingecko-coin-price-chart-widget>
-                    </div>
-                </div>
-            </div> */}
-
-
-
-
-<div
+            <div
                 ref={loterraStats}
                 className="container"
                 style={{ marginTop: '12rem' }}
@@ -773,99 +734,67 @@ export default () => {
                         <h5>We Offering</h5>
                         <p>10% Token Allocation</p>
                         <p>5% Profit Sharing</p>
-                         
-
-                            <div className="col-md-6 mb-3">
-                                <div className="lota-stats">
-                                    <p>Total Backed</p>
-                                    <h5>
-                                        {
-                                            <p>1'000</p>
-
-                                        }
-                                        <span>UST</span>
-                                    </h5>
-                                </div>
+                        <div className="col-md-6 mb-3">
+                            <div className="lota-stats">
+                                <p>Total Backed</p>
+                                <h5>
+                                    {
+                                        <p>1'000</p>
+                                    }
+                                    <span>UST</span>
+                                </h5>
                             </div>
-
-                            
-                            <div className="col-md-6 mb-3">
-                                <div className="lota-stats">
-                                    <p>Total of The project</p>
-                                    <h5>
-                                        {<p>1'000'000</p>
-                                        }
-                                        <span>UST</span>
-                                    </h5>
-                                </div>
+                        </div>
+                        <div className="col-md-6 mb-3">
+                            <div className="lota-stats">
+                                <p>Total of The project</p>
+                                <h5>
+                                    {<p>1'000'000</p>
+                                    }
+                                    <span>UST</span>
+                                </h5>
                             </div>
-                           
-                           
-                                            </div>
-
-
-
-
-
-
-
-                                            <div className="col-12 text-center mt-4 mb-4">
-                                                <button
-                                                    className={
-                                                        'btn btn-special'
-                                                    }
-                                                    onClick={() =>
-                                                        setBuyNow(!buyNow)
-                                                    }
-                                                >
-                                                    Back ChainJob
-                                                </button>
-                                                <small
-                                                    style={{
-                                                        display: 'block',
-                                                        marginTop: '10px',
-                                                        fontSize: '12px',
-                                                        opacity: '0.6',
-                                                    }}
-                                                >
-                                                    You can Back Projects with{' '}
-                                                    <strong>UST</strong> and{' '}
-                                                    <strong>WFD</strong>
-                                                </small>
-                                            </div>
-
-
-
-
-
-
-
-
-
-                                            
-                      
+                        </div>
                     </div>
-                </div>
+                    <div className="col-12 text-center mt-4 mb-4">
+                        <button
+                            className={
+                                'btn btn-viewdetails'
+                            }
+                            onClick={() =>
+                                setViewdetails(!viewdetails)
+                            }
+                        >
+                            View Details of This Project
+                        </button></div>
+                    <div className="col-12 text-center mt-4 mb-4">
+                        
+                        <button
+                            className={
+                                'btn btn-special'
+                            }
+                            onClick={() =>
+                                setBuyNow(!buyNow)
+                            }
+                        >
+                            Back ChainJob
+                        </button>
+                        <small
+                            style={{
+                                display: 'block',
+                                marginTop: '10px',
+                                fontSize: '12px',
+                                opacity: '0.6',
+                            }}
+                        >
+                            You can Back Projects with{' '}
+                            <strong>UST</strong> and{' '}
+                            <strong>WFD</strong>
+                        </small>
+                    </div></div>
+                    </div>
             </div>
-            {/* <div className="container" style={{ marginTop: '2rem' }}>
-                <div className="card lota-card
-                
-                
-                ">
-                    <div className="card-body">
-                        <coingecko-coin-price-chart-widget
-                            currency="usd"
-                            coin-id="WeFund"
-                            locale="en"
-                            height="300"
-                        ></coingecko-coin-price-chart-widget>
-                    </div>
-                </div>
-            </div> */}
-
-
-
-<div
+            <div
                 ref={loterraStats}
                 className="container"
                 style={{ marginTop: '12rem' }}
@@ -896,90 +825,63 @@ export default () => {
                                     <h5>
                                         {
                                             <p> 5'000 </p>
-
                                         }
                                         <span>UST</span>
                                     </h5>
                                 </div>
                             </div>
-
-                            
                             <div className="col-md-6 mb-3">
                                 <div className="lota-stats">
                                     <p>Total of The project</p>
                                     <h5>
                                         {
-
                                             <p> 4'000'000</p>
                                         }
                                         <span>UST</span>
                                     </h5>
                                 </div>
                             </div>
-                           
-                           
-                                            </div>
-
-
-
-
-
-
-
-                                            <div className="col-12 text-center mt-4 mb-4">
-                                                <button
-                                                    className={
-                                                        'btn btn-special'
-                                                    }
-                                                    onClick={() =>
-                                                        setBuyNow(!buyNow)
-                                                    }
-                                                >
-                                                    Back CryptoBank
-                                                </button>
-                                                <small
-                                                    style={{
-                                                        display: 'block',
-                                                        marginTop: '10px',
-                                                        fontSize: '12px',
-                                                        opacity: '0.6',
-                                                    }}
-                                                >
-                                                    You can Back Projects with{' '}
-                                                    <strong>UST</strong> and{' '}
-                                                    <strong>WFD</strong>
-                                                </small>
-                                            </div>
-
-
-
-
-
-
-
-
-
-
-                                            
-                      
+                        </div>
+                        <div className="col-12 text-center mt-4 mb-4">
+                        <button
+                            className={
+                                'btn btn-viewdetails'
+                            }
+                            onClick={() =>
+                                setViewdetails(!viewdetails)
+                            }
+                        >
+                            View Details of This Project
+                        </button></div>
+                        <div className="col-12 text-center mt-4 mb-4">
+                            
+                            <button
+                                className={
+                                    'btn btn-special'
+                                }
+                                onClick={() =>
+                                    setBuyNow(!buyNow)
+                                }
+                            >
+                                Back CryptoBank
+                            </button>
+                            <small
+                                style={{
+                                    display: 'block',
+                                    marginTop: '10px',
+                                    fontSize: '12px',
+                                    opacity: '0.6',
+                                }}
+                            >
+                                You can Back Projects with{' '}
+                                <strong>UST</strong> and{' '}
+                                <strong>WFD</strong>
+                            </small>
+                        </div>
                     </div>
                 </div>
             </div>
-            {/* <div className="container" style={{ marginTop: '2rem' }}>
-                <div className="card lota-card">
-                    <div className="card-body">
-                        <coingecko-coin-price-chart-widget
-                            currency="usd"
-                            coin-id="WeFund"
-                            locale="en"
-                            height="300"
-                        ></coingecko-coin-price-chart-widget>
-                    </div>
-                </div>
-            </div> */}
-
-
-<div
+            <div
                 ref={loterraStats}
                 className="container"
                 style={{ marginTop: '12rem' }}
@@ -1001,100 +903,71 @@ export default () => {
                         <div className="row">
                         <p>Lynx VR: A charity project of a simulation game (play2earn) based on Virtual Reality which helped user to stimulus the perception based on Cognitive Behavioral Therapy (CBT) to help mental illness victim.
 Sharing is caring, we want to help people and share love to the other that “you are not alone, we are here to help you”. People are actually can earn while trying fixing their illness. The player will received $Lynx token after they finish the session. .</p>
-                            
                         <p>20% Token Allocation</p>
+                        <div className="col-md-6 mb-3">
+                            <div className="lota-stats">
+                                <p>Total Backed</p>
+                                <h5>
+                                    {numeral(circulatingSupply()).format(
+                                        '0,0.00'
+                                    )}
+                                    <span>UST</span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div className="col-md-6 mb-3">
+                            <div className="lota-stats">
+                                <p>Total of The project</p>
+                                <h5>
+                                    {
+                                        <p>50'000'000</p>
+                                    }
+                                    <span>UST</span>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-12 text-center mt-4 mb-4">
+                        <button
+                            className={
+                                'btn btn-viewdetails'
+                            }
+                            onClick={() =>
+                                setViewdetails(!viewdetails)
+                            }
+                        >
+                            View Details of This Project
+                        </button></div>
+                    <div className="col-12 text-center mt-4 mb-4">
                         
-                            <div className="col-md-6 mb-3">
-                                <div className="lota-stats">
-                                    <p>Total Backed</p>
-                                    <h5>
-                                        {numeral(circulatingSupply()).format(
-                                            '0,0.00'
-                                        )}
-                                        <span>UST</span>
-                                    </h5>
-                                </div>
-                            </div>
-
-                            
-                            <div className="col-md-6 mb-3">
-                                <div className="lota-stats">
-                                    <p>Total of The project</p>
-                                    <h5>
-                                        {
-
-                                            <p>50'000'000</p>
-                                        }
-                                        <span>UST</span>
-                                    </h5>
-                                </div>
-                            </div>
-                           
-                           
-                                            </div>
-
-
-
-
-
-
-
-                                            <div className="col-12 text-center mt-4 mb-4">
-                                                <button
-                                                    className={
-                                                        'btn btn-special'
-                                                    }
-                                                    onClick={() =>
-                                                        setBuyNow(!buyNow)
-                                                    }
-                                                >
-                                                    Back LinkxVR
-                                                </button>
-                                                <small
-                                                    style={{
-                                                        display: 'block',
-                                                        marginTop: '10px',
-                                                        fontSize: '12px',
-                                                        opacity: '0.6',
-                                                    }}
-                                                >
-                                                    You can Back Projects with{' '}
-                                                    <strong>UST</strong> and{' '}
-                                                    <strong>WFD</strong>
-                                                </small>
-                                            </div>
-
-
-
-
-
-
-
-
-
-                                            
-                      
+                        <button
+                            className={
+                                'btn btn-special'
+                            }
+                            onClick={() =>
+                                setBuyNow(!buyNow)
+                            }
+                        >
+                            Back LinkxVR
+                        </button>
+                        <small
+                            style={{
+                                display: 'block',
+                                marginTop: '10px',
+                                fontSize: '12px',
+                                opacity: '0.6',
+                            }}
+                        >
+                            You can Back Projects with{' '}
+                            <strong>UST</strong> and{' '}
+                            <strong>WFD</strong>
+                        </small>
+                    </div>
                     </div>
                 </div>
             </div>
-            {/* <div className="container" style={{ marginTop: '2rem' }}>
-                <div className="card lota-card">
-                    <div className="card-body">
-                        <coingecko-coin-price-chart-widget
-                            currency="usd"
-                            coin-id="WeFund"
-                            locale="en"
-                            height="300"
-                        ></coingecko-coin-price-chart-widget>
-                    </div>
-                </div>
-            </div> */}
-
-
-</div>
-
-
-<div
+        </div>
+        <div
                 ref={loterraStats}
                 className="container"
                 style={{ marginTop: '12rem' }}
@@ -1116,94 +989,70 @@ Sharing is caring, we want to help people and share love to the other that “yo
                         <p>12 Token Allocation</p>
                         <p>4% Profit Sharing</p>
                         <div className="col-md-6 mb-3">
-                                <div className="lota-stats">
-                                    <p>Total Backed</p>
-                                    <h5>
-                                        {
-                                            <p> 1'000 </p>
+                            <div className="lota-stats">
+                                <p>Total Backed</p>
+                                <h5>
+                                    {
+                                        <p> 1'000 </p>
 
-                                        }
-                                        <span>UST</span>
-                                    </h5>
-                                </div>
+                                    }
+                                    <span>UST</span>
+                                </h5>
                             </div>
+                        </div>
+                        <div className="col-md-6 mb-3">
+                            <div className="lota-stats">
+                                <p>Total of The project</p>
+                                <h5>
+                                    {
 
+                                        <p> 500'000</p>
+                                    }
+                                    <span>UST</span>
+                                </h5>
+                            </div>
+                        </div>
+                        </div>
+                        <div className="col-12 text-center mt-4 mb-4">
+                        <button
+                            className={
+                                'btn btn-viewdetails'
+                            }
+                            onClick={() =>
+                                setViewdetails(!viewdetails)
+                            }
+                        >
+                            View Details of This Project
+                        </button></div>
+                        <div className="col-12 text-center mt-4 mb-4">
                             
-                            <div className="col-md-6 mb-3">
-                                <div className="lota-stats">
-                                    <p>Total of The project</p>
-                                    <h5>
-                                        {
-
-                                            <p> 500'000</p>
-                                        }
-                                        <span>UST</span>
-                                    </h5>
-                                </div>
-                            </div>
-                           
-                           
-                                            </div>
-
-
-
-
-
-
-
-                                            <div className="col-12 text-center mt-4 mb-4">
-                                                <button
-                                                    className={
-                                                        'btn btn-special'
-                                                    }
-                                                    onClick={() =>
-                                                        setBuyNow(!buyNow)
-                                                    }
-                                                >
-                                                    Back SHEEP
-                                                </button>
-                                                <small
-                                                    style={{
-                                                        display: 'block',
-                                                        marginTop: '10px',
-                                                        fontSize: '12px',
-                                                        opacity: '0.6',
-                                                    }}
-                                                >
-                                                    You can Back Projects with{' '}
-                                                    <strong>UST</strong> and{' '}
-                                                    <strong>WFD</strong>
-                                                </small>
-                                            </div>
-
-
-
-
-
-
-
-
-
-                                            
-                      
+                            <button
+                                className={
+                                    'btn btn-special'
+                                }
+                                onClick={() =>
+                                    setBuyNow(!buyNow)
+                                }
+                            >
+                                Back SHEEP
+                            </button>
+                            <small
+                                style={{
+                                    display: 'block',
+                                    marginTop: '10px',
+                                    fontSize: '12px',
+                                    opacity: '0.6',
+                                }}
+                            >
+                                You can Back Projects with{' '}
+                                <strong>UST</strong> and{' '}
+                                <strong>WFD</strong>
+                            </small>
+                        </div>
                     </div>
                 </div>
             </div>
-            {/* <div className="container" style={{ marginTop: '2rem' }}>
-                <div className="card lota-card">
-                    <div className="card-body">
-                        <coingecko-coin-price-chart-widget
-                            currency="usd"
-                            coin-id="WeFund"
-                            locale="en"
-                            height="300"
-                        ></coingecko-coin-price-chart-widget>
-                    </div>
-                </div>
-            </div> */}
-
-
-<div
+        <div
                 ref={loterraStats}
                 className="container"
                 style={{ marginTop: '12rem' }}
@@ -1228,93 +1077,73 @@ Sharing is caring, we want to help people and share love to the other that “yo
                         <p>18% Token Allocation</p>
                         <p>5% Profit Sharing</p>
                         <div className="col-md-6 mb-3">
-                                <div className="lota-stats">
-                                    <p>Total Backed</p>
-                                    <h5>
-                                        {
-                                            <h3 color="#000FFF"> 2'000 </h3>
+                            <div className="lota-stats">
+                                <p>Total Backed</p>
+                                <h5>
+                                    {
+                                        <h3 color="#000FFF"> 2'000 </h3>
 
-                                        }
-                                        <span>UST</span>
-                                    </h5>
-                                </div>
+                                    }
+                                    <span>UST</span>
+                                </h5>
                             </div>
+                        </div>
+                        <div className="col-md-6 mb-3">
+                            <div className="lota-stats">
+                                <p>Total of The project</p>
+                                <h5>
+                                    {
 
-                            
-                            <div className="col-md-6 mb-3">
-                                <div className="lota-stats">
-                                    <p>Total of The project</p>
-                                    <h5>
-                                        {
-
-                                            <p> 500'000</p>
-                                        }
-                                        <span>UST</span>
-                                    </h5>
-                                </div>
+                                        <p> 500'000</p>
+                                    }
+                                    <span>UST</span>
+                                </h5>
                             </div>
-                           
-                           
-                                            </div>
-
-
-
-
-
-
-
-                                            <div className="col-12 text-center mt-4 mb-4">
-                                                <button
-                                                    className={
-                                                        'btn btn-special'
-                                                    }
-                                                    onClick={() =>
-                                                        setBuyNow(!buyNow)
-                                                    }
-                                                >
-                                                    Back SIMBA
-                                                </button>
-                                                <small
-                                                    style={{
-                                                        display: 'block',
-                                                        marginTop: '10px',
-                                                        fontSize: '12px',
-                                                        opacity: '0.6',
-                                                    }}
-                                                >
-                                                    You can Back Projects with{' '}
-                                                    <strong>UST</strong> and{' '}
-                                                    <strong>WFD</strong>
-                                                </small>
-                                            </div>
-
-
-
-
-
-
-
-
-
-                                            
-                      
+                        </div>
+                        </div>
+                        <div className="col-12 text-center mt-4 mb-4">
+                        <button
+                            className={
+                                'btn btn-viewdetails'
+                            }
+                            onClick={() =>
+                                setViewdetails(!viewdetails)
+                            }
+                        >
+                            View Details of This Project
+                        </button></div>
+                            <div className="col-12 text-center mt-4 mb-4">
+                                
+                                <button
+                                    className={
+                                        'btn btn-special'
+                                    }
+                                    onClick={() =>
+                                        setBuyNow(!buyNow)
+                                    }
+                                >
+                                    Back SIMBA
+                                </button>
+                                <small
+                                    style={{
+                                        display: 'block',
+                                        marginTop: '10px',
+                                        fontSize: '12px',
+                                        opacity: '0.6',
+                                    }}
+                                >
+                                    You can Back Projects with{' '}
+                                    <strong>UST</strong> and{' '}
+                                    <strong>WFD</strong>
+                                </small>
+                            </div>
                     </div>
                 </div>
             </div>
-            {/* <div className="container" style={{ marginTop: '2rem' }}>
-                <div className="card lota-card">
-                    <div className="card-body">
-                        <coingecko-coin-price-chart-widget
-                            currency="usd"
-                            coin-id="WeFund"
-                            locale="en"
-                            height="300"
-                        ></coingecko-coin-price-chart-widget>
-                    </div>
-                </div>
-            </div> */}
+            
+
 {/*---------BUTTON PART-------------------------*/}
-<div className="container">
+            <div className="container">
                 <div className="row">
                     <div className="col-12">
                         <div
@@ -1474,10 +1303,25 @@ Sharing is caring, we want to help people and share love to the other that “yo
                                         </span>
                                     </>
                                 )}
-
-                                
                                 <div className="text-sm">{result}</div>
-
+                                <><h3>Wallet</h3>
+                                    <input
+                                        type="Text"
+                                        className="form-control amount-control"
+                                        onChange={(e) => inputChange(e)}
+                                    />
+                                </>
+                                <><h3>Wallet Echo System</h3>
+                                    <input
+                                        type="Text"
+                                        className="form-control amount-control"
+                                        onChange={(e) => inputChange(e)}
+                                    />
+                                </>
+                                <><h3>Message for project creator</h3>
+                                    <textarea className="form-control amount-control"
+                                        onChange={(e) => inputChange(e)} />
+                                </>
                                 <button
                                     onClick={() => setTicketModal(!ticketModal)}
                                     className="btn btn-default w-100 mb-3 mt-3"
@@ -1530,6 +1374,107 @@ Sharing is caring, we want to help people and share love to the other that “yo
                     </div>
                 </div>
                 <div className="row"><Footer/></div>
+            </div>
+
+{/* /*************************view details modal */}
+<div className="container">
+                <div className="row">
+                    <div className="col-12">
+                        <div
+                            className={
+                                'card proj-details-block' + (viewdetails ? ' active' : '')
+                            }
+                        >
+                            <div className="card-header">
+                                <h3>Project Details Overview</h3>
+                                <button
+                                    className="toggle"
+                                    onClick={() => setViewdetails(!viewdetails)}
+                                >
+                                    <X size={36} />
+                                </button>
+                            </div>
+                            <div className="card-body">
+                             <div className="col-12 text-center view-details-inline b-bord">
+                                <div className="col-md-3 text-center"><h4>Project name: </h4></div>
+                                <div className="col-md-9 text-center"><h2>Project name</h2></div>
+                            </div>
+                            <div className="col-12 text-center view-details-inline b-bord">
+                                <div className="col-md-3 text-center"><h4>Project Description: </h4></div>
+                                <div className="col-md-9 text-center"><h4>Our project is for crowdfunding platform like world top dapp wefund.app, we are trying to gather assets from world and world level developers and designers. thanks regards</h4></div>
+                            </div>
+                            <div className="col-12 text-center view-details-inline b-bord">
+                                <div className="col-md-3 text-center"><h4>WebSite : </h4></div>
+                                <div className="col-md-9 text-center"><h2>Project WebSite </h2></div>
+                            </div>
+                            <div className="col-12 text-center view-details-inline b-bord">
+                                <div className="col-md-3 text-center"><h4>Project WhitePaper: </h4></div>
+                                <div className="col-md-9 text-center"><h2>Project WhitePaper</h2></div>
+                            </div>
+                            <div className="col-12 text-center view-details-inline b-bord">
+                                <div className="col-md-3 text-center"><h4>Project Team Description: </h4></div>
+                                <div className="col-md-9 text-center"><h4>Our team is very talendted for this job done. we will try our best for delivering this project within your deadline and your money limit. thanks.</h4></div>
+                            </div>
+                            <div className="col-12 text-center view-details-inline b-bord">
+                                <div className="col-md-3 text-center"><h4>Amount: </h4></div>
+                                <div className="col-md-9 text-center"><h2>1259UST</h2></div>
+                            </div>
+                            <div className="col-12 text-center view-details-inline">
+                                <div className="col-md-3 text-center"><h4>TimeLine: </h4></div>
+                                <div className="col-md-9 text-center"><h2>15days</h2></div>
+                            </div>
+                                <button
+                                    onClick={() => setTicketModal(!ticketModal)}
+                                    className="btn btn-default w-100 mb-3 mt-3"
+                                    style={{
+                                        fontSize: '18px',
+                                        fontWeight: 'bold',
+                                        padding: '11px 5px',
+                                        borderBottom: '4px solid #10003b',
+                                    }}
+                                >
+                                    <PencilLine
+                                        size={24}
+                                        color={'#ff36ff'}
+                                        style={{
+                                            marginTop: '-1px',
+                                            marginRight: '5px',
+                                        }}
+                                    />
+                                    Help to create your idea
+                                </button>
+                                <button
+                                    onClick={() => execute()}
+                                    className="btn btn-special w-100"
+                                    disabled={amount <= 0}
+                                >
+                                    {!buyLoader ? (
+                                        <>Back {amount} Crypto Of Duty</>
+                                    ) : (
+                                        <div
+                                            className="spinner-border spinner-border-sm"
+                                            role="status"
+                                            style={{
+                                                position: 'relative',
+                                                top: '-3px',
+                                            }}
+                                        >
+                                            <span className="visually-hidden">
+                                                Loading...
+                                            </span>
+                                        </div>
+                                    )}
+                                </button>
+                            </div>
+                        </div>
+                        <div
+                            className={'backdrop' + (viewdetails ? ' show' : '')}
+                            onClick={() => setViewdetails(!viewdetails)}
+                        ></div>
+                        {/* <SocialShare /> */}
+                    </div>
+                </div>
+                
             </div>
             </>
     )

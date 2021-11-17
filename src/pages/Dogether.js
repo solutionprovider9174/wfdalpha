@@ -59,71 +59,6 @@ const HomeCard = {
     width: '100px',
     padding: '30px',
 }
-
-const catego_options =[{value: 'Crypto', label: 'Crypto'}, {value: 'NoCrypto', label: 'NoCrypto'}]
-const subcatego_options =[
-    {value: 'Terra', label: 'Terra'}, {value: 'Solana', label: 'Solana'},
-    {value: 'MultiChain', label: 'MultiChain'}, {value: 'CrossChain', label: 'CrossChain'}
-]
-const chaindetail_options =[
-    {value: 'Lending', label: 'Lending'}, {value: 'Charity', label: 'Charity'},
-    {value: 'Social', label: 'Social'}, {value: 'IDO', label: 'IDO'},
-    {value: 'Finance', label: 'Finance'}, {value: 'NFT', label: 'NFT'},
-    {value: 'Game', label: 'Game'}, {value: 'Other', label: 'Other'}
-]
-
-const select_style_1= {
-    control: (provided, state) => ({
-        ...provided,
-        background: "#10003b",
-        color: "white"
-      }),
-      option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-        return {
-          ...styles,
-        color: 'black',
-        };
-      },
-      singleValue: (provided) => ({
-        ...provided,
-        color: 'white'
-      })
-}
-const select_style_2= {
-    control: (provided, state) => ({
-        ...provided,
-        background: "#10003b",
-        color: "white"
-      }),
-      option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-        return {
-          ...styles,
-        color: 'black',
-        };
-      },
-      singleValue: (provided) => ({
-        ...provided,
-        color: 'white'
-      })
-}
-const select_style_3= {
-    control: (provided, state) => ({
-        ...provided,
-        background: "#10003b",
-        color: "white",
-        zIndex: "3"
-      }),
-      option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-        return {
-          ...styles,
-        color: 'black',
-        };
-      },
-      singleValue: (provided) => ({
-        ...provided,
-        color: 'white'
-      })
-}
 const loterra_contract_address = 'terra1q2k29wwcz055q4ftx4eucsq6tg9wtulprjg75w'
 const loterra_pool_address = 'terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta'
 
@@ -704,7 +639,11 @@ export default () => {
         setSelected2(e.value);
     }
     const subcategoryitem = selected2 =>{
-        const item = subcatego_options.find(x => x.value === selected2);
+        const item = subcatego_option.find(x => x.value === selected2);
+        return item ? item : {value : "", label : ""}
+    }
+    const subcategoryitem_1 = selected2 =>{
+        const item = subcatego_option_1.find(x => x.value === selected2);
         return item ? item : {value : "", label : ""}
     }
     const chaindetailshandleChange = e =>{
@@ -713,6 +652,78 @@ export default () => {
     const chaindetailsitem = selected3 =>{
         const item = chaindetail_options.find(x => x.value === selected3);
         return item ? item : {value : "", label : ""}
+    }
+
+
+    const catego_options =[{value: 'Crypto', label: 'Crypto'}, {value: 'NoCrypto', label: 'NoCrypto'}]
+    const subcatego_option =[
+        {value: 'Terra', label: 'Terra'}, {value: 'Solana', label: 'Solana'},
+        {value: 'MultiChain', label: 'MultiChain'}, {value: 'CrossChain', label: 'CrossChain'}
+    ]
+    const subcatego_option_1 = [
+        {value: 'NoCrypto1', label: 'NoCrypto1'}, {value: 'NoCrypto2', label: 'NoCrypto2'},
+        {value: 'NoCrypto3', label: 'NoCrypto3'}, {value: 'NoCrypto4', label: 'NoCrypto4'}
+    ]
+
+    
+    const chaindetail_options =[
+        {value: 'Lending', label: 'Lending'}, {value: 'Charity', label: 'Charity'},
+        {value: 'Social', label: 'Social'}, {value: 'IDO', label: 'IDO'},
+        {value: 'Finance', label: 'Finance'}, {value: 'NFT', label: 'NFT'},
+        {value: 'Game', label: 'Game'}, {value: 'Other', label: 'Other'}
+    ]
+
+    const select_style_1= {
+        control: (provided, state) => ({
+            ...provided,
+            background: "#10003b",
+            color: "white"
+        }),
+        option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+            return {
+            ...styles,
+            color: 'black',
+            };
+        },
+        singleValue: (provided) => ({
+            ...provided,
+            color: 'white'
+        })
+    }
+    const select_style_2= {
+        control: (provided, state) => ({
+            ...provided,
+            background: "#10003b",
+            color: "white"
+        }),
+        option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+            return {
+            ...styles,
+            color: 'black',
+            };
+        },
+        singleValue: (provided) => ({
+            ...provided,
+            color: 'white'
+        })
+    }
+    const select_style_3= {
+        control: (provided, state) => ({
+            ...provided,
+            background: "#10003b",
+            color: "white",
+            zIndex: "3"
+        }),
+        option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+            return {
+            ...styles,
+            color: 'black',
+            };
+        },
+        singleValue: (provided) => ({
+            ...provided,
+            color: 'white'
+        })
     }
 
     return (
@@ -886,14 +897,14 @@ export default () => {
                                     />
                                 </div>
                                 <div className="Project SubCategory col-md-4">
-                                <h2>Project SubCategory</h2>
+                                <h2>Project SubCategory{selected1.value}</h2>
                                     <Select
                                         defaultValue={''}
                                         onChange={(e) => subcategoryhandleChange(e)}
                                         name="subcategory"
                                         styles={select_style_2}
-                                        options={subcatego_options}
-                                        value={subcategoryitem(selected2)}
+                                        options={selected1 === "NoCrypto" ? subcatego_option_1 : subcatego_option}
+                                        value={selected1 === "NoCrypto" ? subcategoryitem_1(selected2) : subcategoryitem(selected2)}
                                     />
                                         
                                 </div>
@@ -1173,7 +1184,7 @@ export default () => {
                                     disabled={amount <= 0}
                                 >
                                     {!buyLoader ? (
-                                        <>Submit Project</>
+                                        <>Submit PROJECT</>
                                     ) : (
                                         <div
                                             className="spinner-border spinner-border-sm"
