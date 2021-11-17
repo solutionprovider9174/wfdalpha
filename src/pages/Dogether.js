@@ -45,6 +45,8 @@ import WinnerRow from '../components/WinnerRow'
 import PriceLoader from '../components/PriceLoader'
 import JackpotResults from '../components/JackpotResults'
 import QuickStats from '../components/QuickStats'
+import Select from 'react-select'
+import { black } from 'ansi-colors'
 
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
@@ -58,6 +60,36 @@ const HomeCard = {
     padding: '30px',
 }
 
+const catego_options =[{value: 'Crypto', label: 'Crypto'}, {value: 'NoCrypto', label: 'NoCrypto'}]
+const subcatego_options =[
+    {value: 'Terra', label: 'Terra'}, {value: 'Solana', label: 'Solana'},
+    {value: 'MultiChain', label: 'MultiChain'}, {value: 'CrossChain', label: 'CrossChain'}
+]
+const chaindetail_options =[
+    {value: 'Lending', label: 'Lending'}, {value: 'Charity', label: 'Charity'},
+    {value: 'Social', label: 'Social'}, {value: 'IDO', label: 'IDO'},
+    {value: 'Finance', label: 'Finance'}, {value: 'NFT', label: 'NFT'},
+    {value: 'Game', label: 'Game'}, {value: 'Other', label: 'Other'}
+]
+
+const select_style= {
+    control: (provided, state) => ({
+        ...provided,
+        background: "#10003b",
+        backgroundColor:"#10003b",
+        color: "black"
+      }),
+      option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+        
+        return {
+          ...styles,
+          backgroundColor: isDisabled ? 'red' : 'blue',
+          color: 'black',
+        //   cursor: isDisabled ? 'not-allowed' : 'default',
+          
+        };
+      }
+}
 const loterra_contract_address = 'terra1q2k29wwcz055q4ftx4eucsq6tg9wtulprjg75w'
 const loterra_pool_address = 'terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta'
 
@@ -624,6 +656,29 @@ export default () => {
         return count
     }
 
+    const [selected, setSelected] = useState("")
+    const categoryhandleChange = e =>{
+        setSelected(e.value);
+    }
+    const categoryItem = selected =>{
+        const item = catego_options.find(x => x.value === selected);
+        return item ? item : {value : "", label : ""}
+    }
+    const subcategoryhandleChange = e =>{
+        setSelected(e.value);
+    }
+    const subcategoryitem = selected =>{
+        const item = subcatego_options.find(x => x.value === selected);
+        return item ? item : {value : "", label : ""}
+    }
+    const chaindetailshandleChange = e =>{
+        setSelected(e.value);
+    }
+    const chaindetailsitem = selected =>{
+        const item = chaindetail_options.find(x => x.value === selected);
+        return item ? item : {value : "", label : ""}
+    }
+
     return (
         <>
             {/* <img src={'/confetti.webp'} style={{
@@ -652,17 +707,16 @@ export default () => {
 
 
 
-<div className="container">
-                <div className="row">
+<div className="container-fluid" style={{
+                    backgroundImage: 'url(ab.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
+                <div className="row" style={{paddingLeft: 100, paddingRight: 100}}>
                     <div className="col-12">
                         <div
                             className={
                                 'hero' + (buyNow ? ' active' : '')
-                            }  style={{
-                    
-                                backgroundImage: 'url(ab.svg)', 
-                                backgroundPosition: 'center center',
-                            }}
+                            }  
                         >
                             <div className="card-header">
                                 <h1>Create a New Project </h1>
@@ -733,6 +787,20 @@ export default () => {
                                 </div>
                                 <div className="Project Description">
                                 <h2>Project Description </h2>
+                                    {/* <input
+                                        type="Text"
+                                        className="form-control amount-control"
+                                        
+                                        
+                                        onChange={(e) => inputChange(e)}
+                                    /> */}
+
+                                    <textarea className="form-control amount-control"
+                                        onChange={(e) => inputChange(e)} />
+                                </div>
+
+                                <div className="Project WebSite">
+                                <h2>Project WebSite </h2>
                                     <input
                                         type="Text"
                                         className="form-control amount-control"
@@ -743,9 +811,8 @@ export default () => {
 
 
                                 </div>
-
-                                <div className="Project WebSite">
-                                <h2>Project WebSite </h2>
+                                <div className="Project White Paper">
+                                <h2>Project WhitePaper </h2>
                                     <input
                                         type="Text"
                                         className="form-control amount-control"
@@ -770,6 +837,43 @@ export default () => {
 
 
                                 </div>
+                                <div className="Project Group row">
+                                <div className="Project Category col-md-4">
+                                <h2>Project Category </h2>
+                                    <Select 
+                                    defaultValue={''}
+                                    options={catego_options}
+                                    onChange={(e) => categoryhandleChange(e)}
+                                    name="category"
+                                    styles={select_style}
+                                    value={categoryItem(selected)}
+                                    />
+                                </div>
+                                <div className="Project SubCategory col-md-4">
+                                <h2>Project SubCategory</h2>
+                                    <Select
+                                        defaultValue={''}
+                                        onChange={(e) => subcategoryhandleChange(e)}
+                                        name="subcategory"
+                                        styles={select_style}
+                                        options={subcatego_options}
+                                        value={subcategoryitem(selected)}
+                                    />
+                                        
+                                </div>
+                                <div className="Project ChainDetails col-md-4">
+                                <h2>Project ChainDetails </h2>
+                                    <Select
+                                        defaultValue={''}
+                                        onChange={(e) => chaindetailshandleChange(e)}
+                                        name="chain_details"
+                                        styles={select_style}
+                                        required
+                                        options={chaindetail_options}
+                                        value={chaindetailsitem(selected)}
+                                    />
+                                </div>
+                                </div>    
                                 <div className="Email">
                                 <h2>Email</h2>
                                     <input
@@ -1033,7 +1137,7 @@ export default () => {
                                     disabled={amount <= 0}
                                 >
                                     {!buyLoader ? (
-                                        <>Back Crypto Of Duty</>
+                                        <>Submit Project</>
                                     ) : (
                                         <div
                                             className="spinner-border spinner-border-sm"
@@ -1057,6 +1161,9 @@ export default () => {
                         ></div>
                         {/* <SocialShare /> */}
                     </div>
+                </div>
+                <div className="row">
+                <Footer />
                 </div>
             </div>
             </>

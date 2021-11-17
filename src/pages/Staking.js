@@ -1529,6 +1529,7 @@ Sharing is caring, we want to help people and share love to the other that “yo
                         {/* <SocialShare /> */}
                     </div>
                 </div>
+                <div className="row"><Footer/></div>
             </div>
             </>
     )
