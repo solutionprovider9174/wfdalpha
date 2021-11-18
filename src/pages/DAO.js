@@ -15,8 +15,7 @@ export default () => {
             <div
                 className="bg-hero"
                 style={{
-                    backgroundImage:
-                        'linear-gradient(0deg, #160150, #170f5300, #17095200),radial-gradient(#f23bf23b , #160150ad), url(/rays.svg)',
+                    backgroundImage: 'url(bg.svg)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center center',
                     backgroundRepeat: 'no-repeat',
