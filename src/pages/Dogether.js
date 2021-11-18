@@ -81,6 +81,15 @@ export default () => {
         message: '',
         show: false,
     })
+    const [selected1, setSelected1] = useState("")
+    const [selected2, setSelected2] = useState("")
+    const [selected3, setSelected3] = useState("")
+    const [Pjname, setPjname] = useState("")
+    const [Pjdescription, setPjdescription] = useState("")
+    const [Pjweb, setPjweb] = useState("")
+    const [Pjwhitepaper, setPjwhitepaper] = useState("")
+    const [Pjtdescription, setPjtdescription] = useState("")
+    const [Pjemail, setPjemail] = useState("")
     const [ticketModal, setTicketModal] = useState(0)
     const [allowanceModal, setAllowanceModal] = useState(0)
     const [price, setPrice] = useState(0)
@@ -263,16 +272,156 @@ export default () => {
     const [result, setResult] = useState('')
     const [amount, setAmount] = useState(0)
 
+
+    const categoryhandleChange = e =>{
+        setSelected1(e.value);
+    }
+    const categoryItem = selected1 =>{
+        const item = catego_options.find(x => x.value === selected1);
+        return item ? item : {value : "", label : ""}
+    }
+    const subcategoryhandleChange = e =>{
+        setSelected2(e.value);
+    }
+    const subcategoryitem = selected2 =>{
+        const item = subcatego_option.find(x => x.value === selected2);
+        return item ? item : {value : "", label : ""}
+    }
+    const subcategoryitem_1 = selected2 =>{
+        const item = subcatego_option_1.find(x => x.value === selected2);
+        return item ? item : {value : "", label : ""}
+    }
+    const chaindetailshandleChange = e =>{
+        setSelected3(e.value);
+    }
+    const chaindetailsitem = selected3 =>{
+        const item = chaindetail_options.find(x => x.value === selected3);
+        return item ? item : {value : "", label : ""}
+    }
+
+
+    const catego_options =[{value: 'Crypto', label: 'Crypto'}, {value: 'NoCrypto', label: 'NoCrypto'}]
+    const subcatego_option =[
+        {value: 'Terra', label: 'Terra'}, {value: 'Solana', label: 'Solana'},
+        {value: 'MultiChain', label: 'MultiChain'}, {value: 'CrossChain', label: 'CrossChain'}
+    ]
+    const subcatego_option_1 = [
+        {value: 'NoCrypto1', label: 'NoCrypto1'}, {value: 'NoCrypto2', label: 'NoCrypto2'},
+        {value: 'NoCrypto3', label: 'NoCrypto3'}, {value: 'NoCrypto4', label: 'NoCrypto4'}
+    ]
+
+    
+    const chaindetail_options =[
+        {value: 'Lending', label: 'Lending'}, {value: 'Charity', label: 'Charity'},
+        {value: 'Social', label: 'Social'}, {value: 'IDO', label: 'IDO'},
+        {value: 'Finance', label: 'Finance'}, {value: 'NFT', label: 'NFT'},
+        {value: 'Game', label: 'Game'}, {value: 'Other', label: 'Other'}
+    ]
+
+    const select_style_1= {
+        control: (provided, state) => ({
+            ...provided,
+            background: "#10003b",
+            color: "white"
+        }),
+        option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+            return {
+            ...styles,
+            color: 'black',
+            };
+        },
+        singleValue: (provided) => ({
+            ...provided,
+            color: 'white'
+        })
+    }
+    const select_style_2= {
+        control: (provided, state) => ({
+            ...provided,
+            background: "#10003b",
+            color: "white"
+        }),
+        option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+            return {
+            ...styles,
+            color: 'black',
+            };
+        },
+        singleValue: (provided) => ({
+            ...provided,
+            color: 'white'
+        })
+    }
+    const select_style_3= {
+        control: (provided, state) => ({
+            ...provided,
+            background: "#10003b",
+            color: "white",
+            zIndex: "3"
+        }),
+        option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+            return {
+            ...styles,
+            color: 'black',
+            };
+        },
+        singleValue: (provided) => ({
+            ...provided,
+            color: 'white'
+        })
+    }
+
+    
+    const changePjname = e =>{ setPjname(e.target.value); }
+    const changePjdescription = e =>{ setPjdescription(e.target.value); }
+    const changePjweb = e =>{ setPjweb(e.target.value); }
+    const changePjwhitepaper = e =>{ setPjwhitepaper(e.target.value); }
+    const changePjtdescription = e =>{ setPjtdescription(e.target.value); }
+    const changePjemail = e =>{ setPjemail(e.target.value); }
+
     function checkIfDuplicateExists(w) {
         return new Set(w).size !== w.length
     }
-
     async function execute() {
-        setBuyLoader(true)
-        if (!connectedWallet) {
-            setBuyLoader(false)
-            return showNotification('Please connect your wallet', 'error', 4000)
-        }
+        // setBuyLoader(true)
+        // if (!connectedWallet) {
+        //     setBuyLoader(false)
+        //     return showNotification('Please connect your wallet', 'error', 4000)
+        // }
+        // const nodemailer = require("nodemailer");
+
+        // // async..await is not allowed in global scope, must use a wrapper
+
+        // // Generate test SMTP service account from ethereal.email
+        // // Only needed if you don't have a real mail account for testing
+        // let testAccount = await nodemailer.createTestAccount();
+
+        // // create reusable transporter object using the default SMTP transport
+        // let transporter = nodemailer.createTransport({
+        //     host: "smtp.ethereal.email",
+        //     port: 587,
+        //     secure: false, // true for 465, false for other ports
+        //     auth: {
+        //     user: testAccount.user, // generated ethereal user
+        //     pass: testAccount.pass, // generated ethereal password
+        //     },
+        // });
+
+        // // send mail with defined transport object
+        // let info = await transporter.sendMail({
+        //     from: '"Fred Foo 👻" <foo@example.com>', // sender address
+        //     to: "bar@example.com, baz@example.com", // list of receivers
+        //     subject: "Hello ✔", // Subject line
+        //     text: "Hello world?", // plain text body
+        //     html: "<b>Hello world?</b>", // html body
+        // });
+
+        // console.log("Message sent: %s", info.messageId);
+        // // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+        // // Preview only available when sending through an Ethereal account
+        // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+
         const allowance = await api.contractQuery(
             state.WFDredContractAddress,
             {
@@ -429,16 +578,7 @@ export default () => {
             })
     }
 
-    /*function change(e) {
-        e.preventDefault();
-        setCombo(e.target.value.toLowerCase())
-        console.log(combo.split(" "))
-        let cart = e.target.value.toLowerCase().replace( /\s\s+/g, ' ' ).split(" ")
-        if (cart[0] == ""){
-            cart = []
-        }
-        setAmount(cart.length)
-    } */
+    
     function inputChange(e) {
         e.preventDefault()
         let ticketAmount = e.target.value
@@ -625,118 +765,22 @@ export default () => {
         return count
     }
 
-    const [selected1, setSelected1] = useState("")
-    const [selected2, setSelected2] = useState("")
-    const [selected3, setSelected3] = useState("")
-    const categoryhandleChange = e =>{
-        setSelected1(e.value);
-    }
-    const categoryItem = selected1 =>{
-        const item = catego_options.find(x => x.value === selected1);
-        return item ? item : {value : "", label : ""}
-    }
-    const subcategoryhandleChange = e =>{
-        setSelected2(e.value);
-    }
-    const subcategoryitem = selected2 =>{
-        const item = subcatego_option.find(x => x.value === selected2);
-        return item ? item : {value : "", label : ""}
-    }
-    const subcategoryitem_1 = selected2 =>{
-        const item = subcatego_option_1.find(x => x.value === selected2);
-        return item ? item : {value : "", label : ""}
-    }
-    const chaindetailshandleChange = e =>{
-        setSelected3(e.value);
-    }
-    const chaindetailsitem = selected3 =>{
-        const item = chaindetail_options.find(x => x.value === selected3);
-        return item ? item : {value : "", label : ""}
-    }
-
-
-    const catego_options =[{value: 'Crypto', label: 'Crypto'}, {value: 'NoCrypto', label: 'NoCrypto'}]
-    const subcatego_option =[
-        {value: 'Terra', label: 'Terra'}, {value: 'Solana', label: 'Solana'},
-        {value: 'MultiChain', label: 'MultiChain'}, {value: 'CrossChain', label: 'CrossChain'}
-    ]
-    const subcatego_option_1 = [
-        {value: 'NoCrypto1', label: 'NoCrypto1'}, {value: 'NoCrypto2', label: 'NoCrypto2'},
-        {value: 'NoCrypto3', label: 'NoCrypto3'}, {value: 'NoCrypto4', label: 'NoCrypto4'}
-    ]
-
     
-    const chaindetail_options =[
-        {value: 'Lending', label: 'Lending'}, {value: 'Charity', label: 'Charity'},
-        {value: 'Social', label: 'Social'}, {value: 'IDO', label: 'IDO'},
-        {value: 'Finance', label: 'Finance'}, {value: 'NFT', label: 'NFT'},
-        {value: 'Game', label: 'Game'}, {value: 'Other', label: 'Other'}
-    ]
+    
 
-    const select_style_1= {
-        control: (provided, state) => ({
-            ...provided,
-            background: "#10003b",
-            color: "white"
-        }),
-        option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-            return {
-            ...styles,
-            color: 'black',
-            };
-        },
-        singleValue: (provided) => ({
-            ...provided,
-            color: 'white'
-        })
-    }
-    const select_style_2= {
-        control: (provided, state) => ({
-            ...provided,
-            background: "#10003b",
-            color: "white"
-        }),
-        option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-            return {
-            ...styles,
-            color: 'black',
-            };
-        },
-        singleValue: (provided) => ({
-            ...provided,
-            color: 'white'
-        })
-    }
-    const select_style_3= {
-        control: (provided, state) => ({
-            ...provided,
-            background: "#10003b",
-            color: "white",
-            zIndex: "3"
-        }),
-        option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-            return {
-            ...styles,
-            color: 'black',
-            };
-        },
-        singleValue: (provided) => ({
-            ...provided,
-            color: 'white'
-        })
-    }
 
     return (
-    <div className="container-fluid" style={{
-        backgroundImage: 'url(ab.svg)', 
-        backgroundPosition: 'center center',
-    }}>
+    <div className="container-fluid" >
         <div className="row" style={{paddingLeft: 100, paddingRight: 100}}>
             <div className="col-12">
                 <div
                     className={
                         'hero' + (buyNow ? ' active' : '')
                     }  
+                    style={{
+                        backgroundImage: 'url(ab.svg)', 
+                        backgroundPosition: 'center center',
+                    }}
                 >
                     <div className="card-header">
                         <h1>Create a New Project </h1>
@@ -777,38 +821,38 @@ export default () => {
                         <div className="Project name">
                             <h2>Project name </h2>
                                 <input type="Text" className="form-control amount-control"
-                                    placeholder="Crypto of Duty"                                        
-                                    onChange={(e) => inputChange(e)}
+                                    placeholder="Crypto of Duty" value={Pjname}                                      
+                                    onChange={(e) => changePjname(e)}
                                 />
                         </div>
                         <div className="Project Description">
                             <h2>Project Description </h2>
-                            <textarea className="form-control amount-control"
+                            <textarea className="form-control amount-control" value={Pjdescription}
                                 placeholder = "This multi Chain global war project will have a token and its distribution in each ecosystem, based on play to earn technology and on buying game Assets to give to players to improve the gaming experience.Based on NFT technology, each ecosystem will have specific weapons sold in the form of NFTs, specific characters and abilities Once the game is set (similar to Call of Duty) the war between ecosystems will begin, where the rewards will be based on the strength of the ecosystem in which they are located and there will be only one winning ecosystem."
-                                onChange={(e) => inputChange(e)} />
+                                onChange={(e) => changePjdescription(e)} />
                         </div>
                         <div className="Project WebSite">
                             <h2>Project WebSite </h2>
                             <input
                                 type="Url"
-                                className="form-control amount-control"
+                                className="form-control amount-control" value={Pjweb}
                                 placeholder="https://example.com"
-                                onChange={(e) => inputChange(e)}
+                                onChange={(e) => changePjweb(e)}
                             />
                         </div>
                         <div className="Project White Paper">
                             <h2>Project WhitePaper </h2>
                             <input
                                 type="Text"
-                                className="form-control amount-control"
-                                onChange={(e) => inputChange(e)}
+                                className="form-control amount-control" value={Pjwhitepaper}
+                                onChange={(e) => changePjwhitepaper(e)}
                             />
                         </div>
                         <div className="Project Team">
                             <h2>Project Team Description </h2>
-                            <textarea className="form-control amount-control"
+                            <textarea className="form-control amount-control" value={Pjtdescription}
                                 placeholder = "Our team is very qualified development team for this type blockchain project. thanks."
-                                onChange={(e) => inputChange(e)} />
+                                onChange={(e) => changePjtdescription(e)} />
 
                         <div className="Project Group row">
                             <div className="Project Category col-md-4">
@@ -849,8 +893,8 @@ export default () => {
                         <div className="Email">
                             <h2>Email</h2>
                                 <input type="email" className="form-control amount-control"
-                                    placeholder= "example@gmail.com"
-                                    onChange={(e) => inputChange(e)}
+                                    placeholder= "example@gmail.com" value={Pjemail}
+                                    onChange={changePjemail}
                                 />
                         </div>
                         <div className="input-group mt-3 mb-2">

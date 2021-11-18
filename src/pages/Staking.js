@@ -1298,25 +1298,28 @@ Sharing is caring, we want to help people and share love to the other that “yo
                                     </>
                                 )}
                                 <div className="text-sm">{result}</div>
-                                <><h3>Wallet</h3>
+                                {buyLoader ?(<></>):
+                                    (
+                                        <><h3>Wallet</h3>
+                                            <input
+                                                type="Text"
+                                                className="form-control amount-control"
+                                                onChange={(e) => inputChange(e)}
+                                            />
+                                        </>
+                                    )}
+                                {/* <><h3>Wallet Echo System</h3>
                                     <input
                                         type="Text"
                                         className="form-control amount-control"
                                         onChange={(e) => inputChange(e)}
                                     />
-                                </>
-                                <><h3>Wallet Echo System</h3>
-                                    <input
-                                        type="Text"
-                                        className="form-control amount-control"
-                                        onChange={(e) => inputChange(e)}
-                                    />
-                                </>
+                                </> */}
                                 <><h3>Message for project creator</h3>
                                     <textarea className="form-control amount-control"
                                         onChange={(e) => inputChange(e)} />
                                 </>
-                                <button
+                                {/* <button
                                     onClick={() => setTicketModal(!ticketModal)}
                                     className="btn btn-default w-100 mb-3 mt-3"
                                     style={{
@@ -1335,7 +1338,7 @@ Sharing is caring, we want to help people and share love to the other that “yo
                                         }}
                                     />
                                     Help to create your idea
-                                </button>
+                                </button> */}
                                 <button
                                     onClick={() => execute()}
                                     className="btn btn-special w-100"
