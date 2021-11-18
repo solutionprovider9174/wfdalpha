@@ -11,20 +11,24 @@ import {
     Button,
     useColorModeValue,
   } from '@chakra-ui/react';
-  import {
-    IoArrowForwardCircle,
-    IoLogoBitcoin,
-    IoSearchSharp,
-  } from 'react-icons/io5';
-  import { ReactElement } from 'react';
+  // import {
+  //   IoArrowForwardCircle,
+  //   IoLogoBitcoin,
+  //   IoSearchSharp,
+  // } from 'react-icons/io5';
+  import{
+    ArrowForwardIcon
+  } from '@chakra-ui/icons';
   
-  interface FeatureProps {
-    text: string;
-    iconBg: string;
-    icon?: ReactElement;
-  }
+  import React from 'react';
   
-  const Feature = ({ text, icon, iconBg }: FeatureProps) => {
+  // interface FeatureProps {
+  //   text: string;
+  //   iconBg: string;
+  //   icon?: ReactElement;
+  // }
+  
+  const Feature = ({ text, icon, iconBg }) => {
     return (
       <Stack direction={'column'} align={'center'}>
         <Flex
@@ -49,43 +53,43 @@ import {
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
           <Stack spacing={1}>
           <Container ml={'-10'}>
-          <Flex>
-          <Image
-              alt={'Wefund'}
-              w={'20%'}
-              h={'20%'}
-              src={
-                'https://www.wefund.app/assets/images/wfd%20abt%20icon.svg'
-              }
-            />
-            <Container >
-            <Text
-              textTransform={'uppercase'}
-              color={'grey.200'}
-              fontWeight={100}
-              fontSize={'md'}
-              p={2}
-              alignSelf={'flex-start'}
-              rounded={'lg'}>
-              About WeFund
-            </Text>
-            <Heading w={'2xl'} fontWeight={400}>One Goal, One Passion</Heading>
-            </Container>
+            <Flex>
+              <Image
+                alt={'Wefund'}
+                w={'20%'}
+                h={'20%'}
+                src={
+                  'wfd%20abt%20icon.svg'
+                }
+              />
+              <Container >
+                <Text
+                  textTransform={'uppercase'}
+                  color={'grey.200'}
+                  fontWeight={100}
+                  fontSize={'md'}
+                  p={2}
+                  alignSelf={'flex-start'}
+                  rounded={'lg'}>
+                  About WeFund
+                </Text>
+                <Heading w={'2xl'} fontWeight={400}>One Goal, One Passion</Heading>
+              </Container>
             </Flex>
-            </Container>
-            <br/>
-            <Text color={'gray.200'} fontSize={'lg'}>
-            WeFund is Decentralized crowdfunding for the crypto-startup project industry and beyond implemented for a real-life use case. <br/> <br/> The vision of WeFund is to become the connector of the blockchain ecosystem that exists on the market.
-             to fulfill this vision, WeFund's initial development stage would be in the Terra ecosystem and will continue to use another ecosystem such as Solana, Etherium, Cardano, etc in near future.
-            </Text>
-            <SimpleGrid columns={{ base: 1, md: 3 }} >
+          </Container>
+          <br/>
+          <Text color={'gray.200'} fontSize={'lg'}>
+          WeFund is Decentralized crowdfunding for the crypto-startup project industry and beyond implemented for a real-life use case. <br/> <br/> The vision of WeFund is to become the connector of the blockchain ecosystem that exists on the market.
+            to fulfill this vision, WeFund's initial development stage would be in the Terra ecosystem and will continue to use another ecosystem such as Solana, Etherium, Cardano, etc in near future.
+          </Text>
+          <SimpleGrid columns={{ base: 1, md: 3 }} >
             <Stack
               spacing={4}
               mt={'10'}>
               <Feature
                 icon={
                   <Image
-                  src={'https://www.wefund.app/assets/images/ca1.svg'}/>
+                  src={'ca1.svg'}/>
                 }
                 iconBg={useColorModeValue('yellow.100', 'yellow.900')}
                 text={'Yield Benefit for Backers'}
@@ -93,20 +97,19 @@ import {
               <Feature
                 icon={
                   <Image
-                  src={'https://www.wefund.app/assets/images/ca2.svg'}/>
+                  src={'ca2.svg'}/>
                 }
                 iconBg={useColorModeValue('yellow.100', 'yellow.900')}
                 text={'Governance Voting Power'}
               />
-              
             </Stack>
             <Stack
-              spacing={4}
-              mt={'10'}>
+            spacing={4}
+            mt={'10'}>
               <Feature
                 icon={
                   <Image
-                  src={'https://www.wefund.app/assets/images/ca3.svg'}/>
+                  src={'ca3.svg'}/>
                 }
                 iconBg={useColorModeValue('yellow.100', 'yellow.900')}
                 text={'Secure Stable Deposits'}
@@ -114,20 +117,19 @@ import {
               <Feature
                 icon={
                   <Image
-                  src={'https://www.wefund.app/assets/images/ca4.svg'}/>
+                  src={'ca4.svg'}/>
                 }
                 iconBg={useColorModeValue('yellow.100', 'yellow.900')}
                 text={'Deflationary Token Value'}
               />
-              
-            </Stack>
+            </Stack>          
             <Stack
               spacing={4}
               mt={'10'}>
               <Feature
                 icon={
                   <Image
-                  src={'https://www.wefund.app/assets/images/ca5.svg'}/>
+                  src={'ca5.svg'}/>
                 }
                 iconBg={useColorModeValue('yellow.100', 'yellow.900')}
                 text={'Low Risk investment'}
@@ -135,23 +137,20 @@ import {
               <Feature
                 icon={
                   <Image
-                  src={'https://www.wefund.app/assets/images/ca6.svg'}/>
+                  src={'ca6.svg'}/>
                 }
                 iconBg={useColorModeValue('yellow.100', 'yellow.900')}
                 text={'NFT Mirror Real World Asset'}
               />
-              
             </Stack>
-              
-            </SimpleGrid>
-            <br/><br/><br/>
-            <Button rightIcon={<IoArrowForwardCircle />} bgGradient={"linear( #79D1F0, #69A7E8)"} mt={'10%'}  size="lg" maxW={'600'} ml={'200px'}>
-              Download Whitepaper
-              </Button>
-          </Stack>
+          </SimpleGrid>
+          <br/><br/><br/>
+          <Button rightIcon={<ArrowForwardIcon/>} bgGradient={"linear( #79D1F0, #69A7E8)"} mt= {'10%'}  size="lg" maxW={'600'} ml={'200px'}>
+            Download Whitepaper
+          </Button>
+        </Stack>
           
-          <Flex>
-            
+          <Flex>            
             <Image
               alt={'feature image'}
               mt={'15%'}
@@ -159,7 +158,7 @@ import {
               w={'80%'}
               h={'80%'}
               src={
-                'https://www.wefund.app/assets/images/wfd%20abt.svg'
+                'wfd%20abt.svg'
               }
             />
           </Flex>

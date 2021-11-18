@@ -11,10 +11,11 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { CheckIcon } from '@chakra-ui/icons';
+import React from 'react';
 
 export default function Emailsub() {
   const [email, setEmail] = useState('');
-  const [state, setState] = useState<'initial' | 'submitting' | 'success'>(
+  const [state, setState] = useState(
     'initial'
   );
   const [error, setError] = useState(false);
@@ -26,11 +27,12 @@ export default function Emailsub() {
       justify={'center'}
       w={'100%'}
 
-      bg={useColorModeValue('white', 'whiteAlpha.100')}>
+      bg={'whiteAlpha.100'}>
       <Container
         boxShadow={'xl'}
         rounded={'lg'}
         p={6}
+        bg={'purple.900'}
         direction={'column'}
         >
         <Heading
@@ -46,7 +48,7 @@ export default function Emailsub() {
           direction={{ base: 'column', md: 'row' }}
           as={'form'}
           spacing={'12px'}
-          onSubmit={(e: FormEvent) => {
+          onSubmit={(e) => {
             e.preventDefault();
             setError(false);
             setState('submitting');
@@ -79,7 +81,7 @@ export default function Emailsub() {
               value={email}
               h={16}
               disabled={state !== 'initial'}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              onChange={(e) =>
                 setEmail(e.target.value)
               }
             />

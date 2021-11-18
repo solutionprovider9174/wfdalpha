@@ -94,7 +94,7 @@ class App extends Component {
                         />
                     </Head>
                     <StoreProvider>
-                        <Navbar />
+                        {/* <Navbar /> */}
                         <Routes default />
                     </StoreProvider>
 

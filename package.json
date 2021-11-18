@@ -11,6 +11,10 @@
         "lint": "prettier --write ."
     },
     "dependencies": {
+        "@chakra-ui/icons": "^1.1.1",
+        "@chakra-ui/react": "^1.7.2",
+        "@emotion/react": "11",
+        "@emotion/styled": "11",
         "@popperjs/core": "^2.9.2",
         "@reach/router": "^1.3.4",
         "@terra-money/terra.js": "^2.0.14",
@@ -19,6 +23,7 @@
         "babel-plugin-transform-remove-console": "^6.9.4",
         "bootstrap": "^5.0.2",
         "chart.js": "^3.5.0",
+        "framer-motion": "4",
         "nouislider-react": "^3.4.1",
         "numeral": "^2.0.6",
         "phosphor-react": "^1.3.1",

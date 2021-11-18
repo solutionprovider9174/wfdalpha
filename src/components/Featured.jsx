@@ -5,25 +5,26 @@ import {
   Image,
   Flex,
   Icon,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
 
-import { MdHeadset, MdEmail, MdLocationOn, MdWork, MdWeb, MdWebStories } from "react-icons/md";
-import { BsArrow90DegRight, BsFillBriefcaseFill } from "react-icons/bs";
+// import { MdHeadset, MdEmail, MdLocationOn, MdWork, MdWeb, MdWebStories } from "react-icons/md";
+// import { BsArrow90DegRight, BsFillBriefcaseFill } from "react-icons/bs";
 
 const Projectfeature = () => {
   return (
     <Flex
-      bg={"#F9FAFB"}
       p={50}
       w="full"
       alignItems="center"
       justifyContent="center"
     >
+      
       <Box
         w="xs"
         mx="auto"
-        bg={useColorModeValue("white", "gray.800")}
+        bg="white"
+        
         shadow="lg"
         rounded="lg"
         overflow="hidden"
@@ -33,7 +34,7 @@ const Projectfeature = () => {
           h={56}
           fit="cover"
           objectPosition="center"
-          src="https://www.wefund.app/assets/images/lynx.jpeg"
+          src="lynx.jpeg"
           alt="avatar"
         />
 
@@ -48,7 +49,7 @@ const Projectfeature = () => {
           
 
           <chakra.p py={2} color={useColorModeValue("gray.700", "gray.400")}>
-          Lynx VR: A charity project of a simulation game (play2earn) based on Virtual Reality 
+          Lynx VR: A charity project of a simulation game  based on VR
           </chakra.p>
 
           <Flex
@@ -56,12 +57,12 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            <Icon
+            {/* <Icon
               as={MdWebStories}
               h={6}
               w={6}
               mr={2}
-            />
+            /> */}
 
             <chakra.h1 px={2} fontSize="sm">
               Charity Project
@@ -73,10 +74,10 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            <Icon as={MdLocationOn} h={6} w={6} mr={2} />
+            {/* <Icon as={MdLocationOn} h={6} w={6} mr={2} /> */}
 
             <chakra.h1 px={2} fontSize="sm">
-              Jakarta
+              Cardano
             </chakra.h1>
           </Flex>
           <Flex
@@ -84,10 +85,10 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            <Icon as={MdWork} h={6} w={6} mr={2} />
+            {/* <Icon as={MdWork} h={6} w={6} mr={2} /> */}
 
             <chakra.h1 px={2} fontSize="sm">
-              Lynx.Lyxnwebsite
+              -\
             </chakra.h1>
           </Flex>
         </Box>
@@ -95,7 +96,8 @@ const Projectfeature = () => {
       <Box
         w="xs"
         mx="auto"
-        bg={useColorModeValue("white", "gray.800")}
+        bg="white"
+        
         shadow="lg"
         rounded="lg"
         overflow="hidden"
@@ -105,14 +107,14 @@ const Projectfeature = () => {
           h={56}
           fit="cover"
           objectPosition="center"
-          src="https://www.wefund.app/assets/images/lynx.jpeg"
+          src="coin%20icon%20shp1.png"
           alt="avatar"
         />
 
         <Flex alignItems="center" px={6} py={3} bg="gray.900">
 
           <chakra.h1 mx={3} color="white" fontWeight="bold" fontSize="lg">
-            Lynx Vr
+            Sheep
           </chakra.h1>
         </Flex>
 
@@ -120,7 +122,7 @@ const Projectfeature = () => {
           
 
           <chakra.p py={2} color={useColorModeValue("gray.700", "gray.400")}>
-          Lynx VR: A charity project of a simulation game (play2earn) based on Virtual Reality 
+          Sheep: Memecoin to share awareness of covid 
           </chakra.p>
 
           <Flex
@@ -128,15 +130,15 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            <Icon
+            {/* <Icon
               as={MdWebStories}
               h={6}
               w={6}
               mr={2}
-            />
+            /> */}
 
             <chakra.h1 px={2} fontSize="sm">
-              Charity Project
+              Memecoin Project
             </chakra.h1>
           </Flex>
 
@@ -145,10 +147,10 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            <Icon as={MdLocationOn} h={6} w={6} mr={2} />
+            {/* <Icon as={MdLocationOn} h={6} w={6} mr={2} /> */}
 
             <chakra.h1 px={2} fontSize="sm">
-              Jakarta
+              Terra Ecosystem
             </chakra.h1>
           </Flex>
           <Flex
@@ -156,18 +158,18 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            <Icon as={MdWork} h={6} w={6} mr={2} />
+            {/* <Icon as={MdWork} h={6} w={6} mr={2} /> */}
 
             <chakra.h1 px={2} fontSize="sm">
-              Lynx.Lyxnwebsite
+              -\
             </chakra.h1>
           </Flex>
         </Box>
-      </Box>
-      <Box
+      </Box><Box
         w="xs"
         mx="auto"
-        bg={useColorModeValue("white", "gray.800")}
+        bg="white"
+        
         shadow="lg"
         rounded="lg"
         overflow="hidden"
@@ -177,14 +179,14 @@ const Projectfeature = () => {
           h={56}
           fit="cover"
           objectPosition="center"
-          src="https://www.wefund.app/assets/images/lynx.jpeg"
+          src="simba%20icon-mini.png"
           alt="avatar"
         />
 
         <Flex alignItems="center" px={6} py={3} bg="gray.900">
 
           <chakra.h1 mx={3} color="white" fontWeight="bold" fontSize="lg">
-            Lynx Vr
+            Simba
           </chakra.h1>
         </Flex>
 
@@ -192,7 +194,7 @@ const Projectfeature = () => {
           
 
           <chakra.p py={2} color={useColorModeValue("gray.700", "gray.400")}>
-          Lynx VR: A charity project of a simulation game (play2earn) based on Virtual Reality 
+          Simba: A charity project on memecoin to fund nature and ecosystem
           </chakra.p>
 
           <Flex
@@ -200,15 +202,15 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            <Icon
+            {/* <Icon
               as={MdWebStories}
               h={6}
               w={6}
               mr={2}
-            />
+            /> */}
 
             <chakra.h1 px={2} fontSize="sm">
-              Charity Project
+              Memecoin Project
             </chakra.h1>
           </Flex>
 
@@ -217,10 +219,10 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            <Icon as={MdLocationOn} h={6} w={6} mr={2} />
+            {/* <Icon as={MdLocationOn} h={6} w={6} mr={2} /> */}
 
             <chakra.h1 px={2} fontSize="sm">
-              Jakarta
+              Terra Ecosystem
             </chakra.h1>
           </Flex>
           <Flex
@@ -228,18 +230,18 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            <Icon as={MdWork} h={6} w={6} mr={2} />
+            {/* <Icon as={MdWork} h={6} w={6} mr={2} /> */}
 
             <chakra.h1 px={2} fontSize="sm">
-              Lynx.Lyxnwebsite
+              -
             </chakra.h1>
           </Flex>
         </Box>
-      </Box>
-      <Box
+      </Box><Box
         w="xs"
         mx="auto"
-        bg={useColorModeValue("white", "gray.800")}
+        bg="white"
+        
         shadow="lg"
         rounded="lg"
         overflow="hidden"
@@ -249,14 +251,14 @@ const Projectfeature = () => {
           h={56}
           fit="cover"
           objectPosition="center"
-          src="https://www.wefund.app/assets/images/lynx.jpeg"
+          src="6053394334130220469_121.jpg"
           alt="avatar"
         />
 
         <Flex alignItems="center" px={6} py={3} bg="gray.900">
 
           <chakra.h1 mx={3} color="white" fontWeight="bold" fontSize="lg">
-            Lynx Vr
+            Crypto of Duty
           </chakra.h1>
         </Flex>
 
@@ -264,7 +266,7 @@ const Projectfeature = () => {
           
 
           <chakra.p py={2} color={useColorModeValue("gray.700", "gray.400")}>
-          Lynx VR: A charity project of a simulation game (play2earn) based on Virtual Reality 
+          Crypto of Duty: Multi Chain global war project game
           </chakra.p>
 
           <Flex
@@ -272,15 +274,15 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            <Icon
+            {/* <Icon
               as={MdWebStories}
               h={6}
               w={6}
               mr={2}
-            />
+            /> */}
 
             <chakra.h1 px={2} fontSize="sm">
-              Charity Project
+              Game Project
             </chakra.h1>
           </Flex>
 
@@ -289,10 +291,10 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            <Icon as={MdLocationOn} h={6} w={6} mr={2} />
+            {/* <Icon as={MdLocationOn} h={6} w={6} mr={2} /> */}
 
             <chakra.h1 px={2} fontSize="sm">
-              Jakarta
+              Multichain
             </chakra.h1>
           </Flex>
           <Flex
@@ -300,10 +302,10 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            <Icon as={MdWork} h={6} w={6} mr={2} />
+            {/* <Icon as={MdWork} h={6} w={6} mr={2} /> */}
 
             <chakra.h1 px={2} fontSize="sm">
-              Lynx.Lyxnwebsite
+              -
             </chakra.h1>
           </Flex>
         </Box>

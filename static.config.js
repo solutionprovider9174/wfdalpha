@@ -18,7 +18,11 @@ export default {
         // A simple route
         {
             path: '/',
-            template: 'src/pages/Index',
+            template: 'src/pages/index',
+        },
+        {
+            path: 'startup',
+            template: 'src/pages/Startup',
         },
         {
             path: 'staking',

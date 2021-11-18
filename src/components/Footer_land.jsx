@@ -1,6 +1,8 @@
-import { Flex, FlexProps } from '@chakra-ui/react'
-import { Image } from "@chakra-ui/react"
-export const Footer = (props: FlexProps) => (
+import { Flex, FlexProps } from '@chakra-ui/react';
+import { Image } from "@chakra-ui/react";
+import React from 'react';
+
+export const Footer = (props) => (
   <Flex as="footer" py="8rem" {...props} />
 )
 import {
@@ -13,28 +15,21 @@ import {
   useColorModeValue,
   VisuallyHidden,
 } from '@chakra-ui/react';
-import { FaDiscord, FaInstagram, FaTelegram, FaTwitter, FaWizardsOfTheCoast, FaYoutube } from 'react-icons/fa';
+
+// import { FaDiscord, FaInstagram, FaTelegram, FaTwitter, FaWizardsOfTheCoast, FaYoutube } from 'react-icons/fa';
 import { ReactNode } from 'react';
 
-const Logo = (props: any) => {
+const Logo = (props) => {
   return (
     <Image
   w = {10}
-  src="https://www.wefund.app/assets/images/WeFund%20Logos%20only.png"
+  src="WeFund%20Logos%20only.png"
   alt="WeFund"
 />
   );
 };
 
-const SocialButton = ({
-  children,
-  label,
-  href,
-}: {
-  children: ReactNode;
-  label: string;
-  href: string;
-}) => {
+const SocialButton = ({ children, label, href,}) => {
   return (
     <chakra.button
       bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
@@ -49,7 +44,7 @@ const SocialButton = ({
       justifyContent={'center'}
       transition={'background 0.3s ease'}
       _hover={{
-        bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
+        bg:'whiteAlpha.200',
       }}>
       <VisuallyHidden>{label}</VisuallyHidden>
       {children}
@@ -60,8 +55,8 @@ const SocialButton = ({
 export default function FooterCenter() {
   return (
     <Box width="100%"
-      bg={useColorModeValue('gray.50', 'gray.900')}
-      color={useColorModeValue('gray.700', 'gray.200')}>
+      bg={'gray.900'}
+      color={'gray.200'}>
       <Container
         as={Stack}
         maxW={'6xl'}
@@ -81,7 +76,7 @@ export default function FooterCenter() {
       <Box
         borderTopWidth={1}
         borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.700')}>
+        borderColor={'gray.700'}>
         <Container
           as={Stack}
           maxW={'6xl'}
@@ -93,16 +88,16 @@ export default function FooterCenter() {
           <Text>© 2021 AI.Wefund Ltd</Text>
           <Stack direction={'row'} spacing={6}>
             <SocialButton label={'Twitter'} href={'#'}>
-              <FaTwitter />
+              {/* <FaTwitter /> */}
             </SocialButton>
             <SocialButton label={'Telegram'} href={'#'}>
-              <FaTelegram />
+              {/* <FaTelegram /> */}
             </SocialButton>
             <SocialButton label={'Instagram'} href={'#'}>
-              <FaInstagram />
+              {/* <FaInstagram /> */}
             </SocialButton>
              <SocialButton label={'Instagram'} href={'#'}>
-              <FaDiscord />
+              {/* <FaDiscord /> */}
             </SocialButton>
           </Stack>
         </Container>
