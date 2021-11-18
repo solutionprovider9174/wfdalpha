@@ -15,7 +15,7 @@ export default {
     }),
     //maxThreads: 1, // Remove this when you start doing any static generation
     getRoutes: async ({ dev }) => [
-        // A simple route
+        //  simple route
         {
             path: '/',
             template: 'src/pages/Index',

@@ -1245,12 +1245,9 @@ Sharing is caring, we want to help people and share love to the other that “yo
                                     </p>
                                 ) : (
                                     <>
-                                        <p
-                                            className="mb-0"
-                                            style={{
+                                        <p className="mb-0" style={{
                                                 textDecoration: 'line-through',
-                                            }}
-                                        >
+                                            }} >
                                             Total:{' '}
                                             <strong>
                                                 {numeral(
@@ -1259,10 +1256,7 @@ Sharing is caring, we want to help people and share love to the other that “yo
                                                 UST
                                             </strong>
                                         </p>
-                                        <p
-                                            className="mb-2"
-                                            style={{ color: '#4ee19b' }}
-                                        >
+                                        <p className="mb-2" style={{ color: '#4ee19b' }} >
                                             Total:{' '}
                                             <strong>
                                                 {' '}

@@ -727,492 +727,400 @@ export default () => {
     }
 
     return (
-        <>
-            {/* <img src={'/confetti.webp'} style={{
-            position:'absolute',
-            maxWidth:'100%'
-            }}/> */}
-       
-        
-
-     
-
-
-            {/* <div className="container" style={{ marginTop: '2rem' }}>
-                <div className="card lota-card">
-                    <div className="card-body">
-                        <coingecko-coin-price-chart-widget
-                            currency="usd"
-                            coin-id="WeFund"
-                            locale="en"
-                            height="300"
-                        ></coingecko-coin-price-chart-widget>
-                    </div>
-                </div>
-            </div> */}
-{/*---------BUTTON PART-------------------------*/}
-
-
-
-<div className="container-fluid" style={{
-                    backgroundImage: 'url(ab.svg)', 
-                    backgroundPosition: 'center center',
-                }}>
-                <div className="row" style={{paddingLeft: 100, paddingRight: 100}}>
-                    <div className="col-12">
-                        <div
-                            className={
-                                'hero' + (buyNow ? ' active' : '')
-                            }  
+    <div className="container-fluid" style={{
+        backgroundImage: 'url(ab.svg)', 
+        backgroundPosition: 'center center',
+    }}>
+        <div className="row" style={{paddingLeft: 100, paddingRight: 100}}>
+            <div className="col-12">
+                <div
+                    className={
+                        'hero' + (buyNow ? ' active' : '')
+                    }  
+                >
+                    <div className="card-header">
+                        <h1>Create a New Project </h1>
+                        <button className="toggle"
+                            onClick={() => setBuyNow(!buyNow)}
                         >
-                            <div className="card-header">
-                                <h1>Create a New Project </h1>
-                                <button
-                                    className="toggle"
-                                    onClick={() => setBuyNow(!buyNow)}
-                                >
-                                   
-                                </button>
+                        </button>
+                    </div>
+                    <div className="card-body">
+                        <p style={{ marginBottom: 0,}}>
+                            Back On:
+                        </p>
+                        <div className="btn-group w-100 mb-2">
+                            <button className={
+                                    'btn btn-default' +
+                                    (payWith == 'ust'
+                                        ? ' active'
+                                        : ' inactive')
+                                }
+                                onClick={() => setPayWith('ust')}
+                            >
+                                <img src={'/UST.svg'} className="me-2" width="20px"/>
+                                UST
+                            </button>
+                            <button
+                                className={
+                                    'btn btn-default' +
+                                    (payWith == 'WFD'
+                                        ? ' active'
+                                        : ' inactive')
+                                }
+                                onClick={() => setPayWith('WFD')}
+                            >
+                                <img src={'/WFD.png'} className="me-2" width="20px" />
+                                WFD
+                            </button>
+                        </div>
+                        <div className="Project name">
+                            <h2>Project name </h2>
+                                <input type="Text" className="form-control amount-control"
+                                    placeholder="Crypto of Duty"                                        
+                                    onChange={(e) => inputChange(e)}
+                                />
+                        </div>
+                        <div className="Project Description">
+                            <h2>Project Description </h2>
+                            <textarea className="form-control amount-control"
+                                placeholder = "This multi Chain global war project will have a token and its distribution in each ecosystem, based on play to earn technology and on buying game Assets to give to players to improve the gaming experience.Based on NFT technology, each ecosystem will have specific weapons sold in the form of NFTs, specific characters and abilities Once the game is set (similar to Call of Duty) the war between ecosystems will begin, where the rewards will be based on the strength of the ecosystem in which they are located and there will be only one winning ecosystem."
+                                onChange={(e) => inputChange(e)} />
+                        </div>
+                        <div className="Project WebSite">
+                            <h2>Project WebSite </h2>
+                            <input
+                                type="Url"
+                                className="form-control amount-control"
+                                placeholder="https://example.com"
+                                onChange={(e) => inputChange(e)}
+                            />
+                        </div>
+                        <div className="Project White Paper">
+                            <h2>Project WhitePaper </h2>
+                            <input
+                                type="Text"
+                                className="form-control amount-control"
+                                onChange={(e) => inputChange(e)}
+                            />
+                        </div>
+                        <div className="Project Team">
+                            <h2>Project Team Description </h2>
+                            <textarea className="form-control amount-control"
+                                placeholder = "Our team is very qualified development team for this type blockchain project. thanks."
+                                onChange={(e) => inputChange(e)} />
+
+                        <div className="Project Group row">
+                            <div className="Project Category col-md-4">
+                                <h2>Project Category </h2>
+                                <Select 
+                                defaultValue={catego_options["Crypto"]}
+                                options={catego_options}
+                                onChange={(e) => categoryhandleChange(e)}
+                                name="category"
+                                styles={select_style_1}
+                                value={categoryItem(selected1)}
+                                />
                             </div>
+                            <div className="Project SubCategory col-md-4">
+                                <h2>Project SubCategory</h2>
+                                <Select
+                                    defaultValue={subcatego_option["Terra"]}
+                                    onChange={(e) => subcategoryhandleChange(e)}
+                                    name="subcategory"
+                                    styles={select_style_2}
+                                    options={selected1 === "NoCrypto" ? subcatego_option_1 : subcatego_option}
+                                    value={selected1 === "NoCrypto" ? subcategoryitem_1(selected2) : subcategoryitem(selected2)}
+                                />
+                            </div>
+                            <div className="Project ChainDetails col-md-4">
+                                <h2>Project ChainDetails </h2>
+                                <Select
+                                    defaultValue={chaindetail_options["Charity"]}
+                                    onChange={(e) => chaindetailshandleChange(e)}
+                                    name="chain_details"
+                                    styles={select_style_3}
+                                    required
+                                    options={chaindetail_options}
+                                    value={chaindetailsitem(selected3)}
+                                />
+                            </div>
+                        </div>    
+                        <div className="Email">
+                            <h2>Email</h2>
+                                <input type="email" className="form-control amount-control"
+                                    placeholder= "example@gmail.com"
+                                    onChange={(e) => inputChange(e)}
+                                />
+                        </div>
+                        <div className="input-group mt-3 mb-2">
+                        <h2>Amount Required </h2>
+                            <button className="btn btn-default"
+                                onClick={() => amountChange('down')}
+                            >
+                                <MinusCircle
+                                    size={31}
+                                    color={'#9183d4'}
+                                />s
+                            </button>
+                            <input
+                                type="number"
+                                className="form-control amount-control"
+                                value={amount}
+                                min="1"
+                                max="1000000000000"
+                                step="1"
+                                onChange={(e) => inputChange(e)}
+                            />
+                            <button
+                                className="btn btn-default"
+                                onClick={() => amountChange('up')}
+                            >
+                                <PlusCircle
+                                    size={31}
+                                    color={'#9183d4'}
+                                />
+                            </button>
+                        </div>
 
-
-
-                            <div className="card-body">
+                        {/* <p className="mb-2">Total: <strong>{numeral((amount * price) / 1000000).format("0,0.00")} UST</strong></p> */}
+                        {!WFDBonus || payWith == 'WFD' ? (
+                            <p className="mb-2">
+                                Total:{' '}
+                                <strong>
+                                    {numeral(
+                                        (amount * price) / 1000000
+                                    ).format('0,0.00')}{' '}
+                                    {payWith == 'ust' ? 'UST' : 'WFD'}
+                                </strong>
+                            </p>
+                        ) : (
+                            <>
                                 <p
+                                    className="mb-0"
                                     style={{
-                                        marginBottom: 0,
+                                        textDecoration: 'line-through',
                                     }}
                                 >
-                                    Back On:
-                                </p>
-                                <div className="btn-group w-100 mb-2">
-                                    <button
-                                        className={
-                                            'btn btn-default' +
-                                            (payWith == 'ust'
-                                                ? ' active'
-                                                : ' inactive')
-                                        }
-                                        onClick={() => setPayWith('ust')}
-                                    >
-                                        <img
-                                            src={'/UST.svg'}
-                                            className="me-2"
-                                            width="20px"
-                                        />
+                                    Total:{' '}
+                                    <strong>
+                                        {numeral(
+                                            (amount * price) / 1000000
+                                        ).format('0,0.00')}{' '}
                                         UST
-                                    </button>
-                                    <button
-                                        className={
-                                            'btn btn-default' +
-                                            (payWith == 'WFD'
-                                                ? ' active'
-                                                : ' inactive')
-                                        }
-                                        onClick={() => setPayWith('WFD')}
-                                    >
-                                        <img
-                                            src={'/WFD.png'}
-                                            className="me-2"
-                                            width="20px"
-                                        />
-                                        WFD
-                                    </button>
-                                </div>
-                                
-                                <div className="Project name">
-                                <h2>Project name </h2>
-                                    <input
-                                        type="Text"
-                                        className="form-control amount-control"
-                                        
-                                        
-                                        onChange={(e) => inputChange(e)}
-                                    />
-
-
-                                </div>
-                                <div className="Project Description">
-                                <h2>Project Description </h2>
-                                    {/* <input
-                                        type="Text"
-                                        className="form-control amount-control"
-                                        
-                                        
-                                        onChange={(e) => inputChange(e)}
-                                    /> */}
-
-                                    <textarea className="form-control amount-control"
-                                        onChange={(e) => inputChange(e)} />
-                                </div>
-
-                                <div className="Project WebSite">
-                                <h2>Project WebSite </h2>
-                                    <input
-                                        type="Text"
-                                        className="form-control amount-control"
-                                        
-                                        
-                                        onChange={(e) => inputChange(e)}
-                                    />
-
-
-                                </div>
-                                <div className="Project White Paper">
-                                <h2>Project WhitePaper </h2>
-                                    <input
-                                        type="Text"
-                                        className="form-control amount-control"
-                                        
-                                        
-                                        onChange={(e) => inputChange(e)}
-                                    />
-
-
-                                </div>
-
-
-                                <div className="Project Team">
-                                <h2>Project Team Description </h2>
-                                    <input
-                                        type="Text"
-                                        className="form-control amount-control"
-                                        
-                                        
-                                        onChange={(e) => inputChange(e)}
-                                    />
-
-
-                                </div>
-                                <div className="Project Group row">
-                                <div className="Project Category col-md-4">
-                                <h2>Project Category </h2>
-                                    <Select 
-                                    defaultValue={''}
-                                    options={catego_options}
-                                    onChange={(e) => categoryhandleChange(e)}
-                                    name="category"
-                                    styles={select_style_1}
-                                    value={categoryItem(selected1)}
-                                    />
-                                </div>
-                                <div className="Project SubCategory col-md-4">
-                                <h2>Project SubCategory{selected1.value}</h2>
-                                    <Select
-                                        defaultValue={''}
-                                        onChange={(e) => subcategoryhandleChange(e)}
-                                        name="subcategory"
-                                        styles={select_style_2}
-                                        options={selected1 === "NoCrypto" ? subcatego_option_1 : subcatego_option}
-                                        value={selected1 === "NoCrypto" ? subcategoryitem_1(selected2) : subcategoryitem(selected2)}
-                                    />
-                                        
-                                </div>
-                                <div className="Project ChainDetails col-md-4">
-                                <h2>Project ChainDetails </h2>
-                                    <Select
-                                        defaultValue={''}
-                                        onChange={(e) => chaindetailshandleChange(e)}
-                                        name="chain_details"
-                                        styles={select_style_3}
-                                        required
-                                        options={chaindetail_options}
-                                        value={chaindetailsitem(selected3)}
-                                    />
-                                </div>
-                                </div>    
-                                <div className="Email">
-                                <h2>Email</h2>
-                                    <input
-                                        type="Text"
-                                        className="form-control amount-control"
-                                        
-                                        
-                                        onChange={(e) => inputChange(e)}
-                                    />
-
-
-                                </div>
-
-                                
-
-                                
-                                
-
-                                <div className="input-group mt-3 mb-2">
-                                <h2>Amount Required </h2>
-                                    <button
-                                        className="btn btn-default"
-                                        onClick={() => amountChange('down')}
-                                    >
-                                        <MinusCircle
-                                            size={31}
-                                            color={'#9183d4'}
-                                        />s
-                                    </button>
-                                  
-
-
-                                    <input
-                                        type="number"
-                                        className="form-control amount-control"
-                                        value={amount}
-                                        min="1"
-                                        max="1000000000000"
-                                        step="1"
-                                        onChange={(e) => inputChange(e)}
-                                    />
-                                    <button
-                                        className="btn btn-default"
-                                        onClick={() => amountChange('up')}
-                                    >
-                                        <PlusCircle
-                                            size={31}
-                                            color={'#9183d4'}
-                                        />
-                                    </button>
-                                </div>
-
-
-
-                                {/* <p className="mb-2">Total: <strong>{numeral((amount * price) / 1000000).format("0,0.00")} UST</strong></p> */}
-                                {!WFDBonus || payWith == 'WFD' ? (
-                                    <p className="mb-2">
-                                        Total:{' '}
-                                        <strong>
+                                    </strong>
+                                </p>
+                                <p
+                                    className="mb-2"
+                                    style={{ color: '#4ee19b' }}
+                                >
+                                    Total:{' '}
+                                    <strong>
+                                        {' '}
+                                        {numeral(
+                                            (amount * price) / 1000000 -
+                                                (amount * price) /
+                                                    1000000 /
+                                                    state.config
+                                                        .bonus_burn_rate
+                                        ).format('0,0.00')}{' '}
+                                        UST{' '}
+                                        <span>
+                                            +{' '}
                                             {numeral(
-                                                (amount * price) / 1000000
+                                                (amount * price) /
+                                                    1000000 /
+                                                    state.config
+                                                        .bonus_burn_rate
                                             ).format('0,0.00')}{' '}
-                                            {payWith == 'ust' ? 'UST' : 'WFD'}
-                                        </strong>
-                                    </p>
-                                ) : (
-                                    <>
-                                        <p
-                                            className="mb-0"
-                                            style={{
-                                                textDecoration: 'line-through',
-                                            }}
-                                        >
-                                            Total:{' '}
-                                            <strong>
-                                                {numeral(
-                                                    (amount * price) / 1000000
-                                                ).format('0,0.00')}{' '}
-                                                UST
-                                            </strong>
-                                        </p>
-                                        <p
-                                            className="mb-2"
-                                            style={{ color: '#4ee19b' }}
-                                        >
-                                            Total:{' '}
-                                            <strong>
-                                                {' '}
-                                                {numeral(
-                                                    (amount * price) / 1000000 -
-                                                        (amount * price) /
-                                                            1000000 /
-                                                            state.config
-                                                                .bonus_burn_rate
-                                                ).format('0,0.00')}{' '}
-                                                UST{' '}
-                                                <span>
-                                                    +{' '}
-                                                    {numeral(
-                                                        (amount * price) /
-                                                            1000000 /
-                                                            state.config
-                                                                .bonus_burn_rate
-                                                    ).format('0,0.00')}{' '}
-                                                    WFD
-                                                </span>
-                                            </strong>
-                                        </p>
-                                        <span className="info mb-2">
-                                            <Info
-                                                size={14}
-                                                style={{ marginTop: '-2px' }}
-                                                weight="fill"
-                                                className="me-1"
-                                            />
-                                            No WFD? you can buy WFD on the{' '}
-                                            <a
-                                                href="https://app.WFDredprotocol.com"
-                                                target="_blank"
-                                            >
-                                                WFDred website
-                                            </a>
+                                            WFD
                                         </span>
-                                    </>
-                                )}
+                                    </strong>
+                                </p>
+                                <span className="info mb-2">
+                                    <Info
+                                        size={14}
+                                        style={{ marginTop: '-2px' }}
+                                        weight="fill"
+                                        className="me-1"
+                                    />
+                                    No WFD? you can buy WFD on the{' '}
+                                    <a
+                                        href="https://app.WFDredprotocol.com"
+                                        target="_blank"
+                                    >
+                                        WFDred website
+                                    </a>
+                                </span>
+                            </>
+                        )}
 
-                                {payWith == 'ust' && (
-                                    <>
-                                        <p
-                                            style={{
-                                                marginBottom: '7px',
-                                                fontSize: '14px',
-                                                opacity: '0.3',
-                                            }}
-                                        >
-                                            Boost this project GOLD{' '}
-                                            <a
-                                                style={{ color: '#fff' }}
-                                                href="https://app.WFDredprotocol.com"
-                                                target="_blank"
-                                            >
-                                                WFD Gold
-                                            </a>
-                                        </p>
-                                        <label className="bonus-label">
-                                            <input
-                                                type="checkbox"
-                                                ref={bonusToggle}
-                                                checked={WFDBonus}
-                                                className="switch"
-                                                name="WFD_bonus"
-                                                onChange={(e, checked) =>
-                                                    bonusCheckbox(e, checked)
-                                                }
-                                            />
-                                            <label
-                                                className="switch-label"
-                                                onClick={() =>
-                                                    clickElement(bonusToggle)
-                                                }
-                                            ></label>
-                                            <Fire size={24} weight="fill" />{' '}
-                                            BOOST GOLD
-                                            <span
-                                                style={{
-                                                    color: '#FFD700',
-                                                    fontFamily: 'Cosmos',
-                                                    fontSize: '1.2em',
-                                                    padding: '4px 8px',
-                                                    background:
-                                                        'linear-gradient(228.88deg,rgba(0,0,0,.2) 18.2%,hsla(0,0%,69%,.107292) 77.71%,rgba(0,0,0,.0885417) 99.78%,transparent 146.58%),#171717',
-                                                    borderRadius: '25px',
-                                                }}
-                                            >
-                                                WFD
-                                            </span>
-                                            <span className="badge rounded-pill">
-                                                BOOST
-                                            </span>
-                                        </label>
-                                    </>
-                                )}
-                                {payWith !== 'ust' && (
-                                    <span className="info mb-2">
-                                        <Info
-                                            size={14}
-                                            style={{ marginTop: '-2px' }}
-                                            weight="fill"
-                                            className="me-1"
-                                        />
-                                        No WFD? you can buy WFD on the{' '}
-                                        <a
-                                            href="https://app.WFDredprotocol.com"
-                                            target="_blank"
-                                        >
-                                            WFDred website
-                                        </a>
-                                    </span>
-                                )}
-
-                                <label className="gift-label">
+                        {payWith == 'ust' && (
+                            <>
+                                <p
+                                    style={{
+                                        marginBottom: '7px',
+                                        fontSize: '14px',
+                                        opacity: '0.3',
+                                    }}
+                                >
+                                    Boost this project GOLD{' '}
+                                    <a
+                                        style={{ color: '#fff' }}
+                                        href="https://app.WFDredprotocol.com"
+                                        target="_blank"
+                                    >
+                                        WFD Gold
+                                    </a>
+                                </p>
+                                <label className="bonus-label">
                                     <input
                                         type="checkbox"
-                                        ref={friendsToggle}
-                                        checked={giftFriend.active}
+                                        ref={bonusToggle}
+                                        checked={WFDBonus}
                                         className="switch"
-                                        name="gift_friend"
+                                        name="WFD_bonus"
                                         onChange={(e, checked) =>
-                                            giftCheckbox(e, checked)
+                                            bonusCheckbox(e, checked)
                                         }
                                     />
                                     <label
                                         className="switch-label"
                                         onClick={() =>
-                                            clickElement(friendsToggle)
+                                            clickElement(bonusToggle)
                                         }
                                     ></label>
-                                    <Gift size={24} weight="fill" /> BOOST SILVER
+                                    <Fire size={24} weight="fill" />{' '}
+                                    BOOST GOLD
+                                    <span
+                                        style={{
+                                            color: '#FFD700',
+                                            fontFamily: 'Cosmos',
+                                            fontSize: '1.2em',
+                                            padding: '4px 8px',
+                                            background:
+                                                'linear-gradient(228.88deg,rgba(0,0,0,.2) 18.2%,hsla(0,0%,69%,.107292) 77.71%,rgba(0,0,0,.0885417) 99.78%,transparent 146.58%),#171717',
+                                            borderRadius: '25px',
+                                        }}
+                                    >
+                                        WFD
+                                    </span>
                                     <span className="badge rounded-pill">
                                         BOOST
                                     </span>
                                 </label>
-                                {giftFriend.active && (
-                                    <>
-                                        <p className="m-0">
-                                        </p>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="yourfriendswalletaddress"
-                                            name="gift_wallet"
-                                            onChange={(e) => giftAddress(e)}
-                                        />
-                                    </>
-                                )}
-                                <div className="text-sm">{result}</div>
+                            </>
+                        )}
+                        {payWith !== 'ust' && (
+                            <span className="info mb-2">
+                                <Info
+                                    size={14}
+                                    style={{ marginTop: '-2px' }}
+                                    weight="fill"
+                                    className="me-1"
+                                />
+                                No WFD? you can buy WFD on the{' '}
+                                <a
+                                    href="https://app.WFDredprotocol.com"
+                                    target="_blank"
+                                >
+                                    WFDred website
+                                </a>
+                            </span>
+                        )}
 
-                                <button
-                                    onClick={() => setTicketModal(!ticketModal)}
-                                    className="btn btn-default w-100 mb-3 mt-3"
+                        <label className="gift-label">
+                            <input
+                                type="checkbox"
+                                ref={friendsToggle}
+                                checked={giftFriend.active}
+                                className="switch"
+                                name="gift_friend"
+                                onChange={(e, checked) =>
+                                    giftCheckbox(e, checked)
+                                }
+                            />
+                            <label
+                                className="switch-label"
+                                onClick={() =>
+                                    clickElement(friendsToggle)
+                                }
+                            ></label>
+                            <Gift size={24} weight="fill" /> BOOST SILVER
+                            <span className="badge rounded-pill">
+                                BOOST
+                            </span>
+                        </label>
+                        {giftFriend.active && (
+                            <>
+                                <p className="m-0">
+                                </p>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="yourfriendswalletaddress"
+                                    name="gift_wallet"
+                                    onChange={(e) => giftAddress(e)}
+                                />
+                            </>
+                        )}
+                        <div className="text-sm">{result}</div>
+
+                        <button
+                            onClick={() => setTicketModal(!ticketModal)}
+                            className="btn btn-default w-100 mb-3 mt-3"
+                            style={{
+                                fontSize: '18px',
+                                fontWeight: 'bold',
+                                padding: '11px 5px',
+                                borderBottom: '4px solid #10003b',
+                            }}
+                        >
+                            <PencilLine
+                                size={24}
+                                color={'#ff36ff'}
+                                style={{
+                                    marginTop: '-1px',
+                                    marginRight: '5px',
+                                }}
+                            />
+                            Help to create your idea
+                        </button>
+                        <button
+                            onClick={() => execute()}
+                            className="btn btn-special w-100"
+                            disabled={amount <= 0}
+                        >
+                            {!buyLoader ? (
+                                <>Submit PROJECT</>
+                            ) : (
+                                <div
+                                    className="spinner-border spinner-border-sm"
+                                    role="status"
                                     style={{
-                                        fontSize: '18px',
-                                        fontWeight: 'bold',
-                                        padding: '11px 5px',
-                                        borderBottom: '4px solid #10003b',
+                                        position: 'relative',
+                                        top: '-3px',
                                     }}
                                 >
-                                    <PencilLine
-                                        size={24}
-                                        color={'#ff36ff'}
-                                        style={{
-                                            marginTop: '-1px',
-                                            marginRight: '5px',
-                                        }}
-                                    />
-                                    Help to create your idea
-                                </button>
-                                <button
-                                    onClick={() => execute()}
-                                    className="btn btn-special w-100"
-                                    disabled={amount <= 0}
-                                >
-                                    {!buyLoader ? (
-                                        <>Submit PROJECT</>
-                                    ) : (
-                                        <div
-                                            className="spinner-border spinner-border-sm"
-                                            role="status"
-                                            style={{
-                                                position: 'relative',
-                                                top: '-3px',
-                                            }}
-                                        >
-                                            <span className="visually-hidden">
-                                                Loading...
-                                            </span>
-                                        </div>
-                                    )}
-                                </button>
-                            </div>
-                        </div>
-                        <div
-                            className={'backdrop' + (buyNow ? ' show' : '')}
-                            onClick={() => setBuyNow(!buyNow)}
-                        ></div>
-                        {/* <SocialShare /> */}
+                                    <span className="visually-hidden">
+                                        Loading...
+                                    </span>
+                                </div>
+                            )}
+                        </button>
                     </div>
                 </div>
-                <div className="row">
-                <Footer />
-                </div>
+                <div
+                    className={'backdrop' + (buyNow ? ' show' : '')}
+                    onClick={() => setBuyNow(!buyNow)}
+                ></div>
+                {/* <SocialShare /> */}
             </div>
-            </>
+        </div>
+        <div className="row">
+        <Footer />
+        </div>
+    </div>
+    </div>
     )
 }
