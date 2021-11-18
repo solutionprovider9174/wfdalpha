@@ -12,18 +12,22 @@ import Emailsub from '../components/Email';
 import Projectfeature from '../components/Featured';
 import FooterCenter from '../components/Footer_land';
 
+import { Container } from '../components/Container';
+
 
 export default() => {
     return(
         <ChakraProvider resetCSS theme={theme}>
-            <NavBar/>
-            <Hero/>
-            <About/>
-            <Industry/>
-            <RoadMap/>
-            <Emailsub/>
-            <Projectfeature/>
-            <FooterCenter/>
+            <Container>
+                <NavBar/>
+                <Hero/>
+                <About/>
+                <Industry/>
+                <RoadMap/>
+                <Emailsub/>
+                <Projectfeature/>
+                <FooterCenter/>
+            </Container>
         </ChakraProvider>
     )
 }
