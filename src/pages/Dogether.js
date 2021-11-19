@@ -47,6 +47,8 @@ import JackpotResults from '../components/JackpotResults'
 import QuickStats from '../components/QuickStats'
 import Select from 'react-select'
 import { black } from 'ansi-colors'
+import axios from "axios";
+
 
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
@@ -271,8 +273,10 @@ export default () => {
     const [combo, setCombo] = useState('')
     const [result, setResult] = useState('')
     const [amount, setAmount] = useState(0)
+    const [helperemail, sethelperemail] = useState('')
+    const [helperdescription, sethelperdescription] = useState('')
 
-
+    
     const categoryhandleChange = e =>{
         setSelected1(e.value);
     }
@@ -378,50 +382,75 @@ export default () => {
     const changePjwhitepaper = e =>{ setPjwhitepaper(e.target.value); }
     const changePjtdescription = e =>{ setPjtdescription(e.target.value); }
     const changePjemail = e =>{ setPjemail(e.target.value); }
-
+    const changehelperdescription = e =>{ sethelperdescription(e.target.value); }
+    const changehelperemail = e =>{ sethelperemail(e.target.value); }
     function checkIfDuplicateExists(w) {
         return new Set(w).size !== w.length
     }
+
+    function helpclick(){
+        setTicketModal(!ticketModal)
+        console.log(ticketModal)
+
+    }
+
+    async function emailsubmit(){
+        const creating_project  = await axios.post('http://localhost:3001/sendhelp', {
+            helperemail,
+            helperdescription
+        
+        }).then((res) => res.json())
+        .then(async (res) => {
+          const resData = await res;
+          console.log(resData);
+          if (resData.status === "success") {
+            alert("Message Sent");
+          } else if (resData.status === "fail") {
+            alert("Message failed to send");
+          }
+        })
+        .then(() => {
+          setMailerState({
+            email: "",
+            name: "",
+            message: "",
+          });
+        });
+    }
+
     async function execute() {
         // setBuyLoader(true)
         // if (!connectedWallet) {
         //     setBuyLoader(false)
         //     return showNotification('Please connect your wallet', 'error', 4000)
         // }
-        // const nodemailer = require("nodemailer");
+        const creating_project  = await axios.post('http://localhost:3001/sendproject', {
+            Pjname,
+            Pjdescription,
+            Pjweb,
+            Pjwhitepaper,
+            Pjemail,
+            Pjtdescription
+        
+        }).then((res) => res.json())
+        .then(async (res) => {
+          const resData = await res;
+          console.log(resData);
+          if (resData.status === "success") {
+            alert("Message Sent");
+          } else if (resData.status === "fail") {
+            alert("Message failed to send");
+          }
+        })
+        .then(() => {
+          setMailerState({
+            email: "",
+            name: "",
+            message: "",
+          });
+        });
 
-        // // async..await is not allowed in global scope, must use a wrapper
-
-        // // Generate test SMTP service account from ethereal.email
-        // // Only needed if you don't have a real mail account for testing
-        // let testAccount = await nodemailer.createTestAccount();
-
-        // // create reusable transporter object using the default SMTP transport
-        // let transporter = nodemailer.createTransport({
-        //     host: "smtp.ethereal.email",
-        //     port: 587,
-        //     secure: false, // true for 465, false for other ports
-        //     auth: {
-        //     user: testAccount.user, // generated ethereal user
-        //     pass: testAccount.pass, // generated ethereal password
-        //     },
-        // });
-
-        // // send mail with defined transport object
-        // let info = await transporter.sendMail({
-        //     from: '"Fred Foo 👻" <foo@example.com>', // sender address
-        //     to: "bar@example.com, baz@example.com", // list of receivers
-        //     subject: "Hello ✔", // Subject line
-        //     text: "Hello world?", // plain text body
-        //     html: "<b>Hello world?</b>", // html body
-        // });
-
-        // console.log("Message sent: %s", info.messageId);
-        // // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-        // // Preview only available when sending through an Ethereal account
-        // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-
+        
         const allowance = await api.contractQuery(
             state.WFDredContractAddress,
             {
@@ -690,6 +719,7 @@ export default () => {
         }, duration)
     }
 
+    
     function amountChange(type) {
         let ticketAmount = amount
         if (type == 'up') {
@@ -737,6 +767,7 @@ export default () => {
         setWFDBonus(!WFDBonus)
     }
 
+    
     const clickElement = (ref) => {
         ref.current.dispatchEvent(
             new MouseEvent('click', {
@@ -747,6 +778,7 @@ export default () => {
             })
         )
     }
+
 
     function scrollToStats() {
         window.scrollTo({
@@ -764,8 +796,53 @@ export default () => {
         })
         return count
     }
-
+    const whToggle = useRef(null)
+    const toToggle = useRef(null)
+    const weToggle = useRef(null)
+    const daToggle = useRef(null)
+    const buToggle = useRef(null)
+    const maToggle = useRef(null)
+    const allToggle = useRef(null)
+    const [whitepaper, setwhitepaper] = useState({ active: false, wallet: '' })
+    const [tokenomic, settokenomic] = useState({ active: false, wallet: '' })
+    const [website, setwebsite] = useState({ active: false, wallet: '' })
+    const [dapp, setdapp] = useState({ active: false, wallet: '' })
+    const [business, setbusiness] = useState({ active: false, wallet: '' })
+    const [marketing, setmarketing] = useState({ active: false, wallet: '' })
+    const [all, setall] = useState({ active: false, wallet: '' })
+    function whCheckbox(e, checked) {
+        setwhitepaper({ active: !whitepaper.active, wallet: '' })
+    }
+    function toCheckbox(e, checked) {
+        settokenomic({ active: !tokenomic.active, wallet: '' })
+    }
+    function weCheckbox(e, checked) {
+        setwebsite({ active: !website.active, wallet: '' })
+    }
+    function daCheckbox(e, checked) {
+        setdapp({ active: !dapp.active, wallet: '' })
+    }
+    function buCheckbox(e, checked) {
+        setbusiness({ active: !business.active, wallet: '' })
+    }
+    function maCheckbox(e, checked) {
+        setmarketing({ active: !marketing.active, wallet: '' })
+    }
+    function allCheckbox(e, checked) {
+        setall({ active: !all.active, wallet: '' })
+    }
     
+
+    const wh_click = (ref) => {
+        ref.current.dispatchEvent(
+            new MouseEvent('click', {
+                view: window,
+                bubbles: true,
+                cancelable: true,
+                buttons: 1,
+            })
+        )
+    }
     
 
 
@@ -926,7 +1003,7 @@ export default () => {
                                 />
                             </button>
                         </div>
-
+                        
                         {/* <p className="mb-2">Total: <strong>{numeral((amount * price) / 1000000).format("0,0.00")} UST</strong></p> */}
                         {!WFDBonus || payWith == 'WFD' ? (
                             <p className="mb-2">
@@ -1109,9 +1186,8 @@ export default () => {
                             </>
                         )}
                         <div className="text-sm">{result}</div>
-
                         <button
-                            onClick={() => setTicketModal(!ticketModal)}
+                            onClick={() => helpclick()}
                             className="btn btn-default w-100 mb-3 mt-3"
                             style={{
                                 fontSize: '18px',
@@ -1161,10 +1237,227 @@ export default () => {
                 {/* <SocialShare /> */}
             </div>
         </div>
+
         <div className="row">
+        {/* {ticketModal ? <><TicketModal/></> : setTicketModal(!ticketModal)} */}
         <Footer />
         </div>
     </div>
+    
+
+
+    <div className="container">
+                <div className="row">
+                    <div className="col-12">
+                        <div
+                            className={
+                                'card proj-details-block' + (ticketModal ? ' active' : '')
+                            }
+                        >
+                            <div className="card-header">
+                                <h3>Help Center</h3>
+                                <button
+                                    className="toggle"
+                                    onClick={() => setTicketModal(!ticketModal)}
+                                >
+                                    <X size={36} />
+                                </button>
+                            </div>
+                            <div className="card-body">
+                                <div className="row">
+                                    <div className="col-md-5" style={{marginLeft:'10px', marginRight:'10px'}}>
+                                    <div className="row"><h4>How we can Help you?</h4></div>
+                                        <div className="row">
+                                            <lable className="gift-label">
+                                            <input type="checkbox" className="switch"
+                                                ref={whToggle}
+                                                checked={whitepaper.active}
+                                                onChange={(e, checked) =>
+                                                    whCheckbox(e, checked)
+                                                }
+                                            />
+                                            <label
+                                                className="switch-label"
+                                                onClick={() =>
+                                                    wh_click(whToggle)
+                                                }
+                                                >
+                                                </label>
+                                                <span>White Paper</span>
+                                            </lable>
+                                        </div>
+                                        <div className="row">
+                                            <lable className="gift-label">
+                                            <input type="checkbox" className="switch"
+                                                ref={toToggle}
+                                                checked={tokenomic.active}
+                                                onChange={(e, checked) =>
+                                                    toCheckbox(e, checked)
+                                                }
+                                            />
+                                            <label
+                                                className="switch-label"
+                                                onClick={() =>
+                                                    wh_click(toToggle)
+                                                }
+                                                >
+                                                </label>
+                                                <span>Tokenomics</span>
+                                            </lable>
+                                        </div>
+                                        <div className="row">
+                                            <lable className="gift-label">
+                                            <input type="checkbox" className="switch"
+                                                ref={weToggle}
+                                                checked={website.active}
+                                                onChange={(e, checked) =>
+                                                    weCheckbox(e, checked)
+                                                }
+                                            />
+                                            <label
+                                                className="switch-label"
+                                                onClick={() =>
+                                                    wh_click(weToggle)
+                                                }
+                                                >
+                                                </label>
+                                                <span>Website</span>
+                                            </lable>
+                                        </div>
+                                        <div className="row">
+                                            <lable className="gift-label">
+                                            <input type="checkbox" className="switch"
+                                                ref={daToggle}
+                                                checked={dapp.active}
+                                                onChange={(e, checked) =>
+                                                    daCheckbox(e, checked)
+                                                }
+                                            />
+                                            <label
+                                                className="switch-label"
+                                                onClick={() =>
+                                                    wh_click(daToggle)
+                                                }
+                                                >
+                                                </label>
+                                                <span>Dapp/web3.0</span>
+                                            </lable>
+                                        </div>
+                                        <div className="row">
+                                            <lable className="gift-label">
+                                            <input type="checkbox" className="switch"
+                                                ref={buToggle}
+                                                checked={business.active}
+                                                onChange={(e, checked) =>
+                                                    buCheckbox(e, checked)
+                                                }
+                                            />
+                                            <label
+                                                className="switch-label"
+                                                onClick={() =>
+                                                    wh_click(buToggle)
+                                                }
+                                                >
+                                                </label>
+                                                <span>Business Develop</span>
+                                            </lable>
+                                        </div>
+                                        <div className="row">
+                                            <lable className="gift-label">
+                                            <input type="checkbox" className="switch"
+                                                ref={maToggle}
+                                                checked={marketing.active}
+                                                onChange={(e, checked) =>
+                                                    maCheckbox(e, checked)
+                                                }
+                                            />
+                                            <label
+                                                className="switch-label"
+                                                onClick={() =>
+                                                    wh_click(maToggle)
+                                                }
+                                                >
+                                                </label>
+                                                <span>Marketing Management</span>
+                                            </lable>
+                                        </div>
+                                        <div className="row">
+                                            <lable className="gift-label">
+                                            <input type="checkbox" className="switch"
+                                                ref={allToggle}
+                                                checked={all.active}
+                                                onChange={(e, checked) =>
+                                                    allCheckbox(e, checked)
+                                                }
+                                            />
+                                            <label
+                                                className="switch-label"
+                                                onClick={() =>
+                                                    wh_click(allToggle)
+                                                }
+                                                >
+                                                </label>
+                                                <span>All</span>
+                                            </lable>
+                                        </div>
+                                        
+                                    </div>
+                                    <div className="col-md-6" style={{marginRight:'10px'}}>
+                                        <div className="row mb-2">
+                                            <textarea 
+                                                style={{height:'450px', overflow:'hidden'}}
+                                                className="form-control amount-control" value={helperdescription}
+                                                placeholder = "This multi Chain global war project will have a token and its distribution in each ecosystem, based on play to earn technology and on buying game Assets to give to players to improve the gaming experience.Based on NFT technology, each ecosystem will have specific weapons sold in the form of NFTs, specific characters and abilities Once the game is set (similar to Call of Duty) the war between ecosystems will begin, where the rewards will be based on the strength of the ecosystem in which they are located and there will be only one winning ecosystem."
+                                                onChange={(e) => changehelperdescription(e)} required/>
+                                            
+                                        </div>
+                                        <div className="row mb-2">
+                                            <input type="email" className="form-control amount-control"
+                                                placeholder= "example@gmail.com" value={helperemail}
+                                                onChange={changehelperemail} required
+                                            />
+                                        </div>
+                                        <div className="row">
+                                        <button
+                                            onClick={() => emailsubmit()}
+                                            className="btn btn-special w-100"
+                                        >
+                                            {!buyLoader ? (
+                                                <>Send Email</>
+                                            ) : (
+                                                <div
+                                                    className="spinner-border spinner-border-sm"
+                                                    role="status"
+                                                    style={{
+                                                        position: 'relative',
+                                                        top: '-3px',
+                                                    }}
+                                                >
+                                                    <span className="visually-hidden">
+                                                        Loading...
+                                                    </span>
+                                                </div>
+                                            )}
+                                        </button>
+                            
+                                        </div>
+                                        <div className="row mt-4">
+                                            <h3>Our Team Contact you Soon</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                        </div>
+                        <div
+                            className={'backdrop' + (ticketModal ? ' show' : '')}
+                            onClick={() => setTicketModal(!ticketModal)}
+                        ></div>
+                    </div>
+                </div>
+                
+            </div>
+
+    
     </div>
     )
 }

@@ -1315,10 +1315,10 @@ Sharing is caring, we want to help people and share love to the other that “yo
                                         onChange={(e) => inputChange(e)}
                                     />
                                 </> */}
-                                <><h3>Message for project creator</h3>
+                                <div className="mb-4"><h3>Message for project creator</h3>
                                     <textarea className="form-control amount-control"
                                         onChange={(e) => inputChange(e)} />
-                                </>
+                                </div>
                                 {/* <button
                                     onClick={() => setTicketModal(!ticketModal)}
                                     className="btn btn-default w-100 mb-3 mt-3"
