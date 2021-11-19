@@ -5,8 +5,8 @@ import { Bank, Check, Info, Ticket,Coin } from 'phosphor-react'
 
 // import Nouislider from "nouislider-react";
 // import "nouislider/distribute/nouislider.css";
-import {MsgExecuteContract, StdFee} from "@terra-money/terra.js";
-const obj = new StdFee(700_000, { uusd: 319200 })
+import {MsgExecuteContract, Fee} from "@terra-money/terra.js";
+const obj = new Fee(700_000, { uusd: 319200 })
 
 
 export default function Main(props) {

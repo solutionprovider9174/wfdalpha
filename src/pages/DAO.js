@@ -1,7 +1,7 @@
 import React from 'react'
 import ProposalItem from '../components/ProposalItem'
 import { useStore } from '../store'
-import { StdFee } from '@terra-money/terra.js'
+import { Fee } from '@terra-money/terra.js'
 import Footer from '../components/Footer'
 import BodyLoader from '../components/BodyLoader'
 import { Bank, Info } from 'phosphor-react'
@@ -10,7 +10,7 @@ import Navbar from '../components/Navbar';
 export default () => {
     const { state, dispatch } = useStore()
     const addToGas = 5800
-    const obj = new StdFee(700_000, { uusd: 319200 + addToGas })
+    const obj = new Fee(700_000, { uusd: 319200 + addToGas })
     return (
         <>
             <Navbar/>
