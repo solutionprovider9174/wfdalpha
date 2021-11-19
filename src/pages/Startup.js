@@ -631,6 +631,8 @@ export default () => {
             position:'absolute',
             maxWidth:'100%'
             }}/> */}
+
+            <Navbar />
             <div
                 className="hero"
                 style={{

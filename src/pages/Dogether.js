@@ -45,6 +45,7 @@ import WinnerRow from '../components/WinnerRow'
 import PriceLoader from '../components/PriceLoader'
 import JackpotResults from '../components/JackpotResults'
 import QuickStats from '../components/QuickStats'
+import Navbar from '../components/Navbar';
 
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
@@ -652,6 +653,7 @@ export default () => {
 
 
 
+<Navbar />
 <div className="container">
                 <div className="row">
                     <div className="col-12">

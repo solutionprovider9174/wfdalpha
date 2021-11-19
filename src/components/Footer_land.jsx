@@ -16,7 +16,7 @@ import {
   VisuallyHidden,
 } from '@chakra-ui/react';
 
-// import { FaDiscord, FaInstagram, FaTelegram, FaTwitter, FaWizardsOfTheCoast, FaYoutube } from 'react-icons/fa';
+import { FaDiscord, FaInstagram, FaTelegram, FaTwitter, FaWizardsOfTheCoast, FaYoutube } from 'react-icons/fa';
 import { ReactNode } from 'react';
 
 const Logo = (props) => {
@@ -88,16 +88,16 @@ export default function FooterCenter() {
           <Text>© 2021 AI.Wefund Ltd</Text>
           <Stack direction={'row'} spacing={6}>
             <SocialButton label={'Twitter'} href={'#'}>
-              {/* <FaTwitter /> */}
+              <FaTwitter />
             </SocialButton>
             <SocialButton label={'Telegram'} href={'#'}>
-              {/* <FaTelegram /> */}
+              <FaTelegram />
             </SocialButton>
             <SocialButton label={'Instagram'} href={'#'}>
-              {/* <FaInstagram /> */}
+              <FaInstagram />
             </SocialButton>
              <SocialButton label={'Instagram'} href={'#'}>
-              {/* <FaDiscord /> */}
+              <FaDiscord />
             </SocialButton>
           </Stack>
         </Container>

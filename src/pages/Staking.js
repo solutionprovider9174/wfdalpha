@@ -45,6 +45,7 @@ import WinnerRow from '../components/WinnerRow'
 import PriceLoader from '../components/PriceLoader'
 import JackpotResults from '../components/JackpotResults'
 import QuickStats from '../components/QuickStats'
+import Navbar from '../components/Navbar';
 
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
@@ -630,8 +631,7 @@ export default () => {
             maxWidth:'100%'
             }}/> */}
        
-        
-
+            <Navbar />
             <div
                 ref={loterraStats}
                 className="container"

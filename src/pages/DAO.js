@@ -5,6 +5,7 @@ import { StdFee } from '@terra-money/terra.js'
 import Footer from '../components/Footer'
 import BodyLoader from '../components/BodyLoader'
 import { Bank, Info } from 'phosphor-react'
+import Navbar from '../components/Navbar';
 
 export default () => {
     const { state, dispatch } = useStore()
@@ -12,6 +13,7 @@ export default () => {
     const obj = new StdFee(700_000, { uusd: 319200 + addToGas })
     return (
         <>
+            <Navbar/>
             <div
                 className="bg-hero"
                 style={{

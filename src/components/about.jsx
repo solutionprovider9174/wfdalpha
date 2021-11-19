@@ -11,15 +11,12 @@ import {
     Button,
     useColorModeValue,
   } from '@chakra-ui/react';
-  // import {
-  //   IoArrowForwardCircle,
-  //   IoLogoBitcoin,
-  //   IoSearchSharp,
-  // } from 'react-icons/io5';
-  import{
-    ArrowForwardIcon
-  } from '@chakra-ui/icons';
-  
+  import {
+    IoArrowForwardCircle,
+    IoLogoBitcoin,
+    IoSearchSharp,
+  } from 'react-icons/io5';
+
   import React from 'react';
   
   // interface FeatureProps {
@@ -145,7 +142,7 @@ import {
             </Stack>
           </SimpleGrid>
           <br/><br/><br/>
-          <Button rightIcon={<ArrowForwardIcon/>} bgGradient={"linear( #79D1F0, #69A7E8)"} mt= {'10%'}  size="lg" maxW={'600'} ml={'200px'}>
+          <Button rightIcon={<IoArrowForwardCircle/>} bgGradient={"linear( #79D1F0, #69A7E8)"} mt= {'10%'}  size="lg" maxW={'600'} ml={'200px'}>
             Download Whitepaper
           </Button>
         </Stack>

@@ -8,8 +8,8 @@ import {
   useColorModeValue
 } from "@chakra-ui/react";
 
-// import { MdHeadset, MdEmail, MdLocationOn, MdWork, MdWeb, MdWebStories } from "react-icons/md";
-// import { BsArrow90DegRight, BsFillBriefcaseFill } from "react-icons/bs";
+import { MdHeadset, MdEmail, MdLocationOn, MdWork, MdWeb, MdWebStories } from "react-icons/md";
+import { BsArrow90DegRight, BsFillBriefcaseFill } from "react-icons/bs";
 
 const Projectfeature = () => {
   return (
@@ -57,12 +57,12 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            {/* <Icon
+            <Icon
               as={MdWebStories}
               h={6}
               w={6}
               mr={2}
-            /> */}
+            />
 
             <chakra.h1 px={2} fontSize="sm">
               Charity Project
@@ -74,7 +74,7 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            {/* <Icon as={MdLocationOn} h={6} w={6} mr={2} /> */}
+            <Icon as={MdLocationOn} h={6} w={6} mr={2} />
 
             <chakra.h1 px={2} fontSize="sm">
               Cardano
@@ -85,7 +85,7 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            {/* <Icon as={MdWork} h={6} w={6} mr={2} /> */}
+            <Icon as={MdWork} h={6} w={6} mr={2} />
 
             <chakra.h1 px={2} fontSize="sm">
               -\
@@ -130,12 +130,12 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            {/* <Icon
+            <Icon
               as={MdWebStories}
               h={6}
               w={6}
               mr={2}
-            /> */}
+            />
 
             <chakra.h1 px={2} fontSize="sm">
               Memecoin Project
@@ -147,7 +147,7 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            {/* <Icon as={MdLocationOn} h={6} w={6} mr={2} /> */}
+            <Icon as={MdLocationOn} h={6} w={6} mr={2} />
 
             <chakra.h1 px={2} fontSize="sm">
               Terra Ecosystem
@@ -158,7 +158,7 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            {/* <Icon as={MdWork} h={6} w={6} mr={2} /> */}
+            <Icon as={MdWork} h={6} w={6} mr={2} />
 
             <chakra.h1 px={2} fontSize="sm">
               -\
@@ -202,12 +202,12 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            {/* <Icon
+            <Icon
               as={MdWebStories}
               h={6}
               w={6}
               mr={2}
-            /> */}
+            />
 
             <chakra.h1 px={2} fontSize="sm">
               Memecoin Project
@@ -219,7 +219,7 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            {/* <Icon as={MdLocationOn} h={6} w={6} mr={2} /> */}
+            <Icon as={MdLocationOn} h={6} w={6} mr={2} />
 
             <chakra.h1 px={2} fontSize="sm">
               Terra Ecosystem
@@ -230,7 +230,7 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            {/* <Icon as={MdWork} h={6} w={6} mr={2} /> */}
+            <Icon as={MdWork} h={6} w={6} mr={2} />
 
             <chakra.h1 px={2} fontSize="sm">
               -
@@ -274,12 +274,12 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            {/* <Icon
+            <Icon
               as={MdWebStories}
               h={6}
               w={6}
               mr={2}
-            /> */}
+            />
 
             <chakra.h1 px={2} fontSize="sm">
               Game Project
@@ -291,7 +291,7 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            {/* <Icon as={MdLocationOn} h={6} w={6} mr={2} /> */}
+            <Icon as={MdLocationOn} h={6} w={6} mr={2} />
 
             <chakra.h1 px={2} fontSize="sm">
               Multichain
@@ -302,7 +302,7 @@ const Projectfeature = () => {
             mt={4}
             color={useColorModeValue("gray.700", "gray.200")}
           >
-            {/* <Icon as={MdWork} h={6} w={6} mr={2} /> */}
+            <Icon as={MdWork} h={6} w={6} mr={2} />
 
             <chakra.h1 px={2} fontSize="sm">
               -
