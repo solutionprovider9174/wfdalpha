@@ -257,11 +257,15 @@ const MobileNavItem = ({ label, children, href }) => {
         _hover={{
           textDecoration: 'none',
         }}>
-        <Text
-          fontWeight={600}
-          color={'gray.400'}>
-          {label}
-        </Text>
+        console.log(label);
+        console.log(children);
+          <a href = {children?'#':href} >
+            <Text
+              fontWeight={600}
+              color={'gray.400'}>
+              {label}
+            </Text>
+          </a>
         {children && (
           <Icon
             as={ChevronDownIcon}
@@ -333,7 +337,7 @@ const NAV_ITEMS = [
   },
   {
     label: 'Contact',
-    href: '#',
+    href: '#Contactme',
   },
   {
     label: 'Blog',
