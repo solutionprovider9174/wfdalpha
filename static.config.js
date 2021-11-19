@@ -21,6 +21,10 @@ export default {
             template: 'src/pages/Index',
         },
         {
+            path: 'startup',
+            template: 'src/pages/Startup',
+        },
+        {
             path: 'staking',
             template: 'src/pages/Staking',
         },

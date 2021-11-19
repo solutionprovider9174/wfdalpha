@@ -25,7 +25,7 @@ import {
 } from 'phosphor-react'
 // import Jackpot from "../components/Jackpot";
 import {
-    StdFee,
+    Fee,
     MsgExecuteContract,
     LCDClient,
     WasmAPI,
@@ -45,6 +45,7 @@ import WinnerRow from '../components/WinnerRow'
 import PriceLoader from '../components/PriceLoader'
 import JackpotResults from '../components/JackpotResults'
 import QuickStats from '../components/QuickStats'
+import Navbar from '../components/Navbar';
 
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
@@ -311,11 +312,11 @@ export default () => {
             setBuyLoader(false)
             return
         }
-        // const obj = new StdFee(1_000_000, { uusd: 200000 })
+        // const obj = new Fee(1_000_000, { uusd: 200000 })
         const addToGas = 5000 * cart.length
-        // const obj = new StdFee(1_000_000, { uusd: 30000 + addToGas })
-        //const obj = new StdFee(200_000, { uusd: 340000 + addToGas })
-        const obj = new StdFee(10_000, { uusd: 4500})
+        // const obj = new Fee(1_000_000, { uusd: 30000 + addToGas })
+        //const obj = new Fee(200_000, { uusd: 340000 + addToGas })
+        const obj = new Fee(10_000, { uusd: 4500})
         let exec_msg = {
             register: {
                 combination: cart,
@@ -625,7 +626,14 @@ export default () => {
     }
 
     return (
-        <><div
+        <>
+            {/* <img src={'/confetti.webp'} style={{
+            position:'absolute',
+            maxWidth:'100%'
+            }}/> */}
+       
+            <Navbar />
+            <div
                 ref={loterraStats}
                 className="container"
                 style={{ marginTop: '12rem' }}
