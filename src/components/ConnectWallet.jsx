@@ -23,7 +23,39 @@ import {
 import numeral from 'numeral'
 import UserModal from './UserModal'
 import { useStore } from '../store'
-import { Link } from '@reach/router'
+// import { Link } from '@reach/router'
+import {
+    Box,
+    Flex,
+    Text,
+    IconButton,
+    Button,
+    Stack,
+    Collapse,
+    Icon,
+    Link,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    useColorModeValue,
+    useBreakpointValue,
+    useDisclosure,
+    PopoverHeader,
+    PopoverBody,
+    PopoverFooter,
+    PopoverArrow,
+    PopoverCloseButton,
+    Portal,
+    Image
+  } from '@chakra-ui/react';
+  
+  import {
+    HamburgerIcon,
+    CloseIcon,
+    ChevronDownIcon,
+    ChevronRightIcon,
+    AddIcon,
+  } from '@chakra-ui/icons';
 // let useWallet = {}
 // if (typeof document !== 'undefined') {
 //     useWallet = require('@terra-money/wallet-provider').useWallet
@@ -559,268 +591,142 @@ export default function ConnectWallet() {
     ])
 
     return (
-        <div
-            className={
-                scrolled
-                    ? 'navbar navbar-expand p-2 p-md-3 sticky'
-                    : 'navbar navbar-expand p-2 p-md-3'
-            }
-        >
-            <div className="container-fluid">
-                <a className="navbar-brand" href="/">
-                    <img src="/logo.png" /> <span>WeFund</span>
-                </a>
-                <nav
-                    className={
-                        sideNav
-                            ? 'navbar-nav main-nav me-auto open'
-                            : 'navbar-nav main-nav me-auto'
-                    }
-                >
-                    <button
-                        className="main-nav-close-toggle"
-                        onClick={() => showSideNav()}
-                    >
-                        <X size={36} />
-                    </button>
-                    <li className="nav-item">
-                        <a href="/" className={'nav-link ' + homeClass}>
-                            <Ticket
-                                size={24}
-                                style={{
-                                    marginRight: '3px',
-                                    position: 'relative',
-                                    top: '-1px',
+        <>
+            <div className="navbar-nav ms-auto" style={{flexDirection:'row'}}>
+                {!connected && (
+                    <>
+                        <Popover >
+                            <PopoverTrigger>
+                                <Button
+                                display={{ base: 'none', md: 'inline-flex' }}
+                                fontSize={'sm'}
+                                fontWeight={600}
+                                color={'white'}
+                                bg={'purple.400'}
+                                href={'#'}
+                                _hover={{
+                                bg: 'blue.300',
                                 }}
-                            />{' '}
-                            WeFund
-                            <span className="item-label">WeFund Explanation</span>
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a
-                            href="/dogether"
-                            className="nav-link"
-                            style={{ position: 'relative' }}
+                                rightIcon={<AddIcon />}>
+                                Connect Wallet
+                                </Button>
+                            </PopoverTrigger>
+                            <Portal >
+                            <PopoverContent bg={'gray.800'} color={'white'} boxShadow={'md'}>
+                                <PopoverArrow />
+                                <PopoverHeader border={'none'}>
+                                    Connect your wallet
+                                </PopoverHeader>
+                                <PopoverCloseButton />
+                                <PopoverBody>
+                                    <Stack>
+                                    <Button colorScheme="purple" onClick={() => connectTo('extension')}>Station</Button>
+                                    <Button colorScheme="purple" onClick={() => connectTo('mobile')}>Browser Extension</Button>
+                                    </Stack>
+                                </PopoverBody>
+                                </PopoverContent>
+                            </Portal>
+                        </Popover>
+                        <button
+                            className="btn btn-default nav-item ms-2 main-nav-toggle"
+                            onClick={() => showSideNav()}
                         >
-                            <Ticket
-                                size={24}
-                                style={{
-                                    marginRight: '3px',
-                                    position: 'relative',
-                                    top: '-1px',
-                                }}
-                            />{' '}
-                            Create a new Project
-                            <span className="item-label">Make Real Your Dream</span>
-                            <span
-                                className="badge"
-                                style={{
-                                    position: 'absolute',
-                                    right: 0,
-                                    top: '-9px',
-                                    fontSize: '10px',
-                                    lineHeight: '10px',
-                                    padding: '3px',
-                                    textTransform: 'uppercase',
-                                    color:'#10003b',
-                                    background:'#8bf6c2'
-                                }}
-                            >
-                                
-                            </span>
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a
-                            href="/staking"
-                            className="nav-link"
-                            className={'nav-link ' + stakingClass}
+                            <List size={26} />
+                        </button>
+                    </>
+                )}
+                {connected && (
+                    <>
+                        <button
+                            className={
+                                'btn btn-default nav-item me-2' +
+                                (state.youWon ? ' winner' : '')
+                            }
+                            style={{
+                                padding: '0.275rem 0.55rem',
+                            }}
+                            onClick={() => setIsModal(!isModal)}
                         >
-                            <Coin
-                                size={24}
-                                style={{
-                                    marginRight: '3px',
-                                    position: 'relative',
-                                    top: '-1px',
-                                }}
-                            />{' '}
-                           Platform
-                            <span className="item-label">
-                                View and Back amazing project
-                            </span>
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a
-                            href="/dao"
-                            className="nav-link"
-                            className={'nav-link ' + daoClass}
-                        >
-                            <Bank
-                                size={24}
-                                style={{
-                                    marginRight: '3px',
-                                    position: 'relative',
-                                    top: '-1px',
-                                }}
-                            />{' '}
-                            DAO
-                            <span className="item-label">
-                                Together we decide
-                            </span>
-                        </a>
-                    </li>                    
-                </nav>
-
-                <div className="navbar-nav ms-auto">
-                    {!connected && (
-                        <>
-                            <div className="btn-group">
-                                <button
-                                    className="btn btn-green nav-item dropdown-toggle"
-                                    type="button"
-                                    id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                >
-                                    <Wallet
-                                        size={18}
-                                        style={{
-                                            marginTop: '-4px',
-                                            marginRight: '4px',
-                                        }}
-                                    />
-                                    Connect
-                                </button>
-                                <ul
-                                    className="dropdown-menu dropdown-menu-end"
-                                    aria-labelledby="dropdownMenuButton1"
-                                >
-                                    <button
-                                        onClick={() => connectTo('extension')}
-                                        className="dropdown-item"
-                                    >
-                                        <CaretRight
-                                            size={16}
-                                            style={{ marginTop: '-4px' }}
-                                        />{' '}
-                                        Terra Station (extension/mobile)
-                                    </button>
-                                    <button
-                                        onClick={() => connectTo('mobile')}
-                                        className="dropdown-item"
-                                    >
-                                        <CaretRight
-                                            size={16}
-                                            style={{ marginTop: '-4px' }}
-                                        />{' '}
-                                        Terra Station (mobile for desktop)
-                                    </button>
-                                </ul>
-                            </div>
-                            <button
-                                className="btn btn-default nav-item ms-2 main-nav-toggle"
-                                onClick={() => showSideNav()}
-                            >
-                                <List size={26} />
-                            </button>
-                        </>
-                    )}
-                    {connected && (
-                        <>
-                            <button
-                                className={
-                                    'btn btn-default nav-item me-2' +
-                                    (state.youWon ? ' winner' : '')
-                                }
-                                style={{
-                                    padding: '0.275rem 0.55rem',
-                                }}
-                                onClick={() => setIsModal(!isModal)}
-                            >
-                                {state.youWon ? (
-                                    <>
-                                        <Trophy
-                                            size={33}
-                                            style={{
-                                                marginTop: '-2px',
-                                                color: '#ecba26',
-                                            }}
-                                        />
-                                        <span className="badge">YOU WON</span>
-                                    </>
-                                ) : (
-                                    <UserCircle
+                            {state.youWon ? (
+                                <>
+                                    <Trophy
                                         size={33}
                                         style={{
                                             marginTop: '-2px',
-                                            color: '#72ffc1',
+                                            color: '#ecba26',
                                         }}
                                     />
-                                )}
-                            </button>
-                            <button
-                                className="btn btn-green nav-item dropdown-toggle"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                            >
-                                {returnBank() ? returnBank() : 'loading'}
-                            </button>
-                            <ul
-                                className="dropdown-menu dropdown-menu-end"
-                                aria-labelledby="dropdownMenuButton2"
-                                style={{ top: '70px' }}
-                            >
-                                {bank && alteBank && (
-                                    <div
-                                        className="wallet-info d-inline-block text-start px-3"
-                                        style={{ fontSize: '13px' }}
-                                    >
-                                        <span className="d-block">
-                                            <strong>YOUR WALLET:</strong>
-                                        </span>
-                                        <span
-                                            className="d-block"
-                                            style={{ marginBottom: '-5px' }}
-                                        >
-                                            {bank}{' '}
-                                            <span className="text-sm">UST</span>
-                                        </span>
-                                        <span className="d-block">
-                                            {alteBank}{' '}
-                                            <span className="text-sm">
-                                                ALTE
-                                            </span>
-                                        </span>
-                                    </div>
-                                )}
-                                <button
-                                    onClick={() => connectTo('disconnect')}
-                                    className="dropdown-item"
+                                    <span className="badge">YOU WON</span>
+                                </>
+                            ) : (
+                                <UserCircle
+                                    size={33}
+                                    style={{
+                                        marginTop: '-2px',
+                                        color: '#72ffc1',
+                                    }}
+                                />
+                            )}
+                        </button>
+                        <button
+                            className="btn btn-green nav-item dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            {returnBank() ? returnBank() : 'loading'}
+                        </button>
+                        <ul
+                            className="dropdown-menu dropdown-menu-end"
+                            aria-labelledby="dropdownMenuButton2"
+                            style={{ top: '70px' }}
+                        >
+                            {bank && alteBank && (
+                                <div
+                                    className="wallet-info d-inline-block text-start px-3"
+                                    style={{ fontSize: '13px' }}
                                 >
-                                    <Power
-                                        size={16}
-                                        style={{ marginTop: '-2px' }}
-                                    />{' '}
-                                    <span style={{ fontSize: '13px' }}>
-                                        Disconnect
+                                    <span className="d-block">
+                                        <strong>YOUR WALLET:</strong>
                                     </span>
-                                </button>
-                            </ul>
+                                    <span
+                                        className="d-block"
+                                        style={{ marginBottom: '-5px' }}
+                                    >
+                                        {bank}{' '}
+                                        <span className="text-sm">UST</span>
+                                    </span>
+                                    <span className="d-block">
+                                        {alteBank}{' '}
+                                        <span className="text-sm">
+                                            ALTE
+                                        </span>
+                                    </span>
+                                </div>
+                            )}
                             <button
-                                className="btn btn-default nav-item ms-2 main-nav-toggle"
-                                onClick={() => showSideNav()}
+                                onClick={() => connectTo('disconnect')}
+                                className="dropdown-item"
                             >
-                                <List size={26} />
+                                <Power
+                                    size={16}
+                                    style={{ marginTop: '-2px' }}
+                                />{' '}
+                                <span style={{ fontSize: '13px' }}>
+                                    Disconnect
+                                </span>
                             </button>
-                        </>
-                    )}
-                </div>
+                        </ul>
+                        <button
+                            className="btn btn-default nav-item ms-2 main-nav-toggle"
+                            onClick={() => showSideNav()}
+                        >
+                            <List size={26} />
+                        </button>
+                    </>
+                )}
             </div>
-
             {/*<button onClick={() => display()}>Connect Wallet</button>
-        {renderDialog()}*/}
+                {renderDialog()}*/}
             {connected && connectedWallet && (
                 <UserModal
                     open={isModal}
@@ -828,6 +734,6 @@ export default function ConnectWallet() {
                     connectedWallet={connectedWallet}
                 />
             )}
-        </div>
+        </>
     )
 }
