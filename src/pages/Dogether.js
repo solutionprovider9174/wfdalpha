@@ -50,6 +50,7 @@ import { black } from 'ansi-colors'
 import axios from "axios";
 import Navbar from '../components/Navbar';
 
+
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
     useConnectedWallet =

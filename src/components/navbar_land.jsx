@@ -91,16 +91,17 @@ export default function WithSubnavigation() {
             fontSize={'sm'}
             fontWeight={400}
             variant={'link'}
-            href={'#'}>
+            href={'/staking'}>
             Browse Project
           </Button>
           <Button
+            as={'a'}
             display={{ base: 'none', md: 'inline-flex' }}
             fontSize={'sm'}
             fontWeight={600}
             color={'white'}
             bg={'purple.400'}
-            href={'#'}
+            href={'/dogether'}
             _hover={{
               bg: 'blue.300',
             }}>
