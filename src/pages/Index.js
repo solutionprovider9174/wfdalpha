@@ -3,7 +3,6 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { useStore } from '../store';
 import theme from '../theme';
 
-import NavBar from '../components/navbar_land';
 import Hero from '../components/Hero';
 import About from '../components/about';
 import Industry from '../components/Industry';
@@ -19,7 +18,6 @@ export default() => {
     return(
         <ChakraProvider resetCSS theme={theme}>
             <Container>
-                <NavBar/>
                 <Hero/>
                 <About/>
                 <Industry/>
