@@ -49,7 +49,7 @@ import Select from 'react-select'
 import { black } from 'ansi-colors'
 import axios from "axios";
 import Navbar from '../components/Navbar';
-
+import { Container } from '../components/Container';
 
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
@@ -848,7 +848,12 @@ export default () => {
 
 
     return (
-    <><Navbar />
+    <>
+    <div className="row">
+        
+    <Navbar />
+    </div>
+    
     <div className="container-fluid" >
         <div className="row" style={{paddingLeft: 100, paddingRight: 100}}>
             <div className="col-12">
