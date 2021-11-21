@@ -1,19 +1,26 @@
 import React from 'react';
 import ConnectWallet from './ConnectWallet';
 //
+import '../styles/custom.css';
+
 
 export default function WithSubnavigation() {
   // const { isOpen, onToggle } = useDisclosure();
   const isOpen = true;
   const onToggle = true;
 
+  function gotoLocation(href){
+    if(typeof document !== 'undefined')
+      document.location = href;
+  }
+  
   return (
     <div style={{width:'100%'}}>
       <div
         style={{display:'flex', backgroundColor:'#313131', height:'60px', padding:'2px', alignItems:'center', justifyContent:'space-between'}}>
         <div style={{display:'flex'}}>
-          <div style={{cursor:'pointer'}}>
-             {/* onClick={()=>{document.location="/"}}> */}
+          <div style={{cursor:'pointer'}}
+             onClick={()=>{gotoLocation("/")}}>
             <img
                 alt={'Wefund'}
                 src={
@@ -31,7 +38,7 @@ export default function WithSubnavigation() {
                 className="btn btn-green"
                 type="button"
                 width="150px"
-                // onClick={()=>{document.location='/dogether'}}
+                onClick = {()=>(gotoLocation('/dogether'))}
             >
                 Create Project
             </button>
