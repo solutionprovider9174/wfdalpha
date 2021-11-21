@@ -1,4 +1,3 @@
-import { Button } from 'bootstrap';
 import React from 'react';
 import ConnectWallet from './ConnectWallet';
 //
@@ -13,7 +12,8 @@ export default function WithSubnavigation() {
       <div
         style={{display:'flex', backgroundColor:'#313131', height:'60px', padding:'2px', alignItems:'center', justifyContent:'space-between'}}>
         <div style={{display:'flex'}}>
-          <div style={{cursor:'pointer'}} onClick={()=>{document.location="/"}}>
+          <div style={{cursor:'pointer'}}>
+             {/* onClick={()=>{document.location="/"}}> */}
             <img
                 alt={'Wefund'}
                 src={
@@ -31,7 +31,7 @@ export default function WithSubnavigation() {
                 className="btn btn-green"
                 type="button"
                 width="150px"
-                onClick={()=>{document.location='/dogether'}}
+                // onClick={()=>{document.location='/dogether'}}
             >
                 Create Project
             </button>

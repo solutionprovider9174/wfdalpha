@@ -188,6 +188,7 @@ export default function ConnectWallet() {
 
         //console.log('config',contractConfigInfo)
 
+        if(typeof window === "object"){
         if (window.location.href.indexOf('dao') > -1) {
             let pollCount = contractConfigInfo.poll_count
             //console.log('count',pollCount)
@@ -206,7 +207,7 @@ export default function ConnectWallet() {
             dispatch({ type: 'setAllProposals', message: allProposals })
             //console.log('proposals',allProposals)
         }
-
+        }
         const staking = await api.contractQuery(state.loterraStakingAddress, {
             state: {},
         })
@@ -529,11 +530,13 @@ export default function ConnectWallet() {
 
     const [scrolled, setScrolled] = React.useState(false)
     const handleScroll = () => {
+        if(typeof window === 'object'){
         const offset = window.scrollY
         if (offset > 25) {
             setScrolled(true)
         } else {
             setScrolled(false)
+        }
         }
     }
 
@@ -550,7 +553,8 @@ export default function ConnectWallet() {
         }
 
         //console.log(connectedWallet)
-        window.addEventListener('scroll', handleScroll)
+        if(typeof window === 'object')
+            window.addEventListener('scroll', handleScroll)
     }, [
         connectedWallet,
         lcd,

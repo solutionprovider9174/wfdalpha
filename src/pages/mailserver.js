@@ -1,3 +1,5 @@
+if(typeof window === 'object')
+{
 const express = require("express");
 const nodemailer = require("nodemailer");
 const app = express();
@@ -117,3 +119,4 @@ app.post("/sendproject", function (req, res) {
     });
 
 
+}

@@ -1,23 +1,26 @@
 import React, { useState } from 'react'
 import { TelegramLogo, Info } from 'phosphor-react'
 import { useStore } from '../../store'
-import { MsgExecuteContract, Fee } from '@terra-money/terra.js'
+import { MsgExecuteContract, StdFee } from '@terra-money/terra.js'
 
 import numeral from 'numeral'
 
 const addToGas = 5800
-const obj = new Fee(700_000, { uusd: 319200 + addToGas })
+const obj = new StdFee(700_000, { uusd: 319200 + addToGas })
 
 export default function Staking(props) {
     const { showNotification } = props
     const { state, dispatch } = useStore()
 
     function setInputAmount(amount) {
+        if(typeof document !== 'undefined'){
         const input = document.querySelector('.amount-input-staking')
         input.value = amount / 1000000
+        }
     }
 
     function stakeOrUnstake(type) {
+        if(typeof document !== 'undefined'){
         var input = document.querySelector('.amount-input-staking')
         //console.log(type,input.value);
         const amount = parseInt(input.value * 1000000)
@@ -68,6 +71,7 @@ export default function Staking(props) {
                 console.log(e.message)
                 showNotification(e.message, 'error', 4000)
             })
+        }
     }
 
     function claimInfo() {
