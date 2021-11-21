@@ -3,7 +3,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { useStore } from '../store';
 import theme from '../theme';
 
-import NavBar from '../components/navbar_land';
+import NavBar from '../components/Navbar';
 import Hero from '../components/Hero';
 import About from '../components/about';
 import Industry from '../components/Industry';
