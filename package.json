@@ -18,7 +18,11 @@
         "@popperjs/core": "^2.9.2",
         "@reach/router": "^1.3.4",
         "@terra-money/terra.js": "2.0.14",
-        "@terra-money/wallet-provider": "^2.2.0",
+<<<<<<< HEAD
+        "@terra-money/wallet-provider": "2.2.0",
+=======
+        "@terra-money/wallet-provider": "2.2.0",
+>>>>>>> cbfe8947436d6c56b3ddf108ddc6aa37826f34da
         "axios": "^0.21.1",
         "babel-plugin-transform-remove-console": "^6.9.4",
         "bootstrap": "^5.0.2",
@@ -60,5 +64,8 @@
         "react-static-plugin-tailwindcss": "^0.1.3",
         "serve": "^11.3.2",
         "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+    },
+    "engines": {
+        "node": "14.x"
     }
 }
