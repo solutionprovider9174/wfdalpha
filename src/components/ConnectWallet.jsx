@@ -24,38 +24,7 @@ import numeral from 'numeral'
 import UserModal from './UserModal'
 import { useStore } from '../store'
 // import { Link } from '@reach/router'
-import {
-    Box,
-    Flex,
-    Text,
-    IconButton,
-    Button,
-    Stack,
-    Collapse,
-    Icon,
-    Link,
-    Popover,
-    PopoverTrigger,
-    PopoverContent,
-    useColorModeValue,
-    useBreakpointValue,
-    useDisclosure,
-    PopoverHeader,
-    PopoverBody,
-    PopoverFooter,
-    PopoverArrow,
-    PopoverCloseButton,
-    Portal,
-    Image
-  } from '@chakra-ui/react';
-  
-  import {
-    HamburgerIcon,
-    CloseIcon,
-    ChevronDownIcon,
-    ChevronRightIcon,
-    AddIcon,
-  } from '@chakra-ui/icons';
+
 // let useWallet = {}
 // if (typeof document !== 'undefined') {
 //     useWallet = require('@terra-money/wallet-provider').useWallet
