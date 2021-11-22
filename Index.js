@@ -46,8 +46,6 @@ import PriceLoader from '../components/PriceLoader'
 import JackpotResults from '../components/JackpotResults'
 import QuickStats from '../components/QuickStats'
 
-import Navbar from '../components/Navbar';
-
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
     useConnectedWallet =
@@ -670,8 +668,92 @@ export default () => {
                                         <span>UST</span>
                                     </div>
                                 </h2>
-                               </div>
-                         
+                                <div className="combine-jackpot">
+                                    <PlusCircle size={28} weight="fill" />
+                                </div>
+                                <h2 className="WFD-jackpot">
+                                    {numeral(jackpotWFDred)
+                                        .format('0,0.00')
+                                        .split('')
+                                        .map((obj) => {
+                                            return (
+                                                <div className="roller">
+                                                    {obj}
+                                                </div>
+                                            )
+                                        })}
+                                    <div className="roller">
+                                        <span>WFD</span>
+                                    </div>
+                                </h2>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-8 mx-auto">
+                                    <div className="countdown-holder">
+                                        <div className="row">
+                                            <div className="col-6">
+                                                <div className="card stats-card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-4 text-center svg-rotate">
+                                                                <UserFocus
+                                                                    size={36}
+                                                                />
+                                                            </div>
+                                                            <div className="col-8 text-center d-flex text-md-start">
+                                                                <h3 className="align-self-center">
+                                                                    <span>
+                                                                        PROJECT BAKED
+                                                                    </span>
+                                                                    {players ? (
+                                                                        players
+                                                                    ) : (
+                                                                        <PriceLoader />
+                                                                    )}
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="col-6">
+                                                <div className="card stats-card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-4 text-center svg-rotate">
+                                                                <Ticket
+                                                                    size={36}
+                                                                />
+                                                            </div>
+                                                            <div className="col-8 text-center d-flex text-md-start">
+                                                                <h3 className="align-self-center">
+                                                                    <span>
+                                                                        PROJECT TO BACK
+                                                                    </span>
+                                                                    {tickets ? (
+                                                                        tickets
+                                                                    ) : (
+                                                                        <PriceLoader />
+                                                                    )}
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-8 mx-auto">
+                                                <Countdown
+                                                    expiryTimestamp={
+                                                        expiryTimestamp
+                                                    }
+                                                />
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                        
@@ -681,12 +763,16 @@ export default () => {
                 {/*
              <div className="mt-4">contract-v2.0.1</div>
                 <div className="text-sm">terra14mevcmeqt0n4myggt7c56l5fl0xw2hwa2mhlg0</div> */}
-           
+            </div>
                 
 
             <div
                 className="how"
-               >
+                style={{
+                    
+                    backgroundImage: 'url(bgflip.svg)', 
+                    backgroundPosition: 'center center',
+                }}>
             
                 <div className="container">
                     <div className="row">
@@ -742,10 +828,10 @@ export default () => {
                                 WeFund  documentation
                             </a>
                         </div>
-               
-            
+                    </div>
+                </div>
+            </div>
 
-           
             {/* <QuickStats lotaPrice={lotaPrice} marketCap={marketCap} circulatingSupply={circulatingSupply}/> */}
 
             <JackpotResults />
@@ -859,7 +945,7 @@ export default () => {
                 </div>
             </div>
 
-           
+
 
 
             <div
@@ -894,13 +980,6 @@ export default () => {
             </div>
 
             </div>
-
-            </div>
-
-            </div>
-
-            </div>
-                </div>
             {/* <div className="container" style={{ marginTop: '2rem' }}>
                 <div className="card lota-card">
                     <div className="card-body">

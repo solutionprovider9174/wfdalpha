@@ -5,7 +5,7 @@ import React, {
     useCallback,
 } from 'react'
 import {
-    Fee,
+    StdFee,
     MsgExecuteContract,
     LCDClient,
     WasmAPI,

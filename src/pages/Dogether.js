@@ -50,7 +50,8 @@ import { black } from 'ansi-colors'
 import axios from "axios";
 import Navbar from '../components/Navbar';
 import { Container } from '../components/Container';
-
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from '../theme';
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
     useConnectedWallet =
@@ -850,8 +851,9 @@ export default () => {
     return (
     <>
     <div className="row">
-        
+    <ChakraProvider resetCSS theme={theme}>
     <Navbar />
+    </ChakraProvider>
     </div>
     
     <div className="container-fluid" >

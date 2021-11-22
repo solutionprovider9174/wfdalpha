@@ -97,9 +97,9 @@ class App extends Component {
                         />
                     </Head>
                     <StoreProvider>
-                    <ChakraProvider resetCSS theme={theme}>
+                    {/* <ChakraProvider resetCSS theme={theme}> */}
                         <Routes default />
-                    </ChakraProvider>
+                    {/* </ChakraProvider> */}
                     </StoreProvider>
 
                     {/*<Footer/>*/}

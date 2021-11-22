@@ -75,7 +75,6 @@ const Dialog = {
     display: "flex",
     justifyContent: "center",
     flexDirection:"column",
-
 } */
 
 const DialogButton = {
