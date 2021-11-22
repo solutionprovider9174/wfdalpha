@@ -24,6 +24,8 @@ import {
     Info,
 } from 'phosphor-react'
 // import Jackpot from "../components/Jackpot";
+
+import sample from '../../public/Wefund/og.mp4'
 import {
     StdFee,
     MsgExecuteContract,
@@ -852,7 +854,10 @@ export default () => {
 
     return (
     <>
-    <div className="container-fluid" >
+    <video className='videoTag' autoPlay loop muted style={{position:"fixed"}}>
+        <source src={sample} type='video/mp4' />
+    </video>
+    <div className="container-fluid" style={{position:"absolute", opacity:"0.8"}} >
         <div className="row" style={{paddingLeft: 100, paddingRight: 100}}>
             <div className="col-12">
                 <div
