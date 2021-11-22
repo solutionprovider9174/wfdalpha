@@ -1,6 +1,6 @@
 import React from 'react';
 import ConnectWallet from './ConnectWallet';
-//
+import {Flex} from '@chakra-ui/react';
 import '../styles/custom.css';
 
 
@@ -63,7 +63,7 @@ const DesktopNav = () => {
     <>
       {NAV_ITEMS.map((navItem, index) => (
         <div class="btn-group" style={{cursor:'pointer'}}>
-          <a href={navItem.href} type="button" class={"btn btn-danger "+ (navItem.children ? "dropdown-toggle":"")} data-bs-toggle="dropdown" aria-expanded="false" style={{color:'white'}}>
+          <a href={navItem.href} type="" class={"btn btn-danger "+ (navItem.children ? "dropdown-toggle":"")} data-bs-toggle="dropdown" aria-expanded="false" style={{color:'white'}}>
             {navItem.label}
           </a>
           {navItem.children &&
