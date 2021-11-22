@@ -13,11 +13,14 @@ export default function LpStaking(props) {
     const { state, dispatch } = useStore()
 
     function setInputAmount(amount) {
+        if(typeof document !== 'undefined'){
         const input = document.querySelector('.amount-input-lpstaking')
         input.value = amount / 1000000
+        }
     }
 
     function stakeOrUnstake(type) {
+        if(typeof document !== 'undefined'){
         var input = document.querySelector('.amount-input-lpstaking')
         //console.log(type,input.value);
         const amount = parseInt(input.value * 1000000)
@@ -69,6 +72,7 @@ export default function LpStaking(props) {
                 console.log(e)
                 showNotification(e.message, 'error', 4000)
             })
+        }
     }
 
     function claimInfo() {

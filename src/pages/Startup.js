@@ -46,7 +46,6 @@ import PriceLoader from '../components/PriceLoader'
 import JackpotResults from '../components/JackpotResults'
 import QuickStats from '../components/QuickStats'
 
-import Navbar from '../components/Navbar';
 
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
@@ -314,8 +313,8 @@ export default () => {
         }
         // const obj = new StdFee(1_000_000, { uusd: 200000 })
         const addToGas = 5000 * cart.length
-        // const obj = new StdFee(1_000_000, { uusd: 30000 + addToGas })
-        //const obj = new StdFee(200_000, { uusd: 340000 + addToGas })
+        // const obj = new Fee(1_000_000, { uusd: 30000 + addToGas })
+        //const obj = new Fee(200_000, { uusd: 340000 + addToGas })
         const obj = new StdFee(10_000, { uusd: 4500})
         let exec_msg = {
             register: {
@@ -598,6 +597,7 @@ export default () => {
     }
 
     const clickElement = (ref) => {
+        if(typeof window === 'object'){
         ref.current.dispatchEvent(
             new MouseEvent('click', {
                 view: window,
@@ -606,6 +606,7 @@ export default () => {
                 buttons: 1,
             })
         )
+        }
     }
 
     function scrollToStats() {

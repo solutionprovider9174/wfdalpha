@@ -13,11 +13,14 @@ export default function Staking(props) {
     const { state, dispatch } = useStore()
 
     function setInputAmount(amount) {
+        if(typeof document !== 'undefined'){
         const input = document.querySelector('.amount-input-staking')
         input.value = amount / 1000000
+        }
     }
 
     function stakeOrUnstake(type) {
+        if(typeof document !== 'undefined'){
         var input = document.querySelector('.amount-input-staking')
         //console.log(type,input.value);
         const amount = parseInt(input.value * 1000000)
@@ -68,6 +71,7 @@ export default function Staking(props) {
                 console.log(e.message)
                 showNotification(e.message, 'error', 4000)
             })
+        }
     }
 
     function claimInfo() {

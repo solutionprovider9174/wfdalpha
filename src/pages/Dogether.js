@@ -25,7 +25,7 @@ import {
 } from 'phosphor-react'
 // import Jackpot from "../components/Jackpot";
 import {
-    Fee,
+    StdFee,
     MsgExecuteContract,
     LCDClient,
     WasmAPI,
@@ -48,10 +48,8 @@ import QuickStats from '../components/QuickStats'
 import Select from 'react-select'
 import { black } from 'ansi-colors'
 import axios from "axios";
-import Navbar from '../components/Navbar';
-import { Container } from '../components/Container';
-import { ChakraProvider } from "@chakra-ui/react";
-import theme from '../theme';
+
+
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
     useConnectedWallet =
@@ -496,7 +494,7 @@ export default () => {
         const addToGas = 5000 * cart.length
         // const obj = new Fee(1_000_000, { uusd: 30000 + addToGas })
         //const obj = new Fee(200_000, { uusd: 340000 + addToGas })
-        const obj = new Fee(10_000, { uusd: 4500})
+        const obj = new StdFee(10_000, { uusd: 4500})
         let exec_msg = {
             register: {
                 combination: cart,
@@ -783,10 +781,12 @@ export default () => {
 
 
     function scrollToStats() {
+        if(typeof window === 'object'){
         window.scrollTo({
             behavior: 'smooth',
             top: loterraStats.current.offsetTop,
         })
+        }
     }
 
     function totalNrPrizes() {
@@ -836,6 +836,7 @@ export default () => {
     
 
     const wh_click = (ref) => {
+        if(typeof window == 'object'){
         ref.current.dispatchEvent(
             new MouseEvent('click', {
                 view: window,
@@ -844,18 +845,13 @@ export default () => {
                 buttons: 1,
             })
         )
+        }
     }
     
 
 
     return (
     <>
-    <div className="row">
-    <ChakraProvider resetCSS theme={theme}>
-    <Navbar />
-    </ChakraProvider>
-    </div>
-    
     <div className="container-fluid" >
         <div className="row" style={{paddingLeft: 100, paddingRight: 100}}>
             <div className="col-12">

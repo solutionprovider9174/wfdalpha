@@ -19,7 +19,6 @@ export default() => {
     return(
         <ChakraProvider resetCSS theme={theme}>
             <Container>
-                <NavBar/>
                 <Hero/>
                 <About/>
                 <Industry/>

@@ -24,38 +24,6 @@ import numeral from 'numeral'
 import UserModal from './UserModal'
 import { useStore } from '../store'
 // import { Link } from '@reach/router'
-import {
-    Box,
-    Flex,
-    Text,
-    IconButton,
-    Button,
-    Stack,
-    Collapse,
-    Icon,
-    Link,
-    Popover,
-    PopoverTrigger,
-    PopoverContent,
-    useColorModeValue,
-    useBreakpointValue,
-    useDisclosure,
-    PopoverHeader,
-    PopoverBody,
-    PopoverFooter,
-    PopoverArrow,
-    PopoverCloseButton,
-    Portal,
-    Image
-  } from '@chakra-ui/react';
-  
-  import {
-    HamburgerIcon,
-    CloseIcon,
-    ChevronDownIcon,
-    ChevronRightIcon,
-    AddIcon,
-  } from '@chakra-ui/icons';
 // let useWallet = {}
 // if (typeof document !== 'undefined') {
 //     useWallet = require('@terra-money/wallet-provider').useWallet
@@ -218,6 +186,7 @@ export default function ConnectWallet() {
 
         //console.log('config',contractConfigInfo)
 
+        if(typeof window === "object"){
         if (window.location.href.indexOf('dao') > -1) {
             let pollCount = contractConfigInfo.poll_count
             //console.log('count',pollCount)
@@ -236,7 +205,7 @@ export default function ConnectWallet() {
             dispatch({ type: 'setAllProposals', message: allProposals })
             //console.log('proposals',allProposals)
         }
-
+        }
         const staking = await api.contractQuery(state.loterraStakingAddress, {
             state: {},
         })
@@ -559,11 +528,13 @@ export default function ConnectWallet() {
 
     const [scrolled, setScrolled] = React.useState(false)
     const handleScroll = () => {
+        if(typeof window === 'object'){
         const offset = window.scrollY
         if (offset > 25) {
             setScrolled(true)
         } else {
             setScrolled(false)
+        }
         }
     }
 
@@ -580,7 +551,8 @@ export default function ConnectWallet() {
         }
 
         //console.log(connectedWallet)
-        window.addEventListener('scroll', handleScroll)
+        if(typeof window === 'object')
+            window.addEventListener('scroll', handleScroll)
     }, [
         connectedWallet,
         lcd,
@@ -594,38 +566,44 @@ export default function ConnectWallet() {
             <div className="navbar-nav ms-auto" style={{flexDirection:'row'}}>
                 {!connected && (
                     <>
-                        <Popover >
-                            <PopoverTrigger>
-                                <Button
-                                display={{ base: 'none', md: 'inline-flex' }}
-                                fontSize={'sm'}
-                                fontWeight={600}
-                                color={'white'}
-                                bg={'purple.400'}
-                                href={'#'}
-                                _hover={{
-                                bg: 'blue.300',
-                                }}
-                                rightIcon={<AddIcon />}>
-                                Connect Wallet
-                                </Button>
-                            </PopoverTrigger>
-                            <Portal >
-                            <PopoverContent bg={'gray.800'} color={'white'} boxShadow={'md'}>
-                                <PopoverArrow />
-                                <PopoverHeader border={'none'}>
-                                    Connect your wallet
-                                </PopoverHeader>
-                                <PopoverCloseButton />
-                                <PopoverBody>
-                                    <Stack>
-                                    <Button colorScheme="purple" onClick={() => connectTo('extension')}>Station</Button>
-                                    <Button colorScheme="purple" onClick={() => connectTo('mobile')}>Browser Extension</Button>
-                                    </Stack>
-                                </PopoverBody>
-                                </PopoverContent>
-                            </Portal>
-                        </Popover>
+                        <div className="btn-group" style={{width:'100%'}}>
+                            <button
+                                className="btn btn-green nav-item dropdown-toggle"
+                                type="button"
+                                id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                width="150px"
+                                style={{backGroundColor:'red', width:'100%'}}
+                            >
+                                Connect
+                            </button>
+                            <ul
+                                className="dropdown-menu dropdown-menu-end"
+                                aria-labelledby="dropdownMenuButton1"
+                            >
+                                <button
+                                    onClick={() => connectTo('extension')}
+                                    className="dropdown-item"
+                                    style={{display:'flex', flexDirection:'row', alignItems:'center'}}
+                                >
+                                    <CaretRight
+                                        size={16}
+                                    />{' '}
+                                    Terra Station (extension/mobile)
+                                </button>
+                                <button
+                                    onClick={() => connectTo('mobile')}
+                                    className="dropdown-item"
+                                    style={{display:'flex', flexDirection:'row', alignItems:'center'}}
+                                >
+                                    <CaretRight
+                                        size={16}
+                                    />{' '}
+                                    Terra Station (mobile for desktop)
+                                </button>
+                            </ul>
+                        </div>
                         <button
                             className="btn btn-default nav-item ms-2 main-nav-toggle"
                             onClick={() => showSideNav()}
