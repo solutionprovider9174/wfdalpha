@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Document, Page, pdfjs } from "react-pdf";
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry";
 import SignatureCanvas from 'react-signature-canvas';
@@ -8,7 +8,13 @@ pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 const PDFTEMPLATE = "PDFTemplate.pdf";
 const MyInput = (props) => {
   const [cover, setCover] = useState(true);
+  const inputRef = useRef();
 
+  useEffect(()=>{
+      console.log(inputRef.current);
+      if(typeof inputRef.current != 'undefined')
+        inputRef.current.focus();
+  },[cover]);
   return(
     <div style={{diplay:'flex', flexDirection:'column', height:'50px', width:props.width,
     position:'relative', left:props.left, top:props.top, zIndex:'99'}}>
@@ -17,7 +23,7 @@ const MyInput = (props) => {
           <div onClick={()=>{setCover(false); }} style={{display:'flex', justifyContent:'center',marginTop:'8px', fontSize:'8px', color:'white',backgroundColor:'rgb(24 99 124)', width:'100%', alignItem:'center'}}><div>Click</div></div>
         }
         {!cover && 
-        <input type="text" value={props.value} onChange={props.onChange} 
+        <input ref={inputRef} type="text" value={props.value} onChange={props.onChange} 
         style={{width:'100%', height:'100%', backgroundColor:'rgb(109 209 243)', border:'0px', fontSize:props.fontsize}}/>
         }
       </div>
@@ -73,7 +79,7 @@ export default ()=> {
         document.getElementById('loading').innerHTML=`
         <div>
         <h1>Sent success!</h1>
-        <h2><a href=${data.data}>Click here to see your PDF!</a></h2>
+        <h2><a href="/PDF/${data.data}">Click here to see your PDF!</a></h2>
         `
       })
       .catch((e) =>{
@@ -88,11 +94,11 @@ export default ()=> {
         <h1>Loading...</h1>
         <h3>Please wait..</h3>
       </div>
-      <div style={{backgroundColor:'gray', height:'40px', display:'flex', justifyContent:'center'}}>
-        <div style={{width:'150px', borderRadius:'34px',height:'100%', backgroundColor:'rgb(42 76 43)', cursor:'pointer', display:'flex', justifyContent:'center'}}
+      <div style={{backgroundColor:'#b1adad', height:'40px', display:'flex', justifyContent:'center', alignItems:'center', position:'fiexed', width:'100%', zIndex:'999'}}>
+        <div style={{width:'120px', borderRadius:'34px',height:'80%', backgroundColor:'rgb(42 76 43)', cursor:'pointer', display:'flex', justifyContent:'center'}}
         onClick={()=>{confirm()}}
         >
-          <h4>Confirm</h4>
+          <h5>Confirm</h5>
         </div>
       </div>
       <div style={{display:'flex', flexDirection:'row'}}>

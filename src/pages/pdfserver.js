@@ -12,11 +12,11 @@ app.use(cors());
 let amount, date, name, title,email;
 let pdfFile;
 let signFile;
-let pdfPath = "../../public/";
+let pdfPath = "../../public/PDF/";
 
 async function embedImages() {
 
-  const url = pdfPath + 'PDFTemplate.pdf';
+  const url = "../../public/" + 'PDFTemplate.pdf';
   let existingPdfBytes = fs.readFileSync(url);
 
   //const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
