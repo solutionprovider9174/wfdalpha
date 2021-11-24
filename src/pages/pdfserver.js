@@ -11,9 +11,12 @@ app.use(cors());
 
 let amount, date, name, title,email;
 let pdfFile;
+let signFile;
+let pdfPath = "../../public/";
+
 async function embedImages() {
 
-  const url = '../../public/PDFTemplate.pdf';
+  const url = pdfPath + 'PDFTemplate.pdf';
   let existingPdfBytes = fs.readFileSync(url);
 
   //const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
@@ -22,8 +25,7 @@ async function embedImages() {
   
   const pdfDoc = await PDFDocument.load(existingPdfBytes)
   const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
-console.log(pdfDoc.embedFont);
-console.log(helveticaFont);
+
   const pages = pdfDoc.getPages()
   const firstPage = pages[0]
   const { width, height } = firstPage.getSize()
@@ -68,11 +70,10 @@ console.log(helveticaFont);
     color: rgb(0, 0, 0)
   })
 
-  const signPNG = "../../public/" + name + "_sign.png";
+  const signPNG = pdfPath + signFile;
   let pngImageBytes = fs.readFileSync(signPNG);
   //const jpgImageBytes = await fetch(jpgUrl).then((res) => res.arrayBuffer())
   //const pngImageBytes = await fetch(pngUrl).then((res) => res.arrayBuffer())
-
   //const pdfDoc = await PDFDocument.create()
 
   const pngImage = await pdfDoc.embedPng(pngImageBytes)
@@ -86,9 +87,10 @@ console.log(helveticaFont);
   })
 
   const res = await pdfDoc.save({ dataUri: true });
-  pdfFile = "../../public/" + name + "_pdf.pdf";
-  console.log("write file:"+pdfFile);
-  fs.writeFileSync(pdfFile, res);
+
+  pdfFile = name + "_pdf.pdf";
+  console.log("write file:" + pdfPath + pdfFile);
+  fs.writeFileSync(pdfPath + pdfFile, res);
   return true;
 }
 
@@ -101,15 +103,9 @@ app.post("/pdfmake", async function (req, res) {
 
   const sign = req.body.Sign;
 
-  // console.log(amount)
-  // console.log(date);
-  // console.log(name);
-  // console.log(title);
-  // console.log(email);
-  // console.log(sign);
-
   let buff = Buffer.from(sign.substr(22), 'base64');
-  fs.writeFileSync("../../public/" + name + "_sign.png", buff);
+  signFile = name + "_sign.png";
+  fs.writeFileSync(pdfPath + signFile, buff);
 
   await embedImages();
 console.log("send pdf file:"+pdfFile);
