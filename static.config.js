@@ -36,6 +36,10 @@ export default {
             path: 'dogether',
             template: 'src/pages/Dogether',
         },
+        {
+            path: 'esignedit',
+            template: 'src/pages/EsignEdit',
+        },
         // A 404 component
         {
             path: '404',

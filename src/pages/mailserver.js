@@ -26,6 +26,7 @@ let transporter = nodemailer.createTransport({
     // });
 
 app.post("/sendproject", function (req, res) {
+    console.log("Send project");
     
     const htmlEmail = `
     <h3>Contact Details</h3>
