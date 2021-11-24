@@ -13,6 +13,7 @@ let amount, date, name, title,email;
 let pdfFile;
 let signFile;
 let pdfPath = "../../public/PDF/";
+let serverPath = "http://d9e0-188-43-136-33.ngrok.io/";
 
 async function embedImages() {
 
@@ -93,6 +94,46 @@ async function embedImages() {
   fs.writeFileSync(pdfPath + pdfFile, res);
   return true;
 }
+function SendMail(){
+  const htmlEmail = `
+    <h3>Contact Details</h3>
+    <h1><a href="${serverPath}${pdfPath}${pdfFile}">Cllick to see your pdf</a></h1>
+    <h3>Message</h3>
+    <p>Testing</p>
+    `
+  let mailOptions = {
+    from: `alenzer0902@gmail.com`,
+    to: "simkin0902@gmail.com",
+    subject: 'Message from: server',
+    html: htmlEmail,
+    };
+  
+  let transporter = nodemailer.createTransport({
+    // service: "gmail",
+    host: 'smtp.gmail.com',
+    port:587, 
+    secure: false,
+    requireTLS: true,
+    auth: {
+    // type: "OAuth2",
+    user: "markovitez090@gmail.com",
+    pass: "12345678",
+    // clientId: '958471293842-kipnnfth137ajici3iuka6a92ltbn64e.apps.googleusercontent.com',
+    // clientSecret: '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',
+    // refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+    },
+    // tls: {rejectUnauthorized: false}
+  });   
+  transporter.sendMail(mailOptions, function (err, data) {
+    if (err) {
+        console.log(err)
+        return false;
+    } else {
+        console.log("== Message Sent ==");
+        return true;
+    }
+  });
+}
 
 app.post("/pdfmake", async function (req, res) {
   amount = req.body.Amount;
@@ -108,60 +149,14 @@ app.post("/pdfmake", async function (req, res) {
   fs.writeFileSync(pdfPath + signFile, buff);
 
   await embedImages();
-console.log("send pdf file:"+pdfFile);
+console.log("Create pdf file:"+pdfFile);
+console.log("Sending email");
+  SendMail();
+
   res.json({
     status: "success",
     data: pdfFile,
   });
-
-  // const htmlEmail = `
-  //   <h3>Contact Details</h3>
-  //   <ul>
-  //       <li>Name: Customer</li>
-  //       <li>Email: Testing</li>
-  //   </ul>
-  //   <h3>Message</h3>
-  //   <p>Testing</p>
-  //   `
-  // let mailOptions = {
-  //   from: `alenzer0902@gmail.com`,
-  //   to: "simkin0902@gmail.com",
-  //   subject: 'Message from: server',
-  //   text: htmlEmail,
-  //   };
-  
-  
-  // let transporter = nodemailer.createTransport({
-  //   service: "gmail",
-  //   auth: {
-  //   user: "alenzer0902@gmail.com",
-  //   pass: "upwards0722",
-  //   },
-  // });
-  // let transporter = nodemailer.createTransport({
-  //   service: "gmail",
-  //   auth: {
-  //   type: "OAuth2",
-  //   user: "wefund.project@gmail.com",
-  //   pass: "upwards0722",
-  //   clientId: '958471293842-kipnnfth137ajici3iuka6a92ltbn64e.apps.googleusercontent.com',
-  //   clientSecret: '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',
-  //   // refreshToken: process.env.OAUTH_REFRESH_TOKEN,
-  //   },
-  // });   
-  // transporter.sendMail(mailOptions, function (err, data) {
-  //   if (err) {
-  //       console.log(err)
-  //       res.json({
-  //       status: "fail",
-  //       });
-  //   } else {
-  //       console.log("== Message Sent ==");
-  //       res.json({
-  //       status: "success",
-  //       });
-  //   }
-  // });
 });
 
 const port = 3001;

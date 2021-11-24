@@ -51,6 +51,12 @@ export default ()=> {
   
   async function confirm(){
     if(typeof document !== 'undefined'){
+      if(typeof canvasRef.current === 'undefined' || 
+      amount ==='' || date === '' || name === '' || title === '' || email === '')
+      {
+        document.getElementById('loading').innerHTML='<h6>Please fill all fields!</h6>'
+        return false;
+      }
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
@@ -63,14 +69,14 @@ export default ()=> {
           "Sign":canvasRef.current.toDataURL(),
         }),
       };
-      console.log(amount)
-      console.log(date);
-      console.log(name);
-      console.log(title);
-      console.log(email);
-      console.log(canvasRef.current.toDataURL());
+      // console.log(amount)
+      // console.log(date);
+      // console.log(name);
+      // console.log(title);
+      // console.log(email);
+      // console.log(canvasRef.current.toDataURL());
 
-      fetch('http://localhost:3001/pdfmake',
+      fetch('http://d378-87-116-163-233.ngrok.io/pdfmake',
       requestOptions)
       .then((res) => res.json())
       .then((data) => {
@@ -78,8 +84,8 @@ export default ()=> {
         console.log(data);
         document.getElementById('loading').innerHTML=`
         <div>
-        <h1>Sent success!</h1>
-        <h2><a href="/PDF/${data.data}">Click here to see your PDF!</a></h2>
+        <h5>Sent success!</h5>
+        <h6><a href="/PDF/${data.data}">Click here to see your PDF!</a></h6>
         `
       })
       .catch((e) =>{
@@ -90,11 +96,11 @@ export default ()=> {
 
   return (
     <>
-      <div id="loading" style={{position:'absolute', left:'10px', top:'100px'}} >
-        <h1>Loading...</h1>
-        <h3>Please wait..</h3>
-      </div>
-      <div style={{backgroundColor:'#b1adad', height:'40px', display:'flex', justifyContent:'center', alignItems:'center', position:'fiexed', width:'100%', zIndex:'999'}}>
+      <div style={{backgroundColor:'#b1adad', height:'40px', display:'flex', justifyContent:'center', alignItems:'center', position:'fixed', width:'100%', zIndex:'999'}}>
+        <div id="loading" style={{position:'absolute', left:'0', top:'0', zIndex:'999'}} >
+          <h5>Loading...</h5>
+          <h6>Please wait..</h6>
+        </div>
         <div style={{width:'120px', borderRadius:'34px',height:'80%', backgroundColor:'rgb(42 76 43)', cursor:'pointer', display:'flex', justifyContent:'center'}}
         onClick={()=>{confirm()}}
         >
