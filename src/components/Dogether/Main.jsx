@@ -34,7 +34,8 @@ export default function Main(props) {
             state.dogetherAddress,
             {
                 pool: {},
-            },  {"uusd": parseFloat(amount) * 1000000}
+            },  
+            {"uusd": parseFloat(amount) * 1000000}
         )
         state.wallet
             .post({
