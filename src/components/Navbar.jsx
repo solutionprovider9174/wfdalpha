@@ -16,7 +16,7 @@ export default function WithSubnavigation() {
             <img
                 alt={'Wefund'}
                 src={
-                  'WeFund%20Logos%20only.png'
+                  '/WeFund%20Logos%20only.png'
                 }
                 style={{height:'40px'}}
               />

@@ -5,7 +5,7 @@ import SignatureCanvas from 'react-signature-canvas';
 
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
-const PDFTEMPLATE = "PDFTemplate.pdf";
+const PDFTEMPLATE = "/PDFTemplate.pdf";
 const MyInput = (props) => {
   const [cover, setCover] = useState(true);
   const inputRef = useRef();
@@ -85,7 +85,7 @@ export default ()=> {
         document.getElementById('loading').innerHTML=`
         <div>
         <h5>Sent success!</h5>
-        <h6><a href="/PDF/${data.data}">Click here to see your PDF!</a></h6>
+        <h6><a href="./PDF/${data.data}">Click here to see your PDF!</a></h6>
         `
       })
       .catch((e) =>{
