@@ -56,7 +56,7 @@ export default function Main(props) {
             })
     }
     function doGetherUnstake(){
-        console.log('Dogether with: ',amount,percentage)
+        // console.log('Dogether with: ',amount,percentage)
         if (amount <= 0) return
         let msg = new MsgExecuteContract(
             state.wallet.walletAddress,

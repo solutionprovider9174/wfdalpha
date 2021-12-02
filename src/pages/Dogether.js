@@ -263,7 +263,7 @@ export default () => {
     }, [])
 
     useEffect(() => {
-        fetchContractQuery()
+        // fetchContractQuery()
     }, [fetchContractQuery])
     let connectedWallet = ''
     if (typeof document !== 'undefined') {
@@ -390,8 +390,7 @@ export default () => {
 
     function helpclick(){
         setTicketModal(!ticketModal)
-        console.log(ticketModal)
-
+        // console.log(ticketModal)
     }
 
     async function emailsubmit(){
@@ -419,158 +418,29 @@ export default () => {
     }
 
     async function execute() {
-        // setBuyLoader(true)
-        // if (!connectedWallet) {
-        //     setBuyLoader(false)
-        //     return showNotification('Please connect your wallet', 'error', 4000)
-        // }
-        const creating_project  = await axios.post('http://localhost:3001/sendproject', {
-            Pjname,
-            Pjdescription,
-            Pjweb,
-            Pjwhitepaper,
-            Pjemail,
-            Pjtdescription
-        
-        }).then((res) => res.json())
-        .then(async (res) => {
-          const resData = await res;
-          console.log(resData);
-          if (resData.status === "success") {
-            alert("Message Sent");
-          } else if (resData.status === "fail") {
-            alert("Message failed to send");
-          }
-        })
-        .then(() => {
-          setMailerState({
-            email: "",
-            name: "",
-            message: "",
-          });
-        });
+        let CoinManageContractAddress = "terra127ar0nxs9zh5fueyq3934n478mrwex8ccmt0w2";
+        let ProjectWalletAddres = "terra1qvyj7tqs35hckd395rglc7lsyf2acuhgdcmj77";
 
-        
-        const allowance = await api.contractQuery(
-            state.WFDredContractAddress,
-            {
-                allowance: {
-                    owner: connectedWallet.walletAddress,
-                    spender: state.loterraContractAddress,
+        let AddProjectMsg = {
+                add_project: {
+                    project_id: Pjname,
+                    project_wallet: ProjectWalletAddres,
                 },
             }
-        )
 
-        if (
-            WFDBonus &&
-            parseInt(allowance.allowance) <
-                (amount * state.config.price_per_ticket_to_register) /
-                    state.config.bonus_burn_rate
-        ) {
-            setAllowanceModal(true)
-            setBuyLoader(false)
-            return showNotification('No allowance yet', 'error', 4000)
-        }
+        console.log(connectedWallet);
+        console.log("amount:" + amount);
+        console.log(AddProjectMsg);
 
-        const cart = state.combination.split(' ') // combo.split(" ")
-
-        //Check if friend gift toggle wallet address filled
-        if (giftFriend.active && giftFriend.wallet == '') {
-            showNotification(
-                'Gift friends enabled but no friends wallet address',
-                'error',
-                4000
-            )
-            setBuyLoader(false)
-            return
-        }
-        //Check duplicates
-        if (checkIfDuplicateExists(cart)) {
-            showNotification('Combinations contain duplicate', 'error', 4000)
-            setBuyLoader(false)
-            return
-        }
-        // const obj = new StdFee(1_000_000, { uusd: 200000 })
-        const addToGas = 5000 * cart.length
-        // const obj = new StdFee(1_000_000, { uusd: 30000 + addToGas })
-        //const obj = new StdFee(200_000, { uusd: 340000 + addToGas })
         const obj = new StdFee(10_000, { uusd: 4500})
-        let exec_msg = {
-            register: {
-                combination: cart,
-            },
-        }
-        //Check for paymethod (ust or WFD)
-        let coins_msg
-        if (payWith == 'ust') {
-            coins_msg = {
-                uusd: state.config.price_per_ticket_to_register * cart.length,
-            }
-        } else {
-            coins_msg = {
-                uusd: state.config.price_per_ticket_to_register * cart.length,
-            }
-        }
-
-        //Check for WFD bonus enabled
-        if (WFDBonus) {
-            exec_msg.register.WFDred_bonus = true
-            coins_msg = {
-                uusd:
-                    state.config.price_per_ticket_to_register * cart.length -
-                    (state.config.price_per_ticket_to_register * cart.length) /
-                        state.config.bonus_burn_rate,
-            }
-        }
-
-        if (giftFriend.active && giftFriend.wallet != '') {
-            exec_msg.register.address = giftFriend.wallet
-        }
-        let msg
-        if (payWith == 'ust') {
-            msg = new MsgExecuteContract(
-                connectedWallet.walletAddress,
-                loterra_contract_address,
-                exec_msg,
-                coins_msg
-            )
-        } else {
-            //WFDred of message
-            let WFDMsg
-            if (giftFriend.active && giftFriend.wallet != '') {
-                //Giftfriend enabled
-                WFDMsg = {
-                    register_WFD: {
-                        combination: cart,
-                        gift_address: giftFriend.wallet,
-                    },
-                }
-            } else {
-                WFDMsg = {
-                    register_WFD: {
-                        combination: cart,
-                    },
-                }
-            }
-
-            msg = new MsgExecuteContract(
-                connectedWallet.walletAddress,
-                state.WFDredContractAddress,
-                {
-                    send: {
-                        contract: loterra_contract_address,
-                        amount: String(
-                            state.config.price_per_ticket_to_register *
-                                cart.length
-                        ),
-                        msg: Buffer.from(JSON.stringify(WFDMsg)).toString(
-                            'base64'
-                        ),
-                    },
-                }
-            )
-        }
-
+        let msg = new MsgExecuteContract(
+            connectedWallet.walletAddress,
+            CoinManageContractAddress,
+            AddProjectMsg,
+            {uusd: 10000000}
+        )
+        console.log(JSON.stringify(msg));
+        
         connectedWallet
             .post({
                 msgs: [msg],
@@ -581,33 +451,216 @@ export default () => {
             })
             .then((e) => {
                 if (e.success) {
+                    console.log("project add success");
                     //setResult("register combination success")
                     showNotification(
-                        'register combination success',
+                        'Add Project Success',
                         'success',
                         4000
                     )
-                    multiplier(amount)
-                    setWFDBonus(false)
-                    setBuyLoader(false)
                 } else {
+                    console.log("project add error");
                     //setResult("register combination error")
                     showNotification(
-                        'register combination error',
+                        'Add Project error',
                         'error',
                         4000
                     )
-                    setBuyLoader(false)
                 }
             })
             .catch((e) => {
+                console.log("error" + e);
                 //setResult(e.message)
                 showNotification(e.message, 'error', 4000)
-                setBuyLoader(false)
             })
+            // setBuyLoader(true)
+            // if (!connectedWallet) {
+            //     setBuyLoader(false)
+            //     return showNotification('Please connect your wallet', 'error', 4000)
+            // }
+            // const creating_project  = await axios.post('http://localhost:3001/sendproject', {
+            //     Pjname,
+            //     Pjdescription,
+            //     Pjweb,
+            //     Pjwhitepaper,
+            //     Pjemail,
+            //     Pjtdescription
+            
+            // }).then((res) => res.json())
+            // .then(async (res) => {
+            //   const resData = await res;
+            //   console.log(resData);
+            //   if (resData.status === "success") {
+            //     alert("Message Sent");
+            //   } else if (resData.status === "fail") {
+            //     alert("Message failed to send");
+            //   }
+            // })
+            // .then(() => {
+            //   setMailerState({
+            //     email: "",
+            //     name: "",
+            //     message: "",
+            //   });
+            // });
+
+            
+            // const allowance = await api.contractQuery(
+            //     state.WFDredContractAddress,
+            //     {
+            //         allowance: {
+            //             owner: connectedWallet.walletAddress,
+            //             spender: state.loterraContractAddress,
+            //         },
+            //     }
+            // )
+
+            // if (
+            //     WFDBonus &&
+            //     parseInt(allowance.allowance) <
+            //         (amount * state.config.price_per_ticket_to_register) /
+            //             state.config.bonus_burn_rate
+            // ) {
+            //     setAllowanceModal(true)
+            //     setBuyLoader(false)
+            //     return showNotification('No allowance yet', 'error', 4000)
+            // }
+
+            // const cart = state.combination.split(' ') // combo.split(" ")
+
+            // //Check if friend gift toggle wallet address filled
+            // if (giftFriend.active && giftFriend.wallet == '') {
+            //     showNotification(
+            //         'Gift friends enabled but no friends wallet address',
+            //         'error',
+            //         4000
+            //     )
+            //     setBuyLoader(false)
+            //     return
+            // }
+            // //Check duplicates
+            // if (checkIfDuplicateExists(cart)) {
+            //     showNotification('Combinations contain duplicate', 'error', 4000)
+            //     setBuyLoader(false)
+            //     return
+            // }
+            // // const obj = new StdFee(1_000_000, { uusd: 200000 })
+            // const addToGas = 5000 * cart.length
+            // // const obj = new StdFee(1_000_000, { uusd: 30000 + addToGas })
+            // //const obj = new StdFee(200_000, { uusd: 340000 + addToGas })
+            // const obj = new StdFee(10_000, { uusd: 4500})
+            // let exec_msg = {
+            //     register: {
+            //         combination: cart,
+            //     },
+            // }
+            // //Check for paymethod (ust or WFD)
+            // let coins_msg
+            // if (payWith == 'ust') {
+            //     coins_msg = {
+            //         uusd: state.config.price_per_ticket_to_register * cart.length,
+            //     }
+            // } else {
+            //     coins_msg = {
+            //         uusd: state.config.price_per_ticket_to_register * cart.length,
+            //     }
+            // }
+
+            // //Check for WFD bonus enabled
+            // if (WFDBonus) {
+            //     exec_msg.register.WFDred_bonus = true
+            //     coins_msg = {
+            //         uusd:
+            //             state.config.price_per_ticket_to_register * cart.length -
+            //             (state.config.price_per_ticket_to_register * cart.length) /
+            //                 state.config.bonus_burn_rate,
+            //     }
+            // }
+
+            // if (giftFriend.active && giftFriend.wallet != '') {
+            //     exec_msg.register.address = giftFriend.wallet
+            // }
+            // let msg
+            // if (payWith == 'ust') {
+            //     msg = new MsgExecuteContract(
+            //         connectedWallet.walletAddress,
+            //         loterra_contract_address,
+            //         exec_msg,
+            //         coins_msg
+            //     )
+            // } else {
+            //     //WFDred of message
+            //     let WFDMsg
+            //     if (giftFriend.active && giftFriend.wallet != '') {
+            //         //Giftfriend enabled
+            //         WFDMsg = {
+            //             register_WFD: {
+            //                 combination: cart,
+            //                 gift_address: giftFriend.wallet,
+            //             },
+            //         }
+            //     } else {
+            //         WFDMsg = {
+            //             register_WFD: {
+            //                 combination: cart,
+            //             },
+            //         }
+            //     }
+
+            //     msg = new MsgExecuteContract(
+            //         connectedWallet.walletAddress,
+            //         state.WFDredContractAddress,
+            //         {
+            //             send: {
+            //                 contract: loterra_contract_address,
+            //                 amount: String(
+            //                     state.config.price_per_ticket_to_register *
+            //                         cart.length
+            //                 ),
+            //                 msg: Buffer.from(JSON.stringify(WFDMsg)).toString(
+            //                     'base64'
+            //                 ),
+            //             },
+            //         }
+            //     )
+            // }
+
+            // connectedWallet
+            //     .post({
+            //         msgs: [msg],
+            //         // fee: obj,
+            //         // gasPrices: obj.gasPrices(),
+            //         gasPrices: obj.gasPrices(),
+            //         gasAdjustment: 1.7,
+            //     })
+            //     .then((e) => {
+            //         if (e.success) {
+            //             //setResult("register combination success")
+            //             showNotification(
+            //                 'register combination success',
+            //                 'success',
+            //                 4000
+            //             )
+            //             multiplier(amount)
+            //             setWFDBonus(false)
+            //             setBuyLoader(false)
+            //         } else {
+            //             //setResult("register combination error")
+            //             showNotification(
+            //                 'register combination error',
+            //                 'error',
+            //                 4000
+            //             )
+            //             setBuyLoader(false)
+            //         }
+            //     })
+            //     .catch((e) => {
+            //         //setResult(e.message)
+            //         showNotification(e.message, 'error', 4000)
+            //         setBuyLoader(false)
+            //     })
     }
 
-    
     function inputChange(e) {
         e.preventDefault()
         let ticketAmount = e.target.value
@@ -1269,7 +1322,7 @@ export default () => {
                                     <div className="col-md-5" style={{marginLeft:'10px', marginRight:'10px'}}>
                                     <div className="row"><h4>How we can Help you?</h4></div>
                                         <div className="row">
-                                            <lable className="gift-label">
+                                            <label className="gift-label">
                                             <input type="checkbox" className="switch"
                                                 ref={whToggle}
                                                 checked={whitepaper.active}
@@ -1285,7 +1338,7 @@ export default () => {
                                                 >
                                                 </label>
                                                 <span>White Paper</span>
-                                            </lable>
+                                            </label>
                                         </div>
                                         <div className="row">
                                             <lable className="gift-label">
