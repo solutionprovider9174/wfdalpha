@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react'
+import React, { useState, useEffect, useMemo, useRef, useContext } from 'react'
 import axios from 'axios'
 import { LCDClient, WasmAPI } from '@terra-money/terra.js'
 import {
@@ -23,6 +23,21 @@ import {
 import numeral from 'numeral'
 import UserModal from './UserModal'
 import { useStore } from '../store'
+import {InjectedConnector} from '@web3-react/injected-connector'
+import {WalletConnectConnector} from '@web3-react/walletconnect-connector'
+import {Web3ReactProvider} from "@web3-react/core"
+import {useWeb3React} from "@web3-react/core"
+import Web3 from 'web3'
+import { Web3Provider } from "@ethersproject/providers";
+import {MathWalletConnector} from '@harmony-react/mathwallet-connector'
+// import {Harmony} from '@harmony-js/core'
+// import { Harmony } from '@harmony-js/core'
+const injected = new InjectedConnector({
+    supportedChainIds : [1, 3, 4, 5, 42]
+})
+
+const mathwallet = new MathWalletConnector({ supportedChainIds: [1, 2] })
+
 // import { Link } from '@reach/router'
 // let useWallet = {}
 // if (typeof document !== 'undefined') {
@@ -48,6 +63,9 @@ const Dialog = {
 const DialogButton = {
     margin: '10px 20px 10px 20px',
 }
+
+
+
 export default function ConnectWallet() {
     let connectedWallet = ''
     const [isDisplayDialog, setIsDisplayDialog] = useState(false)
@@ -57,7 +75,49 @@ export default function ConnectWallet() {
     const [alteBank, setAlteBank] = useState()
     const [connected, setConnected] = useState(false)
     const { state, dispatch } = useStore()
+    const [userwallet, setUserwallet] = useState("")
+    const [loaded, setLoaded] = useState(false)
+    function getLibrary(provider){
+        const library = new Web3Provider(provider);
+        library.pollingInterval = 12000;
+        return library;
+    }
 
+    function MetamaskProvider({ children }) {
+        const { active: networkActive, error: networkError, activate:activateNetwork } = useWeb3React()
+    
+            useEffect(() => {
+                injected
+                .isAuthorized()
+                .then((isAuthorized) => {
+                  setLoaded(true)
+                  if (isAuthorized && !networkActive && !networkError) {
+                      console.log(isAuthorized)
+                      console.log(networkActive)
+                      console.log(networkError)
+                    // activateNetwork(injected)
+                  }
+                })
+                .catch(() => {
+                  setLoaded(true)
+                })
+                mathwallet
+                .isAuthorized()
+                .then((isAuthorized) => {
+                
+                })
+                .catch(() => {
+                  setLoaded(true)
+                })
+                
+            }, [activateNetwork, networkActive, networkError])
+            
+    
+            if (loaded) {
+              return children
+            }
+            return <>Loading</>
+          }
     //Nav link active settings
     let homeClass, stakingClass, daoClass
     if (typeof location !== 'undefined') {
@@ -549,7 +609,7 @@ export default function ConnectWallet() {
         if (connectedWallet) {
             contactBalance()
         }
-
+        
         //console.log(connectedWallet)
         if(typeof window === 'object')
             window.addEventListener('scroll', handleScroll)
@@ -560,6 +620,90 @@ export default function ConnectWallet() {
         state.allRecentWinners,
         state.youWon,
     ])
+    const ConnectMathWallet = () =>{
+        const context = useWeb3React()
+        const {active:math_active, account:math_account, library:math_library, connector:math_connector, activate:math_activate, deactivate:math_deactivate} = context
+        const [tried, setTried] = useState(false)
+        useEffect(() => {
+            if (math_active) {
+                setTried(true)
+                alert("Mathwallet : " + math_account)
+              }else{
+              // setConnected(!connected)
+              }
+          }, [math_active,math_account, mathwallet])
+
+          const disconnect_mathwallet = async () => {
+            try {
+                math_deactivate()
+            } catch (exception) {
+              console.log(exception);
+            }
+          };
+          return (
+            <>
+              {!math_active ? <button
+              onClick={() => {
+                  math_activate(mathwallet)
+              }} className="dropdown-item"
+              style={{display:'flex', flexDirection:'row', alignItems:'center'}}
+                  ><CaretRight size={16}/>{' '}
+                  MathWallet Connect</button> :
+              <button onClick={() => disconnect_mathwallet()} 
+                       className="dropdown-item"
+                       style={{display:'flex', flexDirection:'row', alignItems:'center'}}
+                   ><CaretRight size={16}/>{' '}Disconnect MathWallet</button>
+              }
+            </>
+          );
+    }
+    const ConnectMetaMask = () => {
+        const [activatingConnector, setActivatingConnector] = React.useState();
+        const context = useWeb3React()
+        const {active:meta_active, account:meta_account, library:meta_library, connector:meta_connector, activate:meta_activate, deactivate:meta_deactivate} = context
+        const [tried, setTried] = useState(false)
+        useEffect(() => {
+            if (meta_active) {
+              setUserwallet(meta_account)
+              setTried(true)
+              console.log("Metamask : " + meta_account)
+              meta_library
+              .getBalance(meta_account)
+              .then((balance)=>{
+                  console.log(balance.result)
+              })
+            }else{
+            // setConnected(!connected)
+            }
+          }, [meta_active,  meta_account,  injected])
+          
+          const disconnect_metamask = async () => {
+            try {
+                meta_deactivate()
+            } catch (exception) {
+              console.log(exception);
+            }
+          };
+
+          
+        return (
+          <>
+            {!meta_active ? <button onClick={() => meta_activate(injected)}
+                className="dropdown-item"
+                style={{display:'flex', flexDirection:'row', alignItems:'center'}}
+            ><CaretRight size={16}/>{' '}
+               Connect to Metamask 
+            </button> :
+            <button onClick={() => disconnect_metamask()} 
+                className="dropdown-item"
+                style={{display:'flex', flexDirection:'row', alignItems:'center'}}
+            ><CaretRight size={16}/>{' '}Disconnect metamask</button>
+            }
+            
+          </>
+        );
+      };
+
 
     return (
         <>
@@ -602,6 +746,16 @@ export default function ConnectWallet() {
                                     />{' '}
                                     Terra Station (mobile for desktop)
                                 </button>
+                                <>
+                                    <Web3ReactProvider getLibrary={getLibrary}>
+                                        <MetamaskProvider>
+                                            <ConnectMetaMask />
+                                            <ConnectMathWallet />
+                                        </MetamaskProvider>
+                                        
+                                    </Web3ReactProvider>
+                                </>
+                                
                             </ul>
                         </div>
                         <button
@@ -623,8 +777,10 @@ export default function ConnectWallet() {
                                 padding: '0.275rem 0.55rem',
                             }}
                             onClick={() => setIsModal(!isModal)}
-                        >
-                            {state.youWon ? (
+                        > 
+                            {
+                            userwallet == "" ?(
+                            state.youWon ? (
                                 <>
                                     <Trophy
                                         size={33}
@@ -643,8 +799,10 @@ export default function ConnectWallet() {
                                         color: '#72ffc1',
                                     }}
                                 />
-                            )}
+                            )): 'Metamask'
+                            }
                         </button>
+
                         <button
                             className="btn btn-green nav-item dropdown-toggle"
                             data-bs-toggle="dropdown"
@@ -692,6 +850,7 @@ export default function ConnectWallet() {
                                     Disconnect
                                 </span>
                             </button>
+                            
                         </ul>
                         <button
                             className="btn btn-default nav-item ms-2 main-nav-toggle"
