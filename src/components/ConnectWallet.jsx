@@ -30,13 +30,19 @@ import {useWeb3React} from "@web3-react/core"
 import Web3 from 'web3'
 import { Web3Provider } from "@ethersproject/providers";
 import {MathWalletConnector} from '@harmony-react/mathwallet-connector'
-// import {Harmony} from '@harmony-js/core'
-// import { Harmony } from '@harmony-js/core'
+import { NetworkConnector } from '@web3-react/network-connector'
 const injected = new InjectedConnector({
     supportedChainIds : [1, 3, 4, 5, 42]
 })
 
 const mathwallet = new MathWalletConnector({ supportedChainIds: [1, 2] })
+const walletconnect = new WalletConnectConnector({
+    supportedChainIds:[1],
+    bridge: 'https://bridge.walletconnect.org',
+    qrcode: true,
+    pollingInterval: 12000
+  })
+
 
 // import { Link } from '@reach/router'
 // let useWallet = {}
@@ -95,21 +101,12 @@ export default function ConnectWallet() {
                       console.log(isAuthorized)
                       console.log(networkActive)
                       console.log(networkError)
-                    // activateNetwork(injected)
+                    activateNetwork(injected)
                   }
                 })
                 .catch(() => {
                   setLoaded(true)
                 })
-                mathwallet
-                .isAuthorized()
-                .then((isAuthorized) => {
-                
-                })
-                .catch(() => {
-                  setLoaded(true)
-                })
-                
             }, [activateNetwork, networkActive, networkError])
             
     
@@ -620,89 +617,143 @@ export default function ConnectWallet() {
         state.allRecentWinners,
         state.youWon,
     ])
-    const ConnectMathWallet = () =>{
-        const context = useWeb3React()
-        const {active:math_active, account:math_account, library:math_library, connector:math_connector, activate:math_activate, deactivate:math_deactivate} = context
-        const [tried, setTried] = useState(false)
-        useEffect(() => {
-            if (math_active) {
-                setTried(true)
-                alert("Mathwallet : " + math_account)
-              }else{
-              // setConnected(!connected)
-              }
-          }, [math_active,math_account, mathwallet])
+      
 
-          const disconnect_mathwallet = async () => {
-            try {
-                math_deactivate()
-            } catch (exception) {
-              console.log(exception);
-            }
-          };
-          return (
-            <>
-              {!math_active ? <button
-              onClick={() => {
-                  math_activate(mathwallet)
-              }} className="dropdown-item"
-              style={{display:'flex', flexDirection:'row', alignItems:'center'}}
-                  ><CaretRight size={16}/>{' '}
-                  MathWallet Connect</button> :
-              <button onClick={() => disconnect_mathwallet()} 
-                       className="dropdown-item"
-                       style={{display:'flex', flexDirection:'row', alignItems:'center'}}
-                   ><CaretRight size={16}/>{' '}Disconnect MathWallet</button>
-              }
-            </>
-          );
-    }
-    const ConnectMetaMask = () => {
-        const [activatingConnector, setActivatingConnector] = React.useState();
-        const context = useWeb3React()
-        const {active:meta_active, account:meta_account, library:meta_library, connector:meta_connector, activate:meta_activate, deactivate:meta_deactivate} = context
-        const [tried, setTried] = useState(false)
-        useEffect(() => {
-            if (meta_active) {
-              setUserwallet(meta_account)
-              setTried(true)
-              console.log("Metamask : " + meta_account)
-              meta_library
-              .getBalance(meta_account)
-              .then((balance)=>{
-                  console.log(balance.result)
-              })
-            }else{
-            // setConnected(!connected)
-            }
-          }, [meta_active,  meta_account,  injected])
-          
-          const disconnect_metamask = async () => {
-            try {
-                meta_deactivate()
-            } catch (exception) {
-              console.log(exception);
-            }
-          };
 
-          
+    //   function useEagerConnect() {
+    //     const { activate, active } = useWeb3React()
+      
+    //     const [tried, setTried] = useState(false)
+      
+    //     useEffect(() => {
+    //       injected.isAuthorized().then((isAuthorized) => {
+    //         if (isAuthorized) {
+    //           activate(injected, undefined, true).catch(() => {
+    //             setTried(true)
+    //           })
+    //         } else {
+    //           setTried(true)
+    //         }
+    //       })
+    //     }, []) // intentionally only running on mount (make sure it's only mounted once :))
+      
+    //     // if the connection worked, wait until we get confirmation of that to flip the flag
+    //     useEffect(() => {
+    //       if (!tried && active) {
+    //         setTried(true)
+    //       }
+    //     }, [tried, active])
+      
+    //     return tried
+    //   }
+
+    // const triedEager = useEagerConnect()
+    
+    const ConnectWallet = () =>{
+
+        const ConnectorNames = {
+            Injected : 'Injected',
+            Mathwallet : 'MathWallet'
+        }
+
+        const connectorsByName={
+            MathWallet: mathwallet, 
+            MetaMask : injected,
+            WalletConnect : walletconnect,
+        }
+
+        const context = useWeb3React()
+        const {active, account, library, connector, activate, deactivate, error} = context
+        const [activatingConnector, setActivatingConnector] = React.useState()
+        useEffect(() => {
+        if (activatingConnector && activatingConnector === connector) {
+            setActivatingConnector(undefined)
+            }
+        }, [activatingConnector, connector])
+
+        const [hoveredConnectorButtons, setHoveredConnectorButtons] = React.useState(new Map());
+        const updateHoveredConnectorButtons = (k,v) => {
+            setHoveredConnectorButtons(new Map(hoveredConnectorButtons.set(k,v)))
+          }
+        
+        // var connectorsByName = {MathWallet: MathWalletConnector, Injected:InjectedConnector}
+        const onConnectionClicked = (currentConnector, name, setActivatingConnector, activate) => {
+        setActivatingConnector(currentConnector);
+        
+        activate(connectorsByName[name])
+        alert(account)
+        }
+
+        const onDeactivateClicked = (deactivate, connector) => {
+            if (deactivate) {
+              deactivate()
+            }
+            if (connector && connector.close) {
+              connector.close()
+            }
+          }
+
         return (
-          <>
-            {!meta_active ? <button onClick={() => meta_activate(injected)}
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
+            {Object.keys(connectorsByName).map(name => {
+                const currentConnector = connectorsByName[name];
+                const activating = currentConnector === activatingConnector;
+                const connected = (currentConnector === connector);
+                const disabled = !!activatingConnector || connected || !!error;
+                const hovered = hoveredConnectorButtons.get(name);
+                const dotColor = (connected && !hovered) ? '#4caf50' : '#FF0000';
+                var display = (hovered && connected) ? 'Disconnect' : name;
+
+                return (
+                <div key={name} style={{ width: '252px'}}>
+                    <button 
+                    // onMouseEnter={() => updateHoveredConnectorButtons(name, true) }
+                    // onMouseLeave={() => updateHoveredConnectorButtons(name, false) }
+                    onClick={() => {
+                        // connected ? onDeactivateClicked(deactivate, currentConnector) : onConnectionClicked(currentConnector, name, setActivatingConnector, activate)
+                        onConnectionClicked(currentConnector, name, setActivatingConnector, activate)
+                    }}
+                    disabled={ disabled }
+                    className="dropdown-item"
+                    style={{display:'flex', flexDirection:'row', alignItems:'center'}}
+                    >
+                        <CaretRight
+                            size={16}
+                        />{' '}
+                        { display }
+
+                    {/* { (!activating && !connected) && <img style={
+                        {
+                        position: 'absolute',
+                        right: '20px',
+                        width: '30px',
+                        height: '30px'
+                        }
+                    }  alt=""/> } */}
+                    {/* { activating && <CircularProgress size={ 15 } style={{marginRight: '10px'}} /> } */}
+                    {/* { (!activating && connected) && <div style={{ background: dotColor, borderRadius: '10px', width: '10px', height: '10px', marginRight: '10px' }}></div> } */}
+                    </button>
+                </div>
+                )
+            }) }
+
+            <div style={{ width: '252px'}}>
+                <button 
+                onClick={() => { onDeactivateClicked(deactivate, connector); }}
                 className="dropdown-item"
                 style={{display:'flex', flexDirection:'row', alignItems:'center'}}
-            ><CaretRight size={16}/>{' '}
-               Connect to Metamask 
-            </button> :
-            <button onClick={() => disconnect_metamask()} 
-                className="dropdown-item"
-                style={{display:'flex', flexDirection:'row', alignItems:'center'}}
-            ><CaretRight size={16}/>{' '}Disconnect metamask</button>
-            }
-            
-          </>
-        );
-      };
+            >
+                <CaretRight
+                    size={16}
+                />{' '}
+                    Deactivate
+                </button>
+            </div>
+            </div>
+        )
+
+    }
+    
 
 
     return (
@@ -749,10 +800,8 @@ export default function ConnectWallet() {
                                 <>
                                     <Web3ReactProvider getLibrary={getLibrary}>
                                         <MetamaskProvider>
-                                            <ConnectMetaMask />
-                                            <ConnectMathWallet />
+                                            <ConnectWallet />
                                         </MetamaskProvider>
-                                        
                                     </Web3ReactProvider>
                                 </>
                                 
