@@ -30,12 +30,12 @@ import {useWeb3React} from "@web3-react/core"
 import Web3 from 'web3'
 import { Web3Provider } from "@ethersproject/providers";
 import {MathWalletConnector} from '@harmony-react/mathwallet-connector'
-import { NetworkConnector } from '@web3-react/network-connector'
+import { useEagerConnect, useInactiveListener } from '../hooks'
 const injected = new InjectedConnector({
     supportedChainIds : [1, 3, 4, 5, 42]
 })
 
-const mathwallet = new MathWalletConnector({ supportedChainIds: [1, 2] })
+const mathwallet = new MathWalletConnector({ chainId: [1,2] })
 const walletconnect = new WalletConnectConnector({
     supportedChainIds:[1],
     bridge: 'https://bridge.walletconnect.org',
@@ -89,7 +89,7 @@ export default function ConnectWallet() {
         return library;
     }
 
-    function MetamaskProvider({ children }) {
+    function MetaMaskProvider({ children }) {
         const { active: networkActive, error: networkError, activate:activateNetwork } = useWeb3React()
     
             useEffect(() => {
@@ -115,6 +115,7 @@ export default function ConnectWallet() {
             }
             return <>Loading</>
           }
+
     //Nav link active settings
     let homeClass, stakingClass, daoClass
     if (typeof location !== 'undefined') {
@@ -650,14 +651,8 @@ export default function ConnectWallet() {
     // const triedEager = useEagerConnect()
     
     const ConnectWallet = () =>{
-
-        const ConnectorNames = {
-            Injected : 'Injected',
-            Mathwallet : 'MathWallet'
-        }
-
         const connectorsByName={
-            MathWallet: mathwallet, 
+            // MathWallet: mathwallet, 
             MetaMask : injected,
             WalletConnect : walletconnect,
         }
@@ -671,6 +666,12 @@ export default function ConnectWallet() {
             }
         }, [activatingConnector, connector])
 
+          // handle logic to eagerly connect to the injected ethereum provider, if it exists and has granted access already
+        const triedEager = useEagerConnect()
+
+        // handle logic to connect in reaction to certain events on the injected ethereum provider, if it exists
+        useInactiveListener(!!activatingConnector)
+
         const [hoveredConnectorButtons, setHoveredConnectorButtons] = React.useState(new Map());
         const updateHoveredConnectorButtons = (k,v) => {
             setHoveredConnectorButtons(new Map(hoveredConnectorButtons.set(k,v)))
@@ -681,7 +682,7 @@ export default function ConnectWallet() {
         setActivatingConnector(currentConnector);
         
         activate(connectorsByName[name])
-        alert(account)
+        alert(name +" : "+account)
         }
 
         const onDeactivateClicked = (deactivate, connector) => {
@@ -692,7 +693,7 @@ export default function ConnectWallet() {
               connector.close()
             }
           }
-
+          console.log(!triedEager, !!activatingConnector, connected, !!error)
         return (
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
             {Object.keys(connectorsByName).map(name => {
@@ -715,7 +716,7 @@ export default function ConnectWallet() {
                     }}
                     disabled={ disabled }
                     className="dropdown-item"
-                    style={{display:'flex', flexDirection:'row', alignItems:'center'}}
+                    style={{display:'flex', flexDirection:'row', alignItems:'center', borderColor: activating ? 'orange' : connected ? 'green' : 'unset',}}
                     >
                         <CaretRight
                             size={16}
@@ -731,7 +732,7 @@ export default function ConnectWallet() {
                         }
                     }  alt=""/> } */}
                     {/* { activating && <CircularProgress size={ 15 } style={{marginRight: '10px'}} /> } */}
-                    {/* { (!activating && connected) && <div style={{ background: dotColor, borderRadius: '10px', width: '10px', height: '10px', marginRight: '10px' }}></div> } */}
+                    { (!activating && connected) && <div style={{ background: dotColor, borderRadius: '10px', width: '10px', height: '10px', marginRight: '10px' }}></div> }
                     </button>
                 </div>
                 )
@@ -799,9 +800,11 @@ export default function ConnectWallet() {
                                 </button>
                                 <>
                                     <Web3ReactProvider getLibrary={getLibrary}>
-                                        <MetamaskProvider>
+                                        <MetaMaskProvider>
+                                        {/* <MathWalletProvider> */}
                                             <ConnectWallet />
-                                        </MetamaskProvider>
+                                        {/* </MathWalletProvider> */}
+                                        </MetaMaskProvider>
                                     </Web3ReactProvider>
                                 </>
                                 
