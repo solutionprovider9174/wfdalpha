@@ -5,6 +5,7 @@ import { StdFee } from '@terra-money/terra.js'
 import Footer from '../components/Footer'
 import BodyLoader from '../components/BodyLoader'
 import { Bank, Info } from 'phosphor-react'
+import Navbar from '../components/Navbar';
 
 export default () => {
     const { state, dispatch } = useStore()

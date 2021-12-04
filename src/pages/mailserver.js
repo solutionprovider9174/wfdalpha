@@ -1,5 +1,3 @@
-if(typeof window === 'object')
-{
 const express = require("express");
 const nodemailer = require("nodemailer");
 const app = express();
@@ -28,6 +26,7 @@ let transporter = nodemailer.createTransport({
     // });
 
 app.post("/sendproject", function (req, res) {
+    console.log("Send project");
     
     const htmlEmail = `
     <h3>Contact Details</h3>
@@ -119,4 +118,3 @@ app.post("/sendproject", function (req, res) {
     });
 
 
-}

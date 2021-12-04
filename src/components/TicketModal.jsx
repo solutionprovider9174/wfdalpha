@@ -45,7 +45,6 @@ export default function TicketModal(props) {
     function handleKeyDown(e, ck, k) {
         const keys = [8, 46, 32, 37, 38, 39, 40]
         if (keys.includes(e.keyCode)) {
-            if(typeof document !== 'undefined'){
             let input = document.querySelector('.char' + ck + k)
             const lastValue = input.value
 
@@ -59,7 +58,6 @@ export default function TicketModal(props) {
             }
             input.dispatchEvent(event)
             input.select()
-            }
         }
     }
 

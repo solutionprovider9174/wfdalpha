@@ -1,30 +1,22 @@
 import React from 'react';
 import ConnectWallet from './ConnectWallet';
-import {Flex} from '@chakra-ui/react';
-import '../styles/custom.css';
-
+//
 
 export default function WithSubnavigation() {
   // const { isOpen, onToggle } = useDisclosure();
   const isOpen = true;
   const onToggle = true;
 
-  function gotoLocation(href){
-    if(typeof document !== 'undefined')
-      document.location = href;
-  }
-  
   return (
     <div style={{width:'100%'}}>
       <div
         style={{display:'flex', backgroundColor:'#313131', height:'60px', padding:'2px', alignItems:'center', justifyContent:'space-between'}}>
         <div style={{display:'flex'}}>
-          <div style={{cursor:'pointer'}}
-             onClick={()=>{gotoLocation("/")}}>
+          <div style={{cursor:'pointer'}} onClick={()=>{document.location="/"}}>
             <img
                 alt={'Wefund'}
                 src={
-                  'WeFund%20Logos%20only.png'
+                  '/WeFund%20Logos%20only.png'
                 }
                 style={{height:'40px'}}
               />
@@ -38,7 +30,7 @@ export default function WithSubnavigation() {
                 className="btn btn-green"
                 type="button"
                 width="150px"
-                onClick = {()=>(gotoLocation('/dogether'))}
+                onClick={()=>{document.location='/dogether'}}
             >
                 Create Project
             </button>
@@ -62,12 +54,12 @@ const DesktopNav = () => {
   return (
     <>
       {NAV_ITEMS.map((navItem, index) => (
-        <div key={index} className="btn-group" style={{cursor:'pointer'}}>
-          <a href={navItem.href} type="" className={"btn btn-danger "+ (navItem.children ? "dropdown-toggle":"")} data-bs-toggle="dropdown" aria-expanded="false" style={{color:'white'}}>
+        <div key={index} class="btn-group" style={{cursor:'pointer'}}>
+          <a href={navItem.href} type="button" class={"btn btn-danger "+ (navItem.children ? "dropdown-toggle":"")} data-bs-toggle="dropdown" aria-expanded="false" style={{color:'white'}}>
             {navItem.label}
           </a>
           {navItem.children &&
-            <ul className="dropdown-menu" style={{width:'380px', padding:'10px', backgroundColor:'black'}}>
+            <ul class="dropdown-menu" style={{width:'380px', padding:'10px', backgroundColor:'black'}}>
               {navItem.children.map((childitem, index) => (
                 <li key={index}>
                   <div style={{margin:'20px'}} >

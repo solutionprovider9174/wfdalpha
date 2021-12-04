@@ -1,12 +1,12 @@
-import React, { Component, Suspense, useContext } from 'react';
-import { Root, Routes } from 'react-static';
-import { Router, Link } from '@reach/router';
-import Footer from './components/Footer';
+import React, { Component, Suspense, useContext } from 'react'
+import { Root, Routes } from 'react-static'
+import { Router, Link } from '@reach/router'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
-import './styles/base.scss';
-import { Head } from 'react-static';
-import { popper } from '@popperjs/core';
-import Navbar from './components/Navbar';
+import './styles/base.scss'
+import { Head } from 'react-static'
+import { popper } from '@popperjs/core'
 
 let bootstrap = {}
 if (typeof document !== 'undefined') {
@@ -96,7 +96,6 @@ class App extends Component {
                     <StoreProvider>
                         <Navbar/>
                         <Routes default />
-                    {/* </ChakraProvider> */}
                     </StoreProvider>
 
                     {/*<Footer/>*/}
