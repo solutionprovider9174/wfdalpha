@@ -139,8 +139,8 @@ const initialState = {
     ustBalance: 0,
     daoFunds: 0,
     lcd_client: new LCDClient({
-        URL: 'https://lcd.terra.dev/',
-        chainID: 'columbus-4',
+        URL: 'https://tequila-lcd.terra.dev/',
+        chainID: 'tequila-0004',
     }),
     blockHeight: 0,
     stateLPStaking: {},

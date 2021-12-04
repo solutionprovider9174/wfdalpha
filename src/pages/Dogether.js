@@ -418,30 +418,43 @@ export default () => {
     }
 
     async function execute() {
-        let CoinManageContractAddress = "terra127ar0nxs9zh5fueyq3934n478mrwex8ccmt0w2";
+        let CoinManageContractAddress = "terra1yn30stcjwa0l7kepwc22qx6wm9w5j4aphe25sm";
         let ProjectWalletAddres = "terra1qvyj7tqs35hckd395rglc7lsyf2acuhgdcmj77";
+        const obj = new StdFee(10_000, { uusd: 4500})
+
+        let AddContractMsg = {
+            add_contract: {
+                contract: ProjectWalletAddres,
+            }
+        }
 
         let AddProjectMsg = {
                 add_project: {
                     project_id: Pjname,
-                    project_wallet: ProjectWalletAddres,
+                    project_wallet: "123",
                 },
             }
 
-        console.log(connectedWallet);
-        console.log("amount:" + amount);
-        console.log(AddProjectMsg);
+        let BackProjectMsg = {
+            back2_project: {
+                project_id: Pjname,
+                backer_wallet: "12345",
+            },
+        }
+        // console.log(connectedWallet);
+        // console.log("amount:" + amount);
+        // console.log(AddProjectMsg);
 
-        const obj = new StdFee(10_000, { uusd: 4500})
         let msg = new MsgExecuteContract(
             connectedWallet.walletAddress,
             CoinManageContractAddress,
-            AddProjectMsg,
+            BackProjectMsg,
             {uusd: 10000000}
         )
+
         console.log(JSON.stringify(msg));
-        
-        connectedWallet
+
+        await connectedWallet
             .post({
                 msgs: [msg],
                 // fee: obj,
@@ -451,7 +464,8 @@ export default () => {
             })
             .then((e) => {
                 if (e.success) {
-                    console.log("project add success");
+                    console.log("success");
+                    console.log(e);
                     //setResult("register combination success")
                     showNotification(
                         'Add Project Success',
@@ -473,6 +487,23 @@ export default () => {
                 //setResult(e.message)
                 showNotification(e.message, 'error', 4000)
             })
+            
+        let ter = new LCDClient({
+            URL: connectedWallet.network.lcd,
+            chainID: connectedWallet.network.chainID,
+        });
+        let api = new WasmAPI(ter.apiRequester);
+
+        const prj = await api.contractQuery(
+            CoinManageContractAddress,
+            {
+                get_project: {
+                    id: "1",
+                },
+            }
+        )
+        console.log(prj);
+
             // setBuyLoader(true)
             // if (!connectedWallet) {
             //     setBuyLoader(false)
