@@ -25,14 +25,6 @@ export default {
             template: 'src/pages/Startup',
         },
         {
-            path: 'staking',
-            template: 'src/pages/Staking',
-        },
-        {
-            path: 'dao',
-            template: 'src/pages/DAO',
-        },
-        {
             path: 'dogether',
             template: 'src/pages/Dogether',
         },
