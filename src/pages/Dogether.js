@@ -657,7 +657,7 @@ export default () => {
                                             WFD
                                         </span>
                                     </strong> */}
-                                </p>
+                                </p>  
                                 <span className="info mb-2">
                                     <Info
                                         size={14}
