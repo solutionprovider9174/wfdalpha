@@ -22,6 +22,48 @@ import {
 } from 'phosphor-react'
 import numeral from 'numeral'
 import { useStore } from '../store'
+import {InjectedConnector} from '@web3-react/injected-connector'
+import {WalletConnectConnector} from '@web3-react/walletconnect-connector'
+import {Web3ReactProvider} from "@web3-react/core"
+import {useWeb3React} from "@web3-react/core"
+import Web3 from 'web3'
+import { Web3Provider } from "@ethersproject/providers";
+import {MathWalletConnector} from '@harmony-react/mathwallet-connector'
+import { useEagerConnect, useInactiveListener } from '../hooks'
+const injected = new InjectedConnector({
+    supportedChainIds : [1, 3, 4, 5, 42]
+})
+
+const mathwallet = new MathWalletConnector({ chainId: [1,2] })
+const walletconnect = new WalletConnectConnector({
+    supportedChainIds:[1],
+    bridge: 'https://bridge.walletconnect.org',
+    qrcode: true,
+    pollingInterval: 12000
+  })
+// import { Link } from '@reach/router'
+
+// let useWallet = {}
+// if (typeof document !== 'undefined') {
+//     useWallet = require('@terra-money/wallet-provider').useWallet
+// }
+/*const Modal = {
+    position: "absolute",
+    width: "100%",
+    height:"100%",
+    left: "0",
+    top: "0",
+}
+const Dialog = {
+    position: "absolute",
+    right: "100px",
+    top: "120px",
+    width: "300px",
+    display: "flex",
+    justifyContent: "center",
+    flexDirection:"column",
+
+} */
 
 const DialogButton = {
     margin: '10px 20px 10px 20px',
@@ -32,7 +74,40 @@ export default function ConnectWallet() {
     const [bank, setBank] = useState()
     const [connected, setConnected] = useState(false)
     const { state, dispatch } = useStore()
+    const [userwallet, setUserwallet] = useState("")
+    const [loaded, setLoaded] = useState(false)
+    function getLibrary(provider){
+        const library = new Web3Provider(provider);
+        library.pollingInterval = 12000;
+        return library;
+    }
 
+    function MetaMaskProvider({ children }) {
+        const { active: networkActive, error: networkError, activate:activateNetwork } = useWeb3React()
+    
+            useEffect(() => {
+                injected
+                .isAuthorized()
+                .then((isAuthorized) => {
+                  setLoaded(true)
+                  if (isAuthorized && !networkActive && !networkError) {
+                      console.log(isAuthorized)
+                      console.log(networkActive)
+                      console.log(networkError)
+                    activateNetwork(injected)
+                  }
+                })
+                .catch(() => {
+                  setLoaded(true)
+                })
+            }, [activateNetwork, networkActive, networkError])
+            
+    
+            if (loaded) {
+              return children
+            }
+            return <>Loading</>
+          }
     //Nav link active settings
 
     let wallet = ''
@@ -98,7 +173,6 @@ export default function ConnectWallet() {
             //Store coins global state
             dispatch({ type: 'setAllNativeCoins', message: coins })
             console.log(coins)
-
             let uusd = coins.filter((c) => {
                 return c.denom === 'uusd'
             })
@@ -170,6 +244,111 @@ export default function ConnectWallet() {
         state.youWon,
     ])
 
+
+    const ConnectWallet = () =>{
+        const connectorsByName={
+            // MathWallet: mathwallet, 
+            MetaMask : injected,
+            WalletConnect : walletconnect,
+        }
+
+        const context = useWeb3React()
+        const {active, account, library, connector, activate, deactivate, error} = context
+        const [activatingConnector, setActivatingConnector] = React.useState()
+        useEffect(() => {
+        if (activatingConnector && activatingConnector === connector) {
+            setActivatingConnector(undefined)
+            }
+        }, [activatingConnector, connector])
+
+          // handle logic to eagerly connect to the injected ethereum provider, if it exists and has granted access already
+        const triedEager = useEagerConnect()
+
+        // handle logic to connect in reaction to certain events on the injected ethereum provider, if it exists
+        useInactiveListener(!!activatingConnector)
+
+        const [hoveredConnectorButtons, setHoveredConnectorButtons] = React.useState(new Map());
+        const updateHoveredConnectorButtons = (k,v) => {
+            setHoveredConnectorButtons(new Map(hoveredConnectorButtons.set(k,v)))
+          }
+        
+        // var connectorsByName = {MathWallet: MathWalletConnector, Injected:InjectedConnector}
+        const onConnectionClicked = (currentConnector, name, setActivatingConnector, activate) => {
+        setActivatingConnector(currentConnector);
+        
+        activate(connectorsByName[name])
+        alert(name +" : "+account)
+        }
+
+        const onDeactivateClicked = (deactivate, connector) => {
+            if (deactivate) {
+              deactivate()
+            }
+            if (connector && connector.close) {
+              connector.close()
+            }
+          }
+          console.log(!triedEager, !!activatingConnector, connected, !!error)
+        return (
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
+            {Object.keys(connectorsByName).map(name => {
+                const currentConnector = connectorsByName[name];
+                const activating = currentConnector === activatingConnector;
+                const connected = (currentConnector === connector);
+                const disabled = !!activatingConnector || connected || !!error;
+                const hovered = hoveredConnectorButtons.get(name);
+                const dotColor = (connected && !hovered) ? '#4caf50' : '#FF0000';
+                var display = (hovered && connected) ? 'Disconnect' : name;
+
+                return (
+                <div key={name} style={{ width: '252px'}}>
+                    <button 
+                    // onMouseEnter={() => updateHoveredConnectorButtons(name, true) }
+                    // onMouseLeave={() => updateHoveredConnectorButtons(name, false) }
+                    onClick={() => {
+                        // connected ? onDeactivateClicked(deactivate, currentConnector) : onConnectionClicked(currentConnector, name, setActivatingConnector, activate)
+                        onConnectionClicked(currentConnector, name, setActivatingConnector, activate)
+                    }}
+                    disabled={ disabled }
+                    className="dropdown-item"
+                    style={{display:'flex', flexDirection:'row', alignItems:'center', borderColor: activating ? 'orange' : connected ? 'green' : 'unset',}}
+                    >
+                        <CaretRight
+                            size={16}
+                        />{' '}
+                        { display }
+
+                    {/* { (!activating && !connected) && <img style={
+                        {
+                        position: 'absolute',
+                        right: '20px',
+                        width: '30px',
+                        height: '30px'
+                        }
+                    }  alt=""/> } */}
+                    {/* { activating && <CircularProgress size={ 15 } style={{marginRight: '10px'}} /> } */}
+                    { (!activating && connected) && <div style={{ background: dotColor, borderRadius: '10px', width: '10px', height: '10px', marginRight: '10px' }}></div> }
+                    </button>
+                </div>
+                )
+            }) }
+
+            <div style={{ width: '252px'}}>
+                <button 
+                onClick={() => { onDeactivateClicked(deactivate, connector); }}
+                className="dropdown-item"
+                style={{display:'flex', flexDirection:'row', alignItems:'center'}}
+            >
+                <CaretRight
+                    size={16}
+                />{' '}
+                    Deactivate
+                </button>
+            </div>
+            </div>
+        )
+
+    }
     return (
         <>
             <div className="navbar-nav ms-auto" style={{flexDirection:'row'}}>
@@ -211,6 +390,15 @@ export default function ConnectWallet() {
                                     />{' '}
                                     Terra Station (mobile for desktop)
                                 </button>
+                                <>
+                                    <Web3ReactProvider getLibrary={getLibrary}>
+                                        <MetaMaskProvider>
+                                        {/* <MathWalletProvider> */}
+                                            <ConnectWallet />
+                                        {/* </MathWalletProvider> */}
+                                        </MetaMaskProvider>
+                                    </Web3ReactProvider>
+                                </>
                             </ul>
                         </div>
                     </>

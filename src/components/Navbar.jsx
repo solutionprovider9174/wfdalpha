@@ -54,14 +54,14 @@ const DesktopNav = () => {
   return (
     <>
       {NAV_ITEMS.map((navItem, index) => (
-        <div class="btn-group" style={{cursor:'pointer'}}>
+        <div key={index} class="btn-group" style={{cursor:'pointer'}}>
           <a href={navItem.href} type="button" class={"btn btn-danger "+ (navItem.children ? "dropdown-toggle":"")} data-bs-toggle="dropdown" aria-expanded="false" style={{color:'white'}}>
             {navItem.label}
           </a>
           {navItem.children &&
             <ul class="dropdown-menu" style={{width:'380px', padding:'10px', backgroundColor:'black'}}>
               {navItem.children.map((childitem, index) => (
-                <li>
+                <li key={index}>
                   <div style={{margin:'20px'}} >
                     <a href={childitem.href} className="navitem">
                     <p style={{marginBottom:'5px', fontSie:'large'}}>{childitem.label}</p>
