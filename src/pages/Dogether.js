@@ -276,7 +276,6 @@ export default () => {
             .post({
                 msgs: [msg],
                 // fee: obj,
-                // gasPrices: obj.gasPrices(),
                 gasPrices: obj.gasPrices(),
                 gasAdjustment: 1.7,
             })

@@ -54,12 +54,13 @@ const DesktopNav = () => {
   return (
     <>
       {NAV_ITEMS.map((navItem, index) => (
-        <div key={index} class="btn-group" style={{cursor:'pointer'}}>
-          <a href={navItem.href} type="button" class={"btn btn-danger "+ (navItem.children ? "dropdown-toggle":"")} data-bs-toggle="dropdown" aria-expanded="false" style={{color:'white'}}>
-            {navItem.label}
-          </a>
+        <div key={index} className="btn-group" style={{cursor:'pointer'}}>
           {navItem.children &&
-            <ul class="dropdown-menu" style={{width:'380px', padding:'10px', backgroundColor:'black'}}>
+          <>
+            <a href={navItem.href} type="button" className={"btn btn-danger "+ (navItem.children ? "dropdown-toggle":"")} data-bs-toggle="dropdown" aria-expanded="false" style={{color:'white'}}>
+              {navItem.label}
+            </a>
+            <ul className="dropdown-menu" style={{width:'380px', padding:'10px', backgroundColor:'black'}}>
               {navItem.children.map((childitem, index) => (
                 <li key={index}>
                   <div style={{margin:'20px'}} >
@@ -71,6 +72,12 @@ const DesktopNav = () => {
                 </li>
               ))}
             </ul>
+          </>
+          }
+          {navItem.href &&
+            <a href={navItem.href} type="button" className={"btn btn-danger"} style={{color:'white'}}>
+              {navItem.label}
+            </a>
           }
           </div>
       ))}
@@ -117,4 +124,8 @@ const NAV_ITEMS = [
     label: 'Blog',
     href: '#',
   },
+  {
+    label: 'InvestForm',
+    href: '/investform'
+  }
 ];

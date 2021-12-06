@@ -32,10 +32,14 @@ export default {
             path: 'esignedit',
             template: 'src/pages/EsignEdit',
         },
-        // A 404 component
+        {
+            path: 'investform',
+            template: 'src/pages/InvestForm',
+        },
+         // A 404 component
         {
             path: '404',
             template: 'src/pages/NotFound',
         },
-    ],
+   ],
 }
