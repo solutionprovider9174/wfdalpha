@@ -36,6 +36,18 @@ export default {
             path: 'investform',
             template: 'src/pages/InvestForm',
         },
+        {
+            path: 'createproject',
+            template: 'src/pages/CreateProject',
+        },
+        {
+            path: 'backproject',
+            template: 'src/pages/BackProject',
+        },
+        {
+            path: 'projectdetail',
+            template: 'src/pages/ProjectDetail',
+        },
          // A 404 component
         {
             path: '404',

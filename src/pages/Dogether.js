@@ -259,10 +259,6 @@ export default () => {
                 backer_wallet: "12345",
             },
         }
-        // console.log(connectedWallet);
-        // console.log("amount:" + amount);
-        // console.log(AddProjectMsg);
-
         let msg = new MsgExecuteContract(
             connectedWallet.walletAddress,
             CoinManageContractAddress,
