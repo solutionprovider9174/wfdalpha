@@ -1,5 +1,7 @@
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from '../theme';
+import { Container } from '../components/Container';
 import {
-    Container,
     Flex,
     Box,
     Heading,
@@ -31,7 +33,8 @@ import {
   
   export default function BackProject() {
     return (
-      
+      <ChakraProvider resetCSS theme={theme}>
+      <Container>
         <Flex>
           <Box
             bg="linear-gradient(180deg, #5E30DF 0%, rgba(97, 45, 208, 0.924167) 55.73%, rgba(116, 41, 190, 0.84) 100%)"
@@ -143,5 +146,7 @@ import {
             </Box>
           </Box>
         </Flex>
+      </Container>
+      </ChakraProvider>
     );
   }
