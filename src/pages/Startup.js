@@ -23,7 +23,6 @@ import {
 
 import { useStore } from '../store'
 
-import Notification from '../components/Notification'
 import Footer from '../components/Footer'
 import JackpotResults from '../components/JackpotResults'
 
@@ -34,20 +33,44 @@ if (typeof document !== 'undefined') {
 }
 
 export default () => {
-    const [jackpot, setJackpot] = useState(0)
-    const [notification, setNotification] = useState({
-        type: 'success',
-        message: '',
-        show: false,
-    })
+    const [totalBackedMoney, setTotalBackedMoney] = useState(0)
     const [contractBalance, setContractBalance] = useState(0)
-    const [lotaPrice, setLotaPrice] = useState(0)
-    const loterraStats = useRef(null)
     const { state, dispatch } = useStore()
-    const terra = state.lcd_client
-    const api = new WasmAPI(terra.apiRequester)
+
+    let connectedWallet = ''
+    if (typeof document !== 'undefined') {
+        connectedWallet = useConnectedWallet()
+    }
+
     const fetchContractQuery = useCallback(async () => {
         try {
+            let terra = new LCDClient({
+                URL: connectedWallet.network.lcd,
+                chainID: connectedWallet.network.chainID,
+                });
+            let api = new WasmAPI(terra.apiRequester);
+
+            const prj = await api.contractQuery(
+            state.managementContractAddress,
+            {
+                get_all_project: {
+                },
+            }
+            )
+            dispatch(state, '')
+            console.log(typeof prj);
+            console.log(prj);
+            console.log(prj.length)
+            let i, j
+            for(i=0; i<prj.length; i++){
+                let tm = prj[i];
+                console.log(tm.backer_states);
+                for(j=0; j<tm.backer_states.length; j++)
+                {
+                    console.log(tm.backer_states[j].amount);
+                }
+            }
+
         } catch (e) {
             console.log(e)
         }
@@ -56,37 +79,6 @@ export default () => {
     useEffect(() => {
         fetchContractQuery()
     }, [fetchContractQuery])
-    let connectedWallet = ''
-    if (typeof document !== 'undefined') {
-        connectedWallet = useConnectedWallet()
-    }
-
-    function hideNotification() {
-        setNotification({
-            message: notification.message,
-            type: notification.type,
-            show: false,
-        })
-    }
-
-    function showNotification(message, type, duration) {
-        //console.log('fired notification')
-        setNotification({
-            message: message,
-            type: type,
-            show: true,
-        })
-        //console.log(notification)
-        //Disable after $var seconds
-        setTimeout(() => {
-            setNotification({
-                message: message,
-                type: type,
-                show: false,
-            })
-            //console.log('disabled',notification)
-        }, duration)
-    }
 
     function marketCap() {
         return 0;
@@ -126,7 +118,7 @@ export default () => {
                             <h1>We Fund Projects Baked</h1> 
                             <h3></h3>
                             <h2>
-                                {numeral(jackpot)
+                                {numeral(totalBackedMoney)
                                     .format('0,0.00')
                                     .split('')
                                     .map((obj) => {
@@ -204,7 +196,6 @@ export default () => {
                         </div>
                          <JackpotResults />
                         <div
-                            ref={loterraStats}
                             className="container"
                             style={{ marginTop: '8rem' }}
                         >
@@ -219,19 +210,13 @@ export default () => {
                                     <div className="row">
                                         <div className="col-md-6 mb-3">
                                             <div className="lota-stats mb-4 mb-md-0">
-                                                {lotaPrice.assets && (
                                                     <>
                                                         <p>Current WFD price</p>
                                                         <h5>
-                                                            {numeral(
-                                                                lotaPrice.assets[1].amount /
-                                                                    lotaPrice.assets[0]
-                                                                        .amount
-                                                            ).format('0.000')}
+                                                            {numeral(100).format('0.000')}
                                                             <span>UST</span>
                                                         </h5>
                                                     </>
-                                                )}
                                             </div>
                                         </div>
                                         <div className="col-md-6 mb-3">
@@ -269,7 +254,6 @@ export default () => {
                                         </div>
                                         <div className="col-md-12 mb-3">
                                             <div className="lota-stats">
-                                                {lotaPrice.assets && (
                                                     <>
                                                         <p>Market Cap</p>
                                                         <h5>
@@ -279,7 +263,6 @@ export default () => {
                                                             <span>UST</span>
                                                         </h5>
                                                     </>
-                                                )}
                                             </div>
                                         </div>
                                         <div className="col-md-12 text-center">
@@ -309,7 +292,6 @@ export default () => {
                             </div>
                         </div>
                         <div
-                            ref={loterraStats}
                             className="container"
                             style={{ marginTop: '8rem' }}
                         >
@@ -339,10 +321,6 @@ export default () => {
             </div>
             </div>
             <Footer />
-            <Notification
-                notification={notification}
-                close={() => hideNotification()}
-            />
         </>
     )
 }

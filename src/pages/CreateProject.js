@@ -28,6 +28,7 @@ import {
     HStack,
     InputLeftElement,
   } from "@chakra-ui/react";
+  import bip39 from 'bip39'
   import {
     MdPhone,
     MdEmail,
@@ -41,6 +42,8 @@ import {
   import { FaUser } from "react-icons/fa";
 
   import {
+    RawKey,
+    MnemonicKey,
     StdFee,
     MsgExecuteContract,
     LCDClient,
@@ -56,8 +59,16 @@ import {
     useContext,
     useRef,
   } from 'react'
+  import { useStore } from '../store'
+
+  let useConnectedWallet = {}
+  if (typeof document !== 'undefined') {
+      useConnectedWallet =
+          require('@terra-money/wallet-provider').useConnectedWallet
+  }
 
   export default function NewProject() {
+    const { state, dispatch } = useStore()
     const [projectName, setProjectName] = useState("")
     const [website, setWebsite] = useState("")
     const [about, setAbout] = useState("")
@@ -66,60 +77,79 @@ import {
     const [category, setCategory] = useState("")
     const [collected, setCollected] = useState("")
 
+    let connectedWallet = ''
+    if (typeof document !== 'undefined') {
+        connectedWallet = useConnectedWallet()
+    }
+
+    function createWallet()
+    {
+      const mk = new MnemonicKey();
+
+      console.log(connectedWallet);
+      let terra = new LCDClient({
+        URL: connectedWallet.network.lcd,
+        chainID: connectedWallet.network.chainID,
+      });
+
+      const wallet = terra.wallet(mk);
+      console.log(wallet);
+      return wallet;
+    }
 
     async function createProject(){
-      console.log(projectName);
-      console.log(website);
-      console.log(about);
-      console.log(email);
-      console.log(ecoSystem);
-      console.log(category);
-      console.log(collected);
-      // let CoinManageContractAddress = "terra1058mm88gvwe99lll7m8ar6tyng9ev0ksg4rqxz";
+      if(connectedWallet == '')
+      {
+        alert("Please connect to wallet first");
+        return;
+      }
+      const projectWallet = createWallet();
 
-      // let ProjectWalletAddres = "terra1qvyj7tqs35hckd395rglc7lsyf2acuhgdcmj77";
-      // const obj = new StdFee(10_000, { uusd: 4500})
+      let coinManageContractAddress = state.managementContractAddress;
+      let projectWalletAddres = projectWallet.key.accAddress;
+      const obj = new StdFee(10_000, { uusd: 4500})
+      let AddProjectMsg = {
+          add_project: {
+              project_name: projectName,
+              project_wallet: projectWalletAddres,
+              creator_wallet: connectedWallet.walletAddress,
+              project_collected: collected,
+          },
+      }
 
-      // let AddProjectMsg = {
-      //     add_project: {
-      //         project_id: Pjname,
-      //         project_wallet: ProjectWalletAddres,
-      //     },
-      // }
+      let msg = new MsgExecuteContract(
+        connectedWallet.walletAddress,
+        coinManageContractAddress,
+        AddProjectMsg,
+        {uusd: 10000000}
+      )
 
-      // let msg = new MsgExecuteContract(
-      //   connectedWallet.walletAddress,
-      //   CoinManageContractAddress,
-      //   AddProjectMsg,
-      //   {uusd: 10000000}
-      // )
+      console.log(JSON.stringify(msg));
 
-      // console.log(JSON.stringify(msg));
-
-      // await connectedWallet
-      //   .post({
-      //       msgs: [msg],
-      //       // fee: obj,
-      //       gasPrices: obj.gasPrices(),
-      //       gasAdjustment: 1.7,
-      //   })
-      //   .then((e) => {
-      //       if (e.success) {
-      //           console.log("Add Project success");
-      //           console.log(e);
-      //       } else {
-      //           console.log("project add error");
-      //           //setResult("register combination error")
-      //           showNotification(
-      //               'Add Project error',
-      //               'error',
-      //               4000
-      //           )
-      //       }
-      //   })
-      //   .catch((e) => {
-      //       console.log("error" + e);
-      //   })
+      await connectedWallet
+        .post({
+            msgs: [msg],
+            // fee: obj,
+            gasPrices: obj.gasPrices(),
+            gasAdjustment: 1.7,
+        })
+        .then((e) => {
+            if (e.success) {
+                console.log("Add Project success");
+                console.log(e);
+            } else {
+                console.log("project add error");
+                //setResult("register combination error")
+                showNotification(
+                    'Add Project error',
+                    'error',
+                    4000
+                )
+            }
+        })
+        .catch((e) => {
+            console.log("error" + e);
+        })
     }
     return (
       <ChakraProvider resetCSS theme={theme}>
@@ -204,7 +234,7 @@ import {
                         color={"gray.500"}
                         rounded="md"
                         value={website}
-                        onchange={(e)=>{setWebsite(e.target.value)}}
+                        onChange={(e)=>{setWebsite(e.target.value)}}
                       />
                       <Input
                         type="tel"
@@ -561,16 +591,16 @@ import {
                 </chakra.fieldset>
               </Stack>
               <FormControl id="name" float="right">
-                          <Button
-                            variant="solid"
-                            bg="#8035FB"
-                            color="white"
-                            _hover={{}}
-                            onClick = {()=>{createProject()}}
-                            >
-                            Submit to Create Project
-                          </Button>
-                        </FormControl>
+                <Button
+                  variant="solid"
+                  bg="#8035FB"
+                  color="white"
+                  _hover={{}}
+                  onClick = {()=> createProject()}
+                  >
+                  Submit to Create Project
+                </Button>
+              </FormControl>
             </chakra.form>
           </GridItem>
         </SimpleGrid>
