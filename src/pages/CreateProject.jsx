@@ -28,19 +28,99 @@ import {
     HStack,
     InputLeftElement,
   } from "@chakra-ui/react";
-  import React from 'react';
   import {
     MdPhone,
     MdEmail,
     MdLocationOn,
     MdFacebook,
     MdOutlineEmail,
+    MdSentimentSatisfiedAlt,
   } from 'react-icons/md';
   import { BsGithub, BsDiscord, BsPerson } from 'react-icons/bs';
 
   import { FaUser } from "react-icons/fa";
+
+  import {
+    StdFee,
+    MsgExecuteContract,
+    LCDClient,
+    WasmAPI,
+    BankAPI,
+    Denom,
+  } from '@terra-money/terra.js'
   
+  import React, {
+    useEffect,
+    useState,
+    useCallback,
+    useContext,
+    useRef,
+  } from 'react'
+
   export default function NewProject() {
+    const [projectName, setProjectName] = useState("")
+    const [website, setWebsite] = useState("")
+    const [about, setAbout] = useState("")
+    const [email, setEmail] = useState("")
+    const [ecoSystem, setEcoSystem] = useState("")
+    const [category, setCategory] = useState("")
+    const [collected, setCollected] = useState("")
+
+
+    async function createProject(){
+      console.log(projectName);
+      console.log(website);
+      console.log(about);
+      console.log(email);
+      console.log(ecoSystem);
+      console.log(category);
+      console.log(collected);
+      // let CoinManageContractAddress = "terra1058mm88gvwe99lll7m8ar6tyng9ev0ksg4rqxz";
+
+      // let ProjectWalletAddres = "terra1qvyj7tqs35hckd395rglc7lsyf2acuhgdcmj77";
+      // const obj = new StdFee(10_000, { uusd: 4500})
+
+      // let AddProjectMsg = {
+      //     add_project: {
+      //         project_id: Pjname,
+      //         project_wallet: ProjectWalletAddres,
+      //     },
+      // }
+
+      // let msg = new MsgExecuteContract(
+      //   connectedWallet.walletAddress,
+      //   CoinManageContractAddress,
+      //   AddProjectMsg,
+      //   {uusd: 10000000}
+      // )
+
+      // console.log(JSON.stringify(msg));
+
+      // await connectedWallet
+      //   .post({
+      //       msgs: [msg],
+      //       // fee: obj,
+      //       gasPrices: obj.gasPrices(),
+      //       gasAdjustment: 1.7,
+      //   })
+      //   .then((e) => {
+      //       if (e.success) {
+      //           console.log("Add Project success");
+      //           console.log(e);
+      //       } else {
+      //           console.log("project add error");
+      //           //setResult("register combination error")
+      //           showNotification(
+      //               'Add Project error',
+      //               'error',
+      //               4000
+      //           )
+      //       }
+      //   })
+      //   .catch((e) => {
+      //       console.log("error" + e);
+      //   })
+    }
     return (
       <ChakraProvider resetCSS theme={theme}>
         <Container>
@@ -105,6 +185,8 @@ import {
                       size="sm"
                       w="full"
                       rounded="md"
+                      value={projectName}
+                      onChange={(e)=>{setProjectName(e.target.value)}}
                     />
                   </FormControl>
                   <FormControl as={GridItem} colSpan={[3, 2]}>
@@ -121,6 +203,8 @@ import {
                         bg={"gray.50"}
                         color={"gray.500"}
                         rounded="md"
+                        value={website}
+                        onchange={(e)=>{setWebsite(e.target.value)}}
                       />
                       <Input
                         type="tel"
@@ -148,6 +232,8 @@ import {
                       shadow="sm"
                       focusBorderColor="purple.800" borderColor="#DADADA"
                       fontSize={{ sm: "sm" }}
+                      value={about}
+                      onChange={(e)=>{setAbout(e.target.value)}}
                     />
                     <FormHelperText>
                       Brief description for your profile. URLs are hyperlinked.
@@ -210,13 +296,13 @@ import {
                           }}
                         >
                           <span>Upload a file</span>
-                          <VisuallyHidden>
+                          {/* <VisuallyHidden> */}
                             <input
                               id="file-upload"
                               name="file-upload"
                               type="file"
                             />
-                          </VisuallyHidden>
+                          {/* </VisuallyHidden> */}
                         </chakra.label>
                         <Text pl={1}>or drag and drop</Text>
                       </Flex>
@@ -279,6 +365,8 @@ import {
                       size="sm"
                       w="full"
                       rounded="md"
+                      value={email}
+                      onChange={(e)=>{setEmail(e.target.value)}}
                     />
                   </FormControl>
 
@@ -302,6 +390,8 @@ import {
                       size="sm"
                       w="full"
                       rounded="md"
+                      value={ecoSystem}
+                      onChange={(e)=>{setEcoSystem(e.target.value)}}
                     >
                       <option>Terra</option>
                       <option>Cardano</option>
@@ -328,6 +418,8 @@ import {
                       size="sm"
                       w="full"
                       rounded="md"
+                      value={category}
+                      onChange={(e)=>{setCategory(e.target.value)}}
                     >
                       <option>Crypto</option>
                       <option>Charity</option>
@@ -353,6 +445,8 @@ import {
                       size="sm"
                       w="full"
                       rounded="md"
+                      value={collected}
+                      onChange={(e)=>{setCollected(e.target.value)}}
                     />
                   </FormControl>
                   
@@ -471,7 +565,9 @@ import {
                             variant="solid"
                             bg="#8035FB"
                             color="white"
-                            _hover={{}}>
+                            _hover={{}}
+                            onClick = {()=>{createProject()}}
+                            >
                             Submit to Create Project
                           </Button>
                         </FormControl>
