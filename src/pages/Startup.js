@@ -26,17 +26,11 @@ import { useStore } from '../store'
 import Footer from '../components/Footer'
 import JackpotResults from '../components/JackpotResults'
 
-let useConnectedWallet = {}
-if (typeof document !== 'undefined') {
-    useConnectedWallet =
-        require('@terra-money/wallet-provider').useConnectedWallet
-}
-
 export default () => {
     const [totalBackedMoney, setTotalBackedMoney] = useState(0)
     const [contractBalance, setContractBalance] = useState(0)
     const { state, dispatch } = useStore()
-
+    
     const fetchContractQuery = useCallback(async () => {
         try {
             let terra = state.lcd_client;

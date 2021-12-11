@@ -29,24 +29,28 @@ import {
     Select,
     Checkbox,
   } from '@chakra-ui/react';
-  import React, {useCallback, useEffect} from 'react';
+  import React, {useCallback, useEffect, useState} from 'react';
 
   import { BsBookmarksFill, BsBox, BsPerson, BsCashCoin } from 'react-icons/bs';
   import { FiServer } from 'react-icons/fi';
   import { GoLocation } from 'react-icons/go';
   
+  import {
+      StdFee,
+      MsgExecuteContract,
+      LCDClient,
+      WasmAPI,
+      BankAPI,
+      Denom,
+  } from '@terra-money/terra.js'
+
   import { useStore } from '../store'
-  import { useParams} from "react-router-dom"
 
   export default function DetailProject() {
     const { state, dispatch } = useStore()
-    let project = state.projectData[state.projectID];
-    let {id} = useParams();
-
-console.log("ProjectDetail");
-console.log(id);
-console.log(state.projectID);
-console.log(state.projectData);
+    const [projectID, setProjectID] = useState(state.projectID);
+    const [projectBacked, setProjectBacked] = useState(0)
+    const [project, setProject] = useState({});
 
     const fetchContractQuery = useCallback(async () => {
       try {
@@ -60,29 +64,28 @@ console.log(state.projectData);
                   },
               }
           )
-          dispatch({
-              type: 'setProjectData',
-              message: projectData,
-          })
+          let project = projectData[projectID];
+          let total = 0;
+          for(let i =0; i<project.backer_states.length; i++)
+              total += parseInt(project.backer_states[i].amount.amount);
+          setProjectBacked(total);
 
-          let i, j
-          let totalBacked = 0;
-          for(i=0; i<projectData.length; i++){
-              for(j=0; j<projectData[i].backer_states.length; j++){
-                  totalBacked += parseInt(projectData[i].backer_states[j].amount.amount);
-              }
-          }
-          totalBacked /= 10**6;
-          setTotalBackedMoney(totalBacked);
+
+          setProject(projectData[projectID]);
+          console.log("settingProject");
       } catch (e) {
           console.log(e)
       }
     }, [])
 
     useEffect(() => {
-      console.log("in project detail - fetchContractQuery");
+      console.log("in detail project - fetchContractQuery");
       fetchContractQuery();
-    }, [fetchContractQuery])
+     }, [fetchContractQuery])
+
+console.log("Rendering");
+console.log(project);
+console.log(state.projectID);
 
     return (
       <ChakraProvider resetCSS theme={theme}>
@@ -127,7 +130,7 @@ console.log(state.projectData);
         fontSize={'4xl'}
         py={10}
         fontWeight={'bold'}>
-        $Project Name
+        {project.project_name}
       </chakra.h1>
       <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 5, lg: 8 }}>
       <Stat
@@ -143,7 +146,7 @@ console.log(state.projectData);
             'Backer'
             </StatLabel>
             <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
-              2000
+              {projectBacked}
             </StatNumber>
           </Box>
           <Box
@@ -242,7 +245,7 @@ console.log(state.projectData);
           color={"white"}
           mb={6}
         >
-          <chakra.span display="block">Introducing {project.projectName}</chakra.span>
+          <chakra.span display="block">Introducing {project.project_name} </chakra.span>
          
         </chakra.h2>
         <chakra.p
@@ -317,8 +320,9 @@ console.log(state.projectData);
               _hover={{
                 bg:"purple.700",
               }}
+              onClick={()=>{document.location.href="/backproject"}}
             >
-              Back {project.projectName}!
+              Back ` {project.project_name}!`
             </chakra.a>
           </Box>
         </Stack>

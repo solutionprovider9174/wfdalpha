@@ -67,7 +67,7 @@ console.log("explorerData");
                         </button>
                         <button
                             className="btn btn-default"
-                            onClick={() => {document.location.href=`/projectdetail/id:${projectID}`}}
+                            onClick={() => {document.location.href='/projectdetail'}}
                         >
                             View Detail
                         </button>
@@ -100,7 +100,6 @@ console.log("explorerData");
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>PrjWallet</th>
                                     <th>Website</th>
                                     <th>Email</th>
                                     <th>Category</th>
@@ -114,9 +113,8 @@ console.log("explorerData");
                                 <tr>
                                     <td>{project.project_id}</td>
                                     <td>{project.project_name}</td>
-                                    <td>{project.project_wallet}</td>
                                     <td>{project.project_website}</td>
-                                    <td>{project.project_emai}</td>
+                                    <td>{project.project_email}</td>
                                     <td>{project.project_category}</td>
                                     <td>{project.project_ecosystem}</td>
                                     <td>{project.project_collected}</td>

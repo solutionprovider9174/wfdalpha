@@ -48,6 +48,7 @@ import {
     useCallback,
     useContext,
     useRef,
+    useMemo,
   } from 'react'
   import { useStore } from '../store'
     
@@ -68,14 +69,22 @@ import {
     if (typeof document !== 'undefined') {
         connectedWallet = useConnectedWallet()
     }
+
+    useMemo( () => {
+      console.log(connectedWallet);
+      if(typeof connectedWallet !== 'undefined' && connectedWallet != '')
+        setBackerWallet(connectedWallet.walletAddress);
+      console.log("usememo");
+    },[connectedWallet])
+
     function changeAmount(e){
-      if(state.ustBalance > parseInt(e.target.value))
-      {
+      // if(state.ustBalance > parseInt(e.target.value))
+      // {
           setAmount(e.target.value);
           setWFDFee(parseInt(e.target.value) *0.05);
-      }else{
-          alert("Insufficient Balance")
-      }
+      // }else{
+          // alert("Insufficient Balance")
+      // }
   }
   async function transfer(){
       // let terra = new LCDClient({
@@ -112,24 +121,25 @@ import {
       console.log(state.ustBalance);
 
       let coinManageContractAddress = state.managementContractAddress;
-      let backerWalletAddres = connectedWallet.walletAddress;
+      let backerWalletAddress = connectedWallet.walletAddress;
 
       const obj = new StdFee(10_000, { uusd: 4500})
 
       let BackProjectMsg = {
           back2_project: {
-              project_name: state.projectName,
-              backer_wallet: backerWalletAddres,
+              project_id : "1",
+              backer_wallet: backerWalletAddress,
           },
       }
+console.log(BackProjectMsg);
       let msg = new MsgExecuteContract(
-          backerWalletAddres,
+          backerWalletAddress,
           coinManageContractAddress,
           BackProjectMsg,
           coin,
       )
 
-      console.log(JSON.stringify(msg));
+console.log(JSON.stringify(msg));
 
       await connectedWallet
           .post({
@@ -179,7 +189,7 @@ import {
                             <InputLeftElement
                               pointerEvents="none"
                             />
-                            <Input type="text" size="md" bg = "white" value={backerWallet}/>
+                            <Input type="text" size="md" bg = "white" value={backerWallet} onChange={()=> {}}/>
                           </InputGroup>
                         </FormControl>
                         <FormControl>
@@ -213,7 +223,7 @@ import {
                             <InputLeftElement
                               pointerEvents="none"
                             />
-                            <Input type="text" size="md" bg = "white" value={amount} onChnage={(e) => changeAmount(e)} />
+                            <Input type="text" size="md" bg = "white" value={amount} onChange={(e) => changeAmount(e)} />
                           </InputGroup>
                         </FormControl>
 

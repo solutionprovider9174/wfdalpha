@@ -51,6 +51,8 @@ const reducer = (state, action) => {
                 managementContractAddress: action.message,
             }
         case 'setProjectData':
+            console.log("coming here");
+            console.log(action.message);
             return{
                 ...state,
                 projectData: action.message,
