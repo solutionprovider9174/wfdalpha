@@ -29,13 +29,61 @@ import {
     Select,
     Checkbox,
   } from '@chakra-ui/react';
-  import React from 'react';
+  import React, {useCallback, useEffect} from 'react';
 
   import { BsBookmarksFill, BsBox, BsPerson, BsCashCoin } from 'react-icons/bs';
   import { FiServer } from 'react-icons/fi';
   import { GoLocation } from 'react-icons/go';
   
+  import { useStore } from '../store'
+  import { useParams} from "react-router-dom"
+
   export default function DetailProject() {
+    const { state, dispatch } = useStore()
+    let project = state.projectData[state.projectID];
+    let {id} = useParams();
+
+console.log("ProjectDetail");
+console.log(id);
+console.log(state.projectID);
+console.log(state.projectData);
+
+    const fetchContractQuery = useCallback(async () => {
+      try {
+          let terra = state.lcd_client;
+          let api = new WasmAPI(terra.apiRequester);
+
+          const projectData = await api.contractQuery(
+              state.managementContractAddress,
+              {
+                  get_all_project: {
+                  },
+              }
+          )
+          dispatch({
+              type: 'setProjectData',
+              message: projectData,
+          })
+
+          let i, j
+          let totalBacked = 0;
+          for(i=0; i<projectData.length; i++){
+              for(j=0; j<projectData[i].backer_states.length; j++){
+                  totalBacked += parseInt(projectData[i].backer_states[j].amount.amount);
+              }
+          }
+          totalBacked /= 10**6;
+          setTotalBackedMoney(totalBacked);
+      } catch (e) {
+          console.log(e)
+      }
+    }, [])
+
+    useEffect(() => {
+      console.log("in project detail - fetchContractQuery");
+      fetchContractQuery();
+    }, [fetchContractQuery])
+
     return (
       <ChakraProvider resetCSS theme={theme}>
       <Container>
@@ -119,7 +167,7 @@ import {
             'Funding Pool'
             </StatLabel>
             <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
-             20,000
+             {project.project_collected}
             </StatNumber>
           </Box>
           <Box
@@ -143,7 +191,7 @@ import {
             'Category'
             </StatLabel>
             <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
-             Charity
+             {project.project_category}
             </StatNumber>
           </Box>
           <Box
@@ -194,7 +242,7 @@ import {
           color={"white"}
           mb={6}
         >
-          <chakra.span display="block">Introducing $Projectname</chakra.span>
+          <chakra.span display="block">Introducing {project.projectName}</chakra.span>
          
         </chakra.h2>
         <chakra.p
@@ -270,7 +318,7 @@ import {
                 bg:"purple.700",
               }}
             >
-              Back $Projectname!
+              Back {project.projectName}!
             </chakra.a>
           </Box>
         </Stack>

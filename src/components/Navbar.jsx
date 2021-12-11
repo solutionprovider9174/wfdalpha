@@ -94,16 +94,16 @@ const NAV_ITEMS = [
           subLabel: 'Create Project',
           href: '/createproject',
       },
-      {
-          label: 'Back to Project',
-          subLabel: 'Back to Project',
-          href: '/backproject',
-      },
-      {
-          label: 'Project Detail',
-          subLabel: 'Project Detail',
-          href: '/projectdetail',
-      },
+      // {
+      //     label: 'Back to Project',
+      //     subLabel: 'Back to Project',
+      //     href: '/backproject',
+      // },
+      // {
+      //     label: 'Project Detail',
+      //     subLabel: 'Project Detail',
+      //     href: '/projectdetail',
+      // },
       {
         label: 'Explore Project',
         subLabel: 'Explore Project that you might be passionate about!',

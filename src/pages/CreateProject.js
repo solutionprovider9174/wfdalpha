@@ -93,7 +93,6 @@ import {
       });
 
       const wallet = terra.wallet(mk);
-      console.log(wallet);
       return wallet;
     }
 
@@ -110,13 +109,18 @@ import {
       const obj = new StdFee(10_000, { uusd: 4500})
       let AddProjectMsg = {
           add_project: {
-              project_name: projectName,
-              project_wallet: projectWalletAddres,
-              creator_wallet: connectedWallet.walletAddress,
-              project_collected: collected,
+            creator_wallet: connectedWallet.walletAddress,
+            project_about: about, 
+            project_category: category, 
+            project_name: projectName,
+            project_ecosystem: ecoSystem,
+            project_email: email,
+            project_collected: collected,
+            project_wallet: projectWalletAddres,
+            project_website: website, 
           },
       }
-
+console.log(AddProjectMsg);
       let msg = new MsgExecuteContract(
         connectedWallet.walletAddress,
         coinManageContractAddress,
@@ -233,14 +237,14 @@ import {
                         bg={"gray.50"}
                         color={"gray.500"}
                         rounded="md"
-                        value={website}
-                        onChange={(e)=>{setWebsite(e.target.value)}}
                       />
                       <Input
                         type="tel"
                         placeholder="www.example.com"
                         focusBorderColor="purple.800" borderColor="#DADADA"
                         rounded="md"
+                        value={website}
+                        onChange={(e)=>{setWebsite(e.target.value)}}
                       />
                     </InputGroup>
                   </FormControl>

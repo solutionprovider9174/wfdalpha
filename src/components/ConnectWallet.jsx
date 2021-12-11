@@ -91,9 +91,9 @@ export default function ConnectWallet() {
                 .then((isAuthorized) => {
                   setLoaded(true)
                   if (isAuthorized && !networkActive && !networkError) {
-                      console.log(isAuthorized)
-                      console.log(networkActive)
-                      console.log(networkError)
+                    //   console.log(isAuthorized)
+                    //   console.log(networkActive)
+                    //   console.log(networkError)
                     activateNetwork(injected)
                   }
                 })

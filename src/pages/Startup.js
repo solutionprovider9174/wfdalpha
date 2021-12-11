@@ -37,47 +37,40 @@ export default () => {
     const [contractBalance, setContractBalance] = useState(0)
     const { state, dispatch } = useStore()
 
-    let connectedWallet = ''
-    if (typeof document !== 'undefined') {
-        connectedWallet = useConnectedWallet()
-    }
-
     const fetchContractQuery = useCallback(async () => {
         try {
-            let terra = new LCDClient({
-                URL: connectedWallet.network.lcd,
-                chainID: connectedWallet.network.chainID,
-                });
+            let terra = state.lcd_client;
             let api = new WasmAPI(terra.apiRequester);
 
-            const prj = await api.contractQuery(
-            state.managementContractAddress,
-            {
-                get_all_project: {
-                },
-            }
-            )
-            dispatch(state, '')
-            console.log(typeof prj);
-            console.log(prj);
-            console.log(prj.length)
-            let i, j
-            for(i=0; i<prj.length; i++){
-                let tm = prj[i];
-                console.log(tm.backer_states);
-                for(j=0; j<tm.backer_states.length; j++)
+            const projectData = await api.contractQuery(
+                state.managementContractAddress,
                 {
-                    console.log(tm.backer_states[j].amount);
+                    get_all_project: {
+                    },
+                }
+            )
+            dispatch({
+                type: 'setProjectData',
+                message: projectData,
+            })
+
+            let i, j
+            let totalBacked = 0;
+            for(i=0; i<projectData.length; i++){
+                for(j=0; j<projectData[i].backer_states.length; j++){
+                    totalBacked += parseInt(projectData[i].backer_states[j].amount.amount);
                 }
             }
-
+            totalBacked /= 10**6;
+            setTotalBackedMoney(totalBacked);
         } catch (e) {
             console.log(e)
         }
     }, [])
 
     useEffect(() => {
-        fetchContractQuery()
+        console.log("in exploer project - fetchContractQuery");
+        fetchContractQuery();
     }, [fetchContractQuery])
 
     function marketCap() {
@@ -194,7 +187,7 @@ export default () => {
                                 WeFund  documentation
                             </a>
                         </div>
-                         <JackpotResults />
+                         <JackpotResults/>
                         <div
                             className="container"
                             style={{ marginTop: '8rem' }}

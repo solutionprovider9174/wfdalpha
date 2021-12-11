@@ -45,7 +45,7 @@ export default {
             template: 'src/pages/BackProject',
         },
         {
-            path: 'projectdetail',
+            path: 'projectdetail/',
             template: 'src/pages/ProjectDetail',
         },
          // A 404 component

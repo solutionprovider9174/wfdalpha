@@ -17,13 +17,14 @@ const StoreContext = createContext()
 const initialState = {
     allNativeCoins: [],
     wallet: {},
-    managementContractAddress: "terra1058mm88gvwe99lll7m8ar6tyng9ev0ksg4rqxz",
-    projectName: "demo1",
+    //managementContractAddress: "terra1g8uaxw608v4kpxhumrcu98csl3fflh0ee93r50",
+    managementContractAddress: "terra1luu5pqcz7xvyr5lqx3397wmhnf4rhrmrdngh4d",
     ustBalance: 0,
     projectData: {},
+    projectID: 0,
     lcd_client: new LCDClient({
-        URL: 'https://tequila-lcd.terra.dev/',
-        chainID: 'tequila-0004',
+        URL: 'https://bombay-lcd.terra.dev',
+        chainID: 'bombay-12',
     }),
 }
 
@@ -49,15 +50,15 @@ const reducer = (state, action) => {
                 ...state,
                 managementContractAddress: action.message,
             }
-        case 'setProjectName':
-            return{
-                ...state,
-                projectName: action.message,
-            }
         case 'setProjectData':
             return{
                 ...state,
                 projectData: action.message,
+            }
+        case 'setProjectID':
+            return{
+                ...state,
+                projectID: action.message,
             }
         default:
             throw new Error(`Unhandled action type: ${action.type}`)
