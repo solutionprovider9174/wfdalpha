@@ -73,7 +73,8 @@ import {
 
     function createWallet()
     {
-      const mk = new MnemonicKey({ mnemonic: "charge useless coyote exchange what beyond disorder grass embody desk credit picture mother tobacco unhappy core about popular chuckle special blossom mystery thumb cat"});
+      const mk = new MnemonicKey();
+      // { mnemonic: "charge useless coyote exchange what beyond disorder grass embody desk credit picture mother tobacco unhappy core about popular chuckle special blossom mystery thumb cat"});
 
       let terra = new LCDClient({
         URL: connectedWallet.network.lcd,
