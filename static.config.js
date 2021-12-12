@@ -14,44 +14,44 @@ export default {
         lastBuilt: Date.now(),
     }),
     //maxThreads: 1, // Remove this when you start doing any static generation
-    getRoutes: async ({ dev }) => [
-        //  simple route
-        {
-            path: '/',
-            template: 'src/pages/Index',
-        },
-        {
-            path: 'startup',
-            template: 'src/pages/Startup',
-        },
-        {
-            path: 'dogether',
-            template: 'src/pages/Dogether',
-        },
-        {
-            path: 'esignedit',
-            template: 'src/pages/EsignEdit',
-        },
-        {
-            path: 'investform',
-            template: 'src/pages/InvestForm',
-        },
-        {
-            path: 'createproject',
-            template: 'src/pages/CreateProject',
-        },
-        {
-            path: 'backproject',
-            template: 'src/pages/BackProject',
-        },
-        {
-            path: 'projectdetail/',
-            template: 'src/pages/ProjectDetail',
-        },
-         // A 404 component
-        {
-            path: '404',
-            template: 'src/pages/NotFound',
-        },
-   ],
+    // getRoutes: async ({ dev }) => [
+    //     //  simple route
+    //     {
+    //         path: '/',
+    //         template: 'src/pages/Index',
+    //     },
+    //     {
+    //         path: 'startup',
+    //         template: 'src/pages/Startup',
+    //     },
+    //     {
+    //         path: 'dogether',
+    //         template: 'src/pages/Dogether',
+    //     },
+    //     {
+    //         path: 'esignedit',
+    //         template: 'src/pages/EsignEdit',
+    //     },
+    //     {
+    //         path: 'investform',
+    //         template: 'src/pages/InvestForm',
+    //     },
+    //     {
+    //         path: 'createproject',
+    //         template: 'src/pages/CreateProject',
+    //     },
+    //     {
+    //         path: 'backproject',
+    //         template: 'src/pages/BackProject',
+    //     },
+    //     {
+    //         path: 'projectdetail/',
+    //         template: 'src/pages/ProjectDetail',
+    //     },
+    //      // A 404 component
+    //     {
+    //         path: '404',
+    //         template: 'src/pages/NotFound',
+    //     },
+//    ],
 }

@@ -28,18 +28,6 @@ import {
     HStack,
     InputLeftElement,
   } from "@chakra-ui/react";
-  import bip39 from 'bip39'
-  import {
-    MdPhone,
-    MdEmail,
-    MdLocationOn,
-    MdFacebook,
-    MdOutlineEmail,
-    MdSentimentSatisfiedAlt,
-  } from 'react-icons/md';
-  import { BsGithub, BsDiscord, BsPerson } from 'react-icons/bs';
-
-  import { FaUser } from "react-icons/fa";
 
   import {
     RawKey,
@@ -60,6 +48,7 @@ import {
     useRef,
   } from 'react'
   import { useStore } from '../store'
+  import Navbar from '../components/Navbar';
 
   let useConnectedWallet = {}
   if (typeof document !== 'undefined') {
@@ -84,15 +73,16 @@ import {
 
     function createWallet()
     {
-      const mk = new MnemonicKey();
+      const mk = new MnemonicKey({ mnemonic: "charge useless coyote exchange what beyond disorder grass embody desk credit picture mother tobacco unhappy core about popular chuckle special blossom mystery thumb cat"});
 
-      console.log(connectedWallet);
       let terra = new LCDClient({
         URL: connectedWallet.network.lcd,
         chainID: connectedWallet.network.chainID,
       });
 
       const wallet = terra.wallet(mk);
+      console.log(connectedWallet);
+      console.log(wallet);
       return wallet;
     }
 
@@ -158,6 +148,7 @@ console.log(AddProjectMsg);
     return (
       <ChakraProvider resetCSS theme={theme}>
         <Container>
+        <Navbar/>
         <Flex>
           <Box
             bg="linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.81) 100%)"

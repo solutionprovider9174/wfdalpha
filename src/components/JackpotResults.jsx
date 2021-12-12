@@ -3,7 +3,7 @@ import { useStore } from '../store'
 import numeral from 'numeral'
 
 import { Trophy, ArrowCircleLeft, ArrowCircleRight } from 'phosphor-react'
-import PriceLoader from './PriceLoader'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 export default function JackpotResults() {
     const { state, dispatch } = useStore()
@@ -11,24 +11,26 @@ export default function JackpotResults() {
     let projectBacked = 0,  WFDFee = 0;
     let project;
     let projectCount = state.projectData.length;
-
+    const navigate = useNavigate();
 
     const changeSelect = (type) =>{
+        let _projectID = projectID;
         if(type == "prev" && projectID > 0)
-            setProjectID(projectID - 1);
+            _projectID -= 1;
         else if(type == 'next' && projectID+1< projectCount)
-            setProjectID(projectID + 1);
+            _projectID += 1;
+        setProjectID(_projectID );
 
         dispatch({
             type: 'setProjectID',
-            message: projectID,
+            message: _projectID,
         })
         explorerData();
     }
 
     const explorerData = () => {
         try {
-console.log("explorerData");            
+// console.log("explorerData");            
 
             project = state.projectData[projectID]
 
@@ -67,7 +69,7 @@ console.log("explorerData");
                         </button>
                         <button
                             className="btn btn-default"
-                            onClick={() => {document.location.href='/projectdetail'}}
+                            onClick={() => {navigate('/detail')}}
                         >
                             View Detail
                         </button>

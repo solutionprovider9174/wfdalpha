@@ -12,12 +12,13 @@ import Projectfeature from '../components/Featured';
 import FooterCenter from '../components/Footer_land';
 
 import { Container } from '../components/Container';
-
+import Navbar from '../components/Navbar';
 
 export default() => {
     return(
         <ChakraProvider resetCSS theme={theme}>
             <Container>
+                <Navbar/>
                 <Hero/>
                 <About/>
                 <Industry/>

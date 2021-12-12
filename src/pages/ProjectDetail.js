@@ -32,64 +32,45 @@ import {
   import React, {useCallback, useEffect, useState} from 'react';
 
   import { BsBookmarksFill, BsBox, BsPerson, BsCashCoin } from 'react-icons/bs';
-  import { FiServer } from 'react-icons/fi';
-  import { GoLocation } from 'react-icons/go';
   
-  import {
-      StdFee,
-      MsgExecuteContract,
-      LCDClient,
-      WasmAPI,
-      BankAPI,
-      Denom,
-  } from '@terra-money/terra.js'
-
-  import { useStore } from '../store'
+  import { useStore } from '../store';
+  import Navbar from '../components/Navbar';
+  import { Outlet, useNavigate } from 'react-router-dom'
 
   export default function DetailProject() {
     const { state, dispatch } = useStore()
-    const [projectID, setProjectID] = useState(state.projectID);
-    const [projectBacked, setProjectBacked] = useState(0)
-    const [project, setProject] = useState({});
+    const navigate = useNavigate();
 
-    const fetchContractQuery = useCallback(async () => {
-      try {
-          let terra = state.lcd_client;
-          let api = new WasmAPI(terra.apiRequester);
+    let projectBacked; 
+    let projectID = 0;
+    let project = {}
 
-          const projectData = await api.contractQuery(
-              state.managementContractAddress,
-              {
-                  get_all_project: {
-                  },
-              }
-          )
-          let project = projectData[projectID];
-          let total = 0;
-          for(let i =0; i<project.backer_states.length; i++)
-              total += parseInt(project.backer_states[i].amount.amount);
-          setProjectBacked(total);
-
-
-          setProject(projectData[projectID]);
-          console.log("settingProject");
-      } catch (e) {
-          console.log(e)
+    function calcBacked()
+    {
+      let prj = state.projectData;
+      console.log("calcBacked");
+      console.log(prj);
+      if(typeof prj !== 'undefined' && prj != {} ){
+        // console.log("state.projectid");
+        // console.log(state.projectID);
+        projectID = state.projectID;
+        project = prj[projectID];
+        let total = 0;
+        for(let i =0; i<project.backer_states.length; i++)
+            total += parseInt(project.backer_states[i].amount.amount);
+        return total;
       }
-    }, [])
-
-    useEffect(() => {
-      console.log("in detail project - fetchContractQuery");
-      fetchContractQuery();
-     }, [fetchContractQuery])
+      return 0;
+    }
 
 console.log("Rendering");
 console.log(project);
-console.log(state.projectID);
 
+    projectBacked = calcBacked();
     return (
       <ChakraProvider resetCSS theme={theme}>
       <Container>
+        <Navbar/>
         <Flex>
           <Box
             bg="linear-gradient(180deg, #5E30DF 0%, rgba(97, 45, 208, 0.924167) 55.73%, rgba(116, 41, 190, 0.84) 100%)"
@@ -320,7 +301,7 @@ console.log(state.projectID);
               _hover={{
                 bg:"purple.700",
               }}
-              onClick={()=>{document.location.href="/backproject"}}
+              onClick={()=>{navigate('/back')}}
             >
               Back ` {project.project_name}!`
             </chakra.a>

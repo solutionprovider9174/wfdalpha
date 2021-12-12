@@ -25,6 +25,7 @@ import { useStore } from '../store'
 
 import Footer from '../components/Footer'
 import JackpotResults from '../components/JackpotResults'
+import Navbar from '../components/Navbar'
 
 export default () => {
     const [totalBackedMoney, setTotalBackedMoney] = useState(0)
@@ -81,6 +82,7 @@ export default () => {
 
     return (
         <>
+            <Navbar/>
             <div
                 className="hero"
                 style={{

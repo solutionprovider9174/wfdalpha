@@ -13,6 +13,7 @@ if (typeof document !== 'undefined') {
     bootstrap = require('bootstrap')
 }
 import { StoreProvider } from './store'
+import AppRouter from 'router'
 
 class App extends Component {
     render() {
@@ -94,8 +95,11 @@ class App extends Component {
                         />
                     </Head>
                     <StoreProvider>
-                        <Navbar/>
-                        <Routes default />
+                        {/* <Navbar/> */}
+                        <AppRouter> 
+                        {/* <Navbar/> */}
+                        </AppRouter>
+                        {/* <Routes default /> */}
                     </StoreProvider>
 
                     {/*<Footer/>*/}

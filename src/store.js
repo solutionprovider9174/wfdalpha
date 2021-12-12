@@ -18,7 +18,8 @@ const initialState = {
     allNativeCoins: [],
     wallet: {},
     //managementContractAddress: "terra1g8uaxw608v4kpxhumrcu98csl3fflh0ee93r50",
-    managementContractAddress: "terra1luu5pqcz7xvyr5lqx3397wmhnf4rhrmrdngh4d",
+    // managementContractAddress: "terra127ltw72x9xqgl5dru9xmd6sw6svapmvym9aywh",
+    managementContractAddress: "terra1rsay5wpkr73ht5c8sp3eu0kuy49jerq0cz7wk8",
     ustBalance: 0,
     projectData: {},
     projectID: 0,
@@ -51,13 +52,14 @@ const reducer = (state, action) => {
                 managementContractAddress: action.message,
             }
         case 'setProjectData':
-            console.log("coming here");
-            console.log(action.message);
+
             return{
                 ...state,
                 projectData: action.message,
             }
         case 'setProjectID':
+            console.log("Set Project ID to Store with coming here");
+            console.log(action.message);            
             return{
                 ...state,
                 projectID: action.message,

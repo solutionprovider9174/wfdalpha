@@ -51,7 +51,8 @@ import {
     useMemo,
   } from 'react'
   import { useStore } from '../store'
-    
+  import Navbar from '../components/Navbar'
+
   let useConnectedWallet = {}
   if (typeof document !== 'undefined') {
       useConnectedWallet =
@@ -85,84 +86,91 @@ import {
       // }else{
           // alert("Insufficient Balance")
       // }
-  }
-  async function transfer(){
-      // let terra = new LCDClient({
-      //   URL: connectedWallet.network.lcd,
-      //   chainID: connectedWallet.network.chainID,
-      // });
-      // let api = new WasmAPI(terra.apiRequester);
+    }
+    async function transfer(){
 
-      // const prj = await api.contractQuery(
-      //   state.managementContractAddress,
-      //   {
-      //       get_all_project: {
-      //       },
-      //   }
-      // )
-      // console.log(typeof prj);
-      // console.log(prj);
-      // console.log(prj.length)
-      // let i, j
-      // for(i=0; i<prj.length; i++){
-      //   let tm = prj[i];
-      //   console.log(tm.backer_states);
-      //   for(j=0; j<tm.backer_states.length; j++)
-      //   {
-      //     console.log(tm.backer_states[j].amount);
-      //   }
-      // }
+        // let terra = new LCDClient({
+        //   URL: connectedWallet.network.lcd,
+        //   chainID: connectedWallet.network.chainID,
+        // });
+        // let api = new WasmAPI(terra.apiRequester);
 
-      const fee = new StdFee(10000, { uusd: 450000})
-      const coin = {
-          uusd: amount * 1.05 * (10**6),
-      }
-      console.log(coin);
-      console.log(state.ustBalance);
+        // const prj = await api.contractQuery(
+        //   state.managementContractAddress,
+        //   {
+        //       get_all_project: {
+        //       },
+        //   }
+        // )
+        // console.log(typeof prj);
+        // console.log(prj);
+        // console.log(prj.length)
+        // let i, j
+        // for(i=0; i<prj.length; i++){
+        //   let tm = prj[i];
+        //   console.log(tm.backer_states);
+        //   for(j=0; j<tm.backer_states.length; j++)
+        //   {
+        //     console.log(tm.backer_states[j].amount);
+        //   }
+        // }
+console.log("state.projectID");
+console.log(state.projectID);
+console.log("state.projectData");
+console.log(state.projectData);
+        const fee = new StdFee(10000, { uusd: 450000})
+        const coin = {
+            uusd: amount * 1.05 * (10**6) + 4000000,
+            // uusd:1,
+        }
+        console.log(coin);
+        console.log(state.ustBalance);
 
-      let coinManageContractAddress = state.managementContractAddress;
-      let backerWalletAddress = connectedWallet.walletAddress;
+        let coinManageContractAddress = state.managementContractAddress;
+        let backerWalletAddress = connectedWallet.walletAddress;
 
-      const obj = new StdFee(10_000, { uusd: 4500})
+        const obj = new StdFee(10_000, { uusd: 4500})
 
-      let BackProjectMsg = {
-          back2_project: {
-              project_id : "1",
-              backer_wallet: backerWalletAddress,
-          },
-      }
-console.log(BackProjectMsg);
-      let msg = new MsgExecuteContract(
-          backerWalletAddress,
-          coinManageContractAddress,
-          BackProjectMsg,
-          coin,
-      )
+        let _project_id = state.projectID + 1;
+        let BackProjectMsg = {
+            back2_project: {
+                project_id : `${_project_id}`,
+                backer_wallet: backerWalletAddress,
+            },
+        }
+  console.log(BackProjectMsg);
+        let msg = new MsgExecuteContract(
+            backerWalletAddress,
+            coinManageContractAddress,
+            BackProjectMsg,
+            coin,
+        )
 
-console.log(JSON.stringify(msg));
+  console.log(JSON.stringify(msg));
 
-      await connectedWallet
-          .post({
-              msgs: [msg],
-              // fee: obj,
-              gasPrices: obj.gasPrices(),
-              gasAdjustment: 1.7,
-          })
-          .then((e) => {
-              if (e.success) {
-                  console.log("back 2 project success");
-                  console.log(e);
-              } else {
-                  console.log("back 2 project error");
-              }
-          })
-          .catch((e) => {
-              console.log("back 2 project error" + e);
-          })
-  }        
+        await connectedWallet
+            .post({
+                msgs: [msg],
+                // fee: obj,
+                gasPrices: obj.gasPrices(),
+                gasAdjustment: 1.7,
+            })
+            .then((e) => {
+                if (e.success) {
+                    console.log("back 2 project success");
+                    console.log(e);
+                } else {
+                    console.log("back 2 project error");
+                }
+            })
+            .catch((e) => {
+                console.log("back 2 project error" + e);
+            })
+    }        
     return (
       <ChakraProvider resetCSS theme={theme}>
       <Container>
+        <Navbar/>
         <Flex>
           <Box
             bg="linear-gradient(180deg, #5E30DF 0%, rgba(97, 45, 208, 0.924167) 55.73%, rgba(116, 41, 190, 0.84) 100%)"
@@ -189,7 +197,7 @@ console.log(JSON.stringify(msg));
                             <InputLeftElement
                               pointerEvents="none"
                             />
-                            <Input type="text" size="md" bg = "white" value={backerWallet} onChange={()=> {}}/>
+                            <Input type="text" size="md" bg = "white" value={backerWallet} readOnly/>
                           </InputGroup>
                         </FormControl>
                         <FormControl>
