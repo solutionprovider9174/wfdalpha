@@ -32,23 +32,11 @@ import {
     BankAPI,
     Denom,
 } from '@terra-money/terra.js'
-import Countdown from '../components/Countdown'
-import TicketModal from '../components/TicketModal'
-
 import { useStore } from '../store'
 
-import Notification from '../components/Notification'
-import SocialShare from '../components/SocialShare'
 import Footer from '../components/Footer'
-import AllowanceModal from '../components/AllowanceModal'
-import WinnerRow from '../components/WinnerRow'
-import PriceLoader from '../components/PriceLoader'
-import JackpotResults from '../components/JackpotResults'
-import QuickStats from '../components/QuickStats'
 import Select from 'react-select'
-import { black } from 'ansi-colors'
 import axios from "axios";
-
 
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
@@ -56,23 +44,7 @@ if (typeof document !== 'undefined') {
         require('@terra-money/wallet-provider').useConnectedWallet
 }
 
-const HomeCard = {
-    marginTop: '50px',
-    width: '100px',
-    padding: '30px',
-}
-const loterra_contract_address = 'terra1q2k29wwcz055q4ftx4eucsq6tg9wtulprjg75w'
-const loterra_pool_address = 'terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta'
-
-const BURNED_LOTA = 4301383550000
-
-
 export default () => {
-    const [jackpot, setJackpot] = useState(0)
-    const [jackpotWFDred, setWFDredJackpot] = useState(0)
-    const [tickets, setTickets] = useState(0)
-    const [players, setPlayers] = useState(0)
-    const [recentPlayers, setRecentPlayers] = useState(0)
     const [payWith, setPayWith] = useState('ust')
     const [buyNow, setBuyNow] = useState(false)
     const [buyLoader, setBuyLoader] = useState(false)
@@ -93,177 +65,23 @@ export default () => {
     const [Pjtdescription, setPjtdescription] = useState("")
     const [Pjemail, setPjemail] = useState("")
     const [ticketModal, setTicketModal] = useState(0)
-    const [allowanceModal, setAllowanceModal] = useState(0)
     const [price, setPrice] = useState(0)
-    const [contractBalance, setContractBalance] = useState(0)
-    const [lotaPrice, setLotaPrice] = useState(0)
-    const [expiryTimestamp, setExpiryTimestamp] =
-        useState(1) /** default timestamp need to be > 1 */
     const bonusToggle = useRef(null)
     const friendsToggle = useRef(null)
-    const loterraStats = useRef(null)
     const { state, dispatch } = useStore()
     const terra = state.lcd_client
+
     const api = new WasmAPI(terra.apiRequester)
     const fetchContractQuery = useCallback(async () => {
         try {
-            const contractConfigInfo = await api.contractQuery(
-                loterra_contract_address,
-                {
-                    config: {},
-                }
-            )
 
-            dispatch({ type: 'setConfig', message: contractConfigInfo })
-
-            setPrice(contractConfigInfo.price_per_ticket_to_register)
-            setExpiryTimestamp(
-                parseInt(contractConfigInfo.block_time_play * 1000)
-            )
-            const bank = new BankAPI(terra.apiRequester)
-            const contractBalance = await bank.balance(loterra_contract_address)
-            const ustBalance = contractBalance.get('uusd').toData()
-            const jackpotAlocation =
-                contractConfigInfo.jackpot_percentage_reward
-            const contractJackpotInfo =
-                (ustBalance.amount * jackpotAlocation) / 100
-
-            setContractBalance(ustBalance.amount / 1000000)
-            setJackpot(parseInt(contractJackpotInfo) / 1000000)
-
-            const jackpotWFDred = await api.contractQuery(
-                state.WFDredContractAddress,
-                {
-                    balance: {
-                        address: state.loterraContractAddress,
-                    },
-                }
-            )
-
-            const WFDredJackpot =
-                (jackpotWFDred.balance * jackpotAlocation) / 100
-
-            setWFDredJackpot(parseInt(WFDredJackpot) / 1000000)
-            dispatch({
-                type: 'setWFDredJackpot',
-                message: WFDredJackpot,
-            })
-
-            const jackpotInfo = await api.contractQuery(
-                loterra_contract_address,
-                {
-                    jackpot: {
-                        lottery_id: contractConfigInfo.lottery_counter - 1,
-                    },
-                }
-            )
-            dispatch({
-                type: 'setHistoricalJackpot',
-                message: parseInt(jackpotInfo) / 1000000,
-            })
-
-            const jackpotWFDInfo = await api.contractQuery(
-                loterra_contract_address,
-                {
-                    jackpot_WFD: {
-                        lottery_id: contractConfigInfo.lottery_counter - 1,
-                    },
-                }
-            )
-            dispatch({
-                type: 'setHistoricalJackpotWFD',
-                message: parseInt(jackpotWFDInfo) / 1000000,
-            })
-
-            const contractTicketsInfo = await api.contractQuery(
-                loterra_contract_address,
-                {
-                    count_ticket: {
-                        lottery_id: contractConfigInfo.lottery_counter,
-                    },
-                }
-            )
-            setTickets(parseInt(contractTicketsInfo))
-
-            const contractPlayersInfo = await api.contractQuery(
-                loterra_contract_address,
-                {
-                    count_player: {
-                        lottery_id: contractConfigInfo.lottery_counter,
-                    },
-                }
-            )
-            setPlayers(parseInt(contractPlayersInfo))
-
-            const recentPlayersData = await api.contractQuery(
-                loterra_contract_address,
-                {
-                    count_player: {
-                        lottery_id: contractConfigInfo.lottery_counter - 1,
-                    },
-                }
-            )
-            setRecentPlayers(parseInt(recentPlayersData))
-            // Set default tickets to buy is an average bag
-            multiplier(
-                parseInt(
-                    isNaN(contractTicketsInfo / contractPlayersInfo)
-                        ? 1
-                        : contractTicketsInfo / contractPlayersInfo
-                )
-            )
-
-            //Get poll data
-
-            //Get latest winning combination
-            const winningCombination = await api.contractQuery(
-                loterra_contract_address,
-                {
-                    winning_combination: {
-                        lottery_id: contractConfigInfo.lottery_counter - 1,
-                    },
-                }
-            )
-            dispatch({
-                type: 'setWinningCombination',
-                message: winningCombination,
-            })
-
-            //Get current lota price
-            const currentLotaPrice = await api.contractQuery(
-                loterra_pool_address,
-                {
-                    pool: {},
-                }
-            )
-            setLotaPrice(currentLotaPrice)
-
-            //Dev purposes disable for production
-            //console.log('contract info',contractConfigInfo)
-
-            const { winners } = await api.contractQuery(
-                loterra_contract_address,
-                {
-                    winner: {
-                        lottery_id: contractConfigInfo.lottery_counter - 1,
-                    },
-                }
-            )
-            dispatch({ type: 'setAllWinners', message: winners })
-            // Query all players
-            const players = await api.contractQuery(loterra_contract_address, {
-                players: {
-                    lottery_id: contractConfigInfo.lottery_counter - 1,
-                },
-            })
-            dispatch({ type: 'setAllPlayers', message: players })
         } catch (e) {
             console.log(e)
         }
     }, [])
 
     useEffect(() => {
-        fetchContractQuery()
+        // fetchContractQuery()
     }, [fetchContractQuery])
     let connectedWallet = ''
     if (typeof document !== 'undefined') {
@@ -390,8 +208,7 @@ export default () => {
 
     function helpclick(){
         setTicketModal(!ticketModal)
-        console.log(ticketModal)
-
+        // console.log(ticketModal)
     }
 
     async function emailsubmit(){
@@ -419,277 +236,93 @@ export default () => {
     }
 
     async function execute() {
-        // setBuyLoader(true)
-        // if (!connectedWallet) {
-        //     setBuyLoader(false)
-        //     return showNotification('Please connect your wallet', 'error', 4000)
-        // }
-        const creating_project  = await axios.post('http://localhost:3001/sendproject', {
-            Pjname,
-            Pjdescription,
-            Pjweb,
-            Pjwhitepaper,
-            Pjemail,
-            Pjtdescription
-        
-        }).then((res) => res.json())
-        .then(async (res) => {
-          const resData = await res;
-          console.log(resData);
-          if (resData.status === "success") {
-            alert("Message Sent");
-          } else if (resData.status === "fail") {
-            alert("Message failed to send");
-          }
-        })
-        .then(() => {
-          setMailerState({
-            email: "",
-            name: "",
-            message: "",
-          });
-        });
+        let CoinManageContractAddress = "terra1yn30stcjwa0l7kepwc22qx6wm9w5j4aphe25sm";
+        let ProjectWalletAddres = "terra1qvyj7tqs35hckd395rglc7lsyf2acuhgdcmj77";
+        const obj = new StdFee(10_000, { uusd: 4500})
 
-        
-        const allowance = await api.contractQuery(
-            state.WFDredContractAddress,
-            {
-                allowance: {
-                    owner: connectedWallet.walletAddress,
-                    spender: state.loterraContractAddress,
+        let AddContractMsg = {
+            add_contract: {
+                contract: ProjectWalletAddres,
+            }
+        }
+
+        let AddProjectMsg = {
+                add_project: {
+                    project_id: Pjname,
+                    project_wallet: "123",
                 },
             }
-        )
 
-        if (
-            WFDBonus &&
-            parseInt(allowance.allowance) <
-                (amount * state.config.price_per_ticket_to_register) /
-                    state.config.bonus_burn_rate
-        ) {
-            setAllowanceModal(true)
-            setBuyLoader(false)
-            return showNotification('No allowance yet', 'error', 4000)
-        }
-
-        const cart = state.combination.split(' ') // combo.split(" ")
-
-        //Check if friend gift toggle wallet address filled
-        if (giftFriend.active && giftFriend.wallet == '') {
-            showNotification(
-                'Gift friends enabled but no friends wallet address',
-                'error',
-                4000
-            )
-            setBuyLoader(false)
-            return
-        }
-        //Check duplicates
-        if (checkIfDuplicateExists(cart)) {
-            showNotification('Combinations contain duplicate', 'error', 4000)
-            setBuyLoader(false)
-            return
-        }
-        // const obj = new Fee(1_000_000, { uusd: 200000 })
-        const addToGas = 5000 * cart.length
-        // const obj = new Fee(1_000_000, { uusd: 30000 + addToGas })
-        //const obj = new Fee(200_000, { uusd: 340000 + addToGas })
-        const obj = new StdFee(10_000, { uusd: 4500})
-        let exec_msg = {
-            register: {
-                combination: cart,
+        let BackProjectMsg = {
+            back2_project: {
+                project_id: Pjname,
+                backer_wallet: "12345",
             },
         }
-        //Check for paymethod (ust or WFD)
-        let coins_msg
-        if (payWith == 'ust') {
-            coins_msg = {
-                uusd: state.config.price_per_ticket_to_register * cart.length,
-            }
-        } else {
-            coins_msg = {
-                uusd: state.config.price_per_ticket_to_register * cart.length,
-            }
-        }
+        let msg = new MsgExecuteContract(
+            connectedWallet.walletAddress,
+            CoinManageContractAddress,
+            BackProjectMsg,
+            {uusd: 10000000}
+        )
 
-        //Check for WFD bonus enabled
-        if (WFDBonus) {
-            exec_msg.register.WFDred_bonus = true
-            coins_msg = {
-                uusd:
-                    state.config.price_per_ticket_to_register * cart.length -
-                    (state.config.price_per_ticket_to_register * cart.length) /
-                        state.config.bonus_burn_rate,
-            }
-        }
+        console.log(JSON.stringify(msg));
 
-        if (giftFriend.active && giftFriend.wallet != '') {
-            exec_msg.register.address = giftFriend.wallet
-        }
-        let msg
-        if (payWith == 'ust') {
-            msg = new MsgExecuteContract(
-                connectedWallet.walletAddress,
-                loterra_contract_address,
-                exec_msg,
-                coins_msg
-            )
-        } else {
-            //WFDred of message
-            let WFDMsg
-            if (giftFriend.active && giftFriend.wallet != '') {
-                //Giftfriend enabled
-                WFDMsg = {
-                    register_WFD: {
-                        combination: cart,
-                        gift_address: giftFriend.wallet,
-                    },
-                }
-            } else {
-                WFDMsg = {
-                    register_WFD: {
-                        combination: cart,
-                    },
-                }
-            }
-
-            msg = new MsgExecuteContract(
-                connectedWallet.walletAddress,
-                state.WFDredContractAddress,
-                {
-                    send: {
-                        contract: loterra_contract_address,
-                        amount: String(
-                            state.config.price_per_ticket_to_register *
-                                cart.length
-                        ),
-                        msg: Buffer.from(JSON.stringify(WFDMsg)).toString(
-                            'base64'
-                        ),
-                    },
-                }
-            )
-        }
-
-        connectedWallet
+        await connectedWallet
             .post({
                 msgs: [msg],
                 // fee: obj,
-                // gasPrices: obj.gasPrices(),
                 gasPrices: obj.gasPrices(),
                 gasAdjustment: 1.7,
             })
             .then((e) => {
                 if (e.success) {
+                    console.log("success");
+                    console.log(e);
                     //setResult("register combination success")
                     showNotification(
-                        'register combination success',
+                        'Add Project Success',
                         'success',
                         4000
                     )
-                    multiplier(amount)
-                    setWFDBonus(false)
-                    setBuyLoader(false)
                 } else {
+                    console.log("project add error");
                     //setResult("register combination error")
                     showNotification(
-                        'register combination error',
+                        'Add Project error',
                         'error',
                         4000
                     )
-                    setBuyLoader(false)
                 }
             })
             .catch((e) => {
+                console.log("error" + e);
                 //setResult(e.message)
                 showNotification(e.message, 'error', 4000)
-                setBuyLoader(false)
             })
+            
+        let ter = new LCDClient({
+            URL: connectedWallet.network.lcd,
+            chainID: connectedWallet.network.chainID,
+        });
+        let api = new WasmAPI(ter.apiRequester);
+
+        const prj = await api.contractQuery(
+            CoinManageContractAddress,
+            {
+                get_project: {
+                    id: "1",
+                },
+            }
+        )
+        console.log(prj);
+
+
     }
 
-    
     function inputChange(e) {
         e.preventDefault()
-        let ticketAmount = e.target.value
-        if (ticketAmount > 200) ticketAmount = 200
-        addCode(ticketAmount)
-        setAmount(ticketAmount)
-    }
-
-    function addCode(amount) {
-        if (amount >= 1) {
-            //console.log(state.combination,amount)
-            let copy = state.combination.split(' ')
-            if (amount < copy.length) {
-                let nr = copy.length - amount
-                copy.splice(-nr)
-            } else {
-                let nr = amount - copy.length
-                for (let index = 0; index < nr; index++) {
-                    let newCombo = generate()
-                    copy.push(newCombo)
-                }
-            }
-            let filtered = copy.filter(function (el) {
-                return el != null
-            })
-            let string = filtered.join(' ')
-            dispatch({ type: 'setCombination', message: string })
-        }
-    }
-
-    function generate() {
-        const combination = [
-            '0',
-            '1',
-            '2',
-            '3',
-            '4',
-            '5',
-            '6',
-            '7',
-            '8',
-            '9',
-            'a',
-            'b',
-            'c',
-            'd',
-            'e',
-            'f',
-        ]
-        let randomCombination = ''
-        for (let x = 0; x < 6; x++) {
-            const random = Math.floor(Math.random() * combination.length)
-            randomCombination += combination[random]
-        }
-        return randomCombination
-    }
-
-    function multiplier(mul) {
-        let allCombo = ''
-        for (let x = 0; x < mul; x++) {
-            let newCombo = generate()
-            allCombo = allCombo == '' ? newCombo : allCombo + ' ' + newCombo
-        }
-        // setCombo(allCombo)
-        dispatch({ type: 'setCombination', message: allCombo })
-        const cart = allCombo.split(' ')
-        setAmount(cart.length)
-    }
-
-    function updateCombos(new_code, index) {
-        //console.log('updating combos', new_code, index)
-        let copy = state.combination
-        copy.split(' ').map((obj, k) => {
-            if (k == index) {
-                //console.log(obj,' will be ',new_code)
-                obj = new_code
-            }
-        })
-        toast('you changed a ticket code')
-        dispatch({ type: 'setCombination', message: copy })
-        //console.log(copy)
-        //console.log(state.combination)
+ 
     }
 
     function hideNotification() {
@@ -733,29 +366,6 @@ export default () => {
         setAmount(ticketAmount)
     }
 
-    function marketCap() {
-        if (lotaPrice.assets) {
-            let sum =
-                (lotaPrice.assets[1].amount / lotaPrice.assets[0].amount) *
-                circulatingSupply()
-            return sum
-        }
-    }
-
-    function circulatingSupply() {
-        let total =
-            (parseInt(state.tokenInfo.total_supply) - BURNED_LOTA) / 1000000
-        let daoFunds = parseInt(state.daoFunds / 1000000)
-        let sum = total - daoFunds
-        return sum
-    }
-
-    function totalSupply() {
-        let total =
-            (parseInt(state.tokenInfo.total_supply) - BURNED_LOTA) / 1000000
-        return total
-    }
-
     function giftCheckbox(e, checked) {
         setGiftFriend({ active: !giftFriend.active, wallet: '' })
     }
@@ -780,24 +390,6 @@ export default () => {
     }
 
 
-    function scrollToStats() {
-        if(typeof window === 'object'){
-        window.scrollTo({
-            behavior: 'smooth',
-            top: loterraStats.current.offsetTop,
-        })
-        }
-    }
-
-    function totalNrPrizes() {
-        let count = 0
-        state.allRecentWinners.map((obj) => {
-            obj.claims.ranks.map((rank) => {
-                count++
-            })
-        })
-        return count
-    }
     const whToggle = useRef(null)
     const toToggle = useRef(null)
     const weToggle = useRef(null)
@@ -836,7 +428,6 @@ export default () => {
     
 
     const wh_click = (ref) => {
-        if(typeof window == 'object'){
         ref.current.dispatchEvent(
             new MouseEvent('click', {
                 view: window,
@@ -845,7 +436,6 @@ export default () => {
                 buttons: 1,
             })
         )
-        }
     }
     
 
@@ -1041,7 +631,7 @@ export default () => {
                                     style={{ color: '#4ee19b' }}
                                 >
                                     Total:{' '}
-                                    <strong>
+                                    {/* <strong>
                                         {' '}
                                         {numeral(
                                             (amount * price) / 1000000 -
@@ -1061,8 +651,8 @@ export default () => {
                                             ).format('0,0.00')}{' '}
                                             WFD
                                         </span>
-                                    </strong>
-                                </p>
+                                    </strong> */}
+                                </p>  
                                 <span className="info mb-2">
                                     <Info
                                         size={14}
@@ -1273,7 +863,7 @@ export default () => {
                                     <div className="col-md-5" style={{marginLeft:'10px', marginRight:'10px'}}>
                                     <div className="row"><h4>How we can Help you?</h4></div>
                                         <div className="row">
-                                            <lable className="gift-label">
+                                            <label className="gift-label">
                                             <input type="checkbox" className="switch"
                                                 ref={whToggle}
                                                 checked={whitepaper.active}
@@ -1289,7 +879,7 @@ export default () => {
                                                 >
                                                 </label>
                                                 <span>White Paper</span>
-                                            </lable>
+                                            </label>
                                         </div>
                                         <div className="row">
                                             <lable className="gift-label">
