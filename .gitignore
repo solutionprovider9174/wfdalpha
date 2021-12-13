@@ -5,3 +5,4 @@ artifacts
 dist
 .next
 public/PDF
+.DS_Store
