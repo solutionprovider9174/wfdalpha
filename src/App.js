@@ -47,7 +47,7 @@ class App extends Component {
                             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
                         />
                         <title>
-                            LoTerra - Decentralized lottery on Terra blockchain
+                            WeFund - Decentralized back project on Terra blockchain
                         </title>
                         <link
                             rel="icon"
@@ -68,21 +68,21 @@ class App extends Component {
                         <meta property="og:type" content="website" />
                         <meta
                             property="og:site_name"
-                            content="LoTerra interface"
+                            content="WeFund - Back To Project"
                         />
                         <meta
                             property="og:description"
-                            content="LoTerra is a lottery contract, buy tickets as a player or join the governance! DAO allows making decisions together! Manage the casino 🎰 Set the prize 🏆 Up the ticket price or go cheap 🏷 Extract max profits 🤑 Keep the vault secure at all times!"
+                            content="WeFund is ready!"
                         />
                         <meta name="twitter:card" content="summary" />
                         <meta name="twitter:site" content="LoTerra" />
                         <meta
                             name="twitter:title "
-                            content="LoTerra - Decentralized lottery on Terra blockchain"
+                            content="WeFund - Decentralized Back to Project Terra blockchain"
                         />
                         <meta
                             name="twitter:description"
-                            content="LoTerra is a lottery contract, buy tickets as a player or join the governance! DAO allows making decisions together! Manage the casino 🎰 Set the prize 🏆 Up the ticket price or go cheap 🏷 Extract max profits 🤑 Keep the vault secure at all times!"
+                            content="WeFund is ready!"
                         />
                         <meta
                             name="twitter:image"

@@ -25,14 +25,6 @@ export default {
             template: 'src/pages/Startup',
         },
         {
-            path: 'staking',
-            template: 'src/pages/Staking',
-        },
-        {
-            path: 'dao',
-            template: 'src/pages/DAO',
-        },
-        {
             path: 'dogether',
             template: 'src/pages/Dogether',
         },
@@ -40,10 +32,14 @@ export default {
             path: 'esignedit',
             template: 'src/pages/EsignEdit',
         },
-        // A 404 component
+        {
+            path: 'investform',
+            template: 'src/pages/InvestForm',
+        },
+         // A 404 component
         {
             path: '404',
             template: 'src/pages/NotFound',
         },
-    ],
+   ],
 }
