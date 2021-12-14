@@ -74,5 +74,6 @@
         "serve": "^11.3.2",
         "tailwindcss": "npm:@tailwindcss/postcss7-compat"
     },
-    "version": "v1.22.15"
+    "version": "v1.22.15",
+    "engines": { "node": "12.x" }
 }
