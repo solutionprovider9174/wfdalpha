@@ -13,7 +13,6 @@ if (typeof document !== 'undefined') {
     bootstrap = require('bootstrap')
 }
 import { StoreProvider } from './store'
-import AppRouter from 'router'
 
 class App extends Component {
     render() {
@@ -48,7 +47,7 @@ class App extends Component {
                             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
                         />
                         <title>
-                            WeFund - Decentralized back project on Terra blockchain
+                            LoTerra - Decentralized lottery on Terra blockchain
                         </title>
                         <link
                             rel="icon"
@@ -69,21 +68,21 @@ class App extends Component {
                         <meta property="og:type" content="website" />
                         <meta
                             property="og:site_name"
-                            content="WeFund - Back To Project"
+                            content="LoTerra interface"
                         />
                         <meta
                             property="og:description"
-                            content="WeFund is ready!"
+                            content="LoTerra is a lottery contract, buy tickets as a player or join the governance! DAO allows making decisions together! Manage the casino 🎰 Set the prize 🏆 Up the ticket price or go cheap 🏷 Extract max profits 🤑 Keep the vault secure at all times!"
                         />
                         <meta name="twitter:card" content="summary" />
                         <meta name="twitter:site" content="LoTerra" />
                         <meta
                             name="twitter:title "
-                            content="WeFund - Decentralized Back to Project Terra blockchain"
+                            content="LoTerra - Decentralized lottery on Terra blockchain"
                         />
                         <meta
                             name="twitter:description"
-                            content="WeFund is ready!"
+                            content="LoTerra is a lottery contract, buy tickets as a player or join the governance! DAO allows making decisions together! Manage the casino 🎰 Set the prize 🏆 Up the ticket price or go cheap 🏷 Extract max profits 🤑 Keep the vault secure at all times!"
                         />
                         <meta
                             name="twitter:image"
@@ -95,11 +94,8 @@ class App extends Component {
                         />
                     </Head>
                     <StoreProvider>
-                        {/* <Navbar/> */}
-                        <AppRouter> 
-                        {/* <Navbar/> */}
-                        </AppRouter>
-                        {/* <Routes default /> */}
+                        <Navbar />
+                        <Routes default />
                     </StoreProvider>
 
                     {/*<Footer/>*/}

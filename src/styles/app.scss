@@ -91,7 +91,7 @@ h4,
 .hero {
     background-size: cover;
     padding: 105px 0;
-    height: 100%;
+    height: 935px;
     max-width: 100%;
     // overflow-y: hidden;
     // overflow-x: hidden;
@@ -904,88 +904,6 @@ h4,
     }
 }
 
-.view-details-inline{
-    display:inline-flex;
-}
-.b-bord{
-    border-bottom: 1px solid #7f1e9c7a;
-}
-
-.proj-details-block{
-    background: linear-gradient(95.45deg, #3b2e73 -92.2%, #10003b 105.35%);
-    box-sizing: border-box;
-    box-shadow: 0px -10px 22px #501b7b;
-    border-radius: 10px;
-    border: 1px solid #7f1e9c7a;
-    visibility: hidden;
-    opacity: 0;
-    margin-left: auto;
-    margin-right: auto;
-    position: absolute;
-    transition: all 200ms linear;
-    z-index: 15;
-    width: 800px;
-    height: 750px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    .toggle {
-        background: transparent;
-        border: 0;
-        position: absolute;
-        right: 0;
-        top: 0;
-        padding: 5px;
-        z-index: 3;
-        svg {
-            opacity: 0.5;
-            color: #fff;
-        }
-        &:hover {
-            svg {
-                opacity: 1;
-            }
-        }
-    }
-    @media (max-width: 660px) {
-        width: 100%;
-    }
-    .card-header {
-        padding: 1rem 1rem;
-        margin-bottom: 0;
-        text-shadow: 2px 2px 0px #140440;
-        h2 {
-            text-align: center;
-        }
-        h3 {
-            font-weight: 900;
-            text-align: center;
-            margin: 0;
-            font-size: 33px;
-            color: #ffffff;
-        }
-    }
-    label {
-        display: block;
-        font-weight: bold;
-    }
-    small {
-        font-size: 12px;
-        color: #a69fbb;
-        span {
-            background: $primary;
-            color: #fff;
-            padding: 4px;
-            border-radius: 10px;
-            margin-right: 3px;
-        }
-    }
-    &.active {
-        visibility: visible;
-        opacity: 1;
-        position: fixed;
-    }
-}
 .amount-block {
     background: linear-gradient(95.45deg, #3b2e73 -92.2%, #10003b 105.35%);
     box-sizing: border-box;
@@ -999,8 +917,7 @@ h4,
     position: absolute;
     transition: all 200ms linear;
     z-index: 15;
-    width: 600px;
-    height: 600px;
+    width: 400px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
