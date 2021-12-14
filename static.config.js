@@ -15,31 +15,27 @@ export default {
     }),
     //maxThreads: 1, // Remove this when you start doing any static generation
     getRoutes: async ({ dev }) => [
-        //  simple route
+        // A simple route
         {
             path: '/',
             template: 'src/pages/Index',
         },
         {
-            path: 'startup',
-            template: 'src/pages/Startup',
+            path: 'staking',
+            template: 'src/pages/Staking',
+        },
+        {
+            path: 'dao',
+            template: 'src/pages/DAO',
         },
         {
             path: 'dogether',
             template: 'src/pages/Dogether',
         },
-        {
-            path: 'esignedit',
-            template: 'src/pages/EsignEdit',
-        },
-        {
-            path: 'investform',
-            template: 'src/pages/InvestForm',
-        },
-         // A 404 component
+        // A 404 component
         {
             path: '404',
             template: 'src/pages/NotFound',
         },
-   ],
+    ],
 }

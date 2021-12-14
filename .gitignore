@@ -4,4 +4,3 @@ node_modules
 artifacts
 dist
 .next
-public/PDF

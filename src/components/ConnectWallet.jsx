@@ -21,8 +21,30 @@ import {
     Bank,
 } from 'phosphor-react'
 import numeral from 'numeral'
+import UserModal from './UserModal'
 import { useStore } from '../store'
+import { Link } from '@reach/router'
+// let useWallet = {}
+// if (typeof document !== 'undefined') {
+//     useWallet = require('@terra-money/wallet-provider').useWallet
+// }
+/*const Modal = {
+    position: "absolute",
+    width: "100%",
+    height:"100%",
+    left: "0",
+    top: "0",
+}
+const Dialog = {
+    position: "absolute",
+    right: "100px",
+    top: "120px",
+    width: "300px",
+    display: "flex",
+    justifyContent: "center",
+    flexDirection:"column",
 
+} */
 
 const DialogButton = {
     margin: '10px 20px 10px 20px',
@@ -69,7 +91,7 @@ export default function ConnectWallet() {
     const api = new WasmAPI(state.lcd_client.apiRequester)
     async function baseData() {
         const latestBlocks = await axios.get(
-            'https://lcd.terra.dev/blocks/latest',
+            'https://lcd.terra.dev/blocks/latest'
         )
 
         dispatch({
@@ -81,7 +103,7 @@ export default function ConnectWallet() {
             state.loterraContractAddress,
             {
                 config: {},
-            },
+            }
         )
 
         dispatch({ type: 'setConfig', message: contractConfigInfo })
@@ -100,7 +122,7 @@ export default function ConnectWallet() {
                 winner: {
                     lottery_id: contractConfigInfo.lottery_counter - 1,
                 },
-            },
+            }
         )
         dispatch({ type: 'setAllRecentWinners', message: winners })
 
@@ -110,28 +132,16 @@ export default function ConnectWallet() {
                 balance: {
                     address: state.loterraContractAddress,
                 },
-            },
+            }
         )
         dispatch({ type: 'setDaoFunds', message: contractDaoBalance.balance })
-
-        const contractDogetherState = await api.contractQuery(
-            state.dogetherAddress,
-            {
-                state: {}
-            },
-        )
-        dispatch({
-            type: 'setDogetherState',
-            message: contractDogetherState,
-        })
-
         const contractLPLoterraBalance = await api.contractQuery(
             state.loterraContractAddressCw20,
             {
                 balance: {
                     address: state.loterraStakingLPAddress,
                 },
-            },
+            }
         )
         dispatch({
             type: 'setStakingLoterraFunds',
@@ -143,7 +153,7 @@ export default function ConnectWallet() {
                 balance: {
                     address: state.alteredStakingLPAddress,
                 },
-            },
+            }
         )
         dispatch({
             type: 'setStakingAlteredFunds',
@@ -152,14 +162,14 @@ export default function ConnectWallet() {
 
         // Get total pool in Dogether
         const total_pool_dogether = await api.contractQuery(
-            'terra19h4xk8xxxew0ne6fuw0mvuf7ltmjmxjxssj5ts',
+            state.dogetherStakingAddress,
             {
-                state: {},
-            },
+                state: { },
+            }
         )
         dispatch({
             type: 'setTotalBalancePoolDogether',
-            message: total_pool_dogether.total_ust_pool,
+            message: total_pool_dogether.total_balance,
         })
 
         const jackpotAltered = await api.contractQuery(
@@ -168,7 +178,7 @@ export default function ConnectWallet() {
                 balance: {
                     address: state.loterraContractAddress,
                 },
-            },
+            }
         )
         dispatch({
             type: 'setAlteredJackpot',
@@ -186,7 +196,7 @@ export default function ConnectWallet() {
                     state.loterraContractAddress,
                     {
                         get_poll: { poll_id: index },
-                    },
+                    }
                 )
                 proposal.nr = index
                 allProposals.push(proposal)
@@ -206,7 +216,7 @@ export default function ConnectWallet() {
             state.loterraContractAddressCw20,
             {
                 token_info: {},
-            },
+            }
         )
         dispatch({ type: 'setTokenInfo', message: token_info })
 
@@ -214,7 +224,7 @@ export default function ConnectWallet() {
             state.loterraStakingLPAddress,
             {
                 state: {},
-            },
+            }
         )
         dispatch({ type: 'setStateLPStaking', message: state_lp_staking })
         const pool_info = await api.contractQuery(state.loterraPoolAddress, {
@@ -294,7 +304,7 @@ export default function ConnectWallet() {
                     state.loterraContractAddress,
                     {
                         config: {},
-                    },
+                    }
                 )
                 setConnected(true)
                 const lastDrawnJackpot = await api.contractQuery(
@@ -303,7 +313,7 @@ export default function ConnectWallet() {
                         jackpot: {
                             lottery_id: contractConfigInfo.lottery_counter - 1,
                         },
-                    },
+                    }
                 )
                 dispatch({
                     type: 'setLastDrawnJackpot',
@@ -311,23 +321,17 @@ export default function ConnectWallet() {
                 })
 
                 // Get balance to staked on Dogether
-                const balance_stake_on_dogether = await api.contractQuery(
-                    state.dogetherStakingAddress,
-                    {
-                        holder: { address: connectedWallet.walletAddress },
-                    },
-                )
-                dispatch({
-                    type: 'setBalanceStakeOnDogether',
-                    message: balance_stake_on_dogether.balance,
+                const balance_stake_on_dogether = await api.contractQuery(state.dogetherStakingAddress, {
+                    holder: {address: connectedWallet.walletAddress},
                 })
+                dispatch({ type: 'setBalanceStakeOnDogether', message: balance_stake_on_dogether.balance })
 
                 // Get balance pending to claim on Dogether
                 const claims_unstake_dogether = await api.contractQuery(
                     state.dogetherStakingAddress,
                     {
                         claims: { address: connectedWallet.walletAddress },
-                    },
+                    }
                 )
                 dispatch({
                     type: 'setHolderClaimsDogether',
@@ -338,7 +342,7 @@ export default function ConnectWallet() {
                     state.loterraStakingAddress,
                     {
                         holder: { address: connectedWallet.walletAddress },
-                    },
+                    }
                 )
                 dispatch({ type: 'setAllHolder', message: holder })
                 //console.log(holder)
@@ -349,7 +353,7 @@ export default function ConnectWallet() {
                         accrued_rewards: {
                             address: connectedWallet.walletAddress,
                         },
-                    },
+                    }
                 )
                 dispatch({
                     type: 'setHolderAccruedRewards',
@@ -361,7 +365,7 @@ export default function ConnectWallet() {
                     state.loterraContractAddressCw20,
                     {
                         balance: { address: connectedWallet.walletAddress },
-                    },
+                    }
                 )
                 dispatch({ type: 'setLotaBalance', message: token })
                 //console.log(token)
@@ -370,7 +374,7 @@ export default function ConnectWallet() {
                     state.loterraStakingAddress,
                     {
                         claims: { address: connectedWallet.walletAddress },
-                    },
+                    }
                 )
                 //console.log("claims")
                 //console.log(claims)
@@ -380,7 +384,7 @@ export default function ConnectWallet() {
                     state.loterraLPAddress,
                     {
                         balance: { address: connectedWallet.walletAddress },
-                    },
+                    }
                 )
                 dispatch({ type: 'setLPBalance', message: tokenLP })
                 //console.log(tokenLP)
@@ -390,7 +394,7 @@ export default function ConnectWallet() {
                         accrued_rewards: {
                             address: connectedWallet.walletAddress,
                         },
-                    },
+                    }
                 )
                 dispatch({
                     type: 'setLPHolderAccruedRewards',
@@ -401,7 +405,7 @@ export default function ConnectWallet() {
                     state.loterraStakingLPAddress,
                     {
                         holder: { address: connectedWallet.walletAddress },
-                    },
+                    }
                 )
                 dispatch({ type: 'setAllHolderLP', message: holderLP })
 
@@ -409,7 +413,7 @@ export default function ConnectWallet() {
                     state.loterraStakingLPAddress,
                     {
                         claims: { address: connectedWallet.walletAddress },
-                    },
+                    }
                 )
 
                 dispatch({
@@ -425,7 +429,7 @@ export default function ConnectWallet() {
                         balance: {
                             address: connectedWallet.walletAddress,
                         },
-                    },
+                    }
                 )
 
                 // Better to keep it at the end
@@ -438,12 +442,14 @@ export default function ConnectWallet() {
                             lottery_id: contractConfigInfo.lottery_counter,
                             address: connectedWallet.walletAddress,
                         },
-                    },
+                    }
                 )
                 dispatch({ type: 'setAllCombinations', message: combinations })
+
             } catch (e) {
                 console.log(e)
             }
+
 
             //Store coins global state
             dispatch({ type: 'setAllNativeCoins', message: coins })
@@ -512,10 +518,7 @@ export default function ConnectWallet() {
                         />
                     </>
                 ) : (
-                    <div
-                        className="spinner-border spinner-border-sm"
-                        role="status"
-                    >
+                    <div className="spinner-border spinner-border-sm" role="status">
                         <span className="visually-hidden">Loading...</span>
                     </div>
                 )}
@@ -554,99 +557,277 @@ export default function ConnectWallet() {
         state.allRecentWinners,
         state.youWon,
     ])
-    
+
     return (
-        <>
-            <div className="navbar-nav ms-auto" style={{flexDirection:'row'}}>
-                {!connected && (
-                    <>
-                        <div className="btn-group" style={{width:'100%'}}>
+        <div
+            className={
+                scrolled
+                    ? 'navbar navbar-expand p-2 p-md-3 sticky'
+                    : 'navbar navbar-expand p-2 p-md-3'
+            }
+        >
+            <div className="container-fluid">
+                <a className="navbar-brand" href="/">
+                    <img src="/logo.png" /> <span>WeFund</span>
+                </a>
+                <nav
+                    className={
+                        sideNav
+                            ? 'navbar-nav main-nav me-auto open'
+                            : 'navbar-nav main-nav me-auto'
+                    }
+                >
+                    <button
+                        className="main-nav-close-toggle"
+                        onClick={() => showSideNav()}
+                    >
+                        <X size={36} />
+                    </button>
+                    <li className="nav-item">
+                        <a href="/" className={'nav-link ' + homeClass}>
+                            <Ticket
+                                size={24}
+                                style={{
+                                    marginRight: '3px',
+                                    position: 'relative',
+                                    top: '-1px',
+                                }}
+                            />{' '}
+                            Create a Project
+                            <span className="item-label">Make Real Your Dream</span>
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a
+                            href="/dogether"
+                            className="nav-link"
+                            style={{ position: 'relative' }}
+                        >
+                            <Ticket
+                                size={24}
+                                style={{
+                                    marginRight: '3px',
+                                    position: 'relative',
+                                    top: '-1px',
+                                }}
+                            />{' '}
+                            View Projects
+                            <span className="item-label">Viev Amazing Projects</span>
+                            <span
+                                className="badge"
+                                style={{
+                                    position: 'absolute',
+                                    right: 0,
+                                    top: '-9px',
+                                    fontSize: '10px',
+                                    lineHeight: '10px',
+                                    padding: '3px',
+                                    textTransform: 'uppercase',
+                                    color:'#10003b',
+                                    background:'#8bf6c2'
+                                }}
+                            >
+                                
+                            </span>
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a
+                            href="/staking"
+                            className="nav-link"
+                            className={'nav-link ' + stakingClass}
+                        >
+                            <Coin
+                                size={24}
+                                style={{
+                                    marginRight: '3px',
+                                    position: 'relative',
+                                    top: '-1px',
+                                }}
+                            />{' '}
+                           Sponsor
+                            <span className="item-label">
+                                Buy NFT, SPONSOR PROJECT
+                            </span>
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a
+                            href="/dao"
+                            className="nav-link"
+                            className={'nav-link ' + daoClass}
+                        >
+                            <Bank
+                                size={24}
+                                style={{
+                                    marginRight: '3px',
+                                    position: 'relative',
+                                    top: '-1px',
+                                }}
+                            />{' '}
+                            DAO
+                            <span className="item-label">
+                                Together we decide
+                            </span>
+                        </a>
+                    </li>                    
+                </nav>
+
+                <div className="navbar-nav ms-auto">
+                    {!connected && (
+                        <>
+                            <div className="btn-group">
+                                <button
+                                    className="btn btn-green nav-item dropdown-toggle"
+                                    type="button"
+                                    id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    <Wallet
+                                        size={18}
+                                        style={{
+                                            marginTop: '-4px',
+                                            marginRight: '4px',
+                                        }}
+                                    />
+                                    Connect
+                                </button>
+                                <ul
+                                    className="dropdown-menu dropdown-menu-end"
+                                    aria-labelledby="dropdownMenuButton1"
+                                >
+                                    <button
+                                        onClick={() => connectTo('extension')}
+                                        className="dropdown-item"
+                                    >
+                                        <CaretRight
+                                            size={16}
+                                            style={{ marginTop: '-4px' }}
+                                        />{' '}
+                                        Terra Station (extension/mobile)
+                                    </button>
+                                    <button
+                                        onClick={() => connectTo('mobile')}
+                                        className="dropdown-item"
+                                    >
+                                        <CaretRight
+                                            size={16}
+                                            style={{ marginTop: '-4px' }}
+                                        />{' '}
+                                        Terra Station (mobile for desktop)
+                                    </button>
+                                </ul>
+                            </div>
+                            <button
+                                className="btn btn-default nav-item ms-2 main-nav-toggle"
+                                onClick={() => showSideNav()}
+                            >
+                                <List size={26} />
+                            </button>
+                        </>
+                    )}
+                    {connected && (
+                        <>
+                            <button
+                                className={
+                                    'btn btn-default nav-item me-2' +
+                                    (state.youWon ? ' winner' : '')
+                                }
+                                style={{
+                                    padding: '0.275rem 0.55rem',
+                                }}
+                                onClick={() => setIsModal(!isModal)}
+                            >
+                                {state.youWon ? (
+                                    <>
+                                        <Trophy
+                                            size={33}
+                                            style={{
+                                                marginTop: '-2px',
+                                                color: '#ecba26',
+                                            }}
+                                        />
+                                        <span className="badge">YOU WON</span>
+                                    </>
+                                ) : (
+                                    <UserCircle
+                                        size={33}
+                                        style={{
+                                            marginTop: '-2px',
+                                            color: '#72ffc1',
+                                        }}
+                                    />
+                                )}
+                            </button>
                             <button
                                 className="btn btn-green nav-item dropdown-toggle"
-                                type="button"
-                                id="dropdownMenuButton1"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
-                                width="150px"
-                                style={{backGroundColor:'red', width:'100%'}}
                             >
-                                Connect
+                                {returnBank() ? returnBank() : 'loading'}
                             </button>
                             <ul
                                 className="dropdown-menu dropdown-menu-end"
-                                aria-labelledby="dropdownMenuButton1"
+                                aria-labelledby="dropdownMenuButton2"
+                                style={{ top: '70px' }}
                             >
+                                {bank && alteBank && (
+                                    <div
+                                        className="wallet-info d-inline-block text-start px-3"
+                                        style={{ fontSize: '13px' }}
+                                    >
+                                        <span className="d-block">
+                                            <strong>YOUR WALLET:</strong>
+                                        </span>
+                                        <span
+                                            className="d-block"
+                                            style={{ marginBottom: '-5px' }}
+                                        >
+                                            {bank}{' '}
+                                            <span className="text-sm">UST</span>
+                                        </span>
+                                        <span className="d-block">
+                                            {alteBank}{' '}
+                                            <span className="text-sm">
+                                                ALTE
+                                            </span>
+                                        </span>
+                                    </div>
+                                )}
                                 <button
-                                    onClick={() => connectTo('extension')}
+                                    onClick={() => connectTo('disconnect')}
                                     className="dropdown-item"
-                                    style={{display:'flex', flexDirection:'row', alignItems:'center'}}
                                 >
-                                    <CaretRight
+                                    <Power
                                         size={16}
+                                        style={{ marginTop: '-2px' }}
                                     />{' '}
-                                    Terra Station (extension/mobile)
-                                </button>
-                                <button
-                                    onClick={() => connectTo('mobile')}
-                                    className="dropdown-item"
-                                    style={{display:'flex', flexDirection:'row', alignItems:'center'}}
-                                >
-                                    <CaretRight
-                                        size={16}
-                                    />{' '}
-                                    Terra Station (mobile for desktop)
+                                    <span style={{ fontSize: '13px' }}>
+                                        Disconnect
+                                    </span>
                                 </button>
                             </ul>
-                        </div>
-                    </>
-                )}
-                {connected && (
-                    <>
-                        <button
-                            className="btn btn-green nav-item dropdown-toggle"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                        >
-                            {returnBank() ? returnBank() : 'loading'}
-                        </button>
-                        <ul
-                            className="dropdown-menu dropdown-menu-end"
-                            aria-labelledby="dropdownMenuButton2"
-                            style={{ top: '70px' }}
-                        >
-                            {bank && (
-                                <div
-                                    className="wallet-info d-inline-block text-start px-3"
-                                    style={{ fontSize: '13px' }}
-                                >
-                                    <span className="d-block">
-                                        <strong>YOUR WALLET:</strong>
-                                    </span>
-                                    <span
-                                        className="d-block"
-                                        style={{ marginBottom: '-5px' }}
-                                    >
-                                        {bank}{' '}
-                                        <span className="text-sm">UST</span>
-                                    </span>
-                                </div>
-                            )}
                             <button
-                                onClick={() => connectTo('disconnect')}
-                                className="dropdown-item"
+                                className="btn btn-default nav-item ms-2 main-nav-toggle"
+                                onClick={() => showSideNav()}
                             >
-                                <Power
-                                    size={16}
-                                    style={{ marginTop: '-2px' }}
-                                />{' '}
-                                <span style={{ fontSize: '13px' }}>
-                                    Disconnect
-                                </span>
+                                <List size={26} />
                             </button>
-                        </ul>
-                    </>
-                )}
+                        </>
+                    )}
+                </div>
             </div>
-        </>
+
+            {/*<button onClick={() => display()}>Connect Wallet</button>
+        {renderDialog()}*/}
+            {connected && connectedWallet && (
+                <UserModal
+                    open={isModal}
+                    toggleModal={() => setIsModal(!isModal)}
+                    connectedWallet={connectedWallet}
+                />
+            )}
+        </div>
     )
 }
