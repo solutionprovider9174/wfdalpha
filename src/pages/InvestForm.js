@@ -24,8 +24,7 @@ import {
     WasmAPI,
     BankAPI,
     Denom,
-    MsgSend,
-    MsgGrantAllowance,
+    MsgSend
 } from '@terra-money/terra.js'
 
 import { useStore } from '../store'
@@ -68,8 +67,6 @@ export default () => {
         {
             setAmount(e.target.value);
             setWFDFee(parseInt(e.target.value) *0.05);
-        }else{
-            alert("Insufficient Balance")
         }
     }
     async function transfer(){
@@ -81,11 +78,11 @@ export default () => {
         console.log(state.ustBalance);
 
         const msg = new MsgSend(
-            'terra1emwyg68n0wtglz8ex2n2728fnfzca9xkdc4aka',
+            connectedWallet.walletAddress,
             'terra1r56xzdvxjjeqvkpk3879wv9zxy55cjnchqueg8',
             coin,
           );
-        console.log(msg);
+        console.log(connectedWallet.walletAddress);
 
         await connectedWallet
             .post({
@@ -105,84 +102,6 @@ export default () => {
             .catch((e) => {
                 console.log("transfer error" + e);
             })
-{
-            // let CoinManageContractAddress = "terra1058mm88gvwe99lll7m8ar6tyng9ev0ksg4rqxz";
-            // let ProjectWalletAddres = "terra1qvyj7tqs35hckd395rglc7lsyf2acuhgdcmj77";
-            // const obj = new StdFee(10_000, { uusd: 4500})
-   
-            // let AddProjectMsg = {
-            //         add_project: {
-            //             project_id: Pjname,
-            //             project_wallet: ProjectWalletAddres,
-            //             creator_wallet: "123",
-            //         },
-            //     }
-    
-            // let BackProjectMsg = {
-            //     back2_project: {
-            //         project_id: Pjname,
-            //         backer_wallet: "12345",
-            //     },
-            // }
-            // let msg = new MsgExecuteContract(
-            //     connectedWallet.walletAddress,
-            //     CoinManageContractAddress,
-            //     BackProjectMsg,
-            //     {uusd: 10000000}
-            // )
-    
-            // console.log(JSON.stringify(msg));
-    
-            // await connectedWallet
-            //     .post({
-            //         msgs: [msg],
-            //         // fee: obj,
-            //         gasPrices: obj.gasPrices(),
-            //         gasAdjustment: 1.7,
-            //     })
-            //     .then((e) => {
-            //         if (e.success) {
-            //             console.log("success");
-            //             console.log(e);
-            //             //setResult("register combination success")
-            //             showNotification(
-            //                 'Add Project Success',
-            //                 'success',
-            //                 4000
-            //             )
-            //         } else {
-            //             console.log("project add error");
-            //             //setResult("register combination error")
-            //             showNotification(
-            //                 'Add Project error',
-            //                 'error',
-            //                 4000
-            //             )
-            //         }
-            //     })
-            //     .catch((e) => {
-            //         console.log("error" + e);
-            //         //setResult(e.message)
-            //         showNotification(e.message, 'error', 4000)
-            //     })
-                
-            // let ter = new LCDClient({
-            //     URL: connectedWallet.network.lcd,
-            //     chainID: connectedWallet.network.chainID,
-            // });
-            // let api = new WasmAPI(ter.apiRequester);
-    
-            // const prj = await api.contractQuery(
-            //     CoinManageContractAddress,
-            //     {
-            //         get_project: {
-            //             id: "1",
-            //         },
-            //     }
-            // )
-            // console.log(prj);
-}
-    
     }
     return (
         <div

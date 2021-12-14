@@ -34,7 +34,8 @@ export default function Main(props) {
             state.dogetherAddress,
             {
                 pool: {},
-            },  {"uusd": parseFloat(amount) * 1000000}
+            },  
+            {"uusd": parseFloat(amount) * 1000000}
         )
         state.wallet
             .post({
@@ -55,7 +56,7 @@ export default function Main(props) {
             })
     }
     function doGetherUnstake(){
-        console.log('Dogether with: ',amount,percentage)
+        // console.log('Dogether with: ',amount,percentage)
         if (amount <= 0) return
         let msg = new MsgExecuteContract(
             state.wallet.walletAddress,
