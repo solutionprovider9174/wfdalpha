@@ -15,7 +15,11 @@ export default function Personal() {
     }
 
     const removeDoGether = (e) => {
+<<<<<<< Updated upstream
         // console.log('Remove Dogether with: ',amount,percentage)
+=======
+        console.log('Remove Dogether with: ',amount,percentage)
+>>>>>>> Stashed changes
     }
     
 

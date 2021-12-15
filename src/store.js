@@ -159,17 +159,24 @@ const initialState = {
     historicalJackpotAlte: 0,
     balanceStakeOnDogether: 0,
     holderClaimsDogether: [],
+<<<<<<< Updated upstream
     totalBalancePoolDogether: 0,
     dogetherState: {}
+=======
+    totalBalancePoolDogether: 0
+>>>>>>> Stashed changes
 }
 
 const reducer = (state, action) => {
     switch (action.type) {
+<<<<<<< Updated upstream
         case "setDogetherState":
             return {
                 ...state,
                 dogetherState: action.message,
             }
+=======
+>>>>>>> Stashed changes
         case 'setTotalBalancePoolDogether':
             return {
                 ...state,

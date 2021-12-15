@@ -31,11 +31,19 @@ if (typeof document !== 'undefined') {
     const renderMethod = target.hasChildNodes()
         ? ReactDOM.hydrate
         : ReactDOM.render
+<<<<<<< Updated upstream
     let inProduction = false
     const render = (Comp) => {
         renderMethod(
             <Wallet
                 defaultNetwork={testnet}
+=======
+    let inProduction = true
+    const render = (Comp) => {
+        renderMethod(
+            <Wallet
+                defaultNetwork={mainnet}
+>>>>>>> Stashed changes
                 walletConnectChainIds={{
                     0: testnet,
                     1: mainnet,
@@ -43,7 +51,11 @@ if (typeof document !== 'undefined') {
                 connectorOpts={{
                     bridge: inProduction
                         ? 'https://walletconnect.terra.dev/'
+<<<<<<< Updated upstream
                         : 'https://tequila-walletconnect.terra.dev/'
+=======
+                        : 'https://tequila-walletconnect.terra.dev/',
+>>>>>>> Stashed changes
                 }}
             >
                 <AppContainer>

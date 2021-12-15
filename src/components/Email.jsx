@@ -8,6 +8,10 @@ import {
   Heading,
   Text,
   Container,
+<<<<<<< Updated upstream
+=======
+  Center,
+>>>>>>> Stashed changes
   Flex,
 } from '@chakra-ui/react';
 import { CheckIcon } from '@chakra-ui/icons';
@@ -26,12 +30,23 @@ export default function Emailsub() {
       align={'center'}
       justify={'center'}
       w={'100%'}
+<<<<<<< Updated upstream
       id = {'Contactme'}
       bg={'whiteAlpha.100'}>
+=======
+      h={"621px"}
+      id = {'Contactme'}
+      bg={'url(saft1.svg)'}
+      backgroundSize = {"cover"}
+      bgRepeat={"no-repeat"}
+      >
+      
+>>>>>>> Stashed changes
       <Container
         boxShadow={'xl'}
         rounded={'lg'}
         p={6}
+<<<<<<< Updated upstream
         bg={'purple.900'}
         direction={'column'}
         >
@@ -105,6 +120,36 @@ export default function Emailsub() {
             ? 'Oh no an error occured! 😢 Please try again later.'
             : "Lets go to the moon! 🚀"}
         </Text>
+=======
+        bg={'url(saft2.svg)'}
+        minW= {"1212px"}
+        marginTop={'535px'}
+        h= {"808px"}
+        bgRepeat={"no-repeat"}
+        >
+        <Heading
+          as={'h2'}
+          fontSize={{ base: '22px', sm: '2xl' }}
+          textAlign={'center'}
+          mb={5}
+          fontFamily="Pilat Extended"
+fontStyle={"normal"}
+fontWeight={"normal"}
+lineHeight={"28px"}
+textTransform={"uppercase"}
+color="rgba(255, 255, 255, 0.54)">
+          Get in Wefund
+        </Heading>
+        <Heading fontFamily="Pilat Extended"
+fontStyle="normal"
+fontWeight="bold"
+fontSize="35px"
+lineHeight="45px" textAlign={'center'}>Grow With Us</Heading>
+<Center>
+        <Button bg={"linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)"}  size="lg" maxW={'200'} marginTop={"150px"}>
+            Start Funding
+            </Button></Center>
+>>>>>>> Stashed changes
       </Container>
     </Flex>
   );

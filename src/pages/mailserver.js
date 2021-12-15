@@ -1,3 +1,8 @@
+<<<<<<< Updated upstream
+=======
+if(typeof window === 'object')
+{
+>>>>>>> Stashed changes
 const express = require("express");
 const nodemailer = require("nodemailer");
 const app = express();
@@ -26,7 +31,10 @@ let transporter = nodemailer.createTransport({
     // });
 
 app.post("/sendproject", function (req, res) {
+<<<<<<< Updated upstream
     console.log("Send project");
+=======
+>>>>>>> Stashed changes
     
     const htmlEmail = `
     <h3>Contact Details</h3>
@@ -118,3 +126,7 @@ app.post("/sendproject", function (req, res) {
     });
 
 
+<<<<<<< Updated upstream
+=======
+}
+>>>>>>> Stashed changes

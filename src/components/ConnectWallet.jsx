@@ -21,8 +21,36 @@ import {
     Bank,
 } from 'phosphor-react'
 import numeral from 'numeral'
+<<<<<<< Updated upstream
 import { useStore } from '../store'
 
+=======
+import UserModal from './UserModal'
+import { useStore } from '../store'
+// import { Link } from '@reach/router'
+
+// let useWallet = {}
+// if (typeof document !== 'undefined') {
+//     useWallet = require('@terra-money/wallet-provider').useWallet
+// }
+/*const Modal = {
+    position: "absolute",
+    width: "100%",
+    height:"100%",
+    left: "0",
+    top: "0",
+}
+const Dialog = {
+    position: "absolute",
+    right: "100px",
+    top: "120px",
+    width: "300px",
+    display: "flex",
+    justifyContent: "center",
+    flexDirection:"column",
+
+} */
+>>>>>>> Stashed changes
 
 const DialogButton = {
     margin: '10px 20px 10px 20px',
@@ -69,7 +97,11 @@ export default function ConnectWallet() {
     const api = new WasmAPI(state.lcd_client.apiRequester)
     async function baseData() {
         const latestBlocks = await axios.get(
+<<<<<<< Updated upstream
             'https://lcd.terra.dev/blocks/latest',
+=======
+            'https://lcd.terra.dev/blocks/latest'
+>>>>>>> Stashed changes
         )
 
         dispatch({
@@ -81,7 +113,11 @@ export default function ConnectWallet() {
             state.loterraContractAddress,
             {
                 config: {},
+<<<<<<< Updated upstream
             },
+=======
+            }
+>>>>>>> Stashed changes
         )
 
         dispatch({ type: 'setConfig', message: contractConfigInfo })
@@ -100,7 +136,11 @@ export default function ConnectWallet() {
                 winner: {
                     lottery_id: contractConfigInfo.lottery_counter - 1,
                 },
+<<<<<<< Updated upstream
             },
+=======
+            }
+>>>>>>> Stashed changes
         )
         dispatch({ type: 'setAllRecentWinners', message: winners })
 
@@ -110,6 +150,7 @@ export default function ConnectWallet() {
                 balance: {
                     address: state.loterraContractAddress,
                 },
+<<<<<<< Updated upstream
             },
         )
         dispatch({ type: 'setDaoFunds', message: contractDaoBalance.balance })
@@ -125,13 +166,22 @@ export default function ConnectWallet() {
             message: contractDogetherState,
         })
 
+=======
+            }
+        )
+        dispatch({ type: 'setDaoFunds', message: contractDaoBalance.balance })
+>>>>>>> Stashed changes
         const contractLPLoterraBalance = await api.contractQuery(
             state.loterraContractAddressCw20,
             {
                 balance: {
                     address: state.loterraStakingLPAddress,
                 },
+<<<<<<< Updated upstream
             },
+=======
+            }
+>>>>>>> Stashed changes
         )
         dispatch({
             type: 'setStakingLoterraFunds',
@@ -143,7 +193,11 @@ export default function ConnectWallet() {
                 balance: {
                     address: state.alteredStakingLPAddress,
                 },
+<<<<<<< Updated upstream
             },
+=======
+            }
+>>>>>>> Stashed changes
         )
         dispatch({
             type: 'setStakingAlteredFunds',
@@ -152,6 +206,7 @@ export default function ConnectWallet() {
 
         // Get total pool in Dogether
         const total_pool_dogether = await api.contractQuery(
+<<<<<<< Updated upstream
             'terra19h4xk8xxxew0ne6fuw0mvuf7ltmjmxjxssj5ts',
             {
                 state: {},
@@ -160,6 +215,16 @@ export default function ConnectWallet() {
         dispatch({
             type: 'setTotalBalancePoolDogether',
             message: total_pool_dogether.total_ust_pool,
+=======
+            state.dogetherStakingAddress,
+            {
+                state: { },
+            }
+        )
+        dispatch({
+            type: 'setTotalBalancePoolDogether',
+            message: total_pool_dogether.total_balance,
+>>>>>>> Stashed changes
         })
 
         const jackpotAltered = await api.contractQuery(
@@ -168,7 +233,11 @@ export default function ConnectWallet() {
                 balance: {
                     address: state.loterraContractAddress,
                 },
+<<<<<<< Updated upstream
             },
+=======
+            }
+>>>>>>> Stashed changes
         )
         dispatch({
             type: 'setAlteredJackpot',
@@ -177,6 +246,10 @@ export default function ConnectWallet() {
 
         //console.log('config',contractConfigInfo)
 
+<<<<<<< Updated upstream
+=======
+        if(typeof window === "object"){
+>>>>>>> Stashed changes
         if (window.location.href.indexOf('dao') > -1) {
             let pollCount = contractConfigInfo.poll_count
             //console.log('count',pollCount)
@@ -186,7 +259,11 @@ export default function ConnectWallet() {
                     state.loterraContractAddress,
                     {
                         get_poll: { poll_id: index },
+<<<<<<< Updated upstream
                     },
+=======
+                    }
+>>>>>>> Stashed changes
                 )
                 proposal.nr = index
                 allProposals.push(proposal)
@@ -195,7 +272,11 @@ export default function ConnectWallet() {
             dispatch({ type: 'setAllProposals', message: allProposals })
             //console.log('proposals',allProposals)
         }
+<<<<<<< Updated upstream
 
+=======
+        }
+>>>>>>> Stashed changes
         const staking = await api.contractQuery(state.loterraStakingAddress, {
             state: {},
         })
@@ -206,7 +287,11 @@ export default function ConnectWallet() {
             state.loterraContractAddressCw20,
             {
                 token_info: {},
+<<<<<<< Updated upstream
             },
+=======
+            }
+>>>>>>> Stashed changes
         )
         dispatch({ type: 'setTokenInfo', message: token_info })
 
@@ -214,7 +299,11 @@ export default function ConnectWallet() {
             state.loterraStakingLPAddress,
             {
                 state: {},
+<<<<<<< Updated upstream
             },
+=======
+            }
+>>>>>>> Stashed changes
         )
         dispatch({ type: 'setStateLPStaking', message: state_lp_staking })
         const pool_info = await api.contractQuery(state.loterraPoolAddress, {
@@ -294,7 +383,11 @@ export default function ConnectWallet() {
                     state.loterraContractAddress,
                     {
                         config: {},
+<<<<<<< Updated upstream
                     },
+=======
+                    }
+>>>>>>> Stashed changes
                 )
                 setConnected(true)
                 const lastDrawnJackpot = await api.contractQuery(
@@ -303,7 +396,11 @@ export default function ConnectWallet() {
                         jackpot: {
                             lottery_id: contractConfigInfo.lottery_counter - 1,
                         },
+<<<<<<< Updated upstream
                     },
+=======
+                    }
+>>>>>>> Stashed changes
                 )
                 dispatch({
                     type: 'setLastDrawnJackpot',
@@ -311,6 +408,7 @@ export default function ConnectWallet() {
                 })
 
                 // Get balance to staked on Dogether
+<<<<<<< Updated upstream
                 const balance_stake_on_dogether = await api.contractQuery(
                     state.dogetherStakingAddress,
                     {
@@ -321,13 +419,23 @@ export default function ConnectWallet() {
                     type: 'setBalanceStakeOnDogether',
                     message: balance_stake_on_dogether.balance,
                 })
+=======
+                const balance_stake_on_dogether = await api.contractQuery(state.dogetherStakingAddress, {
+                    holder: {address: connectedWallet.walletAddress},
+                })
+                dispatch({ type: 'setBalanceStakeOnDogether', message: balance_stake_on_dogether.balance })
+>>>>>>> Stashed changes
 
                 // Get balance pending to claim on Dogether
                 const claims_unstake_dogether = await api.contractQuery(
                     state.dogetherStakingAddress,
                     {
                         claims: { address: connectedWallet.walletAddress },
+<<<<<<< Updated upstream
                     },
+=======
+                    }
+>>>>>>> Stashed changes
                 )
                 dispatch({
                     type: 'setHolderClaimsDogether',
@@ -338,7 +446,11 @@ export default function ConnectWallet() {
                     state.loterraStakingAddress,
                     {
                         holder: { address: connectedWallet.walletAddress },
+<<<<<<< Updated upstream
                     },
+=======
+                    }
+>>>>>>> Stashed changes
                 )
                 dispatch({ type: 'setAllHolder', message: holder })
                 //console.log(holder)
@@ -349,7 +461,11 @@ export default function ConnectWallet() {
                         accrued_rewards: {
                             address: connectedWallet.walletAddress,
                         },
+<<<<<<< Updated upstream
                     },
+=======
+                    }
+>>>>>>> Stashed changes
                 )
                 dispatch({
                     type: 'setHolderAccruedRewards',
@@ -361,7 +477,11 @@ export default function ConnectWallet() {
                     state.loterraContractAddressCw20,
                     {
                         balance: { address: connectedWallet.walletAddress },
+<<<<<<< Updated upstream
                     },
+=======
+                    }
+>>>>>>> Stashed changes
                 )
                 dispatch({ type: 'setLotaBalance', message: token })
                 //console.log(token)
@@ -370,7 +490,11 @@ export default function ConnectWallet() {
                     state.loterraStakingAddress,
                     {
                         claims: { address: connectedWallet.walletAddress },
+<<<<<<< Updated upstream
                     },
+=======
+                    }
+>>>>>>> Stashed changes
                 )
                 //console.log("claims")
                 //console.log(claims)
@@ -380,7 +504,11 @@ export default function ConnectWallet() {
                     state.loterraLPAddress,
                     {
                         balance: { address: connectedWallet.walletAddress },
+<<<<<<< Updated upstream
                     },
+=======
+                    }
+>>>>>>> Stashed changes
                 )
                 dispatch({ type: 'setLPBalance', message: tokenLP })
                 //console.log(tokenLP)
@@ -390,7 +518,11 @@ export default function ConnectWallet() {
                         accrued_rewards: {
                             address: connectedWallet.walletAddress,
                         },
+<<<<<<< Updated upstream
                     },
+=======
+                    }
+>>>>>>> Stashed changes
                 )
                 dispatch({
                     type: 'setLPHolderAccruedRewards',
@@ -401,7 +533,11 @@ export default function ConnectWallet() {
                     state.loterraStakingLPAddress,
                     {
                         holder: { address: connectedWallet.walletAddress },
+<<<<<<< Updated upstream
                     },
+=======
+                    }
+>>>>>>> Stashed changes
                 )
                 dispatch({ type: 'setAllHolderLP', message: holderLP })
 
@@ -409,7 +545,11 @@ export default function ConnectWallet() {
                     state.loterraStakingLPAddress,
                     {
                         claims: { address: connectedWallet.walletAddress },
+<<<<<<< Updated upstream
                     },
+=======
+                    }
+>>>>>>> Stashed changes
                 )
 
                 dispatch({
@@ -425,7 +565,11 @@ export default function ConnectWallet() {
                         balance: {
                             address: connectedWallet.walletAddress,
                         },
+<<<<<<< Updated upstream
                     },
+=======
+                    }
+>>>>>>> Stashed changes
                 )
 
                 // Better to keep it at the end
@@ -438,13 +582,24 @@ export default function ConnectWallet() {
                             lottery_id: contractConfigInfo.lottery_counter,
                             address: connectedWallet.walletAddress,
                         },
+<<<<<<< Updated upstream
                     },
                 )
                 dispatch({ type: 'setAllCombinations', message: combinations })
+=======
+                    }
+                )
+                dispatch({ type: 'setAllCombinations', message: combinations })
+
+>>>>>>> Stashed changes
             } catch (e) {
                 console.log(e)
             }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
             //Store coins global state
             dispatch({ type: 'setAllNativeCoins', message: coins })
             // console.log(coins)
@@ -512,10 +667,14 @@ export default function ConnectWallet() {
                         />
                     </>
                 ) : (
+<<<<<<< Updated upstream
                     <div
                         className="spinner-border spinner-border-sm"
                         role="status"
                     >
+=======
+                    <div className="spinner-border spinner-border-sm" role="status">
+>>>>>>> Stashed changes
                         <span className="visually-hidden">Loading...</span>
                     </div>
                 )}
@@ -525,12 +684,20 @@ export default function ConnectWallet() {
 
     const [scrolled, setScrolled] = React.useState(false)
     const handleScroll = () => {
+<<<<<<< Updated upstream
+=======
+        if(typeof window === 'object'){
+>>>>>>> Stashed changes
         const offset = window.scrollY
         if (offset > 25) {
             setScrolled(true)
         } else {
             setScrolled(false)
         }
+<<<<<<< Updated upstream
+=======
+        }
+>>>>>>> Stashed changes
     }
 
     function showSideNav() {
@@ -546,7 +713,12 @@ export default function ConnectWallet() {
         }
 
         //console.log(connectedWallet)
+<<<<<<< Updated upstream
         window.addEventListener('scroll', handleScroll)
+=======
+        if(typeof window === 'object')
+            window.addEventListener('scroll', handleScroll)
+>>>>>>> Stashed changes
     }, [
         connectedWallet,
         lcd,
@@ -554,7 +726,11 @@ export default function ConnectWallet() {
         state.allRecentWinners,
         state.youWon,
     ])
+<<<<<<< Updated upstream
     
+=======
+
+>>>>>>> Stashed changes
     return (
         <>
             <div className="navbar-nav ms-auto" style={{flexDirection:'row'}}>
@@ -598,11 +774,54 @@ export default function ConnectWallet() {
                                 </button>
                             </ul>
                         </div>
+<<<<<<< Updated upstream
+=======
+                        <button
+                            className="btn btn-default nav-item ms-2 main-nav-toggle"
+                            onClick={() => showSideNav()}
+                        >
+                            <List size={26} />
+                        </button>
+>>>>>>> Stashed changes
                     </>
                 )}
                 {connected && (
                     <>
                         <button
+<<<<<<< Updated upstream
+=======
+                            className={
+                                'btn btn-default nav-item me-2' +
+                                (state.youWon ? ' winner' : '')
+                            }
+                            style={{
+                                padding: '0.275rem 0.55rem',
+                            }}
+                            onClick={() => setIsModal(!isModal)}
+                        >
+                            {state.youWon ? (
+                                <>
+                                    <Trophy
+                                        size={33}
+                                        style={{
+                                            marginTop: '-2px',
+                                            color: '#ecba26',
+                                        }}
+                                    />
+                                    <span className="badge">YOU WON</span>
+                                </>
+                            ) : (
+                                <UserCircle
+                                    size={33}
+                                    style={{
+                                        marginTop: '-2px',
+                                        color: '#72ffc1',
+                                    }}
+                                />
+                            )}
+                        </button>
+                        <button
+>>>>>>> Stashed changes
                             className="btn btn-green nav-item dropdown-toggle"
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
@@ -614,7 +833,11 @@ export default function ConnectWallet() {
                             aria-labelledby="dropdownMenuButton2"
                             style={{ top: '70px' }}
                         >
+<<<<<<< Updated upstream
                             {bank && (
+=======
+                            {bank && alteBank && (
+>>>>>>> Stashed changes
                                 <div
                                     className="wallet-info d-inline-block text-start px-3"
                                     style={{ fontSize: '13px' }}
@@ -629,6 +852,15 @@ export default function ConnectWallet() {
                                         {bank}{' '}
                                         <span className="text-sm">UST</span>
                                     </span>
+<<<<<<< Updated upstream
+=======
+                                    <span className="d-block">
+                                        {alteBank}{' '}
+                                        <span className="text-sm">
+                                            ALTE
+                                        </span>
+                                    </span>
+>>>>>>> Stashed changes
                                 </div>
                             )}
                             <button
@@ -644,9 +876,30 @@ export default function ConnectWallet() {
                                 </span>
                             </button>
                         </ul>
+<<<<<<< Updated upstream
                     </>
                 )}
             </div>
+=======
+                        <button
+                            className="btn btn-default nav-item ms-2 main-nav-toggle"
+                            onClick={() => showSideNav()}
+                        >
+                            <List size={26} />
+                        </button>
+                    </>
+                )}
+            </div>
+            {/*<button onClick={() => display()}>Connect Wallet</button>
+                {renderDialog()}*/}
+            {connected && connectedWallet && (
+                <UserModal
+                    open={isModal}
+                    toggleModal={() => setIsModal(!isModal)}
+                    connectedWallet={connectedWallet}
+                />
+            )}
+>>>>>>> Stashed changes
         </>
     )
 }

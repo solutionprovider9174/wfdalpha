@@ -25,6 +25,7 @@ export default {
             template: 'src/pages/Startup',
         },
         {
+<<<<<<< Updated upstream
             path: 'dogether',
             template: 'src/pages/Dogether',
         },
@@ -37,9 +38,27 @@ export default {
             template: 'src/pages/InvestForm',
         },
          // A 404 component
+=======
+            path: 'staking',
+            template: 'src/pages/Staking',
+        },
+        {
+            path: 'dao',
+            template: 'src/pages/DAO',
+        },
+        {
+            path: 'dogether',
+            template: 'src/pages/Dogether',
+        },
+        // A 404 component
+>>>>>>> Stashed changes
         {
             path: '404',
             template: 'src/pages/NotFound',
         },
+<<<<<<< Updated upstream
    ],
+=======
+    ],
+>>>>>>> Stashed changes
 }

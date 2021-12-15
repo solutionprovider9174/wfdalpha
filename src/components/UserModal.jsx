@@ -54,7 +54,11 @@ export default function UserModal(props) {
             state.loterraContractAddress,
             {
                 claim: {},
+<<<<<<< Updated upstream
             },
+=======
+            }
+>>>>>>> Stashed changes
         )
 
         connectedWallet
@@ -67,7 +71,11 @@ export default function UserModal(props) {
             .then((e) => {
                 if (e.success) {
                     setResult(
+<<<<<<< Updated upstream
                         `Claim success, please verify transaction on the blockchain explorer https://finder.terra.money/columbus-4/tx/${e.result.txhash}`,
+=======
+                        `Claim success, please verify transaction on the blockchain explorer https://finder.terra.money/columbus-4/tx/${e.result.txhash}`
+>>>>>>> Stashed changes
                     )
                     setClaimed(true)
                 } else {
@@ -87,7 +95,11 @@ export default function UserModal(props) {
             let id = parseInt(
                 state.historicalTicketLotteryId == 0
                     ? state.currentLotteryId
+<<<<<<< Updated upstream
                     : state.historicalTicketLotteryId,
+=======
+                    : state.historicalTicketLotteryId
+>>>>>>> Stashed changes
             )
             if (type == 'prev' && id !== 1) {
                 id = id - 1
@@ -112,7 +124,11 @@ export default function UserModal(props) {
                         lottery_id: id,
                         address: state.wallet.walletAddress,
                     },
+<<<<<<< Updated upstream
                 },
+=======
+                }
+>>>>>>> Stashed changes
             )
             console.log(combinations)
             dispatch({ type: 'setAllCombinations', message: combinations })
@@ -458,7 +474,11 @@ export default function UserModal(props) {
                                                         />
                                                         {element}
                                                     </li>
+<<<<<<< Updated upstream
                                                 ),
+=======
+                                                )
+>>>>>>> Stashed changes
                                             )
                                         ) : (
                                             <li className="list-group-item">

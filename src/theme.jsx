@@ -1,7 +1,11 @@
 import { extendTheme } from '@chakra-ui/react'
 import { createBreakpoints } from '@chakra-ui/theme-tools'
 
+<<<<<<< Updated upstream
 const fonts = { mono: `'Menlo', monospace` }
+=======
+const fonts = { mono:'Sk-Modernist' }
+>>>>>>> Stashed changes
 
 const breakpoints = createBreakpoints({
   sm: '40em',

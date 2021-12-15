@@ -1,22 +1,44 @@
 import React from 'react';
 import ConnectWallet from './ConnectWallet';
 //
+<<<<<<< Updated upstream
+=======
+import '../styles/custom.css';
+
+>>>>>>> Stashed changes
 
 export default function WithSubnavigation() {
   // const { isOpen, onToggle } = useDisclosure();
   const isOpen = true;
   const onToggle = true;
 
+<<<<<<< Updated upstream
+=======
+  function gotoLocation(href){
+    if(typeof document !== 'undefined')
+      document.location = href;
+  }
+  
+>>>>>>> Stashed changes
   return (
     <div style={{width:'100%'}}>
       <div
         style={{display:'flex', backgroundColor:'#313131', height:'60px', padding:'2px', alignItems:'center', justifyContent:'space-between'}}>
         <div style={{display:'flex'}}>
+<<<<<<< Updated upstream
           <div style={{cursor:'pointer'}} onClick={()=>{document.location="/"}}>
             <img
                 alt={'Wefund'}
                 src={
                   '/WeFund%20Logos%20only.png'
+=======
+          <div style={{cursor:'pointer'}}
+             onClick={()=>{gotoLocation("/")}}>
+            <img
+                alt={'Wefund'}
+                src={
+                  'WeFund%20Logos%20only.png'
+>>>>>>> Stashed changes
                 }
                 style={{height:'40px'}}
               />
@@ -30,7 +52,11 @@ export default function WithSubnavigation() {
                 className="btn btn-green"
                 type="button"
                 width="150px"
+<<<<<<< Updated upstream
                 onClick={()=>{document.location='/dogether'}}
+=======
+                onClick = {()=>(gotoLocation('/dogether'))}
+>>>>>>> Stashed changes
             >
                 Create Project
             </button>
@@ -54,6 +80,7 @@ const DesktopNav = () => {
   return (
     <>
       {NAV_ITEMS.map((navItem, index) => (
+<<<<<<< Updated upstream
         <div key={index} className="btn-group" style={{cursor:'pointer'}}>
           {navItem.children &&
           <>
@@ -63,6 +90,16 @@ const DesktopNav = () => {
             <ul className="dropdown-menu" style={{width:'380px', padding:'10px', backgroundColor:'black'}}>
               {navItem.children.map((childitem, index) => (
                 <li key={index}>
+=======
+        <div class="btn-group" style={{cursor:'pointer'}}>
+          <a href={navItem.href} type="button" class={"btn btn-danger "+ (navItem.children ? "dropdown-toggle":"")} data-bs-toggle="dropdown" aria-expanded="false" style={{color:'white'}}>
+            {navItem.label}
+          </a>
+          {navItem.children &&
+            <ul class="dropdown-menu" style={{width:'380px', padding:'10px', backgroundColor:'black'}}>
+              {navItem.children.map((childitem, index) => (
+                <li>
+>>>>>>> Stashed changes
                   <div style={{margin:'20px'}} >
                     <a href={childitem.href} className="navitem">
                     <p style={{marginBottom:'5px', fontSie:'large'}}>{childitem.label}</p>
@@ -72,12 +109,15 @@ const DesktopNav = () => {
                 </li>
               ))}
             </ul>
+<<<<<<< Updated upstream
           </>
           }
           {navItem.href &&
             <a href={navItem.href} type="button" className={"btn btn-danger"} style={{color:'white'}}>
               {navItem.label}
             </a>
+=======
+>>>>>>> Stashed changes
           }
           </div>
       ))}
@@ -124,8 +164,11 @@ const NAV_ITEMS = [
     label: 'Blog',
     href: '#',
   },
+<<<<<<< Updated upstream
   {
     label: 'InvestForm',
     href: '/investform'
   }
+=======
+>>>>>>> Stashed changes
 ];

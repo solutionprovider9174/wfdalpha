@@ -3,7 +3,11 @@
 node_modules
 artifacts
 dist
+<<<<<<< Updated upstream
 .next
 public/PDF
 .yarn
 .vscode
+=======
+.next
+>>>>>>> Stashed changes
