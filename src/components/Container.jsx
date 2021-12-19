@@ -11,10 +11,11 @@ export const Container = (props) => {
     <Flex
       direction="column"
       alignItems="center"
-      justifyContent="flex-start"
-      bgImage="url('Rectangle%20181.png'),linear-gradient( #331666, #801998, #5D6FE1, #4B40A1, #48056C)"
+      justify="center"
+      bg={"linear-gradient(90deg, #1F0021 0%, #120054 104.34%)"}
       bgPosition="center"
       color={color[colorMode]}
+      width='100%'
       {...props}
     />
   )

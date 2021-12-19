@@ -200,7 +200,6 @@ export default function JackpotResults() {
             <>
                 <span
                     style={{
-                        background: '#ff36ff',
                         padding: '5px',
                         borderRadius: '3px',
                         marginRight: '5px',
@@ -215,7 +214,6 @@ export default function JackpotResults() {
                 >
                     <Trophy
                         style={{
-                            color: '#4ee19b',
                             position: 'relative',
                             top: '-2px',
                             marginRight: '4px',
@@ -236,7 +234,7 @@ export default function JackpotResults() {
                         <Trophy size={90} color="#20FF93" />
                     </div>
                     <h3>
-                        Latest Jackpot Results
+                        Project Backed by WeFund
                         {state.historicalJackpotLotteryId !== 0 &&
                             state.historicalJackpotLotteryId !==
                                 state.currentLotteryId - 1 && (
@@ -247,7 +245,7 @@ export default function JackpotResults() {
                                         color: '#ff36ff',
                                     }}
                                 >
-                                    Results from Lottery{' '}
+                                   
                                     <strong>
                                         #{state.historicalJackpotLotteryId}
                                     </strong>
@@ -297,7 +295,7 @@ export default function JackpotResults() {
                 <div className="card-body">
                     <div className="w-100 text-center latest-combination">
                         <h4 style={{ color: '#ff36ff' }}>
-                            Winning combination
+                            Project backed
                         </h4>                     
                         <p>
                             {state.winningCombination ? (
@@ -311,16 +309,16 @@ export default function JackpotResults() {
                             )}
                         </p>
                     </div>
-                    <h4 className="mt-4">Rewards</h4>
+                    <h4 className="mt-4">Ranking</h4>
                     <div className="table-responsive">
                         <table className="table text-white mb-3">
                             <thead>
                                 <tr>
                                     <th>Ranks</th>
                                     <th>Symbols</th>
-                                    <th>Gross prizes</th>
-                                    <th>Net prizes</th>
-                                    <th>LOTA tax</th>
+                                    <th>Amount Request</th>
+                                    <th>Amount Collected</th>
+                                    <th>WeFund fee</th>
                                 </tr>
                             </thead>
                             {state.config.prize_rank_winner_percentage && (
@@ -395,7 +393,7 @@ export default function JackpotResults() {
                                                 }}
                                             >
                                                 + {getAltePrizePerRank(1) /*getPrizePerRankAlteNet(1)*/}
-                                                <span>ALTE</span>
+                                                <span>WFD</span>
                                             </span>
                                         </td>
                                         <td>
@@ -489,7 +487,7 @@ export default function JackpotResults() {
                                                 }}
                                             >
                                                 {getPrizePerRankAlteTax(2)}
-                                                ALTE (TAX COMING SOON)
+                                                WFD (FEE COMING SOON)
                                             </span>
                                         </td>
                                     </tr>
@@ -505,7 +503,7 @@ export default function JackpotResults() {
                                                 </p>
                                                 <p className="alte-prize">
                                                     + {getRawNumberOfRankWinners(3) + 'x ' +numeral(getRawAltePrizePerRank(3) / getRawNumberOfRankWinners(3)).format('0,0.00')}
-                                                    <span>ALTE</span>
+                                                    <span>WFD</span>
                                                 </p>
                                             </div>
                                             }
@@ -568,7 +566,7 @@ export default function JackpotResults() {
                                                 }}
                                             >
                                                 {getPrizePerRankAlteTax(3)}
-                                                ALTE (TAX COMING SOON)
+                                                WFD (WFD COMING SOON)
                                             </span>
                                         </td>
                                     </tr>
@@ -584,7 +582,7 @@ export default function JackpotResults() {
                                                 </p>
                                                 <p className="alte-prize">
                                                     + {getRawNumberOfRankWinners(4) + 'x ' +numeral(getRawAltePrizePerRank(4) / getRawNumberOfRankWinners(4)).format('0,0.00')}
-                                                    <span>ALTE</span>
+                                                    <span>WFD</span>
                                                 </p>
                                             </div>
                                             }
@@ -617,7 +615,7 @@ export default function JackpotResults() {
                                                 }}
                                             >
                                                 + {getAltePrizePerRank(4)}
-                                                <span>ALTE</span>
+                                                <span>WFD</span>
                                             </span>
                                         </td>
                                         <td>
@@ -632,7 +630,7 @@ export default function JackpotResults() {
                                                 }}
                                             >
                                                 + {getAltePrizePerRank(4) /*getPrizePerRankAlteNet(4)*/}
-                                                <span>ALTE</span>
+                                                <span>WFD</span>
                                             </span>
                                         </td>
                                         <td>
@@ -647,7 +645,7 @@ export default function JackpotResults() {
                                                 }}
                                             >
                                                 {getPrizePerRankAlteTax(4)}
-                                                ALTE (TAX COMING SOON)
+                                                WFD (FEE)
                                             </span>
                                         </td>
                                     </tr>
@@ -663,7 +661,7 @@ export default function JackpotResults() {
                                                 </p>
                                                 <p className="alte-prize">
                                                     + {getRawNumberOfRankWinners(5) + 'x ' +numeral(getRawAltePrizePerRank(5) / getRawNumberOfRankWinners(5)).format('0,0.00')}
-                                                    <span>ALTE</span>
+                                                    <span>WFD</span>
                                                 </p>
                                             </div>
                                             }
@@ -696,7 +694,7 @@ export default function JackpotResults() {
                                                 }}
                                             >
                                                 + {getAltePrizePerRank(5)}
-                                                <span>ALTE</span>
+                                                <span>WFD</span>
                                             </span>
                                         </td>
                                         <td>
@@ -711,7 +709,7 @@ export default function JackpotResults() {
                                                 }}
                                             >
                                                 + {getAltePrizePerRank(5) /*getPrizePerRankAlteNet(5)*/}
-                                                <span>ALTE</span>
+                                                <span>WFD</span>
                                             </span>
                                         </td>
                                         <td>
@@ -726,7 +724,7 @@ export default function JackpotResults() {
                                                 }}
                                             >
                                                 {getPrizePerRankAlteTax(5)}
-                                                ALTE (TAX COMING SOON)
+                                                WFD (FEE COMING SOON)
                                             </span>
                                         </td>
                                     </tr>
@@ -742,7 +740,7 @@ export default function JackpotResults() {
                                                 </p>
                                                 <p className="alte-prize">
                                                     + {getRawNumberOfRankWinners(6) + 'x ' +numeral(getRawAltePrizePerRank(6) / getRawNumberOfRankWinners(6)).format('0,0.00')}
-                                                    <span>ALTE</span>
+                                                    <span>WFD</span>
                                                 </p>
                                             </div>
                                             }
@@ -775,7 +773,7 @@ export default function JackpotResults() {
                                                 }}
                                             >
                                                 + {getAltePrizePerRank(6)}
-                                                <span>ALTE</span>
+                                                <span>WFD</span>
                                             </span>
                                         </td>
                                         <td>
@@ -790,7 +788,7 @@ export default function JackpotResults() {
                                                 }}
                                             >
                                                 + {getAltePrizePerRank(6) /*getPrizePerRankAlteNet(6)*/}
-                                                <span>ALTE</span>
+                                                <span>WFD</span>
                                             </span>
                                         </td>
                                         <td>
@@ -805,7 +803,7 @@ export default function JackpotResults() {
                                                 }}
                                             >
                                                 {getPrizePerRankAlteTax(6)}
-                                                ALTE (TAX COMING SOON)
+                                                WFD (FEE COMING SOON)
                                             </span>
                                         </td>
                                     </tr>
@@ -813,27 +811,7 @@ export default function JackpotResults() {
                             )}
                         </table>
                     </div>
-                    <h4 className="mt-4">Winners</h4>
-                    <div
-                        className="table-responsive"
-                        style={{ height: '500px' }}
-                    >
-                        <table className="table text-white winners-table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Rank</th>
-                                    <th scope="col">Address</th>
-                                    <th scope="col">Collected</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {state.allWinners &&
-                                    state.allWinners.map((obj, key) => {
-                                        return <WinnerRow a={key} obj={obj} />
-                                    })}
-                            </tbody>
-                        </table>
-                    </div>
+                    
                 </div>
             </div>
         </div>

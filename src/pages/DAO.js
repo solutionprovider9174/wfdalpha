@@ -5,6 +5,7 @@ import { StdFee } from '@terra-money/terra.js'
 import Footer from '../components/Footer'
 import BodyLoader from '../components/BodyLoader'
 import { Bank, Info } from 'phosphor-react'
+import Navbar from '../components/Navbar';
 
 export default () => {
     const { state, dispatch } = useStore()
@@ -15,8 +16,7 @@ export default () => {
             <div
                 className="bg-hero"
                 style={{
-                    backgroundImage:
-                        'linear-gradient(0deg, #160150, #170f5300, #17095200),radial-gradient(#f23bf23b , #160150ad), url(/rays.svg)',
+                    backgroundImage: 'url(bg.svg)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center center',
                     backgroundRepeat: 'no-repeat',
