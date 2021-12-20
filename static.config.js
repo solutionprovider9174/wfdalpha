@@ -1,0 +1,57 @@
+// This file is used to configure:
+// - static-site generation
+// - Document shell (index.html)
+// - ...tons of other things!
+
+// Get started at https://react-static.js.org
+
+export default {
+    disablePreload: true,
+    silent: true,
+    plugins: ['react-static-plugin-sass'],
+    getSiteData: async ({ dev }) => ({
+        title: 'LoTerra is a lottery contract, buy tickets as a player or join the governance! DAO allows making decisions together! Manage the casino 🎰 Set the prize 🏆 Up the ticket price or go cheap 🏷 Extract max profits 🤑 Keep the vault secure at all times!',
+        lastBuilt: Date.now(),
+    }),
+    //maxThreads: 1, // Remove this when you start doing any static generation
+    getRoutes: async ({ dev }) => [
+        //  simple route
+        {
+            path: '/',
+            template: 'src/pages/Index',
+        },
+        {
+            path: 'startup',
+            template: 'src/pages/Startup',
+        },
+        {
+            path: 'staking',
+            template: 'src/pages/Staking',
+        },
+        {
+            path: 'dao',
+            template: 'src/pages/DAO',
+        },
+        {
+            path: 'createproject',
+            template: 'src/pages/CreateProjectNew',
+        },
+        {
+            path: 'esignedit',
+            template: 'src/pages/EsignEdit',
+        },
+        {
+            path: 'createnew',
+            template: 'src/pages/CreateProjectNew',
+        },
+        {
+            path: 'backproject',
+            template: 'src/pages/BackProject',
+        },
+        // A 404 component
+        {
+            path: '404',
+            template: 'src/pages/NotFound',
+        },
+    ],
+}
