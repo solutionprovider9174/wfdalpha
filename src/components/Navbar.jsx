@@ -17,7 +17,7 @@ export default function WithSubnavigation() {
     <ChakraProvider resetCSS theme={theme}>
       <Container>
     <div style={{ display:'flex', width:'100%', height:'80px',background:'linear-gradient(90deg, #3608478A 0%, #18075B 104.34%)'
-    , backdropFilter: 'blur(54px)'}}>
+    , backdropFilter: 'blur(54px)', zIndex:'99'}}>
       
         <div style={{display:'flex', width:'70%'}}>
         <a className="navbar-brand" href="/">
