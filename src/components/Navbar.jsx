@@ -1,6 +1,7 @@
 import React from 'react';
 import ConnectWallet from './ConnectWallet';
 //
+import { Container } from '../components/Container';
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from '../theme';
 import { ButtonTransition, ImageTransition, InputTransition, ButtonBackTransition } from "../components/ImageTransition";
@@ -14,10 +15,12 @@ export default function WithSubnavigation() {
 
   return (
     <ChakraProvider resetCSS theme={theme}>
+      <Container>
     <div style={{ display:'flex', width:'100%', height:'80px',background:'linear-gradient(90deg, #3608478A 0%, #18075B 104.34%)'
-    , backdropFilter: 'blur(54px)'}}>
+    , backdropFilter: 'blur(54px)', zIndex:'99'}}>
       
         <div style={{display:'flex', width:'70%'}}>
+        <a className="navbar-brand" href="/">
             <img
                 alt={'Wefund'}
                 src={
@@ -25,6 +28,7 @@ export default function WithSubnavigation() {
                 }
                 style={{position:'relative', left: '99px', top:'31.25%', width:'56px', height:'30px'}}
               />
+              </a>
               <div style={{position:'absolute',width:'30px', left:'185px', top:'40px', border:'1px solid rgba(255,255,255, 0.2)',
                 transform:'rotate(90deg)'}}></div>
           <DesktopNav/>
@@ -35,7 +39,7 @@ export default function WithSubnavigation() {
               width='197px' height='40px' rounded='33px'
             >
               <Box variant="solid" color="white" justify='center' align='center'
-                  onClick = {()=>{document.location='/createproject'}} >
+                  onClick = {()=>{document.location='/create'}} >
                 Create Your Project
               </Box>
             </ButtonBackTransition>
@@ -45,6 +49,7 @@ export default function WithSubnavigation() {
           </div>
         </div>
       </div>
+      </Container>
     </ChakraProvider>
   );
 }
@@ -88,12 +93,12 @@ const NAV_ITEMS = [
       {
         label: 'Explore Project',
         subLabel: 'Explore Project that you might be passionate about!',
-        href: '/startup',
+        href: '/explore',
       },
       {
         label: 'See Our Guidelines on Creating A Project',
         subLabel: 'Wnat to fund your project? Or open up investment opportunities for your project? See here',
-        href: '/createproject',
+        href: '/create',
       },
     ],
   },
@@ -122,6 +127,6 @@ const NAV_ITEMS = [
   },
   {
     label: 'Browse Project',
-    href: '#',
+    href: '/explore',
   },
 ];

@@ -21,34 +21,42 @@ export default {
             template: 'src/pages/Index',
         },
         {
-            path: 'startup',
-            template: 'src/pages/Startup',
-        },
-        {
-            path: 'staking',
-            template: 'src/pages/Staking',
-        },
-        {
-            path: 'dao',
-            template: 'src/pages/DAO',
-        },
-        {
-            path: 'createproject',
-            template: 'src/pages/CreateProjectNew',
-        },
-        {
             path: 'esignedit',
             template: 'src/pages/EsignEdit',
         },
         {
-            path: 'createnew',
-            template: 'src/pages/CreateProjectNew',
+            path: 'create',
+            template: 'src/pages/CreateProject',
         },
         {
             path: 'backproject',
             template: 'src/pages/BackProject',
         },
+        {
+            path: 'explore',
+            template: 'src/pages/ExploreProject',
+        },
+        {
+            path: 'prjdetail',
+            template: 'src/pages/ProjectDetail',
+        },
         // A 404 component
+        {
+            path: 'invest',
+            template: 'src/pages/Invest',
+        },
+        {
+            path: 'invest2',
+            template: 'src/pages/Invest2',
+        },
+        {
+            path: 'invest3',
+            template: 'src/pages/invest3',
+        },
+        {
+            path: 'invest4',
+            template: 'src/pages/invest4',
+        },
         {
             path: '404',
             template: 'src/pages/NotFound',

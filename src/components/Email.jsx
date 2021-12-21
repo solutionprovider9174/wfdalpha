@@ -3,7 +3,7 @@ import { FormEvent, ChangeEvent, useState } from 'react';
 import { Image, Text, Flex, } from '@chakra-ui/react';
 import { InputTransition, ButtonTransition } from '../components/ImageTransition';
 
-export default function Emailsub() {
+export default function Email() {
 
   return (
     <Flex direction='column' mx='115px' mt='219px' h='350px' bg='url(saft2.svg)' backgroundSize = "contain" bgRepeat="no-repeat" >

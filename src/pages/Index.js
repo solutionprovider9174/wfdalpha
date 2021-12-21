@@ -3,16 +3,16 @@ import { ChakraProvider, Flex } from '@chakra-ui/react';
 import { useStore } from '../store';
 import theme from '../theme';
 
+import Navbar from '../components/Navbar'
 import Hero from '../components/Hero';
 import About from '../components/about';
 import Industry from '../components/Industry';
 import RoadMap from '../components/Roadmap';
-import Emailsub from '../components/Email';
+import Email from '../components/Email';
 import Projectfeature from '../components/Featured';
-import FooterCenter from '../components/Footer_land';
-
+import Footer from '../components/Footer';
 import { Container } from '../components/Container';
-import '../styles/CreateProject.css';
+// import '../styles/transition.css';
 
 export default() => {
     function transitOpacity()
@@ -25,17 +25,20 @@ export default() => {
     return(
         <ChakraProvider resetCSS theme={theme}>
             <Container>
+                {/* <Navbar/> */}
                 <Flex direction='column'  maxWidth='1440px'>
-                <Hero style={{zIndex:'2', position:'absolute'}}   
-                    onTransitOpacity={() => {transitOpacity()}}/>
-                <Flex id="main_part" style={{zIndex:'1'}} className="hidden" direction='column'>
-                    <About/>
-                    <Industry/>
-                    <RoadMap/>
-                    <Emailsub/>
-                    <Projectfeature/>
-                    {/* <FooterCenter/> */}
-                </Flex>
+                    <Hero style={{zIndex:'100', position:'absolute'}}   
+                        onTransitOpacity={() => {transitOpacity()}}
+                    />
+                    <Flex id="main_part" style={{zIndex:'1'}} className="hidden" direction='column'>
+                        <About/>
+                        <Industry/>
+                        <RoadMap/>
+                        <Email/>
+                        <Projectfeature/>
+                        <Footer/>
+                    </Flex>
+
                 </Flex>
             </Container>
         </ChakraProvider>

@@ -8,7 +8,7 @@ import {
 import { ButtonTransition, InputTransition } from '../components/ImageTransition';
 import { IoArrowDownOutline,IoArrowForwardCircleOutline } from 'react-icons/io5';
 
-export default function CallToActionWithIllustration(props) {
+export default function Hero(props) {
   function transitToUpwards()
   {
     if(typeof document !== 'undefined'){
