@@ -30,16 +30,15 @@ import {
     Checkbox,
   } from '@chakra-ui/react';
   import React, {useCallback, useEffect, useState} from 'react';
-
   import { BsBookmarksFill, BsBox, BsPerson, BsCashCoin } from 'react-icons/bs';
   
   import { useStore } from '../store';
   import Navbar from '../components/Navbar';
-  import { Outlet, useNavigate } from 'react-router-dom'
+  // import { Outlet, useNavigate } from 'react-router-dom'
 
   export default function DetailProject() {
     const { state, dispatch } = useStore()
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     let projectBacked; 
     let projectID = 0;
@@ -70,7 +69,6 @@ console.log(project);
     return (
       <ChakraProvider resetCSS theme={theme}>
       <Container>
-        <Navbar/>
         <Flex>
           <Box
             bg="linear-gradient(180deg, #5E30DF 0%, rgba(97, 45, 208, 0.924167) 55.73%, rgba(116, 41, 190, 0.84) 100%)"
@@ -301,7 +299,7 @@ console.log(project);
               _hover={{
                 bg:"purple.700",
               }}
-              onClick={()=>{navigate('/back')}}
+              // onClick={()=>{navigate('/back')}}
             >
               Back ` {project.project_name}!`
             </chakra.a>

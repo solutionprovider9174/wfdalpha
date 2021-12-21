@@ -32,14 +32,14 @@ export default {
             path: 'backproject',
             template: 'src/pages/BackProject',
         },
-        // {
-        //     path: 'explore',
-        //     template: 'src/pages/Explorer',
-        // },
-        // {
-        //     path: 'prjdetail',
-        //     template: 'src/pages/ProjectDetail',
-        // },
+        {
+            path: 'explore',
+            template: 'src/pages/Explorer',
+        },
+        {
+            path: 'prjdetail',
+            template: 'src/pages/ProjectDetail',
+        },
         // A 404 component
         {
             path: '404',
