@@ -25,7 +25,7 @@ export default {
             template: 'src/pages/EsignEdit',
         },
         {
-            path: 'create',
+            path: 'createproject',
             template: 'src/pages/CreateProject',
         },
         {
@@ -34,13 +34,29 @@ export default {
         },
         {
             path: 'explore',
-            template: 'src/pages/Explorer',
+            template: 'src/pages/ExploreProject',
         },
         {
             path: 'prjdetail',
             template: 'src/pages/ProjectDetail',
         },
         // A 404 component
+        {
+            path: 'invest',
+            template: 'src/pages/Invest',
+        },
+        {
+            path: 'invest2',
+            template: 'src/pages/Invest2',
+        },
+        {
+            path: 'invest3',
+            template: 'src/pages/invest3',
+        },
+        {
+            path: 'invest4',
+            template: 'src/pages/invest4',
+        },
         {
             path: '404',
             template: 'src/pages/NotFound',

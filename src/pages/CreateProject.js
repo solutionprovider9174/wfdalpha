@@ -41,12 +41,13 @@ export default function NewProject(props) {
     }    
   }
   
-  const queryString = window.location.search;
-  console.log(queryString);
-  const urlParams = new URLSearchParams(queryString);
-  const product = urlParams.get('id')
-console.log('id=');
-  console.log(product);
+
+//   const queryString = window.location.search;
+//   console.log(queryString);
+//   const urlParams = new URLSearchParams(queryString);
+//   const product = urlParams.get('id')
+// console.log('id=');
+//   console.log(product);
 
   return (
     <ChakraProvider resetCSS theme={theme}>
