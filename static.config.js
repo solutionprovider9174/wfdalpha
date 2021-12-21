@@ -25,7 +25,7 @@ export default {
             template: 'src/pages/EsignEdit',
         },
         {
-            path: 'createproject',
+            path: 'create',
             template: 'src/pages/CreateProject',
         },
         {
