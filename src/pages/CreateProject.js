@@ -1,19 +1,18 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import theme from '../theme';
-import { Container } from '../components/Container';
-import {chakra, Box, Flex, SimpleGrid, GridItem, Heading, Text, Stack, FormControl, FormLabel,
-    Input, InputGroup,  InputLeftAddon, FormHelperText, Textarea, Avatar, Icon, Button,  VisuallyHidden, Select, Checkbox,  RadioGroup, Radio, HStack, InputLeftElement, InputRightElement, Img
-  } from "@chakra-ui/react";
+import {StdFee, MsgExecuteContract, } from '@terra-money/terra.js'
+import { Box, Flex, Text, Input, InputGroup,  InputLeftAddon,  Textarea, Select, 
+    InputLeftElement, InputRightElement, Img  } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
-import { useStore } from '../store'
 import { IoCloudUploadOutline, IoCheckbox } from 'react-icons/io5';
+import { ButtonTransition, ImageTransition, InputTransition } 
+                                from "../components/ImageTransition";
+import theme from '../theme';
 import Footer from "../components/Footer"
-// import '../styles/transition.css';
-import { ButtonTransition, ImageTransition, InputTransition } from "../components/ImageTransition";
+import { useStore } from '../store'
 
 export default function NewProject(props) {
+  const { state, dispatch } = useStore();
   const [isUST, setIsUST] = useState(true);
-  const [submitPressed, setSubmitPressed] = useState(false);
   const [whitepaper, setWhitepaper] = useState('');
   const [prjCategory, setPrjCategory] = useState('');
   const [prjName, setPrjName] = useState('');
@@ -25,29 +24,84 @@ export default function NewProject(props) {
   const [prjSubcategory, setPrjSubcategory]= useState('');
   const [prjChain, setPrjChain] = useState('');
 
-  function handleWhitepaper(){
-    if(typeof document !== 'undefined')
-    {
+  let connectedWallet = ''
+  if (typeof document !== 'undefined') {
+      let useConnectedWallet = require('@terra-money/wallet-provider').useConnectedWallet;
+      connectedWallet = useConnectedWallet();
+  }
+
+  function openUpload(){
+    if(typeof document !== 'undefined') {
       let fileSelector = document.getElementById('fileSelector')
       fileSelector.click();
     }
   }
   function changeWhitepaper(){
-    if(typeof document !== 'undefined')
-    {
+    if(typeof document !== 'undefined') {
       let fileSelector = document.getElementById('fileSelector')
       var fileName = fileSelector.value;
       setWhitepaper(fileName.substr(fileName.lastIndexOf('\\')+1, fileName.length-1));
     }    
   }
-  
+  async function createProject(){
+    if(connectedWallet == '' || connectedWallet == 'undefined'){
+      alert("Please connect to wallet first");
+      return;
+    }
 
-//   const queryString = window.location.search;
-//   console.log(queryString);
-//   const urlParams = new URLSearchParams(queryString);
-//   const product = urlParams.get('id')
-// console.log('id=');
-//   console.log(product);
+    let wefundContractAddress = state.WEFundContractAddress;
+    const obj = new StdFee(10_000, { uusd: 4500})
+
+    let AddProjectMsg = {
+        add_project: {
+          creator_wallet: connectedWallet.walletAddress,
+          project_about: prjDescription, 
+          project_category: prjCategory, 
+          project_name: prjName,
+          project_ecosystem: prjChain,
+          project_email: prjEmail,
+          project_collected: prjAmount,
+          project_wallet: "",
+          project_website: "http://" + prjWebsite, 
+        },
+    }
+console.log(AddProjectMsg);
+    let msg = new MsgExecuteContract(
+      connectedWallet.walletAddress,
+      wefundContractAddress,
+      AddProjectMsg,
+      {uusd: 0}
+    )
+
+    console.log(JSON.stringify(msg));
+
+    await connectedWallet
+      .post({
+          msgs: [msg],
+          // fee: obj,
+          gasPrices: obj.gasPrices(),
+          gasAdjustment: 1.7,
+      })
+      .then((e) => {
+          if (e.success) {
+              console.log("Add Project success");
+              console.log(e);
+          } else {
+              console.log("project add error");
+              //setResult("register combination error")
+          }
+      })
+      .catch((e) => {
+          console.log("error" + e);
+      })
+  }
+
+  const queryString = window.location.search;
+  console.log(queryString);
+  const urlParams = new URLSearchParams(queryString);
+  const product = urlParams.get('id')
+console.log('id=');
+  console.log(product);
 
   return (
     <ChakraProvider resetCSS theme={theme}>
@@ -121,7 +175,7 @@ export default function NewProject(props) {
               width='100%' height='55px' rounded='md'
             >
               <InputGroup style={{background: 'rgba(255, 255, 255, 0.05)', }} size="sm" border='0px'>
-                <Input style={{border:'0', background:'transparent' }} type="text" h='55px'  rounded="md"  value={prjName} placeholder='Type here'  />
+                <Input style={{border:'0', background:'transparent' }} type="text" h='55px'  rounded="md"  value={prjName} placeholder='Type here' onChange={(e)=>setPrjName(e.target.value)} />
               </InputGroup>
             </InputTransition>
           </Box>
@@ -168,13 +222,13 @@ export default function NewProject(props) {
                 <InputGroup size="sm">
                   <InputLeftElement h='55px' pointerEvents='none' children={<IoCloudUploadOutline color='#00A3FF' width='30px' height='30px'/>} />
                   <Input type="text" h='55px' bg='#FFFFFF' borderColor="#FFFFFF33" placeholder="Upload here" focusBorderColor="purple.800"  rounded="md"  
-                  onClick={(e)=>{handleWhitepaper()}}  /> 
+                  onClick={(e)=>{openUpload()}}  /> 
                 </InputGroup>}
               {whitepaper != '' && 
                 <InputGroup size="sm">
                   <InputLeftElement h='55px' pointerEvents='none' children={<IoCheckbox color='00A3FF'  width='30px' height='30px' />} />
                   <Input type="text" h='55px' bg='#FFFFFF' borderColor="#FFFFFF33" placeholder={whitepaper} focusBorderColor="purple.800"  rounded="md"  
-                  onClick={(e)=>{handleWhitepaper()}} /> 
+                  onClick={(e)=>{openUpload()}} /> 
                 </InputGroup>}
               <input type='file' id="fileSelector" name='userFile' style={{display:'none'}}
                 onChange={()=>changeWhitepaper()}/>
@@ -209,7 +263,7 @@ export default function NewProject(props) {
               width='100%' height='55px' rounded='md'
             >       
               <Select id="sub_category" style={{background: 'rgba(255, 255, 255, 0.05)', }} h='55px' name="sub_category" autoComplete="sub_category" focusBorderColor="purple.800" shadow="sm" size="sm" w="full" rounded="md"
-                value='' onChange={(e)=>{setPrjCategory(e.target.value)}} 
+                onChange={(e)=>{setPrjCategory(e.target.value)}} 
               >
                 <option selected style={{backgroundColor:'#1B0645'}}>Crypto</option>
                 <option style={{backgroundColor:'#1B0645'}}>Charity</option>
@@ -302,7 +356,7 @@ export default function NewProject(props) {
               width='350px' height='50px' rounded='33px'
             >
               <Box variant="solid" color="white" justify='center' align='center'
-                  onClick = {()=>{setSubmitPressed(!submitPressed)}} >
+                  onClick = {()=>createProject()} >
                 Submit
               </Box>
             </ButtonTransition>
