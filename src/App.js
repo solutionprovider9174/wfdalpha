@@ -2,8 +2,6 @@ import React, { Component, Suspense, useContext } from 'react'
 import { Root, Routes } from 'react-static'
 import { Router, Link } from '@reach/router'
 import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-
 import './styles/base.scss'
 import { Head } from 'react-static'
 import { popper } from '@popperjs/core'
@@ -13,6 +11,11 @@ if (typeof document !== 'undefined') {
     bootstrap = require('bootstrap')
 }
 import { StoreProvider } from './store'
+
+import Index from 'pages/Index'
+// import ExplorerProject from 'pages/Explorer'
+import CreateProject from 'pages/CreateProject'
+import BackProject from 'pages/BackProject'
 
 class App extends Component {
  
@@ -48,7 +51,7 @@ class App extends Component {
                             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
                         />
                         <title>
-                            LoTerra - Decentralized lottery on Terra blockchain
+                            WeFund - Back to Our Project on Terra blockchain
                         </title>
                         <link
                             rel="icon"
@@ -97,6 +100,10 @@ class App extends Component {
                     <StoreProvider>
                         <Navbar/>
                         <Routes default />
+                        {/* <AppRouter /> */}
+                         {/* <Router>
+                            <Index path="/" />
+                         </Router> */}
                     </StoreProvider>
 
                     {/*<Footer/>*/}
