@@ -1,17 +1,20 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import theme from '../theme';
-import { Container } from '../components/Container';
-import {chakra, Box, Flex, SimpleGrid, GridItem, Heading, Text, Stack, FormControl, FormLabel,
-    Input, InputGroup,  InputLeftAddon, FormHelperText, Textarea, Avatar, Icon, Button,  VisuallyHidden, Select, Checkbox,  RadioGroup, Radio, HStack, InputLeftElement, InputRightElement, Img
-  } from "@chakra-ui/react";
+import {StdFee, MsgExecuteContract, } from '@terra-money/terra.js'
+import { Box, Flex, Text, Input, InputGroup, InputRightElement, Img } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
-import { useStore } from '../store'
 import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark } from 'react-icons/io5';
-
 import { ButtonTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
+import theme from '../theme';
+import { useStore } from '../store'
 
-export default function NewProject() {
-  const [backPressed, setBackPressed] = useState(false);
+let useConnectedWallet = {}
+if (typeof document !== 'undefined') {
+    useConnectedWallet =
+        require('@terra-money/wallet-provider').useConnectedWallet
+}
+
+export default function BackProject() {
+  const { state, dispatch } = useStore();
   const [condition, setCondition] = useState(false);
   const [backAmount, setBackAmount] = useState('');
   const [blog1, setBlog1] = useState(false);
@@ -19,6 +22,58 @@ export default function NewProject() {
   const [blog3, setBlog3] = useState(false);
   const [blog4, setBlog4] = useState(false);
   const [blog5, setBlog5] = useState(false);
+
+  let connectedWallet = ''
+  if (typeof document !== 'undefined') {
+      connectedWallet = useConnectedWallet()
+  }
+
+  async function backProject(){
+    if(connectedWallet == '' || connectedWallet == 'undefined'){
+      alert("Please connect to wallet first");
+      return;
+    }
+
+    let wefundContractAddress = state.WEFundContractAddress;
+
+    const obj = new StdFee(10_000, { uusd: 4500})
+
+    let BackProjectMsg = {
+        back2_project: {
+          backer_wallet: connectedWallet.walletAddress,
+          project_id: "4"
+        },
+    }
+console.log(BackProjectMsg);
+
+    let msg = new MsgExecuteContract(
+      connectedWallet.walletAddress,
+      wefundContractAddress,
+      BackProjectMsg,
+      {uusd: 5000000}
+    )
+
+    console.log(JSON.stringify(msg));
+
+    await connectedWallet
+      .post({
+          msgs: [msg],
+          // fee: obj,
+          gasPrices: obj.gasPrices(),
+          gasAdjustment: 1.7,
+      })
+      .then((e) => {
+          if (e.success) {
+              console.log("Back Project success");
+              console.log(e);
+          } else {
+              console.log("Back project error");
+          }
+      })
+      .catch((e) => {
+          console.log("error" + e);
+      })
+  }
 
   return (
     <ChakraProvider resetCSS theme={theme}>
@@ -103,7 +158,7 @@ export default function NewProject() {
               width='200px' height='50px' rounded='33px'
             >
               <Box variant="solid" color="white" justify='center' align='center'
-                  onClick = {()=>{}} >
+                  onClick = {()=>backProject()} >
                 Back Project
               </Box>
             </ButtonTransition>

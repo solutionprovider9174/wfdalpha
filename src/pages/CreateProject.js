@@ -10,6 +10,12 @@ import theme from '../theme';
 import Footer from "../components/Footer"
 import { useStore } from '../store'
 
+let useConnectedWallet = {}
+if (typeof document !== 'undefined') {
+    useConnectedWallet =
+        require('@terra-money/wallet-provider').useConnectedWallet
+}
+
 export default function NewProject(props) {
   const { state, dispatch } = useStore();
   const [isUST, setIsUST] = useState(true);
@@ -26,9 +32,9 @@ export default function NewProject(props) {
 
   let connectedWallet = ''
   if (typeof document !== 'undefined') {
-      let useConnectedWallet = require('@terra-money/wallet-provider').useConnectedWallet;
-      connectedWallet = useConnectedWallet();
+      connectedWallet = useConnectedWallet()
   }
+
 
   function openUpload(){
     if(typeof document !== 'undefined') {
@@ -50,6 +56,7 @@ export default function NewProject(props) {
     }
 
     let wefundContractAddress = state.WEFundContractAddress;
+
     const obj = new StdFee(10_000, { uusd: 4500})
 
     let AddProjectMsg = {
@@ -62,15 +69,15 @@ export default function NewProject(props) {
           project_email: prjEmail,
           project_collected: prjAmount,
           project_wallet: "",
-          project_website: "http://" + prjWebsite, 
+          project_website: prjWebsite, 
         },
     }
 console.log(AddProjectMsg);
+
     let msg = new MsgExecuteContract(
       connectedWallet.walletAddress,
       wefundContractAddress,
-      AddProjectMsg,
-      {uusd: 0}
+      AddProjectMsg
     )
 
     console.log(JSON.stringify(msg));

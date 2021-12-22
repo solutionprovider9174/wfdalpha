@@ -85,25 +85,25 @@ export default function Footer() {
                             About
                         </a>
                     </div>
-                    <div key="about" className="btn-group" style={{cursor:'pointer', left:'570px'}}>
+                    <div key="contact" className="btn-group" style={{cursor:'pointer', left:'570px'}}>
                         <a href="" className="btn btn-danger "  
                         style={{color:'rgba(255, 255, 255, 0.84)', height:'20px', top:'31px', fontSize:'15px', lineHeight:'18px'}}>
                             Contact
                         </a>
                     </div>
-                    <div key="about" className="btn-group" style={{cursor:'pointer', left:'600px'}}>
+                    <div key="partner" className="btn-group" style={{cursor:'pointer', left:'600px'}}>
                         <a href="" className="btn btn-danger "  
                         style={{color:'rgba(255, 255, 255, 0.84)', height:'20px', top:'31px', fontSize:'15px', lineHeight:'18px'}}>
-                            Parnterships
+                            Partnerships
                         </a>
                     </div>
-                    <div key="about" className="btn-group" style={{cursor:'pointer', left:'630px'}}>
+                    <div key="White" className="btn-group" style={{cursor:'pointer', left:'630px'}}>
                         <a href="" className="btn btn-danger "  
                         style={{color:'rgba(255, 255, 255, 0.84)', height:'20px', top:'31px', fontSize:'15px', lineHeight:'18px'}}>
                             White Papers
                         </a>
                     </div>
-                    <div key="about" className="btn-group" style={{cursor:'pointer', left:'660px'}}>
+                    <div key="terms" className="btn-group" style={{cursor:'pointer', left:'660px'}}>
                         <a href="" className="btn btn-danger "  
                         style={{color:'rgba(255, 255, 255, 0.84)', height:'20px', top:'31px', fontSize:'15px', lineHeight:'18px'}}>
                             Terms of Service
