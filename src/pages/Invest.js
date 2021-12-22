@@ -9,7 +9,7 @@ import { useStore } from '../store'
 import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark } from 'react-icons/io5';
 
 import { ImageTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
-// import Popup from "reactjs-popup";
+import Popup from "reactjs-popup";
 export default function NewProject() {
   const [backPressed, setBackPressed] = useState(false);
   const [condition, setCondition] = useState(false);
@@ -53,7 +53,7 @@ export default function NewProject() {
               alignSelf={'flex-start'}
                 alt={'Wefund'}
                 src={
-                  '/saft.svg'
+                  'saft.svg'
                 }
               />
               </Flex>
@@ -109,7 +109,7 @@ export default function NewProject() {
               alignSelf={'center'}
                 alt={'Wefund'}
                 src={
-                  '/saftroadmap.svg'
+                  'saftroadmap.svg'
                 }
               /></Flex>  
           </VStack>

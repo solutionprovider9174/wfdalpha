@@ -16,7 +16,7 @@ import { useStore } from '../store'
 import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark } from 'react-icons/io5';
 
 import { ImageTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
-// import Popup from "reactjs-popup";
+import Popup from "reactjs-popup";
 export default function NewProject() {
   const [backPressed, setBackPressed] = useState(false);
   const [condition, setCondition] = useState(false);
@@ -51,11 +51,11 @@ export default function NewProject() {
             style={{fontFamily:'PilatExtended-Regular'}}>
             <HStack><Text fontSize='22px' fontWeight={'300'}><Image
                 src={
-                  '/popperleft.svg'
+                  'popperleft.svg'
                 }
               />Congratulations <Image
               src={
-                '/popperright.svg'
+                'popperright.svg'
               }
             /></Text></HStack>
             <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'} maxWidth={'500px'} justifyContent={'center'}>You have invested in WeFund. For more update, please get in touch with us. We will confirm your investment status via email. </Text>
