@@ -21,6 +21,7 @@ const initialState = {
     allNativeCoins: [],
     config: {},
     ustBalance: 0,
+    contractBalance: {},
     lcd_client: new LCDClient({
         URL: 'https://bombay-lcd.terra.dev/',
         chainID: 'bombay-12',
@@ -29,6 +30,11 @@ const initialState = {
 
 const reducer = (state, action) => {
     switch (action.type) {
+        case 'setContractBalance' :
+            return {
+                ...state,
+                contractBalance: action.message,
+            }
         case 'setProjectdata' :
             return {
                 ...state,

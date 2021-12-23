@@ -23,6 +23,8 @@ export default function ExplorerProject() {
   const [prjName, setPrjName] = useState('');
   const [totalBackedMoney, setTotalBackedMoney] = useState(0)
   const { state, dispatch } = useStore();
+  const [ustAmount, setUstAmount] = useState(0);
+  const [austAmount, setAustAmount] = useState(0);
 
   let connectedWallet = ''
   if (typeof document !== 'undefined') {
@@ -69,6 +71,21 @@ console.log(projectData != '')
       }
       totalBacked /= 10**6;
       setTotalBackedMoney(totalBacked);
+
+      const balanceData = await api.contractQuery(
+        state.WEFundContractAddress,
+          {
+              get_balance: {
+                wallet: state.WEFundContractAddress
+              },
+          }
+      )
+      if(!balanceData)
+        return;
+
+      setUstAmount(balanceData.amount[0].amount / 1000000);
+      setAustAmount(balanceData.amount[1].amount / 1000000);
+
     } catch (e) {
         console.log(e)
     }
@@ -96,7 +113,18 @@ console.log(projectData != '')
             style={{fontFamily:'PilatExtended-Bold'}}>
             <Text fontSize='40px' fontWeight={'900'}>Explore&nbsp;</Text>
             <Text fontSize='40px' color='#4790f5' fontWeight={'900'}>
-              Projects: ${totalBackedMoney} backed
+              Projects
+            </Text>
+          </Flex>
+          <Flex justify='center' direction="column" textAlign='center'>
+            <Text fontSize='40px' color='#4790f5' fontWeight={'900'}>
+              {totalBackedMoney} backed
+            </Text>
+            <Text fontSize='40px' color='#4790f5' fontWeight={'900'}>
+              {ustAmount} UST
+            </Text>
+            <Text fontSize='40px' color='#4790f5' fontWeight={'900'}>
+              {austAmount} aUST
             </Text>
           </Flex>
         </div>

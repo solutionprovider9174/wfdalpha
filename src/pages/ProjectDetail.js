@@ -18,11 +18,16 @@ if (typeof document !== 'undefined') {
 }
 
 export default function ProjectDetail() {
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const project_id = urlParams.get('project_id')
   const { state, dispatch } = useStore();
   const [totalBackedMoney, setTotalBackedMoney] = useState(0)
+
+  let queryString, urlParams, project_id;
+  if(typeof window != 'undefined'){
+    queryString = window.location.search;
+    urlParams = new URLSearchParams(queryString);
+    project_id = urlParams.get('project_id')
+  }
+
 
   console.log(project_id);
 
@@ -96,11 +101,11 @@ export default function ProjectDetail() {
           <Flex pt='64px' ml='100px' justify="left">
             <Text fontSize='16px' fontWeight='normal' color={'rgba(255, 255, 255, 0.54)'}>Home &gt;&nbsp;</Text>
             <Text fontSize='16px' fontWeight='normal' color={'rgba(255, 255, 255, 0.54)'}>Projects &gt;&nbsp;</Text>
-            <Text fontSize='16px' color={'rgba(255, 255, 255, 0.84)'}>Lynx</Text>
+            <Text fontSize='16px' color={'rgba(255, 255, 255, 0.84)'}>{state.projectData.project_name}</Text>
           </Flex>
           <Flex mt='11px' ml={'100px'} pb='75px' mb="75px" justify='left'
             style={{fontFamily:'PilatExtended-Bold'}}>
-            <Text fontSize='40px' fontWeight={'900'}>Lynx</Text>
+            <Text fontSize='40px' fontWeight={'900'}>{state.projectData.project_name}</Text>
           </Flex>
         </div>
         </div>

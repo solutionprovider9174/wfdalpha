@@ -25,9 +25,12 @@ export default function BackProject() {
   const [blog4, setBlog4] = useState(false);
   const [blog5, setBlog5] = useState(false);
 
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const project_id = urlParams.get('project_id')
+  let queryString, urlParams, project_id;
+  if(typeof window != 'undefined'){
+    queryString = window.location.search;
+    urlParams = new URLSearchParams(queryString);
+    project_id = urlParams.get('project_id')
+  }
 
   let connectedWallet = ''
   if (typeof document !== 'undefined') {

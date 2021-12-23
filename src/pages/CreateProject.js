@@ -341,9 +341,9 @@ console.log(AddProjectMsg);
                   /> 
                   <Select id="peg" style={{border:'0', background:'transparent' }} h='55px' w='140px' name="peg" autoComplete="peg" focusBorderColor="purple.800" shadow="sm" size="sm" rounded="md" fontSize='16px' value='' onChange={(e)=>{setPrjChain(e.target.value)}} 
                   >
-                    <option selected style={{backgroundColor:'#1B0645'}}>($)USD</option>
-                    <option style={{backgroundColor:'#1B0645'}}>($)USD</option>
-                    <option style={{backgroundColor:'#1B0645'}}>($)USD</option>
+                    <option selected style={{backgroundColor:'#1B0645'}}>($)UST</option>
+                    <option style={{backgroundColor:'#1B0645'}}>($)UST</option>
+                    <option style={{backgroundColor:'#1B0645'}}>($)UST</option>
                   </Select>
                 </InputGroup>
               </InputTransition>
