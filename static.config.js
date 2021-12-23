@@ -29,7 +29,7 @@ export default {
             template: 'src/pages/CreateProject',
         },
         {
-            path: 'backproject',
+            path: 'back',
             template: 'src/pages/BackProject',
         },
         {
@@ -37,7 +37,7 @@ export default {
             template: 'src/pages/ExploreProject',
         },
         {
-            path: 'prjdetail',
+            path: 'detail',
             template: 'src/pages/ProjectDetail',
         },
         // A 404 component

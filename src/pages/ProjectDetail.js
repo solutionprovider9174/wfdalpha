@@ -1,27 +1,90 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from '../theme';
-import { Container } from '../components/Container';
-import {chakra, Box, Flex, SimpleGrid, GridItem, Heading, Text, Stack, Stat, Span,
-    Input, InputGroup,  StatNumber, StatLabel, Textarea, Avatar, Icon, Button,  VisuallyHidden, Image, Select, Checkbox,  RadioGroup, Radio, HStack, VStack, InputLeftElement, InputRightElement, Img
-  } from "@chakra-ui/react";
-import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
-import { useStore } from '../store'
-import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark, IoCloudUploadOutline, IoCheckbox } from 'react-icons/io5';
+import {chakra, Box, Flex, SimpleGrid, Text, Stack, Stat,StatNumber, StatLabel, Icon,Image,HStack, VStack} from "@chakra-ui/react";
 
-import Pagination from "@choc-ui/paginator"
-import { MdHeadset, MdEmail, MdOutlinePlace, MdWork, MdOutlineAccountBalanceWallet, MdOutlineCategory } from "react-icons/md";
+import React, { useEffect, useState,  useCallback, useContext, useRef, useMemo } from 'react';
+import { MdOutlinePlace } from "react-icons/md";
+import {WasmAPI, LCDClient, } from '@terra-money/terra.js'
 
 import '../styles/CreateProject.css';
 import { BsArrowUpRight,BsBookmarksFill, BsBox, BsPerson, BsCashCoin } from "react-icons/bs"
 import { ImageTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
+import { useStore } from '../store'
 
-export default function NewProject() {
-  const [isUST, setIsUST] = useState(true);
-  const [submitPressed, setSubmitPressed] = useState(false);
-  const [whitepaper, setWhitepaper] = useState('');
-  const [prjCategory, setPrjCategory] = useState('');
-  const [prjName, setPrjName] = useState('');
+let useConnectedWallet = {}
+if (typeof document !== 'undefined') {
+    useConnectedWallet =
+        require('@terra-money/wallet-provider').useConnectedWallet
+}
 
+export default function ProjectDetail() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const project_id = urlParams.get('project_id')
+  const { state, dispatch } = useStore();
+  const [totalBackedMoney, setTotalBackedMoney] = useState(0)
+
+  console.log(project_id);
+
+  let connectedWallet = ''
+  if (typeof document !== 'undefined') {
+      connectedWallet = useConnectedWallet()
+  }
+
+  const lcd = useMemo(() => {
+    if (!connectedWallet) {
+        return null
+    }
+    return new LCDClient({
+        URL: connectedWallet.network.lcd,
+        chainID: connectedWallet.network.chainID,
+    })
+  }, [connectedWallet]);
+
+  const api = new WasmAPI(state.lcd_client.apiRequester);
+  async function fetchContractQuery() 
+  {
+    let _project_id = 1;
+    if(project_id != null)
+      _project_id = project_id;
+
+    
+    try {
+      const projectData = await api.contractQuery(
+        state.WEFundContractAddress,
+          {
+              get_project: {
+                project_id: `${_project_id}`
+              },
+          }
+      )
+      if(!projectData)
+        return;
+
+      dispatch({
+          type: 'setProjectdata',
+          message: projectData,
+      })
+  
+      let i, j
+      let totalBacked = 0;
+      for(j=0; j<projectData.backer_states.length; j++){
+          totalBacked += parseInt(projectData.backer_states[j].ust_amount.amount);
+      }
+
+      totalBacked /= 10**6;
+      setTotalBackedMoney(totalBacked);
+    } catch (e) {
+        console.log(e)
+    }
+  };
+
+  useEffect(() => {
+      // console.log("in exploer project - fetchContractQuery");
+      // if(connectedWallet){
+        fetchContractQuery();
+      // }
+  }, [connectedWallet, lcd])
 
   return (
     <ChakraProvider resetCSS theme={theme}>
@@ -42,240 +105,219 @@ export default function NewProject() {
         </div>
         </div>
         <Flex width='100%' justify='center' mt='50px'>
-        <Box style={{fontFamily:'Sk-Modernist-Regular'}} >
-          
-        <Flex width='100%' justify='center' zIndex={'1'}>
-        <SimpleGrid width={'100%'} alignContent={'center'} spacing={100} mb={'40px'} columns={2} marginLeft={'100px'}>
-          <Flex width={'100%'}>
-              <VStack>
-              <Flex alignSelf={'flex-start'}>
-                    <chakra.p color={"gray.100"} fontSize="15px">
-                    Date - <span style={{color:"#FE8600"}}>10 Dec, 2021</span>
-                    </chakra.p>
-                    <Icon as={MdOutlinePlace} h={6} w={6} mr={2} />
-
-            <chakra.h1 fontSize="sm">
-              Cardano
-            </chakra.h1>
-                </Flex>
-                <Flex mt={'75px'}>
-                    <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 5, lg: 8 }}>
-                    <Stat
-                        px={{ base: 2, md: 4 }}
-                        py={'5'}
-                        shadow={'xl'}
-                        border={'1px solid'}
-                        borderColor={'gray.800'}
-                        rounded={'lg'}>
-                        <Flex justifyContent={'space-between'}>
-                        <Box pl={{ base: 2, md: 4 }}>
-                            <StatLabel fontWeight={'medium'} isTruncated>
-                            'Backer'
-                            </StatLabel>
-                            <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
-                            2000
-                            </StatNumber>
-                        </Box>
-                        <Box
-                            my={'auto'}
-                            color={'gray.200'}
-                            alignContent={'center'}>
-                            <BsPerson size={'2em'} />
-                        </Box>
-                        </Flex>
-                    </Stat>
-                    <Stat
-                        px={{ base: 2, md: 4 }}
-                        py={'5'}
-                        shadow={'xl'}
-                        border={'1px solid'}
-                        borderColor={'gray.800'}
-                        rounded={'lg'}>
-                        <Flex justifyContent={'space-between'}>
-                        <Box pl={{ base: 2, md: 4 }}>
-                            <StatLabel fontWeight={'medium'} isTruncated>
-                            'Funding Pool'
-                            </StatLabel>
-                            <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
-                            20,000
-                            </StatNumber>
-                        </Box>
-                        <Box
-                            my={'auto'}
-                            color={'gray.200'}
-                            alignContent={'center'}>
-                            <BsCashCoin size={'2em'} />
-                        </Box>
-                        </Flex>
-                    </Stat>
-                    <Stat
-                        px={{ base: 2, md: 4 }}
-                        py={'5'}
-                        shadow={'xl'}
-                        border={'1px solid'}
-                        borderColor={'gray.500'}
-                        rounded={'lg'}>
-                        <Flex justifyContent={'space-between'}>
-                        <Box pl={{ base: 2, md: 4 }}>
-                            <StatLabel fontWeight={'medium'} isTruncated>
-                            'Category'
-                            </StatLabel>
-                            <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
-                            Charity
-                            </StatNumber>
-                        </Box>
-                        <Box
-                            my={'auto'}
-                            color={'gray.200'}
-                            alignContent={'center'}>
-                            <BsBookmarksFill size={'2em'} />
-                        </Box>
-                        </Flex>
-                    </Stat>
-                    <Stat
-                        px={{ base: 2, md: 4 }}
-                        py={'5'}
-                        shadow={'xl'}
-                        border={'1px solid'}
-                        borderColor={'gray.800'}
-                        rounded={'lg'}>
-                        <Flex justifyContent={'space-between'}>
-                        <Box pl={{ base: 2, md: 4 }}>
-                            <StatLabel fontWeight={'medium'} isTruncated>
-                            'Platform'
-                            </StatLabel>
-                            <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
-                            Cardano
-                            </StatNumber>
-                        </Box>
-                        <Box
-                            my={'auto'}
-                            color={'gray.200'}
-                            alignContent={'center'}>
-                            <BsBox size={'2em'} />
-                        </Box>
-                        </Flex>
-                    </Stat>
-                                </SimpleGrid>
-                </Flex>
-                <Flex mt="40px">
-                    <chakra.p py={2} color={"rgba(255, 255, 255, 0.84)"} fontSize= {"18px"} lineHeight={"150%"}>
-                    Commodo labore ut nisi laborum amet eu qui magna ullamco ut labore. 
-                    Aliquip consectetur labore consectetur dolor exercitation est min quis. 
-                    Magna non irure qui ex est laborum nulla excepteur. Aliquip consectetur labore consectetur dolor exercitation est min quis. 
-                    Magna non irure qui ex est laborum nulla excepteur qui. <br/><br/>
-
-                    Nisi commodo qui pariatur enim sint laborum consequat enim in officia. Officia fugiat incididunt commodo et mollit aliqua non aute.
-                     Enim dolor eiusmod aliqua amet ipsum in enim eiusmod. Quis exercitation sit velit duis.<br/><br/>
-
-                     Commodo labore ut nisi laborum amet eu qui magna ullamco ut labore. 
-                    Aliquip consectetur labore consectetur dolor exercitation est min quis. 
-                    Magna non irure qui ex est laborum nulla excepteur. Aliquip consectetur labore consectetur dolor exercitation est min quis. 
-                    Magna non irure qui ex est laborum nulla excepteur qui.<br/><br/>
-
-                    Nisi commodo qui pariatur enim sint laborum consequat enim in officia. Officia fugiat incididunt commodo et mollit aliqua non aute.
-                     Enim dolor eiusmod aliqua amet ipsum in enim eiusmod. Quis exercitation sit velit duis.<br/><br/>
-                    </chakra.p>
-                </Flex>
-                <Flex  as={Stack}>
-                    <chakra.h1 color="white" fontWeight="900" fontSize="22px" fontFamily={'Pilat Extended'} mb="20px">
-                     Project Founder Speaks
-                    </chakra.h1>
-                    <Box background="rgba(255, 255, 255, 0.05)" border="1.5px solid rgba(255, 255, 255, 0.15)" boxSizing="border-box" borderRadius="10px">
-                        <Text fontSize={'18px'} fontWeight={'bold'}>Incredible Experience</Text>
-                        <Text color= {"rgba(255, 255, 255, 0.54)"}>Aliquip mollit sunt qui irure. Irure ullamco Lorem excepteur dolor qui ea ad quis. 
-                            Enim fugiat cillum enim ad occaecat sint qui elit labore mollit sunt laborum fugiat consequat. 
-                            Voluptate labore sunt duis eu deserunt. Occaecat do ut ut labore cillum enim dolore ad enim enim id. 
-                            Aliquip do veniam ad excepteur ad cillum qui deserunt nostrud sunt aliqua duis sunt occaecat. 
-                            Laborum incididunt commodo ullamco proident quis.</Text>
+          <Box style={{fontFamily:'Sk-Modernist-Regular'}} >
+            <Flex width='100%' justify='center' zIndex={'1'}>
+              <SimpleGrid width={'100%'} alignContent={'center'} spacing={100} mb={'40px'} columns={2} marginLeft={'100px'}>
+                <Flex width={'100%'}>
+                  <VStack>
+                    <Flex alignSelf={'flex-start'}>
+                      <chakra.p color={"gray.100"} fontSize="15px">
+                        Date - 
+                        <span style={{color:"#FE8600"}}>10 Dec, 2021</span>
+                      </chakra.p>
+                      <Icon as={MdOutlinePlace} h={6} w={6} mr={2} />
+                      <chakra.h1 fontSize="sm">
+                        {state.projectData.project_ecosystem}
+                      </chakra.h1>
+                    </Flex>
+                    <Flex mt={'75px'}>
+                      <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 5, lg: 8 }}>
+                        <Stat
+                            px={{ base: 2, md: 4 }}
+                            py={'5'}
+                            shadow={'xl'}
+                            border={'1px solid'}
+                            borderColor={'gray.800'}
+                            rounded={'lg'}>
+                            <Flex justifyContent={'space-between'}>
+                            <Box pl={{ base: 2, md: 4 }}>
+                                <StatLabel fontWeight={'medium'} isTruncated>
+                                'Backer'
+                                </StatLabel>
+                                <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
+                                {totalBackedMoney}
+                                </StatNumber>
+                            </Box>
+                            <Box
+                                my={'auto'}
+                                color={'gray.200'}
+                                alignContent={'center'}>
+                                <BsPerson size={'2em'} />
+                            </Box>
+                            </Flex>
+                        </Stat>
+                        <Stat
+                            px={{ base: 2, md: 4 }}
+                            py={'5'}
+                            shadow={'xl'}
+                            border={'1px solid'}
+                            borderColor={'gray.800'}
+                            rounded={'lg'}>
+                            <Flex justifyContent={'space-between'}>
+                            <Box pl={{ base: 2, md: 4 }}>
+                                <StatLabel fontWeight={'medium'} isTruncated>
+                                'Funding Pool'
+                                </StatLabel>
+                                <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
+                                {state.projectData.project_collected}
+                                </StatNumber>
+                            </Box>
+                            <Box
+                                my={'auto'}
+                                color={'gray.200'}
+                                alignContent={'center'}>
+                                <BsCashCoin size={'2em'} />
+                            </Box>
+                            </Flex>
+                        </Stat>
+                        <Stat
+                            px={{ base: 2, md: 4 }}
+                            py={'5'}
+                            shadow={'xl'}
+                            border={'1px solid'}
+                            borderColor={'gray.500'}
+                            rounded={'lg'}>
+                            <Flex justifyContent={'space-between'}>
+                              <Box pl={{ base: 2, md: 4 }}>
+                                  <StatLabel fontWeight={'medium'} isTruncated>
+                                  'Category'
+                                  </StatLabel>
+                                  <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
+                                  {state.projectData.project_category}
+                                  </StatNumber>
+                              </Box>
+                              <Box
+                                  my={'auto'}
+                                  color={'gray.200'}
+                                  alignContent={'center'}>
+                                  <BsBookmarksFill size={'2em'} />
+                              </Box>
+                            </Flex>
+                        </Stat>
+                        <Stat
+                            px={{ base: 2, md: 4 }}
+                            py={'5'}
+                            shadow={'xl'}
+                            border={'1px solid'}
+                            borderColor={'gray.800'}
+                            rounded={'lg'}>
+                            <Flex justifyContent={'space-between'}>
+                            <Box pl={{ base: 2, md: 4 }}>
+                                <StatLabel fontWeight={'medium'} isTruncated>
+                                'Platform'
+                                </StatLabel>
+                                <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
+                                Cardano
+                                </StatNumber>
+                            </Box>
+                            <Box my={'auto'} color={'gray.200'} alignContent={'center'}>
+                                <BsBox size={'2em'} />
+                            </Box>
+                            </Flex>
+                        </Stat>
+                      </SimpleGrid>
+                    </Flex>
+                    <Flex mt="40px">
+                        <chakra.p py={2} color={"rgba(255, 255, 255, 0.84)"} fontSize= {"18px"} lineHeight={"150%"}>
+                        {state.projectData.project_about}
+                        <br/><br/>
+                        </chakra.p>
+                    </Flex>
+                    <Flex  as={Stack}>
+                        <chakra.h1 color="white" fontWeight="900" fontSize="22px" fontFamily={'Pilat Extended'} mb="20px">
+                          Project Founder Speaks
+                        </chakra.h1>
+                        <Box background="rgba(255, 255, 255, 0.05)" border="1.5px solid rgba(255, 255, 255, 0.15)" boxSizing="border-box" borderRadius="10px">
+                            <Text fontSize={'18px'} fontWeight={'bold'}>Incredible Experience</Text>
+                            <Text color= {"rgba(255, 255, 255, 0.54)"}>
+                              Aliquip mollit sunt qui irure. Irure ullamco Lorem excepteur dolor qui ea ad quis. 
+                              Enim fugiat cillum enim ad occaecat sint qui elit labore mollit sunt laborum fugiat consequat. 
+                              Voluptate labore sunt duis eu deserunt. Occaecat do ut ut labore cillum enim dolore ad enim enim id. 
+                              Aliquip do veniam ad excepteur ad cillum qui deserunt nostrud sunt aliqua duis sunt occaecat. 
+                              Laborum incididunt commodo ullamco proident quis.
+                            </Text>
                             <HStack>
-                    
-              <Image mt='23px' height='35px' objectFit='cover' src='/WeFund Logos only.png' alt='UST Avatar'/>
-                        <VStack><Text>Founder Name</Text>
-                        <Text>CEO</Text></VStack>
-                    </HStack>
-                    </Box>
-                    
-              </Flex>
-              </VStack>
-                
-          </Flex>
-          <Flex width={'300px'}>
-              <VStack>
-                <Flex 
-        my={"6px"}
-        mx={"6px"}
-        width="240px"
-        height="249px"
-        bg="#FFFFFF"
-        boxShadow={"0px 2px 10px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.25)"}
-        borderRadius={"2xl"}
-        justify={'center'}>
-        
-        <Image
-        src="sheep.svg"
-        alt="avatar"
-        />
+                              <Image mt='23px' height='35px' objectFit='cover' src='/WeFund Logos only.png' alt='UST Avatar'/>
+                              <VStack>
+                                <Text>Founder Name</Text>
+                                <Text>CEO</Text>
+                              </VStack>
+                            </HStack>
+                        </Box>
+                    </Flex>
+                  </VStack> 
                 </Flex>
-                <Flex >
-          <ImageTransition 
-              unitid='visit'
-              border1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)' 
-              background1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
-              border2='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
-              background2='linear-gradient(180deg, #1A133E 0%, #1A133E 100%)'
-              border3="linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)"
-              background3="linear-gradient(180deg, #171347 0%, #171347 100%)"
-              selected={false}
-              width='240px' height='50px' rounded='33px'
-            >
-              <Box variant="solid" color="white" justify='center' align='center'
-                  onClick = {()=>{setSubmitPressed(!submitPressed)}} >
-                Visit Website  <Icon as={BsArrowUpRight} h={4} w={4} mr={3} />
-              </Box>
-            </ImageTransition>
+                <Flex width={'300px'}>
+                    <VStack>
+                      <Flex  my={"6px"} mx={"6px"} width="240px" height="249px" bg="#FFFFFF"
+                        boxShadow={"0px 2px 10px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.25)"}
+                        borderRadius={"2xl"}
+                        justify={'center'}>
+                        <Image src="/sheep.png" alt="avatar" />
+                      </Flex>
+                      <Flex >
+                        <ImageTransition 
+                            unitid='visit'
+                            border1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)' 
+                            background1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
+                            border2='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
+                            background2='linear-gradient(180deg, #1A133E 0%, #1A133E 100%)'
+                            border3="linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)"
+                            background3="linear-gradient(180deg, #171347 0%, #171347 100%)"
+                            selected={false}
+                            width='240px' height='50px' rounded='33px'
+                          >
+                            <a href={state.projectData.project_website}>
+                            <Box variant="solid" color="white" justify='center' align='center'
+                                onClick = {()=>{}} >
+                              Visit Website  <Icon as={BsArrowUpRight} h={4} w={4} mr={3} />
+                            </Box>
+                            </a>
+                          </ImageTransition>
+                      </Flex>
+                      <Flex>
+                        <ImageTransition 
+                          unitid='view'
+                          border1='linear-gradient(180deg, #FE8600 0%, #F83E00 100%)' 
+                          background1='linear-gradient(180deg, #FE8600 0%, #F83E00  100%)'
+                          border2='linear-gradient(180deg, #FE8600 0%, #F83E00 100%)'
+                          background2='linear-gradient(180deg, #1A133E 0%, #1A133E 100%)'
+                          border3="linear-gradient(180deg, #FE8600 0%, #F83E00 100%)"
+                          background3="linear-gradient(180deg, #171347 0%, #171347 100%)"
+                          selected={false}
+                          width='240px' height='50px' rounded='33px'
+                        >
+                          <Box variant="solid" color="white" justify='center' align='center'
+                              onClick = {()=>{}} >
+                            See Whitepaper
+                          </Box>
+                        </ImageTransition>
+                      </Flex>
+                      <Flex>
+                        <ImageTransition 
+                          unitid='back'
+                          border1='linear-gradient(180deg, #DEDBDB 0%, #DEDBDB 100%)' 
+                          background1='linear-gradient(180deg, #DEDBDB 0%, #DEDBDB  100%)'
+                          border2='linear-gradient(180deg, #DEDBDB 0%, #DEDBDB 100%)'
+                          background2='linear-gradient(180deg, #1A133E 0%, #1A133E 100%)'
+                          border3="linear-gradient(180deg, #DEDBDB 0%, #DEDBDB 100%)"
+                          background3="linear-gradient(180deg, #171347 0%, #171347 100%)"
+                          selected={false}
+                          width='240px' height='50px' rounded='33px'
+                        >
+                          <a href={"/back?project_id=" + state.projectData.project_id}>
+                          <Box variant="solid" color="white" justify='center' align='center'
+                              onClick = {()=>{}} >
+                            Back {state.projectData.project_name}
+                          </Box>
+                          </a>
+                        </ImageTransition>
+                      </Flex>
+                    </VStack>
                 </Flex>
-                <Flex>
-          <ImageTransition 
-              unitid='view'
-              border1='linear-gradient(180deg, #FE8600 0%, #F83E00 100%)' 
-              background1='linear-gradient(180deg, #FE8600 0%, #F83E00  100%)'
-              border2='linear-gradient(180deg, #FE8600 0%, #F83E00 100%)'
-              background2='linear-gradient(180deg, #1A133E 0%, #1A133E 100%)'
-              border3="linear-gradient(180deg, #FE8600 0%, #F83E00 100%)"
-              background3="linear-gradient(180deg, #171347 0%, #171347 100%)"
-              selected={false}
-              width='240px' height='50px' rounded='33px'
-            >
-              <Box variant="solid" color="white" justify='center' align='center'
-                  onClick = {()=>{setSubmitPressed(!submitPressed)}} >
-                See Whitepaper
-              </Box>
-            </ImageTransition>
-                </Flex>
-                <Flex>
-          <ImageTransition 
-              unitid='back'
-              border1='linear-gradient(180deg, #DEDBDB 0%, #DEDBDB 100%)' 
-              background1='linear-gradient(180deg, #DEDBDB 0%, #DEDBDB  100%)'
-              border2='linear-gradient(180deg, #DEDBDB 0%, #DEDBDB 100%)'
-              background2='linear-gradient(180deg, #1A133E 0%, #1A133E 100%)'
-              border3="linear-gradient(180deg, #DEDBDB 0%, #DEDBDB 100%)"
-              background3="linear-gradient(180deg, #171347 0%, #171347 100%)"
-              selected={false}
-              width='240px' height='50px' rounded='33px'
-            >
-              <Box variant="solid" color="white" justify='center' align='center'
-                  onClick = {()=>{setSubmitPressed(!submitPressed)}} >
-                Back Lynx
-              </Box>
-            </ImageTransition>
-                </Flex>
-              </VStack>
-          </Flex>
-          </SimpleGrid>
-        </Flex>
-        </Box>
+              </SimpleGrid>
+            </Flex>
+          </Box>
         </Flex>
       </div>
     </ChakraProvider>

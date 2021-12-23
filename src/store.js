@@ -16,18 +16,24 @@ const StoreContext = createContext()
 
 const initialState = {
     WEFundContractAddress: "terra14jvfsqdnpgn3tpkkcevarh0f832qrcpzsesfg0",
+    projectData: '',
     wallet: {},    
     allNativeCoins: [],
     config: {},
     ustBalance: 0,
     lcd_client: new LCDClient({
-        URL: 'https://tequila-lcd.terra.dev/',
-        chainID: 'tequila-0004',
+        URL: 'https://bombay-lcd.terra.dev/',
+        chainID: 'bombay-12',
     }),
 }
 
 const reducer = (state, action) => {
     switch (action.type) {
+        case 'setProjectdata' :
+            return {
+                ...state,
+                projectData: action.message,
+            }
         case 'setWallet' :
             return {
                 ...state,

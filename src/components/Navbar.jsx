@@ -18,19 +18,17 @@ export default function WithSubnavigation() {
       <Container>
     <div style={{ display:'flex', width:'100%', height:'80px',background:'linear-gradient(90deg, #3608478A 0%, #18075B 104.34%)'
     , backdropFilter: 'blur(54px)', zIndex:'99'}}>
-      
         <div style={{display:'flex', width:'70%'}}>
-        <a className="navbar-brand" href="/">
+          <a className="navbar-brand" href="/">
             <img
-                alt={'Wefund'}
-                src={
-                  '/WeFund%20Logos%20only.png'
-                }
-                style={{position:'relative', left: '99px', top:'31.25%', width:'56px', height:'30px'}}
-              />
-              </a>
-              <div style={{position:'absolute',width:'30px', left:'185px', top:'40px', border:'1px solid rgba(255,255,255, 0.2)',
-                transform:'rotate(90deg)'}}></div>
+              alt={'Wefund'}
+              src={'/WeFund%20Logos%20only.png'}
+              style={{position:'relative', left: '99px', top:'31.25%', width:'56px', height:'30px'}}
+            />
+          </a>
+          <div style={{position:'absolute',width:'30px', left:'185px', top:'40px', border:'1px solid rgba(255,255,255, 0.2)',
+            transform:'rotate(90deg)'}}>
+          </div>
           <DesktopNav/>
         </div>
         <div style={{display:'flex', position: 'relative', top:'20px',alignItems:'right'}}>

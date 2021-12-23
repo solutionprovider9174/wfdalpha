@@ -17,22 +17,44 @@ export default function BackProject() {
   const { state, dispatch } = useStore();
   const [condition, setCondition] = useState(false);
   const [backAmount, setBackAmount] = useState('');
+  const [wfdAmount, setWfdamount] = useState('');
+
   const [blog1, setBlog1] = useState(false);
   const [blog2, setBlog2] = useState(false);
   const [blog3, setBlog3] = useState(false);
   const [blog4, setBlog4] = useState(false);
   const [blog5, setBlog5] = useState(false);
 
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const project_id = urlParams.get('project_id')
+
   let connectedWallet = ''
   if (typeof document !== 'undefined') {
       connectedWallet = useConnectedWallet()
   }
 
-  async function backProject(){
-    if(connectedWallet == '' || connectedWallet == 'undefined'){
-      alert("Please connect to wallet first");
+  function changeAmount(e)
+  {
+    setBackAmount(e.target.value);
+    let amount = parseInt(e.target.value) *5 / 100;
+    if(amount > 0)
+      setWfdamount(amount);
+    else
+      setWfdamount('');
+  }
+
+  async function backProject()
+  {
+console.log(connectedWallet);
+    if(connectedWallet == '' || typeof connectedWallet == 'undefined'){
+      console.log("Please connect to wallet first");
       return;
     }
+
+    let _project_id = 1;
+    if(project_id != null)
+      _project_id = project_id;
 
     let wefundContractAddress = state.WEFundContractAddress;
 
@@ -41,19 +63,17 @@ export default function BackProject() {
     let BackProjectMsg = {
         back2_project: {
           backer_wallet: connectedWallet.walletAddress,
-          project_id: "4"
+          project_id: `${_project_id}`
         },
     }
-console.log(BackProjectMsg);
 
+    let amount = parseInt(backAmount * 1000000 * 100 / 95 + 4000000);
     let msg = new MsgExecuteContract(
       connectedWallet.walletAddress,
       wefundContractAddress,
       BackProjectMsg,
-      {uusd: 5000000}
+      {uusd: amount}
     )
-
-    console.log(JSON.stringify(msg));
 
     await connectedWallet
       .post({
@@ -113,13 +133,13 @@ console.log(BackProjectMsg);
           >      
             <InputGroup size="sm" style={{border:'0', background: 'rgba(255, 255, 255, 0.05)'}}>
               <Input type="text"  h='55px' style={{border:'0', background:'transparent',  paddingLeft:'25px'}} placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value={backAmount} 
-              onChange={(e)=>{setBackAmount(e.target.value)}} />
+              onChange={(e)=>changeAmount(e)}/>
               <InputRightElement w='60px'  h='55px' pointerEvents='none' children={<Text>UST</Text>} 
               />          
             </InputGroup>
           </InputTransition>
           <Flex alignSelf={'flex-start'} marginLeft={'25%'}>
-                <Text mb='20px' >WFD Fees</Text>
+              <Text mb='20px' >WFD Fees</Text>
               </Flex>
           <InputTransition 
             unitid='WFDamount'
@@ -127,9 +147,9 @@ console.log(BackProjectMsg);
             width='380px' height='55px' rounded='md'
           >      
             <InputGroup size="sm" style={{border:'0', background:'rgba(255, 255, 255, 0.05)'}}>
-              <Input type="text"  h='55px' style={{border:'0', background:'transparent', paddingLeft:'25px'}} placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value=''
+              <Input type="text"  h='55px' style={{border:'0', background:'transparent', paddingLeft:'25px'}} placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value={wfdAmount}
               onChange={(e)=>{}} />
-              <InputRightElement w='60px'  h='55px' pointerEvents='none' children={<Text>WFD</Text>} 
+              <InputRightElement w='60px' h='55px' pointerEvents='none' children={<Text>WFD</Text>} 
               />          
             </InputGroup>
           </InputTransition>

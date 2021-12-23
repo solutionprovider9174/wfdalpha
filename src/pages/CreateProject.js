@@ -1,5 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import {StdFee, MsgExecuteContract, } from '@terra-money/terra.js'
+import {StdFee, MsgExecuteContract } from '@terra-money/terra.js'
 import { Box, Flex, Text, Input, InputGroup,  InputLeftAddon,  Textarea, Select, 
     InputLeftElement, InputRightElement, Img  } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
@@ -102,13 +102,6 @@ console.log(AddProjectMsg);
           console.log("error" + e);
       })
   }
-
-  const queryString = window.location.search;
-  console.log(queryString);
-  const urlParams = new URLSearchParams(queryString);
-  const product = urlParams.get('id')
-console.log('id=');
-  console.log(product);
 
   return (
     <ChakraProvider resetCSS theme={theme}>
