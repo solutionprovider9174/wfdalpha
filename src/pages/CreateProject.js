@@ -90,6 +90,8 @@ export default function CreateProject()
   //---------------create project---------------------------------
   async function createProject()
   {
+console.log(connectedWallet);
+console.log(typeof connectedWallet);
     if(connectedWallet == '' || connectedWallet == 'undefined'){
       showNotification("Please connect wallet first!", 'error', 6000);
       return;
