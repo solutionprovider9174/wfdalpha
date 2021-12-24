@@ -105,7 +105,7 @@ export default function ProjectDetail() {
         return;
 
       dispatch({
-          type: 'setProjectdata',
+          type: 'setOneprojectdata',
           message: projectData,
       })
   
@@ -139,11 +139,11 @@ export default function ProjectDetail() {
           <Flex pt='64px' ml='100px' justify="left">
             <Text fontSize='16px' fontWeight='normal' color={'rgba(255, 255, 255, 0.54)'}>Home &gt;&nbsp;</Text>
             <Text fontSize='16px' fontWeight='normal' color={'rgba(255, 255, 255, 0.54)'}>Projects &gt;&nbsp;</Text>
-            <Text fontSize='16px' color={'rgba(255, 255, 255, 0.84)'}>{state.projectData.project_name}</Text>
+            <Text fontSize='16px' color={'rgba(255, 255, 255, 0.84)'}>{state.oneprojectData.project_name}</Text>
           </Flex>
           <Flex mt='11px' ml={'100px'} pb='75px' mb="75px" justify='left'
             style={{fontFamily:'PilatExtended-Bold'}}>
-            <Text fontSize='40px' fontWeight={'900'}>{state.projectData.project_name}</Text>
+            <Text fontSize='40px' fontWeight={'900'}>{state.oneprojectData.project_name}</Text>
           </Flex>
         </div>
         </div>
@@ -160,7 +160,7 @@ export default function ProjectDetail() {
                       </chakra.p>
                       <Icon as={MdOutlinePlace} h={6} w={6} mr={2} />
                       <chakra.h1 fontSize="sm">
-                        {state.projectData.project_ecosystem}
+                        {state.oneprojectData.project_ecosystem}
                       </chakra.h1>
                     </Flex>
                     <Flex mt={'75px'}>
@@ -202,7 +202,7 @@ export default function ProjectDetail() {
                                 'Funding Pool'
                                 </StatLabel>
                                 <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
-                                {state.projectData.project_collected}
+                                {state.oneprojectData.project_collected}
                                 </StatNumber>
                             </Box>
                             <Box
@@ -226,7 +226,7 @@ export default function ProjectDetail() {
                                   'Category'
                                   </StatLabel>
                                   <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
-                                  {state.projectData.project_category}
+                                  {state.oneprojectData.project_category}
                                   </StatNumber>
                               </Box>
                               <Box
@@ -262,7 +262,7 @@ export default function ProjectDetail() {
                     </Flex>
                     <Flex mt="40px">
                         <chakra.p py={2} color={"rgba(255, 255, 255, 0.84)"} fontSize= {"18px"} lineHeight={"150%"}>
-                        {state.projectData.project_about}
+                        {state.oneprojectData.project_about}
                         <br/><br/>
                         </chakra.p>
                     </Flex>
@@ -310,7 +310,7 @@ export default function ProjectDetail() {
                             selected={false}
                             width='240px' height='50px' rounded='33px'
                           >
-                            <a href={state.projectData.project_website}>
+                            <a href={state.oneprojectData.project_website}>
                             <Box variant="solid" color="white" justify='center' align='center'
                                 onClick = {()=>{}} >
                               Visit Website  <Icon as={BsArrowUpRight} h={4} w={4} mr={3} />
@@ -348,10 +348,10 @@ export default function ProjectDetail() {
                           selected={false}
                           width='240px' height='50px' rounded='33px'
                         >
-                          <Link to={"/back?project_id=" + state.projectData.project_id}>
+                          <Link to={"/back?project_id=" + state.oneprojectData.project_id}>
                           <Box variant="solid" color="white" justify='center' align='center'
                               onClick = {()=>{}} >
-                            Back {state.projectData.project_name}
+                            Back {state.oneprojectData.project_name}
                           </Box>
                           </Link>
                         </ImageTransition>

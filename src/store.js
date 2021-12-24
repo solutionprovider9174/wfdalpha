@@ -17,6 +17,7 @@ const StoreContext = createContext()
 const initialState = {
     WEFundContractAddress: "terra14jvfsqdnpgn3tpkkcevarh0f832qrcpzsesfg0",
     projectData: '',
+    oneprojectData: '',
     wallet: {},    
     allNativeCoins: [],
     config: {},
@@ -39,6 +40,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 projectData: action.message,
+            }
+        case 'setOneprojectdata':
+            return {
+                ...state,
+                oneprojectData: action.message,
             }
         case 'setWallet' :
             return {

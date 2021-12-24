@@ -175,8 +175,9 @@ export default function BackProject() {
           <Flex mt='83px' justify='center' align='center' direction='column'
             style={{fontFamily:'PilatExtended-Regular'}}>
             <Text fontSize='22px' fontWeight={'300'}>Back the Project</Text>
-            <Text fontSize='28px' color='#4790f5' fontWeight={'bold'}>Lynx VR</Text>
-            
+            <Text fontSize='28px' color='#4790f5' fontWeight={'bold'}>
+              {state.oneprojectData.project_name}
+            </Text>
           </Flex>
           {/* --------amount to back----------- */}
           <Flex mt='83px' justify='center' align='center' direction='column'>
