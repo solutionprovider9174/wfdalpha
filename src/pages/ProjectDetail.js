@@ -5,8 +5,8 @@ import {chakra, Box, Flex, SimpleGrid, Text, Stack, Stat,StatNumber, StatLabel, 
 import React, { useEffect, useState,  useCallback, useContext, useRef, useMemo } from 'react';
 import { MdOutlinePlace } from "react-icons/md";
 import {WasmAPI, LCDClient, } from '@terra-money/terra.js'
+import { Router, Link } from '@reach/router'
 
-import '../styles/CreateProject.css';
 import { BsArrowUpRight,BsBookmarksFill, BsBox, BsPerson, BsCashCoin } from "react-icons/bs"
 import { ImageTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
 import { useStore } from '../store'
@@ -348,12 +348,12 @@ export default function ProjectDetail() {
                           selected={false}
                           width='240px' height='50px' rounded='33px'
                         >
-                          <a href={"/back?project_id=" + state.projectData.project_id}>
+                          <Link to={"/back?project_id=" + state.projectData.project_id}>
                           <Box variant="solid" color="white" justify='center' align='center'
                               onClick = {()=>{}} >
                             Back {state.projectData.project_name}
                           </Box>
-                          </a>
+                          </Link>
                         </ImageTransition>
                       </Flex>
                     </VStack>
@@ -366,7 +366,6 @@ export default function ProjectDetail() {
             notification={notification}
             close={() => hideNotification()}
         />
-        <Footer/>
       </div>
     </ChakraProvider>
   )

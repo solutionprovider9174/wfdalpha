@@ -364,7 +364,6 @@ export default function BackProject() {
             notification={notification}
             close={() => hideNotification()}
         />
-        <Footer/>
       </div>
     </ChakraProvider>
   )

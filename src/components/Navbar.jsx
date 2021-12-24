@@ -5,9 +5,11 @@ import { Container } from '../components/Container';
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from '../theme';
 import { ButtonTransition, ImageTransition, InputTransition, ButtonBackTransition } from "../components/ImageTransition";
-import {chakra, Box, Flex, SimpleGrid, GridItem, Heading, Text, Stack, FormControl, FormLabel,
-  Input, InputGroup,  InputLeftAddon, FormHelperText, Textarea, Avatar, Icon, Button,  VisuallyHidden, Select, Checkbox,  RadioGroup, Radio, HStack, InputLeftElement, InputRightElement, Img
-} from "@chakra-ui/react";
+import {chakra, Box} from "@chakra-ui/react";
+
+import { Router, Link } from '@reach/router'
+
+
 export default function WithSubnavigation() {
   // const { isOpen, onToggle } = useDisclosure();
   const isOpen = true;
@@ -19,13 +21,13 @@ export default function WithSubnavigation() {
     <div style={{ display:'flex', width:'100%', height:'80px',background:'linear-gradient(90deg, #3608478A 0%, #18075B 104.34%)'
     , backdropFilter: 'blur(54px)', zIndex:'99'}}>
         <div style={{display:'flex', width:'70%'}}>
-          <a className="navbar-brand" href="/">
+          <Link className="navbar-brand" to="/">
             <img
               alt={'Wefund'}
               src={'/WeFund%20Logos%20only.png'}
               style={{position:'relative', left: '99px', top:'31.25%', width:'56px', height:'30px'}}
             />
-          </a>
+          </Link>
           <div style={{position:'absolute',width:'30px', left:'185px', top:'40px', border:'1px solid rgba(255,255,255, 0.2)',
             transform:'rotate(90deg)'}}>
           </div>
@@ -37,7 +39,7 @@ export default function WithSubnavigation() {
               width='197px' height='40px' rounded='33px'
             >
               <Box variant="solid" color="white" justify='center' align='center'
-                  onClick = {()=>{document.location='/create'}} >
+                  onClick = {()=>{navigate('/create')}} >
                 Create Your Project
               </Box>
             </ButtonBackTransition>
@@ -60,19 +62,19 @@ const DesktopNav = () => {
     <>
       {NAV_ITEMS.map((navItem, index) => (
         <div key={index} className="btn-group" style={{cursor:'pointer', left:'185px'}}>
-          <a href={navItem.href} className={"btn btn-danger "+ (navItem.children ? "dropdown-toggle":"")} data-bs-toggle="dropdown" aria-expanded="false" 
+          <Link to= {navItem.href} className={"btn btn-danger "+ (navItem.children ? "dropdown-toggle":"")} data-bs-toggle="dropdown" aria-expanded="false" 
           style={{color:'rgba(255, 255, 255, 0.84)', height:'20px', top:'25px', fontSize:'15px', lineHeight:'18px'}}>
             {navItem.label}
-          </a>
+          </Link>
           {navItem.children &&
             <ul className="dropdown-menu" style={{width:'380px', padding:'10px', backgroundColor:'black'}}>
               {navItem.children.map((childitem, index) => (
                 <li key={index}>
                   <div style={{margin:'20px'}} >
-                    <a href={childitem.href} className="navitem">
+                    <Link to={childitem.href} className="navitem">
                     <p style={{marginBottom:'5px', fontSie:'large'}}>{childitem.label}</p>
                     <p style={{marginTop:'0px', fontSize:'small'}}>{childitem.subLabel}</p>
-                    </a>
+                    </Link>
                   </div>
                 </li>
               ))}
@@ -91,7 +93,7 @@ const NAV_ITEMS = [
       {
         label: 'Explore Project',
         subLabel: 'Explore Project that you might be passionate about!',
-        href: '/explore',
+        href: '/explorer',
       },
       {
         label: 'See Our Guidelines on Creating A Project',
@@ -99,6 +101,7 @@ const NAV_ITEMS = [
         href: '/create',
       },
     ],
+    href: '',
   },
   {
     label: 'Career',
@@ -114,6 +117,7 @@ const NAV_ITEMS = [
         href: '#',
       },
     ],
+    href: '',
   },
   {
     label: 'Contact',

@@ -1,7 +1,6 @@
 import React, { Component, Suspense, useContext } from 'react'
 import { Root, Routes } from 'react-static'
 import { Router, Link } from '@reach/router'
-import Navbar from './components/Navbar'
 import './styles/base.scss'
 import { Head } from 'react-static'
 import { popper } from '@popperjs/core'
@@ -12,10 +11,17 @@ if (typeof document !== 'undefined') {
 }
 import { StoreProvider } from './store'
 
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from './theme';
+
+import Navbar from './components/Navbar'
 import Index from 'pages/Index'
-// import ExplorerProject from 'pages/Explorer'
+import ExplorerProject from 'pages/ExplorerProject'
 import CreateProject from 'pages/CreateProject'
 import BackProject from 'pages/BackProject'
+import DetailProject from 'pages/ProjectDetail'
+import NotFound from 'pages/NotFound'
+import Footer from './components/Footer'
 
 class App extends Component {
  
@@ -98,18 +104,27 @@ class App extends Component {
                         />
                     </Head>
                     <StoreProvider>
-                        <Navbar/>
-                        <Routes default />
+                    <ChakraProvider resetCSS theme={theme}>
+                        {/* <Routes default /> */}
                         {/* <AppRouter /> */}
-                         {/* <Router>
+                        <Navbar/>
+                        <Router>
                             <Index path="/" />
-                         </Router> */}
+                            <CreateProject path="create" />
+                            <BackProject path="back" />
+                            <ExplorerProject path="explorer" />
+                            <DetailProject path="detail" />
+                            <NotFound default />
+                        </Router>
+                        <Footer/>
+                    </ChakraProvider>
                     </StoreProvider>
 
-                    {/*<Footer/>*/}
+                    
                 </Root>
             </Suspense>
         )
+
     }
 }
 

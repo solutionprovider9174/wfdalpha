@@ -25,7 +25,6 @@ export default() => {
     return(
         <ChakraProvider resetCSS theme={theme}>
             <Container>
-                {/* <Navbar/> */}
                 <Flex direction='column'  maxWidth='1440px'>
                     <Hero style={{zIndex:'100', position:'absolute'}}   
                         onTransitOpacity={() => {transitOpacity()}}

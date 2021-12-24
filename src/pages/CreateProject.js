@@ -7,7 +7,6 @@ import { IoCloudUploadOutline, IoCheckbox } from 'react-icons/io5';
 import { ButtonTransition, ImageTransition, InputTransition } 
                                 from "../components/ImageTransition";
 import theme from '../theme';
-import Footer from "../components/Footer"
 import { useStore } from '../store'
 import Notification from '../components/Notification'
 
@@ -92,7 +91,7 @@ export default function CreateProject()
   {
 console.log(connectedWallet);
 console.log(typeof connectedWallet);
-    if(connectedWallet == '' || connectedWallet == 'undefined'){
+    if(connectedWallet == '' || typeof connectedWallet == 'undefined'){
       showNotification("Please connect wallet first!", 'error', 6000);
       return;
     }
@@ -412,7 +411,6 @@ console.log(typeof connectedWallet);
             notification={notification}
             close={() => hideNotification()}
         />
-        <Footer/>
         </Flex>
       </div>
     </ChakraProvider>

@@ -6,10 +6,10 @@ import { BsArrowUpRight } from "react-icons/bs"
 import Pagination from "@choc-ui/paginator"
 import { MdOutlinePlace, MdOutlineAccountBalanceWallet, MdOutlineCategory } from "react-icons/md";
 import React, { useEffect, useState,  useMemo, useCallback, useContext, useRef, } from 'react';
+import { Router, Link } from '@reach/router'
 
 import { useStore } from '../store'
 import theme from '../theme';
-import '../styles/CreateProject.css';
 import { ImageTransition, InputTransition } from "../components/ImageTransition";
 
 let useConnectedWallet = {}
@@ -203,14 +203,14 @@ export default function ExplorerProject() {
                           <Img src="/sheep.png" alt="avatar" />
                         </Flex>
                         <Box py={4} px={2} w="100%">
-                          <chakra.h1 color="white" fontWeight="bold" fontSize="lg">
+                          <chakra.h1 color="white" fontWeight="bold" fontSize="lg" w='100px'>
                             {projectItem.project_name}
                           </chakra.h1>
                           <chakra.p py={2} color={"gray.400"} fontSize="15px">
                           Date - <span style={{color:"#FE8600"}}>10 Dec, 2021</span>
                           </chakra.p>
 
-                          <chakra.p py={2} color={"gray.400"}>
+                          <chakra.p py={2} color={"gray.400"} w='800px'>
                             {projectItem.project_about}
                             <span style={{color:'#00A3FF'}}>...more</span>
                           </chakra.p>
@@ -267,12 +267,12 @@ export default function ExplorerProject() {
                                     selected={false}
                                     width='160px' height='50px' rounded='33px'
                                   >
-                                  <a href={"/detail?project_id="+projectItem.project_id}>
+                                  <Link to={"/detail?project_id="+projectItem.project_id}>
                                   <Box variant="solid" color="white" justify='center' align='center'
                                       onClick = {()=>{}} >
                                     View Project
                                   </Box>
-                                  </a>
+                                  </Link>
                                 </ImageTransition>
                               </Flex>
                             </HStack>
