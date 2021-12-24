@@ -1,11 +1,13 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import {StdFee, MsgExecuteContract, } from '@terra-money/terra.js'
+import {StdFee, MsgExecuteContract, WasmAPI, LCDClient } from '@terra-money/terra.js'
 import { Box, Flex, Text, Input, InputGroup, InputRightElement, Img } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
 import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark } from 'react-icons/io5';
 import { ButtonTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
 import theme from '../theme';
+import Footer from "../components/Footer"
 import { useStore } from '../store'
+import Notification from '../components/Notification'
 
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
@@ -25,18 +27,54 @@ export default function BackProject() {
   const [blog4, setBlog4] = useState(false);
   const [blog5, setBlog5] = useState(false);
 
+//----------extract project id------------------------------------------
   let queryString, urlParams, project_id;
   if(typeof window != 'undefined'){
     queryString = window.location.search;
     urlParams = new URLSearchParams(queryString);
     project_id = urlParams.get('project_id')
   }
-
+//-----------connect wallet and init lcd api ---------------------------
   let connectedWallet = ''
   if (typeof document !== 'undefined') {
       connectedWallet = useConnectedWallet()
   }
+  const api = new WasmAPI(state.lcd_client.apiRequester);
 
+//------------notification setting---------------------------------
+  const [notification, setNotification] = useState({
+    type: 'success',
+    message: '',
+    show: false,
+  })
+
+  function hideNotification() {
+    setNotification({
+        message: notification.message,
+        type: notification.type,
+        show: false,
+    })
+  }
+
+  function showNotification(message, type, duration) {
+    // console.log('fired notification')
+    setNotification({
+        message: message,
+        type: type,
+        show: true,
+    });
+    console.log(message + type + duration);
+    // Disable after $var seconds
+    setTimeout(() => {
+        setNotification({
+            message: message,
+            type: type,
+            show: false,
+        })
+        // console.log('disabled',notification)
+    }, duration)
+  }
+//----------------------change Amount--------------------------
   function changeAmount(e)
   {
     setBackAmount(e.target.value);
@@ -46,12 +84,11 @@ export default function BackProject() {
     else
       setWfdamount('');
   }
-
+//---------------------back project-----------------------------
   async function backProject()
   {
-console.log(connectedWallet);
     if(connectedWallet == '' || typeof connectedWallet == 'undefined'){
-      console.log("Please connect to wallet first");
+      showNotification("Please connect wallet first!", 'error', 6000);
       return;
     }
 
@@ -59,10 +96,28 @@ console.log(connectedWallet);
     if(project_id != null)
       _project_id = project_id;
 
+    const projectData = await api.contractQuery(
+      state.WEFundContractAddress,
+        {
+            get_project: {
+              project_id: `${_project_id}`
+            },
+        }
+    )
+
+    if(projectData == ''){
+      showNotification("Can't fetch Project Data", 'error', 6000);
+      return;
+    }
+
+    if(projectData.project_needback == false){
+      showNotification("Project already collected! You can't back", 'error', 6000);
+      return;
+    }
+
     let wefundContractAddress = state.WEFundContractAddress;
 
     const obj = new StdFee(10_000, { uusd: 4500})
-
     let BackProjectMsg = {
         back2_project: {
           backer_wallet: connectedWallet.walletAddress,
@@ -87,14 +142,13 @@ console.log(connectedWallet);
       })
       .then((e) => {
           if (e.success) {
-              console.log("Back Project success");
-              console.log(e);
+              showNotification('Back to Project Success', 'success', 4000);
           } else {
-              console.log("Back project error");
+              showNotification(e.message, 'error', 4000)
           }
       })
       .catch((e) => {
-          console.log("error" + e);
+          showNotification(e.message, 'error', 4000)
       })
   }
 
@@ -306,6 +360,11 @@ console.log(connectedWallet);
           </Flex>
         </Box>
         </Flex>
+        <Notification
+            notification={notification}
+            close={() => hideNotification()}
+        />
+        <Footer/>
       </div>
     </ChakraProvider>
   )

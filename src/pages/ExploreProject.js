@@ -26,11 +26,13 @@ export default function ExplorerProject() {
   const [ustAmount, setUstAmount] = useState(0);
   const [austAmount, setAustAmount] = useState(0);
 
+  //-----------connect to wallet ---------------------
   let connectedWallet = ''
   if (typeof document !== 'undefined') {
       connectedWallet = useConnectedWallet()
   }
 
+  //----------init api, lcd-------------------------
   const lcd = useMemo(() => {
     if (!connectedWallet) {
         return null
@@ -43,25 +45,28 @@ export default function ExplorerProject() {
 
   const api = new WasmAPI(state.lcd_client.apiRequester);
 
+  //-----------fetch project data=-------------------------
   async function fetchContractQuery() 
   {
     try {
       const projectData = await api.contractQuery(
         state.WEFundContractAddress,
-          {
-              get_all_project: {
-              },
-          }
+        {
+            get_all_project: {
+            },
+        }
       )
-      if(!projectData)
+      
+      if(projectData == ''){
+        showNotification("Can't fetch Project Data", 'error', 6000);
         return;
+      }
 
       dispatch({
           type: 'setProjectdata',
           message: projectData,
       })
-console.log(projectData);
-console.log(projectData != '')      
+
       let i, j
       let totalBacked = 0;
       for(i=0; i<projectData.length; i++){
@@ -92,10 +97,7 @@ console.log(projectData != '')
   };
 
   useEffect(() => {
-      // console.log("in exploer project - fetchContractQuery");
-      // if(connectedWallet){
-        fetchContractQuery();
-      // }
+      fetchContractQuery();
   }, [connectedWallet, lcd])
 
   return (

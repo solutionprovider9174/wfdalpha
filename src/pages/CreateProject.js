@@ -9,6 +9,7 @@ import { ButtonTransition, ImageTransition, InputTransition }
 import theme from '../theme';
 import Footer from "../components/Footer"
 import { useStore } from '../store'
+import Notification from '../components/Notification'
 
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
@@ -16,7 +17,8 @@ if (typeof document !== 'undefined') {
         require('@terra-money/wallet-provider').useConnectedWallet
 }
 
-export default function NewProject(props) {
+export default function CreateProject() 
+{
   const { state, dispatch } = useStore();
   const [isUST, setIsUST] = useState(true);
   const [whitepaper, setWhitepaper] = useState('');
@@ -30,12 +32,47 @@ export default function NewProject(props) {
   const [prjSubcategory, setPrjSubcategory]= useState('');
   const [prjChain, setPrjChain] = useState('');
 
+  //---------------wallet connect-------------------------------------
   let connectedWallet = ''
   if (typeof document !== 'undefined') {
       connectedWallet = useConnectedWallet()
   }
 
+  //---------------notification setting---------------------------------
+  const [notification, setNotification] = useState({
+    type: 'success',
+    message: '',
+    show: false,
+  })
 
+  function hideNotification() {
+    setNotification({
+        message: notification.message,
+        type: notification.type,
+        show: false,
+    })
+  }
+
+  function showNotification(message, type, duration) {
+    // console.log('fired notification')
+    setNotification({
+        message: message,
+        type: type,
+        show: true,
+    })
+    console.log(notification)
+    // Disable after $var seconds
+    setTimeout(() => {
+        setNotification({
+            message: message,
+            type: type,
+            show: false,
+        })
+        // console.log('disabled',notification)
+    }, duration)
+  }
+
+  //---------------input functions------------------------------
   function openUpload(){
     if(typeof document !== 'undefined') {
       let fileSelector = document.getElementById('fileSelector')
@@ -49,9 +86,12 @@ export default function NewProject(props) {
       setWhitepaper(fileName.substr(fileName.lastIndexOf('\\')+1, fileName.length-1));
     }    
   }
-  async function createProject(){
+
+  //---------------create project---------------------------------
+  async function createProject()
+  {
     if(connectedWallet == '' || connectedWallet == 'undefined'){
-      alert("Please connect to wallet first");
+      showNotification("Please connect wallet first!", 'error', 6000);
       return;
     }
 
@@ -72,7 +112,7 @@ export default function NewProject(props) {
           project_website: prjWebsite, 
         },
     }
-console.log(AddProjectMsg);
+// console.log(AddProjectMsg);
 
     let msg = new MsgExecuteContract(
       connectedWallet.walletAddress,
@@ -80,7 +120,7 @@ console.log(AddProjectMsg);
       AddProjectMsg
     )
 
-    console.log(JSON.stringify(msg));
+    // console.log(JSON.stringify(msg));
 
     await connectedWallet
       .post({
@@ -91,15 +131,17 @@ console.log(AddProjectMsg);
       })
       .then((e) => {
           if (e.success) {
-              console.log("Add Project success");
-              console.log(e);
+              // console.log("Add Project success");
+              // console.log(e);
+              showNotification('Create Project Success', 'success', 4000)
           } else {
-              console.log("project add error");
-              //setResult("register combination error")
+              // console.log("project add error");
+              showNotification(e.message, 'error', 4000)
           }
       })
       .catch((e) => {
-          console.log("error" + e);
+          // console.log("error" + e);
+          showNotification(e.message, 'error', 4000)
       })
   }
 
@@ -364,6 +406,10 @@ console.log(AddProjectMsg);
         </div>
         </Flex>
         <Flex>
+        <Notification
+            notification={notification}
+            close={() => hideNotification()}
+        />
         <Footer/>
         </Flex>
       </div>

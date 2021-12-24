@@ -10,6 +10,8 @@ import '../styles/CreateProject.css';
 import { BsArrowUpRight,BsBookmarksFill, BsBox, BsPerson, BsCashCoin } from "react-icons/bs"
 import { ImageTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
 import { useStore } from '../store'
+import Notification from '../components/Notification'
+import Footer from "../components/Footer"
 
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
@@ -21,6 +23,7 @@ export default function ProjectDetail() {
   const { state, dispatch } = useStore();
   const [totalBackedMoney, setTotalBackedMoney] = useState(0)
 
+  //------------extract project id----------------------------
   let queryString, urlParams, project_id;
   if(typeof window != 'undefined'){
     queryString = window.location.search;
@@ -29,13 +32,13 @@ export default function ProjectDetail() {
   }
 
 
-  console.log(project_id);
-
+  //------------connect wallet ---------------------------------
   let connectedWallet = ''
   if (typeof document !== 'undefined') {
       connectedWallet = useConnectedWallet()
   }
 
+  //------------init api, lcd ----------------------------------------------------
   const lcd = useMemo(() => {
     if (!connectedWallet) {
         return null
@@ -47,6 +50,41 @@ export default function ProjectDetail() {
   }, [connectedWallet]);
 
   const api = new WasmAPI(state.lcd_client.apiRequester);
+
+  //------------notification setting---------------------------------
+  const [notification, setNotification] = useState({
+    type: 'success',
+    message: '',
+    show: false,
+  })
+
+  function hideNotification() {
+    setNotification({
+        message: notification.message,
+        type: notification.type,
+        show: false,
+    })
+  }
+
+  function showNotification(message, type, duration) {
+    // console.log('fired notification')
+    setNotification({
+        message: message,
+        type: type,
+        show: true,
+    });
+    console.log(message + type + duration);
+    // Disable after $var seconds
+    setTimeout(() => {
+        setNotification({
+            message: message,
+            type: type,
+            show: false,
+        })
+        // console.log('disabled',notification)
+    }, duration)
+  }
+  //------------fectch project data------------------------------------
   async function fetchContractQuery() 
   {
     let _project_id = 1;
@@ -324,6 +362,11 @@ export default function ProjectDetail() {
             </Flex>
           </Box>
         </Flex>
+        <Notification
+            notification={notification}
+            close={() => hideNotification()}
+        />
+        <Footer/>
       </div>
     </ChakraProvider>
   )
