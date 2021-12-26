@@ -35,7 +35,7 @@ const initialState = {
     investTitle: '',
     investDate: '',
     investSignature: '',
-    request: 'http://strading.uux.vai.mybluehost.me:3001',
+    request: 'http://localhost:3001',
     pdfFile: '',
 }
 
