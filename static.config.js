@@ -21,10 +21,6 @@ export default {
             template: 'src/pages/Index',
         },
         {
-            path: 'esignedit',
-            template: 'src/pages/EsignEdit',
-        },
-        {
             path: 'create',
             template: 'src/pages/CreateProject',
         },
@@ -43,19 +39,19 @@ export default {
         // A 404 component
         {
             path: 'invest',
-            template: 'src/pages/Invest',
+            template: 'src/pages/Invest_step1',
         },
         {
             path: 'invest2',
-            template: 'src/pages/Invest2',
+            template: 'src/pages/Invest_step2',
         },
         {
             path: 'invest3',
-            template: 'src/pages/Invest3',
+            template: 'src/pages/Invest_step3',
         },
         {
             path: 'invest4',
-            template: 'src/pages/Invest4',
+            template: 'src/pages/Invest_step4',
         },
         {
             path: '404',
