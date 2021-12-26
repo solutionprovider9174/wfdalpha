@@ -48,14 +48,15 @@ export default function Aboutone() {
   }
   return (
     <Flex
-      direction="column"
-      px="115"
       pt="68"
+      px="115"
+      id='aboutSection'
+      direction="column"
+      bgRepeat="no-repeat"
+      backgroundSize="contain"
       fontFamily="Sk-Modernist-Regular"
       onMouseMove={(e) => movingback(e)}
       backgroundImage="url('/swirl.svg')"
-      backgroundSize="contain"
-      bgRepeat="no-repeat"
     >
       <Flex direction="row">
         <Box direction="column">

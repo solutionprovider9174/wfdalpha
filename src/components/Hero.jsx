@@ -1,61 +1,53 @@
 import React from 'react'
+import {
+  ButtonTransition,
+  ButtonBackTransition,
+} from '../components/ImageTransition'
 import { Image, Flex, Text, Box } from '@chakra-ui/react'
-import { ButtonTransition } from '../components/ImageTransition'
 import { IoArrowForwardCircleOutline } from 'react-icons/io5'
 
-export default function Hero(props) {
+export default function Hero() {
   return (
     <Flex
-      id="part1"
-      className="movingup_normal"
       w="100%"
-      height="100vh"
-      bg="url(/herobackground.svg),linear-gradient(90deg, #1F0021 0%, #120054 104.34%)"
-      backgroundSize="cover"
-      bgRepeat="no-repeat"
+      h="100vh"
       direction="column"
-      onClick={props.onClick}
-      onTransitOpacity={props.onTransitOpacity}
-      style={props.style}
+      paddingTop="110px"
+      alignItems="center"
     >
-      <Flex justify="center" pt="122px">
-        <Image src="horizontallogo.svg"></Image>
-      </Flex>
-      <Box ml="100px" mr="100px">
-        <Text
-          fontFamily="PilatExtended-Regular"
-          fontWeight="900"
-          fontSize="50px"
-          lineHeight="110%"
-          textAlign="center"
-        >
-          The foremost enabler of
-          <br />
-          crypto-blockchain
-          <br />
-          based crowdfunding
-          <br />
-          launchpad
-        </Text>
-      </Box>
+      <Image src="stars.svg" id="starsBg" />
+      <Image src="cloud.svg" id="cloudBg" />
+      <Image src="stage.png" id="stageBg" />
+      <Image src="horizontallogo.svg" />
+      <Text
+        fontFamily="PilatExtended-Regular"
+        fontWeight="bolder"
+        lineHeight="110%"
+        textAlign="center"
+        fontSize="50px"
+        mt="10px"
+      >
+        The foremost enabler of
+        <br />
+        crypto-blockchain
+        <br />
+        based crowdfunding
+        <br />
+        launchpad
+      </Text>
+
       <Flex w="100%" mt="60px" justify="center" mb="65px">
-        <ButtonTransition
+        <ButtonBackTransition
           unitid="getstarted"
           selected={false}
           width="178px"
           height="50px"
           rounded="33px"
         >
-          <Box
-            variant="solid"
-            color="white"
-            justify="center"
-            align="center"
-            onClick={() => {}}
-          >
+          <Box variant="solid" color="white" justify="center" align="center">
             Get started
           </Box>
-        </ButtonTransition>
+        </ButtonBackTransition>
         <ButtonTransition
           unitid="howitworks"
           selected={false}
@@ -70,15 +62,14 @@ export default function Hero(props) {
             color="white"
             justify="center"
             align="center"
-            onClick={() => {}}
           >
             <IoArrowForwardCircleOutline />
             &nbsp;How it works?
           </Flex>
         </ButtonTransition>
       </Flex>
-      <Flex mt="30px" mb="30px" justify="center">
-        <a href="#RoadMap">
+      <Flex id="ArrowDownButton">
+        <a href="#aboutSection">
           <Image src="ArrowDown.png" style={{ cursor: 'pointer' }} />
         </a>
       </Flex>

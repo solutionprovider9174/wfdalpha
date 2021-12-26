@@ -32,3 +32,48 @@
   width: 100%;
   position: absolute;
 }
+
+#starsBg {
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+}
+#cloudBg {
+  top: 0;
+  width: 100%;
+  position: absolute;
+}
+#stageBg {
+  top: 0;
+  width: 100%;
+  height: 110vh;
+  position: absolute;
+}
+#ArrowDownButton {
+  top: 90vh;
+  width: 100%;
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  animation: action 1s infinite alternate;
+  -webkit-animation: action 1s infinite alternate;
+}
+
+@-webkit-keyframes action {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes action {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-15px);
+  }
+}
