@@ -119,7 +119,8 @@ export default function Industry() {
         <Box
           w="242px"
           h="161px"
-          bg="#FFFFFF14"
+          bg="#FFFFFF0D"
+          blur="5%"
           borderRadius="0 10% 0 0"
           style={{ borderBottomWidth: choice == 4 ? '3px' : '0px' }}
           onClick={() => setChoice(4)}

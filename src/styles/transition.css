@@ -77,3 +77,26 @@
     transform: translateY(-15px);
   }
 }
+
+#rocket {
+  animation: rocket 1s infinite alternate;
+  -webkit-animation: rocket 1s infinite alternate;
+}
+
+@-webkit-keyframes rocket {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-30px);
+  }
+}
+
+@keyframes rocket {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-30px);
+  }
+}
