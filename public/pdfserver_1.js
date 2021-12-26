@@ -13,12 +13,12 @@ app.use(cors());
 let amount = '', date = '', name = '', title = '' , email = '';
 let pdfFile;
 let signFile;
-let pdfPath = "../../public/PDF/";
+let pdfPath = "PDF/";
 let serverPath = "http://d9e0-188-43-136-33.ngrok.io/";
 
 async function embedImages() {
 
-  const url = "../../public/" + 'PDFTemplate.pdf';
+  const url = 'PDFTemplate.pdf';
   let existingPdfBytes = fs.readFileSync(url);
 
   //const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
@@ -72,7 +72,7 @@ async function embedImages() {
     color: rgb(0, 0, 0)
   })
 
-  const signPNG = pdfPath + signFile;
+  const signPNG = signFile;
   let pngImageBytes = fs.readFileSync(signPNG);
   //const jpgImageBytes = await fetch(jpgUrl).then((res) => res.arrayBuffer())
   //const pngImageBytes = await fetch(pngUrl).then((res) => res.arrayBuffer())
@@ -146,7 +146,7 @@ app.post("/pdfmake", async function (req, res) {
     date = fields.investDate;
 
     var oldpath = files.file.filepath;
-    signFile = "../../public/upload/" + files.file.originalFilename;
+    signFile = "upload/" + files.file.originalFilename;
 
     var source = fs.createReadStream(oldpath);
     var dest = fs.createWriteStream(signFile);
