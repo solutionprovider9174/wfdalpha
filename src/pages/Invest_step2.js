@@ -1,27 +1,40 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from '../theme';
-import { useNavigate } from '@reach/router'
-import {chakra, Box, Flex, Text, VStack, Image, Img
+import { Container } from '../components/Container';
+import { Box, Flex,  Input, InputGroup, VStack,  Image, InputRightElement, Img, Text
   } from "@chakra-ui/react";
-import React, { useState} from 'react';
+import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
+import { useStore } from '../store'
 import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark } from 'react-icons/io5';
 
 import { ImageTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
-import ESign from './EsignEdit';
+import { navigate } from '@reach/router'
 
 export default function NewProject() {
-  const [condition, setCondition] = useState(false);
+  const [backAmount, setBackAmount] = useState('');
+  const [wfdAmount, setWfdamount] = useState('');
   const [blog1, setBlog1] = useState(false);
   const [blog2, setBlog2] = useState(false);
   const [blog3, setBlog3] = useState(false);
   const [blog4, setBlog4] = useState(false);
   const [blog5, setBlog5] = useState(false);
+  const {state, dispatch} = useStore();
 
-  const navigate = useNavigate();
+  function onChangeBackamount(e){
+    setWfdamount(e.target.value);
+    setBackAmount(e.target.value);
+  }
 
   function onNext(){
-    if(condition)
-      navigate('/invest2');
+    dispatch({
+      type: 'setInvestamount',
+      message: backAmount,
+    })
+    dispatch({
+      type: 'setInvestWfdamount',
+      message: wfdAmount,
+    })
+    navigate('/invest_step3');
   }
   return (
     <ChakraProvider resetCSS theme={theme}>
@@ -45,37 +58,50 @@ export default function NewProject() {
         <Box width='900px' bg='#FFFFFF0D' px='50px' style={{fontFamily:'Sk-Modernist-Regular'}} >
           <Flex mt='83px' justify='center' align='center' direction='column'
             style={{fontFamily:'PilatExtended-Regular'}}>
-            <Text fontSize='22px' fontWeight={'300'}>SAFT Form</Text>
-            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'}>Please check and confirm the form and go next to share us next informations</Text>
-            
+            <Text fontSize='22px' fontWeight={'300'}>Input your investment amount</Text>
+            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'}>
+              Please enter your UST amount and we will convert the WFD amount for you
+            </Text>
           </Flex>
           {/* --------amount to back----------- */}
           <Flex mt='83px' justify='center' align='center' direction='column'>
-            <Flex >
-              {/* <Image alignSelf={'flex-start'} alt={'Wefund'} src={ 'saft.svg' } /> */}
-              <ESign/>
-            </Flex>
+          <Flex alignSelf={'flex-start'} marginLeft={'10%'}>
+            <Text mb='20px'>UST amount you want to Invest</Text>
+          </Flex>
+          <InputTransition 
+            unitid='backamount'
+            selected={backAmount==''?false:true}
+            width='600px' height='55px' rounded='md' mb='42px'
+          >      
+            <InputGroup size="sm" style={{border:'0', background: 'rgba(255, 255, 255, 0.05)'}}>
+              <Input type="text"  h='55px' style={{border:'0', background:'transparent',  paddingLeft:'25px'}} placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value={backAmount} 
+              onChange={(e)=>onChangeBackamount(e)} />
+              <InputRightElement w='60px'  h='55px' pointerEvents='none' children={<Text>UST</Text>} 
+              />          
+            </InputGroup>
+          </InputTransition>
+          <Flex alignSelf={'flex-start'} marginLeft={'10%'}>
+            <Text mb='20px' >WFD Tokens You Will Receive</Text>
+          </Flex>
+          <InputTransition 
+            unitid='WFDamount'
+            selected={backAmount==''?false:true}
+            width='600px' height='55px' rounded='md'
+          >      
+            <InputGroup size="sm" style={{border:'0', background:'rgba(255, 255, 255, 0.05)'}}>
+              <Input type="text"  h='55px' style={{border:'0', background:'transparent', paddingLeft:'25px'}} placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value={wfdAmount}
+              onChange={(e)=>{}} />
+              <InputRightElement w='60px'  h='55px' pointerEvents='none' children={<Text>WFD</Text>} 
+              />          
+            </InputGroup>
+          </InputTransition>
 
-            <Flex mt='25px' direction="row">
-              {/* <Input type="checkbox"  h='55px' bg='#FFFFFF0D' borderColor="#FFFFFF33" placeholder="Type here" focusBorderColor="purple.800" rounded="md"  onChange={(e)=>{}} /> */}
-              <InputTransition 
-                unitid='conditioncheck'
-                selected={false}
-                width='24px' height='24px' rounded='md'
-                onClick={()=>{setCondition(!condition)}}
-              >
-                {condition &&
-                <IoCheckmark width='24px' height='24px' color='#FE8600'></IoCheckmark>
-                }
-              </InputTransition>
-
-              <Text ml='10px' fontSize='14px' fontWeight='400'>I agree will all condition of this Project and WeFund</Text>
-            </Flex>
+         
           </Flex>
           {/* -----------------Back Project----------------- */}
           <Flex w='100%' mt='60px'justify='center' mb='170px'>
             <ImageTransition 
-              unitid='investnext'
+              unitid='Invest2invest'
               border1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)' 
               background1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
               border2='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
@@ -85,28 +111,32 @@ export default function NewProject() {
               selected={false}
               width='200px' height='50px' rounded='33px'
             >
-                <Box variant="solid" color="white" justify='center' align='center'
-                onClick={()=>onNext()}>
-                  Next
-                </Box>
+              <Box variant="solid" color="white" justify='center' align='center'
+                  onClick = {()=>onNext()} >
+                Invest
+              </Box>
             </ImageTransition>
           </Flex>
+           {/* -----------------------sroadmap-------------------------------- */}
           
-          {/* -----------------------sroadmap-------------------------------- */}
-          
-          <Flex pb='75px' mb="20px" justify='center'
+           <Flex pb='75px' mb="20px" justify='center'
             style={{fontFamily:'PilatExtended-Bold'}}>
-            <VStack>
+              <VStack>
               <Flex>
-                <Text fontSize='22px'>Our Funding&nbsp;</Text>
-                <Text fontSize='22px' color='#4790f5'>Approach</Text>
+                
+            <Text fontSize='22px'>Our Funding&nbsp;</Text>
+            <Text fontSize='22px' color='#4790f5'>Approach</Text>
+            </Flex>
+          <Flex>
+            <Image
+              alignSelf={'center'}
+                alt={'Wefund'}
+                src={
+                  'saftroadmap.svg'
+                }
+              /></Flex>  
+          </VStack>
               </Flex>
-              <Flex>
-                <Image alignSelf={'center'} alt={'Wefund'} src={ 'saftroadmap.svg' } />
-              </Flex>  
-            </VStack>
-          </Flex>
-
           {/* -----------------------space line-------------------------------- */}
           <Img mt='102px' height='1px' objectFit='cover' src='/line.svg' alt='UST Avatar'/>
 

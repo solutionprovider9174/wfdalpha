@@ -20,10 +20,10 @@ import ExplorerProject from 'pages/ExplorerProject'
 import CreateProject from 'pages/CreateProject'
 import BackProject from 'pages/BackProject'
 import DetailProject from 'pages/ProjectDetail'
-import Invest from 'pages/Invest'
-import Invest2 from 'pages/Invest2'
-import Invest3 from 'pages/Invest3'
-import Invest4 from 'pages/Invest4'
+import Invest_step1 from 'pages/Invest_step1'
+import Invest_step2 from 'pages/Invest_step2'
+import Invest_step3 from 'pages/Invest_step3'
+import Invest_step4 from 'pages/Invest_step4'
 import NotFound from 'pages/NotFound'
 
 class App extends Component {
@@ -117,10 +117,10 @@ class App extends Component {
                             <BackProject path="back" />
                             <ExplorerProject path="explorer" />
                             <DetailProject path="detail" />
-                            <Invest path="invest" />
-                            <Invest2 path='invest2' />
-                            <Invest3 path='invest3' />
-                            <Invest4 path='invest4' />
+                            <Invest_step1 path="invest_step1" />
+                            <Invest_step2 path='invest_step2' />
+                            <Invest_step3 path='invest_step3' />
+                            <Invest_step4 path='invest_step4' />
                             <NotFound default />
                         </Router>
                     </ChakraProvider>

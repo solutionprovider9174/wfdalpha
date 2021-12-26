@@ -1,99 +1,28 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from '../theme';
-import { Container } from '../components/Container';
-import {chakra, Box, Flex, Text, Stack, FormControl, FormLabel,
-    Input, InputGroup,  VStack, Image, InputLeftElement,Img
+import { useNavigate } from '@reach/router'
+import {chakra, Box, Flex, Text, VStack, Image, Img
   } from "@chakra-ui/react";
-import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
-import { useStore } from '../store'
-import { IoChevronUpOutline, IoChevronDownOutline, IoCheckbox,  IoCloudUploadOutline } from 'react-icons/io5';
-import { navigate } from '@reach/router'
+import React, { useState} from 'react';
+import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark } from 'react-icons/io5';
+
 import { ImageTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
+import ESign from './EsignEdit';
 
 export default function NewProject() {
+  const [condition, setCondition] = useState(false);
   const [blog1, setBlog1] = useState(false);
   const [blog2, setBlog2] = useState(false);
   const [blog3, setBlog3] = useState(false);
   const [blog4, setBlog4] = useState(false);
   const [blog5, setBlog5] = useState(false);
 
-  const [signature, setSignature] = useState('');
-  const [InsTitle, setInsTitle] = useState('');
-  const [InsName, setInsName] = useState('');
-  const [InsEmail, setInsEmail] = useState('');
-  const {state, dispatch} = useStore();
-
-  function openUpload(){
-    if(typeof document !== 'undefined') {
-      let fileSelector = document.getElementById('fileSelector')
-      fileSelector.click();
-    }
-  }
-  function onChangeSignature(e){
-    if(typeof document !== 'undefined') {
-      let fileSelector = document.getElementById('fileSelector')
-      var fileName = fileSelector.value;
-      setSignature(fileName.substr(fileName.lastIndexOf('\\')+1, fileName.length-1));
-      dispatch({
-        type: 'setInvestsignature',
-        message: e.target.files[0],
-      })
-    }    
-  }
+  const navigate = useNavigate();
 
   function onNext(){
-    dispatch({
-      type: 'setInvestname',
-      message: InsName,
-    })
-    dispatch({
-      type: 'setInvestemail',
-      message: InsEmail,
-    })
-    dispatch({
-      type: 'setInvesttitle',
-      message: InsTitle
-    })
-
-    const currentDate = new Date();
-
-    let date = currentDate.getDate() + "/" + (currentDate.getMonth()+1) + 
-          "/" + currentDate.getFullYear();
-    dispatch({
-      type: 'setInvestDate',
-      message: date,
-    })
-    
-    var formData = new FormData();
-    formData.append("investName", InsName);
-    formData.append("investTitle", InsTitle);
-    formData.append("investEmail", InsEmail);
-    formData.append("investAmount", state.investAmount);
-    formData.append("investDate", date);
-
-    formData.append("file", state.investSignature);
-
-    const requestOptions = {
-      method: 'POST',
-      body: formData,
-    };
-
-    fetch(state.request + '/pdfmake', requestOptions)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log("from server:");
-      console.log(data);
-      dispatch({
-        type: 'setPdffile',
-        message: data.data,
-      })
-      navigate('/invest4');
-    })
-    .catch((e) =>{
-      console.log("Error:"+e);
-    })
+    if(condition)
+      navigate('/invest_step2');
   }
-
   return (
     <ChakraProvider resetCSS theme={theme}>
       <div style={{background:"linear-gradient(90deg, #1F0021 0%, #120054 104.34%)", 
@@ -116,82 +45,37 @@ export default function NewProject() {
         <Box width='900px' bg='#FFFFFF0D' px='50px' style={{fontFamily:'Sk-Modernist-Regular'}} >
           <Flex mt='83px' justify='center' align='center' direction='column'
             style={{fontFamily:'PilatExtended-Regular'}}>
-                <Text fontSize='22px' fontWeight={'300'}>Input your investment amount</Text>
-            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'}>Please enter your UST amount and we will convert the WFD amount for you</Text>
+            <Text fontSize='22px' fontWeight={'300'}>SAFT Form</Text>
+            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'}>Please check and confirm the form and go next to share us next informations</Text>
+            
           </Flex>
-          <Flex direction='row' mt='40px' justify="center">
-            <Box w='100%'>
-              <Flex justify="space-between">
-                <Text mb='20px'>Name</Text>
-              </Flex>
+          {/* --------amount to back----------- */}
+          <Flex mt='83px' justify='center' align='center' direction='column'>
+            <Flex >
+              {/* <Image alignSelf={'flex-start'} alt={'Wefund'} src={ 'saft.svg' } /> */}
+              <ESign/>
+            </Flex>
+
+            <Flex mt='25px' direction="row">
+              {/* <Input type="checkbox"  h='55px' bg='#FFFFFF0D' borderColor="#FFFFFF33" placeholder="Type here" focusBorderColor="purple.800" rounded="md"  onChange={(e)=>{}} /> */}
               <InputTransition 
-                unitid='projectemail'
-                selected={InsName==''?false:true}
-                width='100%' height='55px' rounded='md' width='290px'
-              >      
-                <InputGroup size="sm" style={{background: 'rgba(255, 255, 255, 0.05)'}}>
-                  <InputLeftElement style={{background: 'transparent', }} pointerEvents='none' color='gray.300' fontSize='1.2em' children=' ' />
-                  <Input style={{ }} type="text" h='55px'placeholder="Type Name" focusBorderColor="purple.800" rounded="md"  value={InsName} onChange={(e)=>{setInsName(e.target.value)}} />
-                </InputGroup>
+                unitid='conditioncheck'
+                selected={false}
+                width='24px' height='24px' rounded='md'
+                onClick={()=>{setCondition(!condition)}}
+              >
+                {condition &&
+                <IoCheckmark width='24px' height='24px' color='#FE8600'></IoCheckmark>
+                }
               </InputTransition>
-            </Box>
-            <Box ml='20px' w='100%'>
-              <Flex justify="space-between">
-                <Text mb='20px'>Title</Text>
-              </Flex>
-              <InputTransition 
-                unitid='projectemail'
-                selected={InsTitle==''?false:true}
-                width='100%' height='55px' rounded='md' width='290px'
-              >      
-                <InputGroup size="sm" style={{background: 'rgba(255, 255, 255, 0.05)'}}>
-                  <InputLeftElement style={{background: 'transparent', }} pointerEvents='none' color='gray.300' fontSize='1.2em' children=' ' />
-                  <Input style={{ }} type="text" h='55px'placeholder="Your title" focusBorderColor="purple.800" rounded="md"  value={InsTitle} onChange={(e)=>{setInsTitle(e.target.value)}} />
-                </InputGroup>
-              </InputTransition>
-            </Box>
-          </Flex>
-          
-          <Flex direction='row' mt='40px' justify="center">
-            <Box w='100%'>
-              <Flex justify="space-between">
-                <Text mb='20px'>Email</Text>
-              </Flex>
-              <InputTransition 
-                unitid='projectemail'
-                selected={InsEmail==''?false:true}
-                width='100%' height='55px' rounded='md' width='290px'
-              >      
-                <InputGroup size="sm" style={{background: 'rgba(255, 255, 255, 0.05)'}}>
-                  <InputLeftElement style={{background: 'transparent', }} pointerEvents='none' color='gray.300' fontSize='1.2em' children=' ' />
-                  <Input style={{ }} type="email" h='55px'placeholder="example@email.com" focusBorderColor="purple.800" rounded="md"  value={InsEmail} onChange={(e)=>{setInsEmail(e.target.value)}} />
-                </InputGroup>
-              </InputTransition>
-            </Box>
-            <Box ml='20px' w='100%'>
-              <Flex justify="space-between">
-                <Text mb='20px'>Signature</Text>
-              </Flex>
-              {signature == '' && 
-                <InputGroup size="sm" width='290px'>
-                  <InputLeftElement width='290px' h='55px' pointerEvents='none' children={<IoCloudUploadOutline color='#00A3FF' width='30px' height='30px'/>} />
-                  <Input type="text" h='55px' bg='#FFFFFF' borderColor="#FFFFFF33" placeholder="Upload here" focusBorderColor="purple.800"  rounded="md"  
-                  onClick={()=>{openUpload()}}  /> 
-                </InputGroup>}
-              {signature != '' && 
-                <InputGroup size="sm" width='290px'>
-                  <InputLeftElement h='55px' pointerEvents='none' children={<IoCheckbox color='00A3FF'  width='30px' height='30px' />} />
-                  <Input type="text" h='55px' bg='#FFFFFF' borderColor="#FFFFFF33" placeholder={signature} focusBorderColor="purple.800"  rounded="md"  
-                  onClick={()=>{openUpload()}} /> 
-                </InputGroup>}
-              <input type='file' id="fileSelector" name='userFile' style={{display:'none'}}
-                onChange={(e)=>onChangeSignature(e)}/>
-            </Box>
+
+              <Text ml='10px' fontSize='14px' fontWeight='400'>I agree will all condition of this Project and WeFund</Text>
+            </Flex>
           </Flex>
           {/* -----------------Back Project----------------- */}
           <Flex w='100%' mt='60px'justify='center' mb='170px'>
             <ImageTransition 
-              unitid='submit'
+              unitid='investnext'
               border1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)' 
               background1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
               border2='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
@@ -201,33 +85,28 @@ export default function NewProject() {
               selected={false}
               width='200px' height='50px' rounded='33px'
             >
-              <Box variant="solid" color="white" justify='center' align='center' 
-                onClick={()=>onNext()}
-              >
-                Submit
-              </Box>
+                <Box variant="solid" color="white" justify='center' align='center'
+                onClick={()=>onNext()}>
+                  Next
+                </Box>
             </ImageTransition>
           </Flex>
-           {/* -----------------------sroadmap-------------------------------- */}
           
-           <Flex pb='75px' mb="20px" justify='center'
+          {/* -----------------------sroadmap-------------------------------- */}
+          
+          <Flex pb='75px' mb="20px" justify='center'
             style={{fontFamily:'PilatExtended-Bold'}}>
-              <VStack>
+            <VStack>
               <Flex>
-                
-            <Text fontSize='22px'>Our Funding&nbsp;</Text>
-            <Text fontSize='22px' color='#4790f5'>Approach</Text>
-            </Flex>
-          <Flex>
-            <Image
-              alignSelf={'center'}
-                alt={'Wefund'}
-                src={
-                  'saftroadmap.svg'
-                }
-              /></Flex>  
-          </VStack>
+                <Text fontSize='22px'>Our Funding&nbsp;</Text>
+                <Text fontSize='22px' color='#4790f5'>Approach</Text>
               </Flex>
+              <Flex>
+                <Image alignSelf={'center'} alt={'Wefund'} src={ 'saftroadmap.svg' } />
+              </Flex>  
+            </VStack>
+          </Flex>
+
           {/* -----------------------space line-------------------------------- */}
           <Img mt='102px' height='1px' objectFit='cover' src='/line.svg' alt='UST Avatar'/>
 

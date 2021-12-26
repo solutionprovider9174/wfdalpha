@@ -55,9 +55,6 @@ export default function WithSubnavigation() {
   );
 }
 const DesktopNav = () => {
-  const linkColor = 'white';
-  const linkHoverColor = 'red';
-  const popoverContentBgColor ='green';
 
   return (
     <>
@@ -154,6 +151,6 @@ const NAV_ITEMS = [
   },
   {
     label: 'Invest on WeFund',
-    href: 'invest',
+    href: 'invest_step1',
   },
 ];

@@ -1,41 +1,99 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from '../theme';
 import { Container } from '../components/Container';
-import { Box, Flex,  Input, InputGroup, VStack,  Image, InputRightElement, Img, Text
+import {chakra, Box, Flex, Text, Stack, FormControl, FormLabel,
+    Input, InputGroup,  VStack, Image, InputLeftElement,Img
   } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
 import { useStore } from '../store'
-import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark } from 'react-icons/io5';
-
-import { ImageTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
+import { IoChevronUpOutline, IoChevronDownOutline, IoCheckbox,  IoCloudUploadOutline } from 'react-icons/io5';
 import { navigate } from '@reach/router'
+import { ImageTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
 
 export default function NewProject() {
-  const [backAmount, setBackAmount] = useState('');
-  const [wfdAmount, setWfdamount] = useState('');
   const [blog1, setBlog1] = useState(false);
   const [blog2, setBlog2] = useState(false);
   const [blog3, setBlog3] = useState(false);
   const [blog4, setBlog4] = useState(false);
   const [blog5, setBlog5] = useState(false);
+
+  const [signature, setSignature] = useState('');
+  const [InsTitle, setInsTitle] = useState('');
+  const [InsName, setInsName] = useState('');
+  const [InsEmail, setInsEmail] = useState('');
   const {state, dispatch} = useStore();
 
-  function onChangeBackamount(e){
-    setWfdamount(e.target.value);
-    setBackAmount(e.target.value);
+  function openUpload(){
+    if(typeof document !== 'undefined') {
+      let fileSelector = document.getElementById('fileSelector')
+      fileSelector.click();
+    }
+  }
+  function onChangeSignature(e){
+    if(typeof document !== 'undefined') {
+      let fileSelector = document.getElementById('fileSelector')
+      var fileName = fileSelector.value;
+      setSignature(fileName.substr(fileName.lastIndexOf('\\')+1, fileName.length-1));
+      dispatch({
+        type: 'setInvestsignature',
+        message: e.target.files[0],
+      })
+    }    
   }
 
   function onNext(){
     dispatch({
-      type: 'setInvestamount',
-      message: backAmount,
+      type: 'setInvestname',
+      message: InsName,
     })
     dispatch({
-      type: 'setInvestWfdamount',
-      message: wfdAmount,
+      type: 'setInvestemail',
+      message: InsEmail,
     })
-    navigate('/invest3');
+    dispatch({
+      type: 'setInvesttitle',
+      message: InsTitle
+    })
+
+    const currentDate = new Date();
+
+    let date = currentDate.getDate() + "/" + (currentDate.getMonth()+1) + 
+          "/" + currentDate.getFullYear();
+    dispatch({
+      type: 'setInvestDate',
+      message: date,
+    })
+    
+    var formData = new FormData();
+    formData.append("investName", InsName);
+    formData.append("investTitle", InsTitle);
+    formData.append("investEmail", InsEmail);
+    formData.append("investAmount", state.investAmount);
+    formData.append("investDate", date);
+
+    formData.append("file", state.investSignature);
+
+    const requestOptions = {
+      method: 'POST',
+      body: formData,
+    };
+
+    fetch(state.request + '/pdfmake', requestOptions)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("from server:");
+      console.log(data);
+      dispatch({
+        type: 'setPdffile',
+        message: data.data,
+      })
+      navigate('/invest_step4');
+    })
+    .catch((e) =>{
+      console.log("Error:"+e);
+    })
   }
+
   return (
     <ChakraProvider resetCSS theme={theme}>
       <div style={{background:"linear-gradient(90deg, #1F0021 0%, #120054 104.34%)", 
@@ -58,50 +116,82 @@ export default function NewProject() {
         <Box width='900px' bg='#FFFFFF0D' px='50px' style={{fontFamily:'Sk-Modernist-Regular'}} >
           <Flex mt='83px' justify='center' align='center' direction='column'
             style={{fontFamily:'PilatExtended-Regular'}}>
-            <Text fontSize='22px' fontWeight={'300'}>Input your investment amount</Text>
-            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'}>
-              Please enter your UST amount and we will convert the WFD amount for you
-            </Text>
+                <Text fontSize='22px' fontWeight={'300'}>Input your investment amount</Text>
+            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'}>Please enter your UST amount and we will convert the WFD amount for you</Text>
           </Flex>
-          {/* --------amount to back----------- */}
-          <Flex mt='83px' justify='center' align='center' direction='column'>
-          <Flex alignSelf={'flex-start'} marginLeft={'10%'}>
-            <Text mb='20px'>UST amount you want to Invest</Text>
+          <Flex direction='row' mt='40px' justify="center">
+            <Box w='100%'>
+              <Flex justify="space-between">
+                <Text mb='20px'>Name</Text>
+              </Flex>
+              <InputTransition 
+                unitid='projectemail'
+                selected={InsName==''?false:true}
+                width='100%' height='55px' rounded='md' width='290px'
+              >      
+                <InputGroup size="sm" style={{background: 'rgba(255, 255, 255, 0.05)'}}>
+                  <InputLeftElement style={{background: 'transparent', }} pointerEvents='none' color='gray.300' fontSize='1.2em' children=' ' />
+                  <Input style={{ }} type="text" h='55px'placeholder="Type Name" focusBorderColor="purple.800" rounded="md"  value={InsName} onChange={(e)=>{setInsName(e.target.value)}} />
+                </InputGroup>
+              </InputTransition>
+            </Box>
+            <Box ml='20px' w='100%'>
+              <Flex justify="space-between">
+                <Text mb='20px'>Title</Text>
+              </Flex>
+              <InputTransition 
+                unitid='projectemail'
+                selected={InsTitle==''?false:true}
+                width='100%' height='55px' rounded='md' width='290px'
+              >      
+                <InputGroup size="sm" style={{background: 'rgba(255, 255, 255, 0.05)'}}>
+                  <InputLeftElement style={{background: 'transparent', }} pointerEvents='none' color='gray.300' fontSize='1.2em' children=' ' />
+                  <Input style={{ }} type="text" h='55px'placeholder="Your title" focusBorderColor="purple.800" rounded="md"  value={InsTitle} onChange={(e)=>{setInsTitle(e.target.value)}} />
+                </InputGroup>
+              </InputTransition>
+            </Box>
           </Flex>
-          <InputTransition 
-            unitid='backamount'
-            selected={backAmount==''?false:true}
-            width='600px' height='55px' rounded='md' mb='42px'
-          >      
-            <InputGroup size="sm" style={{border:'0', background: 'rgba(255, 255, 255, 0.05)'}}>
-              <Input type="text"  h='55px' style={{border:'0', background:'transparent',  paddingLeft:'25px'}} placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value={backAmount} 
-              onChange={(e)=>onChangeBackamount(e)} />
-              <InputRightElement w='60px'  h='55px' pointerEvents='none' children={<Text>UST</Text>} 
-              />          
-            </InputGroup>
-          </InputTransition>
-          <Flex alignSelf={'flex-start'} marginLeft={'10%'}>
-            <Text mb='20px' >WFD Tokens You Will Receive</Text>
-          </Flex>
-          <InputTransition 
-            unitid='WFDamount'
-            selected={backAmount==''?false:true}
-            width='600px' height='55px' rounded='md'
-          >      
-            <InputGroup size="sm" style={{border:'0', background:'rgba(255, 255, 255, 0.05)'}}>
-              <Input type="text"  h='55px' style={{border:'0', background:'transparent', paddingLeft:'25px'}} placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value={wfdAmount}
-              onChange={(e)=>{}} />
-              <InputRightElement w='60px'  h='55px' pointerEvents='none' children={<Text>WFD</Text>} 
-              />          
-            </InputGroup>
-          </InputTransition>
-
-         
+          
+          <Flex direction='row' mt='40px' justify="center">
+            <Box w='100%'>
+              <Flex justify="space-between">
+                <Text mb='20px'>Email</Text>
+              </Flex>
+              <InputTransition 
+                unitid='projectemail'
+                selected={InsEmail==''?false:true}
+                width='100%' height='55px' rounded='md' width='290px'
+              >      
+                <InputGroup size="sm" style={{background: 'rgba(255, 255, 255, 0.05)'}}>
+                  <InputLeftElement style={{background: 'transparent', }} pointerEvents='none' color='gray.300' fontSize='1.2em' children=' ' />
+                  <Input style={{ }} type="email" h='55px'placeholder="example@email.com" focusBorderColor="purple.800" rounded="md"  value={InsEmail} onChange={(e)=>{setInsEmail(e.target.value)}} />
+                </InputGroup>
+              </InputTransition>
+            </Box>
+            <Box ml='20px' w='100%'>
+              <Flex justify="space-between">
+                <Text mb='20px'>Signature</Text>
+              </Flex>
+              {signature == '' && 
+                <InputGroup size="sm" width='290px'>
+                  <InputLeftElement width='290px' h='55px' pointerEvents='none' children={<IoCloudUploadOutline color='#00A3FF' width='30px' height='30px'/>} />
+                  <Input type="text" h='55px' bg='#FFFFFF' borderColor="#FFFFFF33" placeholder="Upload here" focusBorderColor="purple.800"  rounded="md"  
+                  onClick={()=>{openUpload()}}  /> 
+                </InputGroup>}
+              {signature != '' && 
+                <InputGroup size="sm" width='290px'>
+                  <InputLeftElement h='55px' pointerEvents='none' children={<IoCheckbox color='00A3FF'  width='30px' height='30px' />} />
+                  <Input type="text" h='55px' bg='#FFFFFF' borderColor="#FFFFFF33" placeholder={signature} focusBorderColor="purple.800"  rounded="md"  
+                  onClick={()=>{openUpload()}} /> 
+                </InputGroup>}
+              <input type='file' id="fileSelector" name='userFile' style={{display:'none'}}
+                onChange={(e)=>onChangeSignature(e)}/>
+            </Box>
           </Flex>
           {/* -----------------Back Project----------------- */}
           <Flex w='100%' mt='60px'justify='center' mb='170px'>
             <ImageTransition 
-              unitid='Invest2invest'
+              unitid='submit'
               border1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)' 
               background1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
               border2='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
@@ -111,9 +201,10 @@ export default function NewProject() {
               selected={false}
               width='200px' height='50px' rounded='33px'
             >
-              <Box variant="solid" color="white" justify='center' align='center'
-                  onClick = {()=>onNext()} >
-                Invest
+              <Box variant="solid" color="white" justify='center' align='center' 
+                onClick={()=>onNext()}
+              >
+                Submit
               </Box>
             </ImageTransition>
           </Flex>
