@@ -1,5 +1,5 @@
-import { Flex, useColorMode, FlexProps } from '@chakra-ui/react';
-import React from 'react';
+import React from 'react'
+import { Flex, useColorMode } from '@chakra-ui/react'
 
 export const Container = (props) => {
   const { colorMode } = useColorMode()
@@ -12,10 +12,10 @@ export const Container = (props) => {
       direction="column"
       alignItems="center"
       justify="center"
-      bg={"linear-gradient(90deg, #1F0021 0%, #120054 104.34%)"}
+      bg={'linear-gradient(90deg, #1F0021 0%, #120054 104.34%)'}
       bgPosition="center"
       color={color[colorMode]}
-      width='100%'
+      width="100%"
       {...props}
     />
   )

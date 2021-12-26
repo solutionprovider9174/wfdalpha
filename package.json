@@ -22,6 +22,7 @@
         "@react-pdf/renderer": "^2.0.21",
         "@terra-money/terra.js": "2.0.14",
         "@terra-money/wallet-provider": "^2.2.0",
+        "animate-css-styled-components": "^1.0.2",
         "axios": "^0.21.1",
         "babel-plugin-transform-remove-console": "^6.9.4",
         "bootstrap": "^5.0.2",
@@ -55,6 +56,7 @@
         "react-static-plugin-sitemap": "^7.5.1",
         "react-static-plugin-source-filesystem": "^7.5.1",
         "react-timer-hook": "^3.0.4",
+        "styled-components": "^5.3.3",
         "tslib": "2.1.0",
         "web3": "^1.6.1"
     },
