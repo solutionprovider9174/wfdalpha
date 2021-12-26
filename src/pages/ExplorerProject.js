@@ -11,6 +11,7 @@ import { Router, Link } from '@reach/router'
 import { useStore } from '../store'
 import theme from '../theme';
 import { ImageTransition, InputTransition } from "../components/ImageTransition";
+import Footer from '../components/Footer';
 
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
@@ -290,6 +291,7 @@ export default function ExplorerProject() {
             </Flex>
           </Box>
         </Flex>
+        <Footer/>
       </div>
     </ChakraProvider>
   )

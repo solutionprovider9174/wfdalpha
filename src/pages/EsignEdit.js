@@ -46,7 +46,7 @@ export default ()=> {
 
 
   function onDocumentLoadSuccess(){
-    document.getElementById('loading').innerHTML='';
+    // document.getElementById('loading').innerHTML='';
   }
   
   async function confirm(){
@@ -54,7 +54,7 @@ export default ()=> {
       if(typeof canvasRef.current === 'undefined' || 
       amount ==='' || date === '' || name === '' || title === '' || email === '')
       {
-        document.getElementById('loading').innerHTML='<h6>Please fill all fields!</h6>'
+        // document.getElementById('loading').innerHTML='<h6>Please fill all fields!</h6>'
         return false;
       }
       const requestOptions = {
@@ -76,8 +76,7 @@ export default ()=> {
       // console.log(email);
       // console.log(canvasRef.current.toDataURL());
 
-      fetch('http://d378-87-116-163-233.ngrok.io/pdfmake',
-      requestOptions)
+      fetch('http://localhost:3001/pdfmake', requestOptions)
       .then((res) => res.json())
       .then((data) => {
         console.log("from server:");
@@ -96,7 +95,7 @@ export default ()=> {
 
   return (
     <>
-      <div style={{backgroundColor:'#b1adad', height:'40px', display:'flex', justifyContent:'center', alignItems:'center', position:'fixed', width:'100%', zIndex:'999'}}>
+      {/* <div style={{backgroundColor:'#b1adad', height:'40px', display:'flex', justifyContent:'center', alignItems:'center', position:'fixed', width:'100%', zIndex:'999'}}>
         <div id="loading" style={{position:'absolute', left:'0', top:'0', zIndex:'999'}} >
           <h5>Loading...</h5>
           <h6>Please wait..</h6>
@@ -106,19 +105,19 @@ export default ()=> {
         >
           <h5>Confirm</h5>
         </div>
-      </div>
-      <div style={{display:'flex', flexDirection:'row'}}>
-        <div style={{width:"30%"}}>
+      </div> */}
+      <div style={{display:'flex', flexDirection:'row', width:'100%'}}>
+        {/* <div style={{width:"30%"}}>
           <span style={{width:"100%"}}></span>
-        </div>
+        </div> */}
         <div>
-          <div style={{display:'flex', flexDirection:'column'}}>
+          <div style={{display:'flex', flexDirection:'column', width:'100%'}}>
             <div style={{display:'flex', justifyContent:'center'}}>
               <Document
                 file={PDFTEMPLATE}
                 onLoadSuccess={onDocumentLoadSuccess}
               >
-                <Page pageNumber={1} />
+                <Page pageNumber={1} scale="1.3"/>
               </Document>
             </div>
             <div style={{display:'flex', justifyContent:'center', marginTop:"20px"}}>
@@ -126,7 +125,7 @@ export default ()=> {
                 file={PDFTEMPLATE}
                 onLoadSuccess={onDocumentLoadSuccess}
               >
-                <Page pageNumber={2} />
+                <Page pageNumber={2} scale="1.3" />
               </Document>
             </div>
             <div style={{display:'flex', justifyContent:'center', marginTop:"20px"}}>
@@ -134,7 +133,7 @@ export default ()=> {
                 file={PDFTEMPLATE}
                 onLoadSuccess={onDocumentLoadSuccess}
               >
-                <Page pageNumber={3} />
+                <Page pageNumber={3} scale="1.3" />
               </Document>
             </div>
             <div style={{display:'flex', justifyContent:'center', marginTop:"20px"}}>
@@ -142,7 +141,7 @@ export default ()=> {
                 file={PDFTEMPLATE}
                 onLoadSuccess={onDocumentLoadSuccess}
               >
-                <Page pageNumber={4} />
+                <Page pageNumber={4} scale="1.3" />
               </Document>
             </div>
             <div style={{display:'flex', justifyContent:'center', marginTop:"20px"}}>
@@ -150,7 +149,7 @@ export default ()=> {
                 file={PDFTEMPLATE}
                 onLoadSuccess={onDocumentLoadSuccess}
               >
-                <Page pageNumber={5} />
+                <Page pageNumber={5} scale="1.3" />
               </Document>
             </div>
             <div style={{display:'flex', justifyContent:'center', marginTop:"20px"}}>
@@ -158,12 +157,12 @@ export default ()=> {
                 file={PDFTEMPLATE}
                 onLoadSuccess={onDocumentLoadSuccess}
               >
-                <Page pageNumber={6} />
+                <Page pageNumber={6} scale="1.3" />
               </Document>
             </div>
           </div>
         </div>
-        <div style={{width:"30%", display:'flex', flexDirection:'column'}}>
+        {/* <div style={{width:"30%", display:'flex', flexDirection:'column'}}>
           <MyInput width='65px' left='-432px' top='152px' value={amount} 
             onChange={(e) => setAmount(e.target.value)} fontsize='12px'/>
           <MyInput width='55px' left='-163px' top='102px' value={date} fontsize='10px'/>
@@ -191,7 +190,7 @@ export default ()=> {
                 </>
               }
           </div>             
-        </div>
+        </div> */}
       </div>
     </>
   )

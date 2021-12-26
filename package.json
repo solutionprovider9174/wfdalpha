@@ -25,6 +25,7 @@
         "babel-plugin-transform-remove-console": "^6.9.4",
         "bootstrap": "^5.0.2",
         "chart.js": "^3.5.0",
+        "formidable": "^2.0.1",
         "framer-motion": "4",
         "nodemailer": "^6.7.1",
         "nouislider-react": "^3.4.1",

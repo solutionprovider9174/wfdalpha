@@ -51,11 +51,11 @@ export default {
         },
         {
             path: 'invest3',
-            template: 'src/pages/invest3',
+            template: 'src/pages/Invest3',
         },
         {
             path: 'invest4',
-            template: 'src/pages/invest4',
+            template: 'src/pages/Invest4',
         },
         {
             path: '404',

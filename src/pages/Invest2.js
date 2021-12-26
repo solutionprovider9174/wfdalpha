@@ -1,25 +1,41 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from '../theme';
 import { Container } from '../components/Container';
-import {chakra, Box, Flex, SimpleGrid, GridItem, Heading, Text, Stack, FormControl, FormLabel,
-    Input, InputGroup,  InputLeftAddon, FormHelperText, Textarea, Avatar, Icon, Button,  VisuallyHidden, VStack, Select, Image, Checkbox,  RadioGroup, Radio, HStack, InputLeftElement, InputRightElement, Img
+import { Box, Flex,  Input, InputGroup, VStack,  Image, InputRightElement, Img, Text
   } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
 import { useStore } from '../store'
 import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark } from 'react-icons/io5';
 
 import { ImageTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
+import { navigate } from '@reach/router'
 
 export default function NewProject() {
-  const [backPressed, setBackPressed] = useState(false);
-  const [condition, setCondition] = useState(false);
   const [backAmount, setBackAmount] = useState('');
+  const [wfdAmount, setWfdamount] = useState('');
   const [blog1, setBlog1] = useState(false);
   const [blog2, setBlog2] = useState(false);
   const [blog3, setBlog3] = useState(false);
   const [blog4, setBlog4] = useState(false);
   const [blog5, setBlog5] = useState(false);
+  const {state, dispatch} = useStore();
 
+  function onChangeBackamount(e){
+    setWfdamount(e.target.value);
+    setBackAmount(e.target.value);
+  }
+
+  function onNext(){
+    dispatch({
+      type: 'setInvestamount',
+      message: backAmount,
+    })
+    dispatch({
+      type: 'setInvestWfdamount',
+      message: wfdAmount,
+    })
+    navigate('/invest3');
+  }
   return (
     <ChakraProvider resetCSS theme={theme}>
       <div style={{background:"linear-gradient(90deg, #1F0021 0%, #120054 104.34%)", 
@@ -42,16 +58,16 @@ export default function NewProject() {
         <Box width='900px' bg='#FFFFFF0D' px='50px' style={{fontFamily:'Sk-Modernist-Regular'}} >
           <Flex mt='83px' justify='center' align='center' direction='column'
             style={{fontFamily:'PilatExtended-Regular'}}>
-                <Text fontSize='22px' fontWeight={'300'}>Input your investment amount</Text>
-            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'}>Please enter your UST amount and we will convert the WFD amount for you</Text>
-            
-            
+            <Text fontSize='22px' fontWeight={'300'}>Input your investment amount</Text>
+            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'}>
+              Please enter your UST amount and we will convert the WFD amount for you
+            </Text>
           </Flex>
           {/* --------amount to back----------- */}
           <Flex mt='83px' justify='center' align='center' direction='column'>
           <Flex alignSelf={'flex-start'} marginLeft={'10%'}>
-                <Text mb='20px'>UST amount you want to Invest</Text>
-              </Flex>
+            <Text mb='20px'>UST amount you want to Invest</Text>
+          </Flex>
           <InputTransition 
             unitid='backamount'
             selected={backAmount==''?false:true}
@@ -59,21 +75,21 @@ export default function NewProject() {
           >      
             <InputGroup size="sm" style={{border:'0', background: 'rgba(255, 255, 255, 0.05)'}}>
               <Input type="text"  h='55px' style={{border:'0', background:'transparent',  paddingLeft:'25px'}} placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value={backAmount} 
-              onChange={(e)=>{setBackAmount(e.target.value)}} />
+              onChange={(e)=>onChangeBackamount(e)} />
               <InputRightElement w='60px'  h='55px' pointerEvents='none' children={<Text>UST</Text>} 
               />          
             </InputGroup>
           </InputTransition>
           <Flex alignSelf={'flex-start'} marginLeft={'10%'}>
-                <Text mb='20px' >WFD Tokens You Will Receive</Text>
-              </Flex>
+            <Text mb='20px' >WFD Tokens You Will Receive</Text>
+          </Flex>
           <InputTransition 
             unitid='WFDamount'
             selected={backAmount==''?false:true}
             width='600px' height='55px' rounded='md'
           >      
             <InputGroup size="sm" style={{border:'0', background:'rgba(255, 255, 255, 0.05)'}}>
-              <Input type="text"  h='55px' style={{border:'0', background:'transparent', paddingLeft:'25px'}} placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value=''
+              <Input type="text"  h='55px' style={{border:'0', background:'transparent', paddingLeft:'25px'}} placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value={wfdAmount}
               onChange={(e)=>{}} />
               <InputRightElement w='60px'  h='55px' pointerEvents='none' children={<Text>WFD</Text>} 
               />          
@@ -85,7 +101,7 @@ export default function NewProject() {
           {/* -----------------Back Project----------------- */}
           <Flex w='100%' mt='60px'justify='center' mb='170px'>
             <ImageTransition 
-              unitid='submit'
+              unitid='Invest2invest'
               border1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)' 
               background1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
               border2='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
@@ -96,7 +112,7 @@ export default function NewProject() {
               width='200px' height='50px' rounded='33px'
             >
               <Box variant="solid" color="white" justify='center' align='center'
-                  onClick = {()=>{}} >
+                  onClick = {()=>onNext()} >
                 Invest
               </Box>
             </ImageTransition>

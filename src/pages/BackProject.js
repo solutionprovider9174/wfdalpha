@@ -142,7 +142,8 @@ export default function BackProject() {
       })
       .then((e) => {
           if (e.success) {
-              showNotification('Back to Project Success', 'success', 4000);
+            showNotification('Back to Project Success', 'success', 4000);
+            
           } else {
               showNotification(e.message, 'error', 4000)
           }
@@ -361,6 +362,7 @@ export default function BackProject() {
           </Flex>
         </Box>
         </Flex>
+        <Footer/>
         <Notification
             notification={notification}
             close={() => hideNotification()}

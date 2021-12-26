@@ -15,31 +15,30 @@ import { Container } from '../components/Container';
 // import '../styles/transition.css';
 
 export default() => {
-    function transitOpacity()
-    {
-        if(typeof document !== 'undefined'){
-            var main_part = document.getElementById('main_part');
-            main_part.classList.add('hidden_show');
-        }
+  function transitOpacity()
+  {
+    if(typeof document !== 'undefined'){
+        var main_part = document.getElementById('main_part');
+        main_part.classList.add('hidden_show');
     }
-    return(
-        <ChakraProvider resetCSS theme={theme}>
-            <Container>
-                <Flex direction='column'  maxWidth='1440px'>
-                    <Hero style={{zIndex:'100', position:'absolute'}}   
-                        onTransitOpacity={() => {transitOpacity()}}
-                    />
-                    <Flex id="main_part" style={{zIndex:'1'}} className="hidden" direction='column'>
-                        <About/>
-                        <Industry/>
-                        <RoadMap/>
-                        <Email/>
-                        <Projectfeature/>
-                        <Footer/>
-                    </Flex>
-
-                </Flex>
-            </Container>
-        </ChakraProvider>
-    )
+  }
+  return(
+    <ChakraProvider resetCSS theme={theme}>
+      <Container>
+        <Flex direction='column'  maxWidth='1440px'>
+          <Hero style={{zIndex:'100', position:'absolute'}}   
+              onTransitOpacity={() => {transitOpacity()}}
+          />
+          <Flex id="main_part" style={{zIndex:'1'}} className="hidden" direction='column'>
+            <About/>
+            <Industry/>
+            <RoadMap/>
+            <Email/>
+            <Projectfeature/>
+            <Footer/>
+          </Flex>
+        </Flex>
+      </Container>
+    </ChakraProvider>
+  )
 }

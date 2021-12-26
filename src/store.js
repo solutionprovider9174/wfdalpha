@@ -27,48 +27,98 @@ const initialState = {
         URL: 'https://bombay-lcd.terra.dev/',
         chainID: 'bombay-12',
     }),
+
+    investAmount: '',
+    investWfdamount: '',
+    investName: '',
+    investEmail: '',
+    investTitle: '',
+    investDate: '',
+    investSignature: '',
+    request: 'http://localhost:3001',
+    pdfFile: '',
 }
 
 const reducer = (state, action) => {
-    switch (action.type) {
-        case 'setContractBalance' :
-            return {
-                ...state,
-                contractBalance: action.message,
-            }
-        case 'setProjectdata' :
-            return {
-                ...state,
-                projectData: action.message,
-            }
-        case 'setOneprojectdata':
-            return {
-                ...state,
-                oneprojectData: action.message,
-            }
-        case 'setWallet' :
-            return {
-                ...state,
-                wallet: action.message,
-            }
-        case 'setAllNativeCoins':
-            return {
-                ...state,
-                allNativeCoins: action.message,
-            }
-        case 'setConfig':
-            return {
-                ...state,
-                config: action.message,
-            }
-        case 'setUstBalance':
-            return {
-                ...state,
-                ustBalance: action.message,
-            }
-        default:
-            throw new Error(`Unhandled action type: ${action.type}`)
-    }
+  switch (action.type) {
+    case 'setInvestDate':
+        return {
+            ...state,
+            investDate: action.message,
+        }
+    case 'setInvestWfdamount':
+        return {
+            ...state,
+            investWfdamount: action.message,
+        }
+    case 'setPdffile':
+        return {
+            ...state,
+            pdfFile: action.message,
+        }
+    case 'setInvestname':
+        return {
+            ...state,
+            investName: action.message,
+        }
+    case 'setInvestemail':
+        return {
+            ...state,
+            investEmail: action.message,
+        }
+    case 'setInvesttitle':
+        return {
+            ...state,
+            investTitle: action.message,
+        }
+    case 'setInvestsignature':
+        return {
+            ...state,
+            investSignature: action.message,
+        }        
+    case 'setInvestamount':
+        return {
+            ...state,
+            investAmount: action.message,
+        }
+    case 'setContractBalance' :
+        return {
+            ...state,
+            contractBalance: action.message,
+        }
+    case 'setProjectdata' :
+        return {
+            ...state,
+            projectData: action.message,
+        }
+    case 'setOneprojectdata':
+        return {
+            ...state,
+            oneprojectData: action.message,
+        }
+    case 'setWallet' :
+        return {
+            ...state,
+            wallet: action.message,
+        }
+    case 'setAllNativeCoins':
+        return {
+            ...state,
+            allNativeCoins: action.message,
+        }
+    case 'setConfig':
+        return {
+            ...state,
+            config: action.message,
+        }
+    case 'setUstBalance':
+        return {
+            ...state,
+            ustBalance: action.message,
+        }
+    default:
+        throw new Error(`Unhandled action type: ${action.type}`)
+  }
 }
 
 export const StoreProvider = ({ children }) => {

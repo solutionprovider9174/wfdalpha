@@ -9,6 +9,7 @@ import { ButtonTransition, ImageTransition, InputTransition }
 import theme from '../theme';
 import { useStore } from '../store'
 import Notification from '../components/Notification'
+import Footer from '../components/Footer'
 
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
@@ -89,8 +90,6 @@ export default function CreateProject()
   //---------------create project---------------------------------
   async function createProject()
   {
-console.log(connectedWallet);
-console.log(typeof connectedWallet);
     if(connectedWallet == '' || typeof connectedWallet == 'undefined'){
       showNotification("Please connect wallet first!", 'error', 6000);
       return;
@@ -407,6 +406,7 @@ console.log(typeof connectedWallet);
         </div>
         </Flex>
         <Flex>
+        <Footer/>
         <Notification
             notification={notification}
             close={() => hideNotification()}

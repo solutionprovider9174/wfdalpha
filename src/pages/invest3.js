@@ -1,33 +1,99 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from '../theme';
 import { Container } from '../components/Container';
-import {chakra, Box, Flex, SimpleGrid, GridItem, Heading, Text, Stack, FormControl, FormLabel,
-    Input, InputGroup,  InputLeftAddon, FormHelperText, Textarea, Avatar, Icon, Button,  VisuallyHidden, VStack, Select, Image, Checkbox,  RadioGroup, Radio, HStack, InputLeftElement, InputRightElement, Img
+import {chakra, Box, Flex, Text, Stack, FormControl, FormLabel,
+    Input, InputGroup,  VStack, Image, InputLeftElement,Img
   } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
 import { useStore } from '../store'
-import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark,  IoCloudUploadOutline } from 'react-icons/io5';
-
+import { IoChevronUpOutline, IoChevronDownOutline, IoCheckbox,  IoCloudUploadOutline } from 'react-icons/io5';
+import { navigate } from '@reach/router'
 import { ImageTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
 
 export default function NewProject() {
-  const [backPressed, setBackPressed] = useState(false);
-  const [condition, setCondition] = useState(false);
-  const [backAmount, setBackAmount] = useState('');
   const [blog1, setBlog1] = useState(false);
   const [blog2, setBlog2] = useState(false);
   const [blog3, setBlog3] = useState(false);
   const [blog4, setBlog4] = useState(false);
   const [blog5, setBlog5] = useState(false);
-  const [isUST, setIsUST] = useState(true);
-  const [submitPressed, setSubmitPressed] = useState(false);
-  const [whitepaper, setWhitepaper] = useState('');
-  const [InsTitle, setInsCategory] = useState('');
+
+  const [signature, setSignature] = useState('');
+  const [InsTitle, setInsTitle] = useState('');
   const [InsName, setInsName] = useState('');
   const [InsEmail, setInsEmail] = useState('');
-  const [prjAmount, setPrjAmount] = useState('');
-  const [prjSubcategory, setPrjSubcategory]= useState('');
-  const [prjChain, setPrjChain] = useState('');
+  const {state, dispatch} = useStore();
+
+  function openUpload(){
+    if(typeof document !== 'undefined') {
+      let fileSelector = document.getElementById('fileSelector')
+      fileSelector.click();
+    }
+  }
+  function onChangeSignature(e){
+    if(typeof document !== 'undefined') {
+      let fileSelector = document.getElementById('fileSelector')
+      var fileName = fileSelector.value;
+      setSignature(fileName.substr(fileName.lastIndexOf('\\')+1, fileName.length-1));
+      dispatch({
+        type: 'setInvestsignature',
+        message: e.target.files[0],
+      })
+    }    
+  }
+
+  function onNext(){
+    dispatch({
+      type: 'setInvestname',
+      message: InsName,
+    })
+    dispatch({
+      type: 'setInvestemail',
+      message: InsEmail,
+    })
+    dispatch({
+      type: 'setInvesttitle',
+      message: InsTitle
+    })
+
+    const currentDate = new Date();
+
+    let date = currentDate.getDate() + "/" + (currentDate.getMonth()+1) + 
+          "/" + currentDate.getFullYear();
+    dispatch({
+      type: 'setInvestDate',
+      message: date,
+    })
+    
+    var formData = new FormData();
+    formData.append("investName", InsName);
+    formData.append("investTitle", InsTitle);
+    formData.append("investEmail", InsEmail);
+    formData.append("investAmount", state.investAmount);
+    formData.append("investDate", date);
+
+    formData.append("file", state.investSignature);
+
+    const requestOptions = {
+      method: 'POST',
+      body: formData,
+    };
+
+    fetch(state.request + '/pdfmake', requestOptions)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("from server:");
+      console.log(data);
+      dispatch({
+        type: 'setPdffile',
+        message: data.data,
+      })
+      navigate('/invest4');
+    })
+    .catch((e) =>{
+      console.log("Error:"+e);
+    })
+  }
+
   return (
     <ChakraProvider resetCSS theme={theme}>
       <div style={{background:"linear-gradient(90deg, #1F0021 0%, #120054 104.34%)", 
@@ -52,8 +118,6 @@ export default function NewProject() {
             style={{fontFamily:'PilatExtended-Regular'}}>
                 <Text fontSize='22px' fontWeight={'300'}>Input your investment amount</Text>
             <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'}>Please enter your UST amount and we will convert the WFD amount for you</Text>
-            
-            
           </Flex>
           <Flex direction='row' mt='40px' justify="center">
             <Box w='100%'>
@@ -108,20 +172,20 @@ export default function NewProject() {
               <Flex justify="space-between">
                 <Text mb='20px'>Signature</Text>
               </Flex>
-              {whitepaper == '' && 
+              {signature == '' && 
                 <InputGroup size="sm" width='290px'>
                   <InputLeftElement width='290px' h='55px' pointerEvents='none' children={<IoCloudUploadOutline color='#00A3FF' width='30px' height='30px'/>} />
                   <Input type="text" h='55px' bg='#FFFFFF' borderColor="#FFFFFF33" placeholder="Upload here" focusBorderColor="purple.800"  rounded="md"  
-                  onClick={(e)=>{handleSignature()}}  /> 
+                  onClick={()=>{openUpload()}}  /> 
                 </InputGroup>}
-              {whitepaper != '' && 
+              {signature != '' && 
                 <InputGroup size="sm" width='290px'>
                   <InputLeftElement h='55px' pointerEvents='none' children={<IoCheckbox color='00A3FF'  width='30px' height='30px' />} />
-                  <Input type="text" h='55px' bg='#FFFFFF' borderColor="#FFFFFF33" placeholder={whitepaper} focusBorderColor="purple.800"  rounded="md"  
-                  onClick={(e)=>{handleSignature()}} /> 
+                  <Input type="text" h='55px' bg='#FFFFFF' borderColor="#FFFFFF33" placeholder={signature} focusBorderColor="purple.800"  rounded="md"  
+                  onClick={()=>{openUpload()}} /> 
                 </InputGroup>}
               <input type='file' id="fileSelector" name='userFile' style={{display:'none'}}
-                onChange={()=>changeSignature()}/>
+                onChange={(e)=>onChangeSignature(e)}/>
             </Box>
           </Flex>
           {/* -----------------Back Project----------------- */}
@@ -137,8 +201,9 @@ export default function NewProject() {
               selected={false}
               width='200px' height='50px' rounded='33px'
             >
-              <Box variant="solid" color="white" justify='center' align='center'
-                  onClick = {()=>{}} >
+              <Box variant="solid" color="white" justify='center' align='center' 
+                onClick={()=>onNext()}
+              >
                 Submit
               </Box>
             </ImageTransition>

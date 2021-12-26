@@ -362,6 +362,7 @@ export default function ProjectDetail() {
             </Flex>
           </Box>
         </Flex>
+        <Footer/>
         <Notification
             notification={notification}
             close={() => hideNotification()}

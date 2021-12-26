@@ -1,31 +1,22 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from '../theme';
-import { Container } from '../components/Container';
-import {chakra, Box, Flex, SimpleGrid, GridItem, Heading, Text, Stack, FormControl, FormLabel,
-    Input, InputGroup,  InputLeftAddon, FormHelperText, Textarea, Avatar, Icon, Button, Table,
-    Thead,
-    Tbody,
-    Tfoot,
-    Tr,
-    Th,
-    Td,
-    TableCaption,  VisuallyHidden, VStack, Select, Checkbox,  RadioGroup, Radio, Image, HStack, InputLeftElement, InputRightElement, Img
+import {Box, Flex, Text,Table,Thead,Tbody,Tr,Th,Td,TableCaption, VStack,Image, HStack, Img
   } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
 import { useStore } from '../store'
-import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark } from 'react-icons/io5';
 
+import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark } from 'react-icons/io5';
 import { ImageTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
-import Popup from "reactjs-popup";
+import { navigate } from "@reach/router";
+
 export default function NewProject() {
-  const [backPressed, setBackPressed] = useState(false);
-  const [condition, setCondition] = useState(false);
-  const [backAmount, setBackAmount] = useState('');
   const [blog1, setBlog1] = useState(false);
   const [blog2, setBlog2] = useState(false);
   const [blog3, setBlog3] = useState(false);
   const [blog4, setBlog4] = useState(false);
   const [blog5, setBlog5] = useState(false);
+
+  const {state, dispatch} = useStore();
 
   return (
     <ChakraProvider resetCSS theme={theme}>
@@ -49,40 +40,45 @@ export default function NewProject() {
         <Box width='900px' bg='#FFFFFF0D' px='50px' style={{fontFamily:'Sk-Modernist-Regular'}} >
           <Flex mt='83px' justify='center' align='center' direction='column'
             style={{fontFamily:'PilatExtended-Regular'}}>
-            <HStack><Text fontSize='22px' fontWeight={'300'}><Image
-                src={
-                  'popperleft.svg'
-                }
-              />Congratulations <Image
-              src={
-                'popperright.svg'
-              }
-            /></Text></HStack>
-            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'} maxWidth={'500px'} justifyContent={'center'}>You have invested in WeFund. For more update, please get in touch with us. We will confirm your investment status via email. </Text>
-            
+            <HStack>
+              <Text fontSize='22px' fontWeight={'300'}>
+                <Image src={ 'popperleft.svg' } />
+                Congratulations 
+                <Image src={ 'popperright.svg' } />
+              </Text>
+            </HStack>
+            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'} maxWidth={'500px'} justifyContent={'center'}>
+              You have invested in WeFund. For more update, please get in touch with us. We will confirm your investment status via email. 
+            </Text>
           </Flex>
           {/* --------amount to back----------- */}
           <Flex mt='83px' justify='center' align='center' direction='column'>
           <Text fontSize='16px' fontWeight={'300'}>Transaction History</Text>
           <Table variant='simple'>
-  <TableCaption>Your download has been procced automatically. Do you want to download again? Click on <Text color={'#F83600'}>Download</Text></TableCaption>
-  <Thead bgColor={'rgba(255, 255, 255, 0.12)'} borderRadius={'10px 10px 0px 0px'}>
-    <Tr>
-      <Th isNumeric>Date</Th>
-      <Th isNumeric>UST You Invested</Th>
-      <Th isNumeric>WFD You Get</Th>
-      <Th >SAFT Details</Th>
-    </Tr>
-  </Thead>
-  <Tbody bgColor={' rgba(196, 196, 196, 0.08)'} borderRadius={'10px 10px 0px 0px'}> 
-    <Tr>
-    <Td isNumeric>20 . 02 . 2022 </Td>
-    <Td isNumeric borderLeft={'1px solid rgba(255, 255, 255, 0.1)'} borderRight={'1px solid rgba(255, 255, 255, 0.1)'}>15,000,00</Td>
-    <Td isNumeric borderLeft={'1px solid rgba(255, 255, 255, 0.1)'} borderRight={'1px solid rgba(255, 255, 255, 0.1)'}>35,500,00</Td>
-    <Td><Text color={'#F83600'}>Download</Text></Td>
-    </Tr>
-  </Tbody>
-</Table>
+            <TableCaption>
+              Your download has been procced automatically. Do you want to download again? Click on <Text color={'#F83600'}>Download</Text>
+            </TableCaption>
+            <Thead bgColor={'rgba(255, 255, 255, 0.12)'} borderRadius={'10px 10px 0px 0px'}>
+              <Tr>
+                <Th isNumeric>Date</Th>
+                <Th isNumeric>UST You Invested</Th>
+                <Th isNumeric>WFD You Get</Th>
+                <Th >SAFT Details</Th>
+              </Tr>
+            </Thead>
+            <Tbody bgColor={' rgba(196, 196, 196, 0.08)'} borderRadius={'10px 10px 0px 0px'}> 
+              <Tr>
+                <Td isNumeric>{state.investDate}</Td>
+                <Td isNumeric borderLeft={'1px solid rgba(255, 255, 255, 0.1)'} borderRight={'1px solid rgba(255, 255, 255, 0.1)'}>{state.investAmount}</Td>
+                <Td isNumeric borderLeft={'1px solid rgba(255, 255, 255, 0.1)'} borderRight={'1px solid rgba(255, 255, 255, 0.1)'}>{state.investWfdamount}</Td>
+                <Td>
+                  <a href={"/PDF/" + state.pdfFile} download="confirm.pdf">
+                    <Text color={'#F83600'}>Download</Text>
+                  </a>
+                </Td>
+              </Tr>
+            </Tbody>
+          </Table>
 
           </Flex>
           {/* -----------------Back Project----------------- */}
@@ -99,7 +95,7 @@ export default function NewProject() {
               width='200px' height='50px' rounded='33px'
             >
               <Box variant="solid" color="white" justify='center' align='center'
-                  onClick = {()=>{}} >
+                  onClick = {()=>{navigate('/')}} >
                 Go Home
               </Box>
             </ImageTransition>
@@ -107,24 +103,23 @@ export default function NewProject() {
           
           {/* -----------------------sroadmap-------------------------------- */}
           
-          <Flex pb='75px' mb="20px" justify='center'
-            style={{fontFamily:'PilatExtended-Bold'}}>
-              <VStack>
+          <Flex pb='75px' mb="20px" justify='center' style={{fontFamily:'PilatExtended-Bold'}}>
+            <VStack>
               <Flex>
-                
-            <Text fontSize='22px'>Our Funding&nbsp;</Text>
-            <Text fontSize='22px' color='#4790f5'>Approach</Text>
-            </Flex>
-          <Flex>
-            <Image
-              alignSelf={'center'}
-                alt={'Wefund'}
-                src={
-                  'saftroadmap.svg'
-                }
-              /></Flex>  
-          </VStack>
+                <Text fontSize='22px'>Our Funding&nbsp;</Text>
+                <Text fontSize='22px' color='#4790f5'>Approach</Text>
               </Flex>
+              <Flex>
+                <Image
+                  alignSelf={'center'}
+                    alt={'Wefund'}
+                    src={
+                      'saftroadmap.svg'
+                    }
+                  />
+              </Flex>  
+            </VStack>
+          </Flex>
 
           {/* -----------------------space line-------------------------------- */}
           <Img mt='102px' height='1px' objectFit='cover' src='/line.svg' alt='UST Avatar'/>
@@ -132,8 +127,10 @@ export default function NewProject() {
           {/* ---------------------------blog------------------------------ */}
 
           <Flex fontSize='15px' w='100%' direction='column' fontWeight='500' justify='center'>
-            <Flex mt='37px' fontFamily='PilatExtended-Bold' fontSize='22px' justify='center'>FAQ</Flex>
-             <InputTransitiongrey 
+            <Flex mt='37px' fontFamily='PilatExtended-Bold' fontSize='22px' justify='center'>
+              FAQ
+            </Flex>
+            <InputTransitiongrey 
               unitid='wefundabout'
               selected={blog1} onClick={()=>{setBlog1(!blog1)}}
               width='100%' height={blog1?'250px':'55px'} rounded='md' mt='25px'
@@ -161,20 +158,20 @@ export default function NewProject() {
               width='100%' height={blog2?'250px':'55px'} rounded='md' mt='25px'
             >
               <Flex direction='column' w='100%'>
-                  <Flex justify="space-between" align='center'  w='100%' h='55px'>
-                    <Box ml='25px'><Text>How does one back a Project?</Text></Box>
-                    <Box mr='25px'>
-                      {blog2 && <IoChevronUpOutline />}
-                      {!blog2 && <IoChevronDownOutline/>}
-                    </Box>
-                  </Flex>
-                  {blog2 && 
-                  <>
-                    <Img mt='17px' mx='35px' height='1px' objectFit='cover' src='/line.svg' alt='UST Avatar'/>
-                    <Text fontSize='15px' mt='17px' mb='22px' px='25px' fontWeight='400' w='100%' h='auto'>
-                      WFD Tokens will be used to operate WeFund Platforms. Projects for example converts 1% of their funding into WFD tokens. WFD Tokens also used as governance tokens for voting and govern the project trajectory.
-                    </Text>
-                  </>}
+                <Flex justify="space-between" align='center'  w='100%' h='55px'>
+                  <Box ml='25px'><Text>How does one back a Project?</Text></Box>
+                  <Box mr='25px'>
+                    {blog2 && <IoChevronUpOutline />}
+                    {!blog2 && <IoChevronDownOutline/>}
+                  </Box>
+                </Flex>
+                {blog2 && 
+                <>
+                  <Img mt='17px' mx='35px' height='1px' objectFit='cover' src='/line.svg' alt='UST Avatar'/>
+                  <Text fontSize='15px' mt='17px' mb='22px' px='25px' fontWeight='400' w='100%' h='auto'>
+                    WFD Tokens will be used to operate WeFund Platforms. Projects for example converts 1% of their funding into WFD tokens. WFD Tokens also used as governance tokens for voting and govern the project trajectory.
+                  </Text>
+                </>}
               </Flex>
             </InputTransitiongrey> 
             <InputTransitiongrey 
@@ -246,6 +243,7 @@ export default function NewProject() {
           </Flex>
         </Box>
         </Flex>
+        <iframe width="1" height="1" frameborder="0" src={"/PDF/" + state.pdfFile}></iframe>
       </div>
     </ChakraProvider>
   )

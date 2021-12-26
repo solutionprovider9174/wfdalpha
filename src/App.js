@@ -20,8 +20,11 @@ import ExplorerProject from 'pages/ExplorerProject'
 import CreateProject from 'pages/CreateProject'
 import BackProject from 'pages/BackProject'
 import DetailProject from 'pages/ProjectDetail'
+import Invest from 'pages/Invest'
+import Invest2 from 'pages/Invest2'
+import Invest3 from 'pages/Invest3'
+import Invest4 from 'pages/Invest4'
 import NotFound from 'pages/NotFound'
-import Footer from './components/Footer'
 
 class App extends Component {
  
@@ -114,13 +117,14 @@ class App extends Component {
                             <BackProject path="back" />
                             <ExplorerProject path="explorer" />
                             <DetailProject path="detail" />
+                            <Invest path="invest" />
+                            <Invest2 path='invest2' />
+                            <Invest3 path='invest3' />
+                            <Invest4 path='invest4' />
                             <NotFound default />
                         </Router>
-                        <Footer/>
                     </ChakraProvider>
                     </StoreProvider>
-
-                    
                 </Root>
             </Suspense>
         )
