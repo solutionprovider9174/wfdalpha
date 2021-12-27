@@ -149,21 +149,24 @@ export default function ProjectDetail() {
         </div>
         <Flex width='100%' justify='center' mt='50px'>
           <Box style={{fontFamily:'Sk-Modernist-Regular'}} >
+            
+            {/* ------------Details------------ */}
             <Flex width='100%' justify='center' zIndex={'1'}>
-              <SimpleGrid width={'100%'} alignContent={'center'} spacing={100} mb={'40px'} columns={2} marginLeft={'100px'}>
+              <HStack width={'100%'} alignContent={'center'} mb={'40px'} ml='100px' mr='100px'>
                 <Flex width={'100%'}>
                   <VStack>
                     <Flex alignSelf={'flex-start'}>
                       <chakra.p color={"gray.100"} fontSize="15px">
-                        Date - 
-                        <span style={{color:"#FE8600"}}>10 Dec, 2021</span>
+                        Date - <span style={{color:"#FE8600"}}>10 Dec, 2021</span>
                       </chakra.p>
                       <Icon as={MdOutlinePlace} h={6} w={6} mr={2} />
+
                       <chakra.h1 fontSize="sm">
-                        {state.oneprojectData.project_ecosystem}
+                        {state.oneprojectData.project_category}
                       </chakra.h1>
                     </Flex>
                     <Flex mt={'75px'}>
+                      {/* ------------Details on key factors, as SimpleGrid with 1 Col at base, and 4 when in medium res. Stack of Stats------------ */}
                       <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 5, lg: 8 }}>
                         <Stat
                             px={{ base: 2, md: 4 }}
@@ -174,19 +177,18 @@ export default function ProjectDetail() {
                             rounded={'lg'}>
                             <Flex justifyContent={'space-between'}>
                             <Box pl={{ base: 2, md: 4 }}>
+                              <HStack>
+                                <BsPerson size={'1em'} />
                                 <StatLabel fontWeight={'medium'} isTruncated>
                                 'Backer'
                                 </StatLabel>
+                              </HStack>
                                 <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
                                 {totalBackedMoney}
                                 </StatNumber>
+                                
                             </Box>
-                            <Box
-                                my={'auto'}
-                                color={'gray.200'}
-                                alignContent={'center'}>
-                                <BsPerson size={'2em'} />
-                            </Box>
+                            
                             </Flex>
                         </Stat>
                         <Stat
@@ -198,18 +200,15 @@ export default function ProjectDetail() {
                             rounded={'lg'}>
                             <Flex justifyContent={'space-between'}>
                             <Box pl={{ base: 2, md: 4 }}>
+                            <HStack>
+                                <BsCashCoin size={'1em'} />
                                 <StatLabel fontWeight={'medium'} isTruncated>
                                 'Funding Pool'
                                 </StatLabel>
+                              </HStack>
                                 <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
                                 {state.oneprojectData.project_collected}
                                 </StatNumber>
-                            </Box>
-                            <Box
-                                my={'auto'}
-                                color={'gray.200'}
-                                alignContent={'center'}>
-                                <BsCashCoin size={'2em'} />
                             </Box>
                             </Flex>
                         </Stat>
@@ -221,20 +220,17 @@ export default function ProjectDetail() {
                             borderColor={'gray.500'}
                             rounded={'lg'}>
                             <Flex justifyContent={'space-between'}>
-                              <Box pl={{ base: 2, md: 4 }}>
-                                  <StatLabel fontWeight={'medium'} isTruncated>
-                                  'Category'
-                                  </StatLabel>
-                                  <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
-                                  {state.oneprojectData.project_category}
-                                  </StatNumber>
-                              </Box>
-                              <Box
-                                  my={'auto'}
-                                  color={'gray.200'}
-                                  alignContent={'center'}>
-                                  <BsBookmarksFill size={'2em'} />
-                              </Box>
+                            <Box pl={{ base: 2, md: 4 }}>
+                            <HStack>
+                                <BsBookmarksFill size={'1em'} color="blue.200" />
+                                <StatLabel fontWeight={'medium'} isTruncated>
+                                'Category'
+                                </StatLabel>
+                              </HStack>
+                                <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
+                                {state.oneprojectData.project_category}
+                                </StatNumber>
+                            </Box>
                             </Flex>
                         </Stat>
                         <Stat
@@ -246,119 +242,130 @@ export default function ProjectDetail() {
                             rounded={'lg'}>
                             <Flex justifyContent={'space-between'}>
                             <Box pl={{ base: 2, md: 4 }}>
+                            <HStack>
+                                <BsPerson size={'1em'} />
                                 <StatLabel fontWeight={'medium'} isTruncated>
                                 'Platform'
                                 </StatLabel>
+                              </HStack>
                                 <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
                                 Cardano
                                 </StatNumber>
-                            </Box>
-                            <Box my={'auto'} color={'gray.200'} alignContent={'center'}>
-                                <BsBox size={'2em'} />
                             </Box>
                             </Flex>
                         </Stat>
                       </SimpleGrid>
                     </Flex>
                     <Flex mt="40px">
+                      {/* ------------Description of Project------------ */}
                         <chakra.p py={2} color={"rgba(255, 255, 255, 0.84)"} fontSize= {"18px"} lineHeight={"150%"}>
-                        {state.oneprojectData.project_about}
-                        <br/><br/>
+                        {state.oneprojectData.project_description}
+                          <br/><br/>
                         </chakra.p>
                     </Flex>
-                    <Flex  as={Stack}>
-                        <chakra.h1 color="white" fontWeight="900" fontSize="22px" fontFamily={'Pilat Extended'} mb="20px">
-                          Project Founder Speaks
-                        </chakra.h1>
-                        <Box background="rgba(255, 255, 255, 0.05)" border="1.5px solid rgba(255, 255, 255, 0.15)" boxSizing="border-box" borderRadius="10px">
-                            <Text fontSize={'18px'} fontWeight={'bold'}>Incredible Experience</Text>
-                            <Text color= {"rgba(255, 255, 255, 0.54)"}>
-                              Aliquip mollit sunt qui irure. Irure ullamco Lorem excepteur dolor qui ea ad quis. 
-                              Enim fugiat cillum enim ad occaecat sint qui elit labore mollit sunt laborum fugiat consequat. 
-                              Voluptate labore sunt duis eu deserunt. Occaecat do ut ut labore cillum enim dolore ad enim enim id. 
-                              Aliquip do veniam ad excepteur ad cillum qui deserunt nostrud sunt aliqua duis sunt occaecat. 
-                              Laborum incididunt commodo ullamco proident quis.
-                            </Text>
-                            <HStack>
-                              <Image mt='23px' height='35px' objectFit='cover' src='/WeFund Logos only.png' alt='UST Avatar'/>
-                              <VStack>
-                                <Text>Founder Name</Text>
-                                <Text>CEO</Text>
-                              </VStack>
-                            </HStack>
-                        </Box>
+                    <Flex as={Stack}>
+                      {/* ------------Descriptions on Founder of project------------ */}
+                      <chakra.h1 color="white" fontWeight="900" fontSize="22px" fontFamily={'Pilat Extended'} mb="20px">
+                        Project Founder Speaks
+                      </chakra.h1>
+                      <Box background="rgba(255, 255, 255, 0.05)" border="1.5px solid rgba(255, 255, 255, 0.15)" boxSizing="border-box" borderRadius="10px">
+                        <Text fontSize={'18px'} fontWeight={'bold'}>Incredible Experience</Text>
+                        <Text color= {"rgba(255, 255, 255, 0.54)"}>Aliquip mollit sunt qui irure. Irure ullamco Lorem excepteur dolor qui ea ad quis. 
+                                Enim fugiat cillum enim ad occaecat sint qui elit labore mollit sunt laborum fugiat consequat. 
+                                Voluptate labore sunt duis eu deserunt. Occaecat do ut ut labore cillum enim dolore ad enim enim id. 
+                                Aliquip do veniam ad excepteur ad cillum qui deserunt nostrud sunt aliqua duis sunt occaecat. 
+                                Laborum incididunt commodo ullamco proident quis.</Text>
+                        <HStack border={"1.5px solid rgba(255, 255, 255, 0.15)"} spacing={10}>
+                          <Image mt='23px' height='35px' objectFit='cover' src='/WeFund Logos only.png' alt='UST Avatar'/>
+                          <VStack justify={'left'}> 
+                            <Text>Founder Name</Text>
+                            <Text>CEO</Text>
+                          </VStack>
+                        </HStack>
+                      </Box>
+                        
                     </Flex>
-                  </VStack> 
+                  </VStack>
                 </Flex>
                 <Flex width={'300px'}>
-                    <VStack>
-                      <Flex  my={"6px"} mx={"6px"} width="240px" height="249px" bg="#FFFFFF"
-                        boxShadow={"0px 2px 10px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.25)"}
-                        borderRadius={"2xl"}
-                        justify={'center'}>
-                        <Image src="/sheep.png" alt="avatar" />
-                      </Flex>
-                      <Flex >
-                        <ImageTransition 
-                            unitid='visit'
-                            border1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)' 
-                            background1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
-                            border2='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
-                            background2='linear-gradient(180deg, #1A133E 0%, #1A133E 100%)'
-                            border3="linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)"
-                            background3="linear-gradient(180deg, #171347 0%, #171347 100%)"
-                            selected={false}
-                            width='240px' height='50px' rounded='33px'
-                          >
-                            <a href={state.oneprojectData.project_website}>
-                            <Box variant="solid" color="white" justify='center' align='center'
-                                onClick = {()=>{}} >
-                              Visit Website  <Icon as={BsArrowUpRight} h={4} w={4} mr={3} />
-                            </Box>
-                            </a>
-                          </ImageTransition>
-                      </Flex>
-                      <Flex>
-                        <ImageTransition 
-                          unitid='view'
-                          border1='linear-gradient(180deg, #FE8600 0%, #F83E00 100%)' 
-                          background1='linear-gradient(180deg, #FE8600 0%, #F83E00  100%)'
-                          border2='linear-gradient(180deg, #FE8600 0%, #F83E00 100%)'
+                  <VStack>
+                    <Flex 
+                      my={"6px"}
+                      mx={"6px"}
+                      width="240px"
+                      height="249px"
+                      bg="#FFFFFF"
+                      boxShadow={"0px 2px 10px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.25)"}
+                      borderRadius={"2xl"}
+                      justify={'center'}
+                      >
+              
+                    <Image
+                    src="sheep.svg"
+                    alt="avatar"
+                    />
+                    </Flex>
+                    <Flex >
+                      <ImageTransition
+                          unitid='visit'
+                          border1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)' 
+                          background1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
+                          border2='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
                           background2='linear-gradient(180deg, #1A133E 0%, #1A133E 100%)'
-                          border3="linear-gradient(180deg, #FE8600 0%, #F83E00 100%)"
+                          border3="linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)"
                           background3="linear-gradient(180deg, #171347 0%, #171347 100%)"
                           selected={false}
                           width='240px' height='50px' rounded='33px'
-                        >
-                          <Box variant="solid" color="white" justify='center' align='center'
-                              onClick = {()=>{}} >
-                            See Whitepaper
-                          </Box>
-                        </ImageTransition>
-                      </Flex>
-                      <Flex>
-                        <ImageTransition 
-                          unitid='back'
-                          border1='linear-gradient(180deg, #DEDBDB 0%, #DEDBDB 100%)' 
-                          background1='linear-gradient(180deg, #DEDBDB 0%, #DEDBDB  100%)'
-                          border2='linear-gradient(180deg, #DEDBDB 0%, #DEDBDB 100%)'
-                          background2='linear-gradient(180deg, #1A133E 0%, #1A133E 100%)'
-                          border3="linear-gradient(180deg, #DEDBDB 0%, #DEDBDB 100%)"
-                          background3="linear-gradient(180deg, #171347 0%, #171347 100%)"
-                          selected={false}
-                          width='240px' height='50px' rounded='33px'
-                        >
-                          <Link to={"/back?project_id=" + state.oneprojectData.project_id}>
-                          <Box variant="solid" color="white" justify='center' align='center'
-                              onClick = {()=>{}} >
-                            Back {state.oneprojectData.project_name}
-                          </Box>
-                          </Link>
-                        </ImageTransition>
-                      </Flex>
-                    </VStack>
+                      >
+                        <a href={state.oneprojectData.project_website}>
+                        <Box variant="solid" color="white" justify='center' align='center'
+                            onClick = {()=>{}} >
+                          Visit Website  <Icon as={BsArrowUpRight} h={4} w={4} mr={3} />
+                        </Box>
+                        </a>
+                      </ImageTransition>
+                  </Flex>
+                  <Flex>
+                    <ImageTransition 
+                      unitid='view'
+                      border1='linear-gradient(180deg, #FE8600 0%, #F83E00 100%)' 
+                      background1='linear-gradient(180deg, #FE8600 0%, #F83E00  100%)'
+                      border2='linear-gradient(180deg, #FE8600 0%, #F83E00 100%)'
+                      background2='linear-gradient(180deg, #1A133E 0%, #1A133E 100%)'
+                      border3="linear-gradient(180deg, #FE8600 0%, #F83E00 100%)"
+                      background3="linear-gradient(180deg, #171347 0%, #171347 100%)"
+                      selected={false}
+                      width='240px' height='50px' rounded='33px'
+                    >
+                      <Box variant="solid" color="white" justify='center' align='center'
+                          onClick = {()=>{}} >
+                        See Whitepaper
+                      </Box>
+                    </ImageTransition>
+                  </Flex>
+                  <Flex>
+                    <ImageTransition 
+                      unitid='back'
+                      border1='linear-gradient(180deg, #DEDBDB 0%, #DEDBDB 100%)' 
+                      background1='linear-gradient(180deg, #DEDBDB 0%, #DEDBDB  100%)'
+                      border2='linear-gradient(180deg, #DEDBDB 0%, #DEDBDB 100%)'
+                      background2='linear-gradient(180deg, #1A133E 0%, #1A133E 100%)'
+                      border3="linear-gradient(180deg, #DEDBDB 0%, #DEDBDB 100%)"
+                      background3="linear-gradient(180deg, #171347 0%, #171347 100%)"
+                      selected={false}
+                      width='240px' height='50px' rounded='33px'
+                    >
+                      <Link to={"/back?project_id=" + state.oneprojectData.project_id}>
+                      <Box variant="solid" color="white" justify='center' align='center'
+                          onClick = {()=>{}} >
+                        Back {state.oneprojectData.project_name}
+                      </Box>
+                      </Link>
+                    </ImageTransition>
+                  </Flex>
+                </VStack>
                 </Flex>
-              </SimpleGrid>
+              </HStack>
             </Flex>
           </Box>
         </Flex>

@@ -202,25 +202,25 @@ export default function CreateProject()
   return (
     <ChakraProvider resetCSS theme={theme}>
       <div style={{background:"linear-gradient(90deg, #1F0021 0%, #120054 104.34%)", 
-      width:'100%', color:'white', fontSize:'18px', fontFamily:'Sk-Modernist-Regular', fontWeight:'700' }}>
-        <div style={{backgroundImage:"url('/createproject_banner_emphasis.svg')", 
-        boxShadow:"0px 5px 50px 0px #000000A6", width:'100%', zIndex:'10'}}>
-        <div style={{backgroundImage:"url('/createproject_banner.svg')", width:'100%', zIndex:'11',backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover'}}>
-          <Flex pt='64px' justify="center">
+      width:'100%', color:'white', fontSize:'18px', fontFamily:'Sk-Modernist', fontWeight:'700' }}>
+        <div style={{backgroundImage:"url('/createproject_banner_emphasis.svg')", width:'100%', zIndex:'10'}}>
+        <div style={{backgroundImage:"url('/createproject_banner.svg')", position:'absolute', top:'80px', 
+        boxShadow:"0px 30px 70px -30px #000000A6", width:'100%', zIndex:'11',backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover'}}>
+          <Flex pt='95px' justify="center">
             <Text fontSize='16px' fontWeight='400' color={'rgba(255, 255, 255, 0.54)'}>Home &gt;&nbsp;</Text>
             <Text fontSize='16px'>Create Your Project</Text>
           </Flex>
-          <Flex mt='11px' pb='75px' mb="75px" justify='center'
+          <Flex mt='11px' pb='55px' mb="75px" justify='center'
             style={{fontFamily:'PilatExtended-Bold'}}>
             <Text fontSize='40px'>Create a&nbsp;</Text>
             <Text fontSize='40px' color='#4790f5'>New Project</Text>
           </Flex>
         </div>
         </div>
-        <Flex width='100%' justify='center' mt='-80px' px='175px' zIndex={'1'}>
+        <Flex width='100%' justify='center' mt='20px' px='175px' zIndex={'1'}>
         <div style={{width:'900px', background: 'rgba(255, 255, 255, 0.05)', border: '1.5px solid rgba(255, 255, 255, 0.15)',borderTopColor: 'transparent', fontFamily:'Sk-Modernist-Regular', paddingLeft:'50px', paddingRight:'50px', zIndex:'1'}} >
           {/* --------Select UST or WFD------------------ */}
-          <Text fontSize='18px' pt='50px'>Select Back on</Text>
+          <Text fontSize='18px' pt='50px' mt='300px'>Select Back on</Text>
 
           <Flex direction="row" mt='20px'>
             {/* ------------UST---------------------- */}
@@ -395,7 +395,7 @@ export default function CreateProject()
             <InputTransition 
               unitid='projectchain'
               selected={prjChain==''?false:true}
-              width='100%' height='55px' rounded='md'
+              width='100%' height='55px' rounded='md' background= 'rgba(255, 255, 255, 0.05)'
             >       
               <Select id="sub_category" style={{background: 'rgba(255, 255, 255, 0.05)', }} h='55px' name="sub_category" autoComplete="sub_category" focusBorderColor="purple.800" shadow="sm" size="sm" w="full" rounded="md"
                 value='' onChange={(e)=>{setPrjChain(e.target.value)}} 

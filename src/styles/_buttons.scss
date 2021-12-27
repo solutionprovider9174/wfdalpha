@@ -1,4 +1,26 @@
 .btn {
+    &.btn-blue {
+        text-align: center;
+        color: #FFFFFF;
+        background: linear-gradient(180deg, rgba(0, 193, 255, 0.1) 0%, rgba(0, 193, 255, 0) 100%
+            );
+        border: 1.5px solid;
+        border-color: #00A3FF;
+        border-radius: 33px;
+        width: 210px;
+        padding: 10px 33px 10px 33px;
+    }
+    &.btn-orange {
+        text-align: center;
+        color: #FFFFFF;
+        background: linear-gradient(180deg, rgba(0, 193, 255, 0.1) 0%, rgba(0, 193, 255, 0) 100%
+            );
+        border: 1.5px solid;
+        border-color: #FE8600;
+        border-radius: 33px;
+        width: 210px;
+        padding: 10px 33px 10px 33px;
+    }
     &.btn-green {
         background: linear-gradient(
                 92.8deg,

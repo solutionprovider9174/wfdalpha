@@ -1,6 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import {chakra, Box, Flex, Text, Input, InputGroup,  Icon,  HStack, VStack, Select, Img }   
-                                                                            from"@chakra-ui/react";
+import {chakra, Box, Flex, Text, Input, InputGroup,  Icon,  HStack, VStack, Select, Image } from"@chakra-ui/react";
 import {WasmAPI, LCDClient, } from '@terra-money/terra.js'
 import { BsArrowUpRight } from "react-icons/bs"
 import Pagination from "@choc-ui/paginator"
@@ -148,7 +147,7 @@ export default function ExplorerProject() {
           <Box style={{fontFamily:'Sk-Modernist-Regular'}} >
             <Flex width='100%' justify='center'  px='175px' zIndex={'1'}>
               <VStack>
-                <HStack width={'90%'} alignContent={'center'} spacing={10} mb={'40px'}>
+                <HStack  alignContent={'center'} spacing={10} mb={'40px'}>
                   {/* ------------------project category---------- */}
                   <Box w='50%'>
                     <InputTransition 
@@ -159,7 +158,8 @@ export default function ExplorerProject() {
                       <Select id="sub_category" style={{background: 'rgba(255, 255, 255, 0.05)', }} h='55px' name="sub_category" autoComplete="sub_category" focusBorderColor="purple.800" shadow="sm" size="sm" w="full" rounded="md"
                         value='' onChange={(e)=>{setPrjCategory(e.target.value)}} 
                       >
-                        <option selected style={{backgroundColor:'#1B0645'}}>Filter by</option>
+                        <option disabled selected style={{backgroundColor:'#1B0645'}}>Filter by</option>
+                        <option style={{backgroundColor:'#1B0645'}}>Crypto Projects</option>
                         <option style={{backgroundColor:'#1B0645'}}>Charity</option>
                         <option style={{backgroundColor:'#1B0645'}}>Gamification</option>
                       </Select>
@@ -195,7 +195,7 @@ export default function ExplorerProject() {
                     </ImageTransition>
                   </Flex>
                 </HStack>
-                <Flex style={{width:'1225px', background: 'rgba(255, 255, 255, 0.05)', borderRadius:'3xl',borderTopColor: 'transparent', fontFamily:'Sk-Modernist-Regular', paddingLeft:'50px', paddingRight:'50px'}} >
+                <Flex style={{width:'100%', background: 'rgba(255, 255, 255, 0.05)', borderRadius:'3xl',borderTopColor: 'transparent', fontFamily:'Sk-Modernist-Regular', paddingLeft:'50px', paddingRight:'50px'}} >
                   <VStack>
                     <Flex marginTop={'26px'} marginBottom={'26px'}>
                       <Flex alignSelf={'flex-start'} width={'1000px'}><Text>Projects you might like</Text>
@@ -212,7 +212,7 @@ export default function ExplorerProject() {
                         <Flex  my={"6px"} mx={"6px"} width="400px" height="249px" bg="#FFFFFF"
                         boxShadow={"0px 2px 10px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.25)"}
                         borderRadius={"2xl"} px="20px" py="10px">
-                          <Img src="/sheep.png" alt="avatar" />
+                          <Image src="/sheep.svg" alt="avatar" />
                         </Flex>
                         <Box py={4} px={2} w="100%">
                           <chakra.h1 color="white" fontWeight="bold" fontSize="lg" w='100px'>
@@ -223,7 +223,7 @@ export default function ExplorerProject() {
                           </chakra.p>
 
                           <chakra.p py={2} color={"gray.400"} w='800px'>
-                            {projectItem.project_description.substr(0, 500)}
+                            {projectItem.project_description.substr(0, 300)}
                             <span style={{color:'#00A3FF'}}>...more</span>
                           </chakra.p>
                           <HStack justify="space-between">
@@ -295,8 +295,8 @@ export default function ExplorerProject() {
                     ))}                    
                   </VStack>
                 </Flex>
-                <Flex w="1000px" bg={"gray.600"} p={50} alignItems="center" justifyContent="center" >
-                  <Pagination defaultCurrent={1} total={50} paginationProps={{ display: "flex" }} />
+                <Flex w="1000px"  p={50} alignItems="center" justifyContent="center" >
+                  <Pagination bg={"linear-gradient(180deg, #FE8600 21.43%, #F83E00 147.62%)"} defaultCurrent={1} total={50} paginationProps={{ display: "flex" }} />
                 </Flex>
               </VStack>
             </Flex>
