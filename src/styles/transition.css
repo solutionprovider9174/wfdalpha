@@ -1,24 +1,59 @@
-.normal{
-   opacity:1;
-   transition: opacity 1s ease 0.2s;
-}
-.transited{
-   opacity:0;
-   transition: opacity 1s ease 0.2s;
+.EmailBg {
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  position: absolute;
 }
 
-.movingup_normal{
-   top:0;
-   transition: top 2s ease 1s; 
+#starsBg {
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
 }
-.movingup_transited{
-   top:-1024px;
+#cloudBg {
+  top: 0;
+  width: 100%;
+  position: absolute;
+}
+#stageBg {
+  top: 0;
+  width: 100%;
+  height: 110vh;
+  position: absolute;
+}
+#ArrowDownButton {
+  top: 90vh;
+  width: 100%;
+  display: flex;
+  position: absolute;
+  justify-content: center;
 }
 
-.hidden{
-   opacity:0;
-   transition: opacity 1s ease 0.2s;
+#ArrowDownButton {
+  animation: rocket .8s infinite alternate;
+  -webkit-animation: rocket .8s infinite alternate;
 }
-.hidden_show{
-   opacity:1;
+#sphere,
+#rocket {
+  animation: rocket 1.5s infinite alternate;
+  -webkit-animation: rocket 1.5s infinite alternate;
+}
+
+@-webkit-keyframes rocket {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-30px);
+  }
+}
+
+@keyframes rocket {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-30px);
+  }
 }
