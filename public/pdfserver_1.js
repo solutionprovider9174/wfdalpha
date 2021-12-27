@@ -166,6 +166,26 @@ app.post("/pdfmake", async function (req, res) {
     source.on('error', function(err) { console.log("move error") });
   });
 });
+app.post("/uploadWhitepaper", async function (req, res) {
+  var form = new formidable.IncomingForm();
+  form.parse(req, async function (err, fields, files) {
+    var oldpath = files.file.filepath;
+    var newFilename = fields.projectName + "_whitepaper_" + files.file.originalFilename;
+    let newpath = "upload/" + newFilename;
+
+    var source = fs.createReadStream(oldpath);
+    var dest = fs.createWriteStream(newpath);
+    
+    source.pipe(dest);
+    source.on('end', async function() { 
+      res.json({
+        status: "success",
+        data: newFilename,
+      });
+    });
+    source.on('error', function(err) { console.log("move error") });
+  });
+});
 
 const port = 3001;
 app.listen(port, () => {

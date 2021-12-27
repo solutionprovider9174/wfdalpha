@@ -26,11 +26,15 @@ export default function CreateProject()
   const [prjName, setPrjName] = useState('');
   const [prjDescription, setPrjDescription] = useState('');
   const [prjWebsite, setPrjWebsite] = useState('');
-  const [prjTeamdescription, setPrjTeamdescription] = useState('');
+  const [prjTeamdescription, setPrjTeamDescription] = useState('');
   const [prjEmail, setPrjEmail] = useState('');
   const [prjAmount, setPrjAmount] = useState('');
   const [prjSubcategory, setPrjSubcategory]= useState('');
   const [prjChain, setPrjChain] = useState('');
+
+  const [prjNameLen, setPrjNameLen] = useState(0);
+  const [prjDescriptionLen, setPrjDescriptionLen] = useState(0);
+  const [prjTeamdescriptionLen, setPrjTeamDescriptionLen] = useState(0);
 
   //---------------wallet connect-------------------------------------
   let connectedWallet = ''
@@ -79,22 +83,67 @@ export default function CreateProject()
       fileSelector.click();
     }
   }
-  function changeWhitepaper(){
+  function changeWhitepaper(e){
     if(typeof document !== 'undefined') {
       let fileSelector = document.getElementById('fileSelector')
       var fileName = fileSelector.value;
       setWhitepaper(fileName.substr(fileName.lastIndexOf('\\')+1, fileName.length-1));
+
+      dispatch({
+        type: 'setWhitepaper',
+        message: e.target.files[0],
+      })
     }    
   }
-
+  //---------------validate function-------------------------------
+  function onChangePrjName(e){
+    setPrjNameLen(e.target.value.length);
+    if(e.target.value.length < 100)
+      setPrjName(e.target.value);
+  }
+  function onChangePrjDescription(e){
+    setPrjDescriptionLen(e.target.value.length);
+    if(e.target.value.length < 1000)
+      setPrjDescription(e.target.value);
+  }
+  function onChangePrjTeamDescription(e){
+    setPrjTeamDescriptionLen(e.target.value.length);
+    if(e.target.value.length < 1000)
+      setPrjTeamDescription(e.target.value);
+  }
   //---------------create project---------------------------------
   async function createProject()
   {
+    //----------verify connection--------------------------------
     if(connectedWallet == '' || typeof connectedWallet == 'undefined'){
       showNotification("Please connect wallet first!", 'error', 6000);
       return;
     }
 
+    //----------upload whitepaper---------------------------------------
+    let realWhitepaer = '';
+    if(whitepaper != ''){
+      var formData = new FormData();
+      formData.append("projectName", prjName);
+      formData.append("file", state.whitepaper);
+  console.log(state.whitepaper);
+      const requestOptions = {
+        method: 'POST',
+        body: formData,
+      };
+
+      await fetch(state.request + '/uploadWhitepaper', requestOptions)
+      .then((res) => res.json())
+      .then((data) => {
+        realWhitepaer = data.data;
+        showNotification(data.data + ' Whitepaper upload Success' , 'success', 1000);
+      })
+      .catch((e) =>{
+        console.log("Error:"+e);
+        showNotification('upload whitepaper failed' , 'error', 1000);
+      })
+    }
+    //---------------execute contract----------------------------------
     let wefundContractAddress = state.WEFundContractAddress;
 
     const obj = new StdFee(10_000, { uusd: 4500})
@@ -102,14 +151,19 @@ export default function CreateProject()
     let AddProjectMsg = {
         add_project: {
           creator_wallet: connectedWallet.walletAddress,
-          project_about: prjDescription, 
           project_category: prjCategory, 
-          project_name: prjName,
-          project_ecosystem: prjChain,
-          project_email: prjEmail,
+          project_chain: prjChain,
           project_collected: prjAmount,
-          project_wallet: "",
-          project_website: prjWebsite, 
+          project_createddate: '',
+          project_deadline: '',
+          project_description: prjDescription,
+          project_email: prjEmail,
+          project_icon: '',
+          project_name: prjName,
+          project_subcategory: prjSubcategory,
+          project_teamdescription: prjTeamdescription,
+          project_website: prjWebsite,
+          project_whitepaper: realWhitepaer, 
         },
     }
 // console.log(AddProjectMsg);
@@ -209,7 +263,7 @@ export default function CreateProject()
           <Box mt='40px'>
             <Flex justify="space-between">
               <Text mb='20px'>Project Name</Text>
-              <Text fontSize='15px'  opacity='0.5'>0/150 words</Text>
+              <Text fontSize='15px'  opacity='0.5'>{prjNameLen}/100 words</Text>
             </Flex>
             <InputTransition 
               unitid='projectname'
@@ -217,7 +271,8 @@ export default function CreateProject()
               width='100%' height='55px' rounded='md'
             >
               <InputGroup style={{background: 'rgba(255, 255, 255, 0.05)', }} size="sm" border='0px'>
-                <Input style={{border:'0', background:'transparent' }} type="text" h='55px'  rounded="md"  value={prjName} placeholder='Type here' onChange={(e)=>setPrjName(e.target.value)} />
+                <Input style={{border:'0', background:'transparent' }} type="text" h='55px'  rounded="md"  value={prjName} placeholder='Type here' 
+                onChange={(e)=>onChangePrjName(e)} />
               </InputGroup>
             </InputTransition>
           </Box>
@@ -225,7 +280,7 @@ export default function CreateProject()
           <Box mt='40px'>
             <Flex justify="space-between">
               <Text mb='20px'>Project Description</Text>
-              <Text fontSize='15px' opacity='0.5'>0/1000 words</Text>
+              <Text fontSize='15px' opacity='0.5'>{prjDescriptionLen}/1000 words</Text>
             </Flex>
             <InputTransition 
               unitid='projectdescription'
@@ -233,7 +288,7 @@ export default function CreateProject()
               width='100%' height='175px' rounded='md'
             >
               <Textarea style={{background: 'rgba(255, 255, 255, 0.05)', }} value={prjDescription} 
-              onChange={(e)=>{setPrjDescription(e.target.value)}} rounded="md"
+              onChange={(e)=>{onChangePrjDescription(e)}} rounded="md"
                 placeholder='Type here' size='sm' h='175px' />
             </InputTransition>
           </Box>
@@ -273,14 +328,14 @@ export default function CreateProject()
                   onClick={(e)=>{openUpload()}} /> 
                 </InputGroup>}
               <input type='file' id="fileSelector" name='userFile' style={{display:'none'}}
-                onChange={()=>changeWhitepaper()}/>
+                onChange={(e)=>changeWhitepaper(e)}/>
             </Box>
           </Flex>
           {/* --------------project Team description------- */}
           <Box mt='40px'>
             <Flex justify="space-between">
               <Text mb='20px'>Project Team Description</Text>
-              <Text  fontSize='15px' opacity='0.5'>0/1000 words</Text>
+              <Text  fontSize='15px' opacity='0.5'>{prjTeamdescriptionLen}/1000 words</Text>
             </Flex>
             <InputTransition 
               unitid='prjTeamdescription'
@@ -288,7 +343,7 @@ export default function CreateProject()
               width='100%' height='175px' rounded='md'
               style={{background: 'transparent',border:'0'}}
             >
-              <Textarea style={{background: 'transparent',border:'0'}} h='165px' value={prjTeamdescription} onChange={(e)=>{setPrjTeamdescription(e.target.value)}}
+              <Textarea style={{background: 'transparent',border:'0'}} h='165px' value={prjTeamdescription} onChange={(e)=>{onChangePrjTeamDescription(e)}}
                 placeholder='Type here' size='sm'  rounded="md"
               />
             </InputTransition>

@@ -15,7 +15,7 @@ import {
 const StoreContext = createContext()
 
 const initialState = {
-    WEFundContractAddress: "terra14jvfsqdnpgn3tpkkcevarh0f832qrcpzsesfg0",
+    WEFundContractAddress: "terra1hsvqrzda46k80ca28h282dnhmr0k8eff3m9krz",
     projectData: '',
     oneprojectData: '',
     wallet: {},    
@@ -37,10 +37,16 @@ const initialState = {
     investSignature: '',
     request: 'http://localhost:3001',
     pdfFile: '',
+    whitepaper: '',
 }
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'setWhitepaper':
+        return {
+            ...state,
+            whitepaper: action.message,
+        }
     case 'setInvestDate':
         return {
             ...state,

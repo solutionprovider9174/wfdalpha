@@ -22,8 +22,10 @@ if (typeof document !== 'undefined') {
 export default function ExplorerProject() {
   const [prjCategory, setPrjCategory] = useState('');
   const [prjName, setPrjName] = useState('');
-  const [totalBackedMoney, setTotalBackedMoney] = useState(0)
   const { state, dispatch } = useStore();
+
+  const [totalBackedMoney, setTotalBackedMoney] = useState(0)
+  const [totalDeposit, setTotalDeposit] = useState(0)
   const [ustAmount, setUstAmount] = useState(0);
   const [austAmount, setAustAmount] = useState(0);
 
@@ -70,13 +72,19 @@ export default function ExplorerProject() {
 
       let i, j
       let totalBacked = 0;
+      let totalDeposit = 0;
+
       for(i=0; i<projectData.length; i++){
-          for(j=0; j<projectData[i].backer_states.length; j++){
-              totalBacked += parseInt(projectData[i].backer_states[j].ust_amount.amount);
-          }
+        for(j=0; j<projectData[i].backer_states.length; j++){
+            totalBacked += parseInt(projectData[i].backer_states[j].ust_amount.amount);
+            if(projectData[i].project_done == 0)
+              totalDeposit += parseInt(projectData[i].backer_states[j].ust_amount.amount);
+        }
       }
       totalBacked /= 10**6;
       setTotalBackedMoney(totalBacked);
+      totalDeposit /= 10**6;
+      setTotalDeposit(totalDeposit);
 
       const balanceData = await api.contractQuery(
         state.WEFundContractAddress,
@@ -122,6 +130,9 @@ export default function ExplorerProject() {
           <Flex justify='center' direction="column" textAlign='center'>
             <Text fontSize='40px' color='#4790f5' fontWeight={'900'}>
               {totalBackedMoney} backed
+            </Text>
+            <Text fontSize='40px' color='#4790f5' fontWeight={'900'}>
+              {totalDeposit} deposit
             </Text>
             <Text fontSize='40px' color='#4790f5' fontWeight={'900'}>
               {ustAmount} UST
@@ -212,14 +223,14 @@ export default function ExplorerProject() {
                           </chakra.p>
 
                           <chakra.p py={2} color={"gray.400"} w='800px'>
-                            {projectItem.project_about}
+                            {projectItem.project_description.substr(0, 500)}
                             <span style={{color:'#00A3FF'}}>...more</span>
                           </chakra.p>
                           <HStack justify="space-between">
                             <Flex alignItems="center" color={"gray.400"} >
                               <Icon as={MdOutlineCategory} h={6} w={6} mr={2} />
                               <chakra.h1 px={2} fontSize="sm">
-                                {projectItem.project_ecosystem}
+                                {projectItem.project_chain}
                               </chakra.h1>
                             </Flex>
                             <Flex alignItems="center" color={"gray.400"} >

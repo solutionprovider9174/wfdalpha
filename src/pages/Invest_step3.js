@@ -81,8 +81,8 @@ export default function NewProject() {
     fetch(state.request + '/pdfmake', requestOptions)
     .then((res) => res.json())
     .then((data) => {
-      console.log("from server:");
-      console.log(data);
+console.log("from server:");
+console.log(data);
       dispatch({
         type: 'setPdffile',
         message: data.data,

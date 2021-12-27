@@ -125,7 +125,7 @@ export default function BackProject() {
         },
     }
 
-    let amount = parseInt(backAmount * 1000000 * 100 / 95 + 4000000);
+    let amount = parseInt(backAmount * 1000000 * 105 / 100);
     let msg = new MsgExecuteContract(
       connectedWallet.walletAddress,
       wefundContractAddress,
@@ -143,7 +143,6 @@ export default function BackProject() {
       .then((e) => {
           if (e.success) {
             showNotification('Back to Project Success', 'success', 4000);
-            
           } else {
               showNotification(e.message, 'error', 4000)
           }
