@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 import {
   ButtonTransition,
   ButtonBackTransition,
-} from '../components/ImageTransition'
-import { Image, Flex, Text, Box } from '@chakra-ui/react'
-import { IoArrowForwardCircleOutline } from 'react-icons/io5'
+} from '../components/ImageTransition';
+import { Image, Flex, Text, Box } from '@chakra-ui/react';
+import { IoArrowForwardCircleOutline } from 'react-icons/io5';
 
 export default function Hero() {
   return (
@@ -74,5 +74,5 @@ export default function Hero() {
         </a>
       </Flex>
     </Flex>
-  )
+  );
 }

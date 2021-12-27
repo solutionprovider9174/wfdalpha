@@ -1,16 +1,16 @@
-import React from 'react'
-import theme from '../theme'
-import { ChakraProvider } from '@chakra-ui/react'
+import React from 'react';
+import theme from '../theme';
+import { ChakraProvider } from '@chakra-ui/react';
 
-import Hero from '../components/Hero'
-import About from '../components/about'
-import Industry from '../components/Industry'
-import RoadMap from '../components/Roadmap'
-import Email from '../components/Email'
-import Projectfeature from '../components/Featured'
-import Footer from '../components/Footer'
-import { Container } from '../components/Container'
-import '../styles/transition.css'
+import Hero from '../components/Hero';
+import About from '../components/about';
+import Industry from '../components/Industry';
+import RoadMap from '../components/Roadmap';
+import Email from '../components/Email';
+import Projectfeature from '../components/Featured';
+import Footer from '../components/Footer';
+import { Container } from '../components/Container';
+import '../styles/transition.css';
 
 export default () => {
   return (
@@ -25,5 +25,5 @@ export default () => {
         <Footer />
       </Container>
     </ChakraProvider>
-  )
-}
+  );
+};

@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
-import { Image, Flex, Text, Box } from '@chakra-ui/react'
-import { ButtonTransition } from '../components/ImageTransition'
+import React, { useState } from 'react';
+import { Image, Flex, Text, Box } from '@chakra-ui/react';
+import { ButtonTransition } from '../components/ImageTransition';
 
 export default function Industry() {
-  const [choice, setChoice] = useState(1)
+  const [choice, setChoice] = useState(1);
 
   return (
-    <Flex
-      direction="column"
+    <Box
       px="115px"
       pt="47px"
       fontFamily="Sk-Modernist-Regular"
+      justifyContent="space-around"
+      alignItems="flex-start"
+      overflow="visible"
     >
       <Flex
         direction="row"
@@ -21,7 +23,7 @@ export default function Industry() {
         <Text color="#00A3FF">WeFund&nbsp;</Text>
         <Text>Supports All</Text>
       </Flex>
-      <Flex direction="row" mt="45px">
+      <Flex direction="row" mt="45px" position="sticky" top="0">
         {/* ----------crypto startup industry--------------- */}
         <Box
           w="242px"
@@ -217,8 +219,8 @@ export default function Industry() {
           ))}
         </Flex>
       </Flex>
-    </Flex>
-  )
+    </Box>
+  );
 }
 const PROJECT_ITEMS = [
   {
@@ -266,4 +268,4 @@ const PROJECT_ITEMS = [
       'WeFund supports both crypto and non-crypto projects. We are passionate about blockchain technology and its limitless potential. WeFund is designed to democratize the fundraising process.',
     imgsrc: '/RealEstateProject.png',
   },
-]
+];

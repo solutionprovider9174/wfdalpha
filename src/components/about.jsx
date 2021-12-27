@@ -1,51 +1,8 @@
 import React from 'react';
-import { IoCloudDownloadOutline } from 'react-icons/io5';
 import { Flex, Box, Text, Image } from '@chakra-ui/react';
 import { ButtonBackTransition } from '../components/ImageTransition';
 
 export default function Aboutone() {
-  var mouseoriginX = 0,
-    mouseoriginY = 0,
-    mouseposX = 0,
-    mouseposY = 0;
-
-  function movingback(e) {
-    if (mouseoriginX == 0) {
-      mouseoriginX = e.pageX;
-      mouseposX = e.pageX;
-    }
-    if (
-      (mouseposX < e.pageX && e.pageX < mouseoriginX) ||
-      (mouseposX > e.pageX && e.pageX > mouseoriginX)
-    ) {
-      mouseoriginX = mouseposX;
-    }
-
-    if (mouseoriginY == 0) {
-      mouseoriginY = e.pageY;
-      mouseposY = e.pageY;
-    }
-    if (
-      (mouseposY < e.pageY && e.pageY < mouseoriginY) ||
-      (mouseposY > e.pageY && e.pageY > mouseoriginY)
-    ) {
-      mouseoriginY = mouseposY;
-    }
-
-    var base = 1;
-    var deltaX = e.pageX - mouseoriginX;
-    var deltaY = e.pageY - mouseoriginY;
-    var limit = 50;
-    if (deltaX > limit) deltaX = limit;
-    if (deltaX < -limit) deltaX = -limit;
-    if (deltaY > limit) deltaY = limit;
-    if (deltaY < -limit) deltaY = -limit;
-    deltaY += 50;
-
-    var rocket = document.getElementById('rocket');
-    rocket.style.transform =
-      'translate3d(' + deltaX * base + 'px, ' + deltaY * base + 'px, 0px)';
-  }
   return (
     <Flex
       pt="68"
@@ -55,7 +12,6 @@ export default function Aboutone() {
       bgRepeat="no-repeat"
       backgroundSize="contain"
       fontFamily="Sk-Modernist-Regular"
-      onMouseMove={(e) => movingback(e)}
       backgroundImage="url('/swirl.svg')"
     >
       <Flex direction="row">
