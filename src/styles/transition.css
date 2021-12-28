@@ -46,7 +46,7 @@
 }
 #heroHeading {
   z-index: 2;
-  font-size: 55px;
+  font-size: 50px;
   margin-top: 20px;
   line-height: 70px;
   position: relative;
@@ -267,12 +267,6 @@
   text-align: center;
 }
 
-.timeline {
-  width: 5px;
-  height: 100px;
-  background-color: white;
-}
-
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -280,9 +274,8 @@
 }
 
 .timeline {
-  width: 5px;
   height: 100px;
-  background-color: #e5e5e5;
+  border: 2px dashed white;
 }
 
 .circle {
@@ -294,7 +287,7 @@
   align-items: center;
   display: inline-flex;
   justify-content: center;
-  background-color: #e5e5e5;
+  background-color: #fe8501;
   font-family: 'PilatExtended-Regular';
 }
 
