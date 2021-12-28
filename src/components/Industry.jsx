@@ -164,6 +164,7 @@ export default function Industry() {
             return (
               <Flex
                 key={index}
+                id={projectItem.id}
                 className="PROJECT_ITEMS_ROW"
                 direction={isOdd ? 'row' : 'row-reverse'}
               >
