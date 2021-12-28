@@ -119,7 +119,7 @@ export default function ExplorerProject() {
             <Text fontSize='16px' fontWeight='normal' color={'rgba(255, 255, 255, 0.54)'}>Home &gt;&nbsp;</Text>
             <Text fontSize='16px' color={'rgba(255, 255, 255, 0.84)'}>Projects</Text>
           </Flex>
-          <Flex mt='11px' pb='75px' mb="75px" justify='center'
+          <Flex mt='11px' pb='75px' justify='center'
             style={{fontFamily:'PilatExtended-Bold'}}>
             <Text fontSize='40px' fontWeight={'900'}>Explore&nbsp;</Text>
             <Text fontSize='40px' color='#4790f5' fontWeight={'900'}>
@@ -127,7 +127,7 @@ export default function ExplorerProject() {
             </Text>
           </Flex>
           <Flex justify='center' direction="column" textAlign='center'>
-            <Text fontSize='40px' color='#4790f5' fontWeight={'900'}>
+            <Text fontSize='40px' color='#4790f5' fontWeight={'900'}><br/>
               {totalBackedMoney} backed
             </Text>
             <Text fontSize='40px' color='#4790f5' fontWeight={'900'}>
@@ -142,7 +142,6 @@ export default function ExplorerProject() {
           </Flex>
         </div>
         </div>
-
         <Flex width='100%' justify='center' mt='50px' px='175px'>
           <Box style={{fontFamily:'Sk-Modernist-Regular'}} >
             <Flex width='100%' justify='center'  px='175px' zIndex={'1'}>
@@ -154,7 +153,7 @@ export default function ExplorerProject() {
                       unitid='projectcategory'
                       selected={prjCategory==''?false:true}
                       width='290px' height='55px' rounded='md'
-                    >       
+                    >
                       <Select id="sub_category" style={{background: 'rgba(255, 255, 255, 0.05)', }} h='55px' name="sub_category" autoComplete="sub_category" focusBorderColor="purple.800" shadow="sm" size="sm" w="full" rounded="md"
                         value='' onChange={(e)=>{setPrjCategory(e.target.value)}} 
                       >
@@ -212,7 +211,13 @@ export default function ExplorerProject() {
                         <Flex  my={"6px"} mx={"6px"} width="400px" height="249px" bg="#FFFFFF"
                         boxShadow={"0px 2px 10px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.25)"}
                         borderRadius={"2xl"} px="20px" py="10px">
-                          <Image src="/sheep.svg" alt="avatar" />
+                          {projectItem.project_icon && 
+                            <Image 
+                            src={state.request+"/download?filename="+ projectItem.project_icon} alt="avatar" />
+                          }
+                          {!projectItem.project_icon && 
+                            <Image src="/sheep.svg" alt="avatar" />
+                          }
                         </Flex>
                         <Box py={4} px={2} w="100%">
                           <chakra.h1 color="white" fontWeight="bold" fontSize="lg" w='100px'>

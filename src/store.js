@@ -35,13 +35,20 @@ const initialState = {
     investTitle: '',
     investDate: '',
     investSignature: '',
-    request: 'https://wefund-nodejs-hmcl7.ondigitalocean.app',
+    //request: 'https://wefund-nodejs-hmcl7.ondigitalocean.app',
+    request: 'http://a9b4-188-43-136-33.ngrok.io',
     pdfFile: '',
     whitepaper: '',
+    logo: '',
 }
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'setLogo':
+        return {
+            ...state,
+            logo: action.message,
+        }
     case 'setWhitepaper':
         return {
             ...state,

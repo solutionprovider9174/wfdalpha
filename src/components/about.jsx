@@ -209,10 +209,12 @@ export default function Aboutone() {
           height="55px"
           rounded="100px"
         >
+          <a href="/Whitepaper_2.0.docx">
           <Flex justify="space-between" alignItems="center" w="100%" px="20px">
             <Box>Download Whitepaer</Box>
             <Image src="Download.svg" />
           </Flex>
+          </a>
         </ButtonBackTransition>
       </Flex>
     </Flex>

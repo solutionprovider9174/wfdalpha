@@ -4,7 +4,7 @@ import {Box, Flex, Text,Table,Thead,Tbody,Tr,Th,Td,TableCaption, VStack,Image, H
   } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
 import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark } from 'react-icons/io5';
-import download from "js-file-download";
+// import download from "js-file-download";
 import { post, get } from "axios";
 
 import { useStore } from '../store'
@@ -40,10 +40,7 @@ export default function Invest_step4() {
     xhr.onload = function () {
         file = new Blob([xhr.response], { type : 'application/octet-stream' });
         a.href = window.URL.createObjectURL(file);
-        a.download = 'confirm.pdf';  // Set to whatever file name you want
-        // Now just click the link you created
-        // Note that you may have to append the a element to the body somewhere
-        // for this to work in Firefox
+        a.download = 'confirm.pdf';
         a.click();
     };
     xhr.send();

@@ -21,7 +21,10 @@ export default function CreateProject()
 {
   const { state, dispatch } = useStore();
   const [isUST, setIsUST] = useState(true);
+
   const [whitepaper, setWhitepaper] = useState('');
+  const [logo, setLogo] = useState('');
+
   const [prjCategory, setPrjCategory] = useState('');
   const [prjName, setPrjName] = useState('');
   const [prjDescription, setPrjDescription] = useState('');
@@ -31,6 +34,7 @@ export default function CreateProject()
   const [prjAmount, setPrjAmount] = useState('');
   const [prjSubcategory, setPrjSubcategory]= useState('');
   const [prjChain, setPrjChain] = useState('');
+
 
   const [prjNameLen, setPrjNameLen] = useState(0);
   const [prjDescriptionLen, setPrjDescriptionLen] = useState(0);
@@ -95,6 +99,25 @@ export default function CreateProject()
       })
     }    
   }
+  
+  function openLogoUpload(){
+    if(typeof document !== 'undefined') {
+      let fileSelector = document.getElementById('fileLogoSelector')
+      fileSelector.click();
+    }
+  }
+  function changeLogo(e){
+    if(typeof document !== 'undefined') {
+      let fileSelector = document.getElementById('fileLogoSelector')
+      var fileName = fileSelector.value;
+      setLogo(fileName.substr(fileName.lastIndexOf('\\')+1, fileName.length-1));
+
+      dispatch({
+        type: 'setLogo',
+        message: e.target.files[0],
+      })
+    }
+  }
   //---------------validate function-------------------------------
   function onChangePrjName(e){
     setPrjNameLen(e.target.value.length);
@@ -136,11 +159,34 @@ export default function CreateProject()
       .then((res) => res.json())
       .then((data) => {
         realWhitepaer = data.data;
-        showNotification(data.data + ' Whitepaper upload Success' , 'success', 1000);
+        showNotification(data.data + 'Whitepaper upload Success' , 'success', 1000);
       })
       .catch((e) =>{
         console.log("Error:"+e);
         showNotification('upload whitepaper failed' , 'error', 1000);
+      })
+    }
+    //---------upload logo-------------------------------------------------
+    let realLogo = '';
+    if(logo != ''){
+      var formData = new FormData();
+      formData.append("projectName", prjName);
+      formData.append("file", state.logo);
+  console.log(state.logo);
+      const requestOptions = {
+        method: 'POST',
+        body: formData,
+      };
+
+      await fetch(state.request + '/uploadLogo', requestOptions)
+      .then((res) => res.json())
+      .then((data) => {
+        realLogo = data.data;
+        showNotification(data.data + 'Logo upload Success' , 'success', 1000);
+      })
+      .catch((e) =>{
+        console.log("Error:"+e);
+        showNotification('upload logo failed' , 'error', 1000);
       })
     }
     //---------------execute contract----------------------------------
@@ -158,7 +204,7 @@ export default function CreateProject()
           project_deadline: '',
           project_description: prjDescription,
           project_email: prjEmail,
-          project_icon: '',
+          project_icon: realLogo,
           project_name: prjName,
           project_subcategory: prjSubcategory,
           project_teamdescription: prjTeamdescription,
@@ -202,27 +248,27 @@ export default function CreateProject()
   return (
     <ChakraProvider resetCSS theme={theme}>
       <div style={{background:"linear-gradient(90deg, #1F0021 0%, #120054 104.34%)", 
-      width:'100%', color:'white', fontSize:'18px', fontFamily:'Sk-Modernist', fontWeight:'700' }}>
-        <div style={{backgroundImage:"url('/createproject_banner_emphasis.svg')", width:'100%', zIndex:'10'}}>
-        <div style={{backgroundImage:"url('/createproject_banner.svg')", position:'absolute', top:'80px', 
-        boxShadow:"0px 30px 70px -30px #000000A6", width:'100%', zIndex:'11',backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover'}}>
+      width:'100%', color:'white', fontSize:'18px', fontFamily:'Sk-Modernist-Regular', fontWeight:'500' }}>
+        <div style={{backgroundImage:"url('/createproject_banner_emphasis.svg')", 
+        boxShadow:"0px 5px 50px 0px #000000A6", width:'100%', zIndex:'10'}}>
+        <div style={{backgroundImage:"url('/createproject_banner.svg')", width:'100%', width:'100%', zIndex:'11',backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',zIndex:'11'}}>
           <Flex pt='95px' justify="center">
             <Text fontSize='16px' fontWeight='400' color={'rgba(255, 255, 255, 0.54)'}>Home &gt;&nbsp;</Text>
             <Text fontSize='16px'>Create Your Project</Text>
           </Flex>
-          <Flex mt='11px' pb='55px' mb="75px" justify='center'
+          <Flex mt='11px' pb='150px' justify='center'
             style={{fontFamily:'PilatExtended-Bold'}}>
             <Text fontSize='40px'>Create a&nbsp;</Text>
             <Text fontSize='40px' color='#4790f5'>New Project</Text>
           </Flex>
         </div>
         </div>
-        <Flex width='100%' justify='center' mt='20px' px='175px' zIndex={'1'}>
+        <Flex width='100%' justify='center' mt='0px' px='175px' zIndex={'1'}>
         <div style={{width:'900px', background: 'rgba(255, 255, 255, 0.05)', border: '1.5px solid rgba(255, 255, 255, 0.15)',borderTopColor: 'transparent', fontFamily:'Sk-Modernist-Regular', paddingLeft:'50px', paddingRight:'50px', zIndex:'1'}} >
           {/* --------Select UST or WFD------------------ */}
-          <Text fontSize='18px' pt='50px' mt='300px'>Select Back on</Text>
+          <Text fontSize='18px' pt='50px'>Select Back on</Text>
 
-          <Flex direction="row" mt='20px'>
+          <Flex direction="row" mt='40px'>
             {/* ------------UST---------------------- */}
             <ImageTransition 
               unitid='coinust'
@@ -331,6 +377,26 @@ export default function CreateProject()
                 onChange={(e)=>changeWhitepaper(e)}/>
             </Box>
           </Flex>
+          {/* -------------------Project Icon------------------- */}
+          <Box mt='40px' w='50%'>
+            <Flex justify="space-between">
+              <Text mb='20px'>Project Logo</Text>
+            </Flex>
+            {logo == '' && 
+              <InputGroup size="sm">
+                <InputLeftElement h='55px' pointerEvents='none' children={<IoCloudUploadOutline color='#00A3FF' width='30px' height='30px'/>} />
+                <Input type="text" h='55px' bg='#FFFFFF' borderColor="#FFFFFF33" placeholder="Upload here" focusBorderColor="purple.800"  rounded="md"  
+                onClick={(e)=>{openLogoUpload()}}  /> 
+              </InputGroup>}
+            {logo != '' && 
+              <InputGroup size="sm">
+                <InputLeftElement h='55px' pointerEvents='none' children={<IoCheckbox color='00A3FF'  width='30px' height='30px' />} />
+                <Input type="text" h='55px' bg='#FFFFFF' borderColor="#FFFFFF33" placeholder={logo} focusBorderColor="purple.800"  rounded="md"  
+                onClick={(e)=>{openLogoUpload()}} /> 
+              </InputGroup>}
+            <input type='file' id="fileLogoSelector" name='userFile' style={{display:'none'}}
+              onChange={(e)=>changeLogo(e)}/>
+          </Box>
           {/* --------------project Team description------- */}
           <Box mt='40px'>
             <Flex justify="space-between">
