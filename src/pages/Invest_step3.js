@@ -9,8 +9,9 @@ import { useStore } from '../store'
 import { IoChevronUpOutline, IoChevronDownOutline, IoCheckbox,  IoCloudUploadOutline } from 'react-icons/io5';
 import { navigate } from '@reach/router'
 import { ImageTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
+import Notification from '../components/Notification'
 
-export default function NewProject() {
+export default function Invest_step3() {
   const [blog1, setBlog1] = useState(false);
   const [blog2, setBlog2] = useState(false);
   const [blog3, setBlog3] = useState(false);
@@ -23,6 +24,40 @@ export default function NewProject() {
   const [InsEmail, setInsEmail] = useState('');
   const {state, dispatch} = useStore();
 
+  //---------------notification setting---------------------------------
+  const [notification, setNotification] = useState({
+    type: 'success',
+    message: '',
+    show: false,
+  })
+
+  function hideNotification() {
+    setNotification({
+        message: notification.message,
+        type: notification.type,
+        show: false,
+    })
+  }
+
+  function showNotification(message, type, duration) {
+    // console.log('fired notification')
+    setNotification({
+        message: message,
+        type: type,
+        show: true,
+    })
+    console.log(notification)
+    // Disable after $var seconds
+    setTimeout(() => {
+        setNotification({
+            message: message,
+            type: type,
+            show: false,
+        })
+        // console.log('disabled',notification)
+    }, duration)
+  }
+  //----------------upload signature----------------------------
   function openUpload(){
     if(typeof document !== 'undefined') {
       let fileSelector = document.getElementById('fileSelector')
@@ -40,6 +75,7 @@ export default function NewProject() {
       })
     }    
   }
+  //---------------on next------------------------------------
 
   function onNext(){
     dispatch({
@@ -78,9 +114,12 @@ export default function NewProject() {
       body: formData,
     };
 
+    showNotification("Uploading", 'success', 4000)
+
     fetch(state.request + '/pdfmake', requestOptions)
     .then((res) => res.json())
     .then((data) => {
+      hideNotification();
 console.log("from server:");
 console.log(data);
       dispatch({
@@ -348,6 +387,10 @@ console.log(data);
           </Flex>
         </Box>
         </Flex>
+        <Notification
+            notification={notification}
+            close={() => hideNotification()}
+        />
       </div>
     </ChakraProvider>
   )

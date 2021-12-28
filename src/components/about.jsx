@@ -5,7 +5,7 @@ import { ButtonBackTransition } from '../components/ImageTransition';
 export default function Aboutone() {
   return (
     <Flex
-      pt="68"
+      mt="120px"
       px="115"
       id="aboutSection"
       direction="column"

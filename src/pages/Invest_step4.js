@@ -3,13 +3,15 @@ import theme from '../theme';
 import {Box, Flex, Text,Table,Thead,Tbody,Tr,Th,Td,TableCaption, VStack,Image, HStack, Img
   } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
-import { useStore } from '../store'
-
 import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark } from 'react-icons/io5';
+import download from "js-file-download";
+import { post, get } from "axios";
+
+import { useStore } from '../store'
 import { ImageTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
 import { navigate } from "@reach/router";
 
-export default function NewProject() {
+export default function Invest_step4() {
   const [blog1, setBlog1] = useState(false);
   const [blog2, setBlog2] = useState(false);
   const [blog3, setBlog3] = useState(false);
@@ -17,6 +19,35 @@ export default function NewProject() {
   const [blog5, setBlog5] = useState(false);
 
   const {state, dispatch} = useStore();
+
+  function download_pdf(){
+    // get(state.request + "/download", { params: { filename: state.pdfFile } }).
+    // then((res, req) => {
+    //     console.log(res);
+    //     download(res.data, state.pdfFile);
+    //   }
+    // )
+    // .catch((e) =>{
+    //   console.log("Error:"+e);
+    // })
+    window.URL = window.URL || window.webkitURL;
+
+    var xhr = new XMLHttpRequest(),
+          a = document.createElement('a'), file;
+
+    xhr.open('GET', state.request + '/download_pdf?filename='+state.pdfFile, true);
+    xhr.responseType = 'blob';
+    xhr.onload = function () {
+        file = new Blob([xhr.response], { type : 'application/octet-stream' });
+        a.href = window.URL.createObjectURL(file);
+        a.download = 'confirm.pdf';  // Set to whatever file name you want
+        // Now just click the link you created
+        // Note that you may have to append the a element to the body somewhere
+        // for this to work in Firefox
+        a.click();
+    };
+    xhr.send();
+  }
 
   return (
     <ChakraProvider resetCSS theme={theme}>
@@ -72,7 +103,9 @@ export default function NewProject() {
                 <Td isNumeric borderLeft={'1px solid rgba(255, 255, 255, 0.1)'} borderRight={'1px solid rgba(255, 255, 255, 0.1)'}>{state.investAmount}</Td>
                 <Td isNumeric borderLeft={'1px solid rgba(255, 255, 255, 0.1)'} borderRight={'1px solid rgba(255, 255, 255, 0.1)'}>{state.investWfdamount}</Td>
                 <Td>
-                  <a href={"/PDF/" + state.pdfFile} download="confirm.pdf">
+                  {/* <a href={state.request+"/download_pdf?filename=" + state.pdfFile} 
+                      download="confirm.pdf"> */}
+                  <a onClick={()=>{download_pdf()}}>
                     <Text color={'#F83600'}>Download</Text>
                   </a>
                 </Td>

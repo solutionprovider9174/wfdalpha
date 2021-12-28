@@ -187,7 +187,7 @@ app.post("/uploadWhitepaper", async function (req, res) {
   });
 });
 
-const port = 3001;
+const port = 3002;
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });

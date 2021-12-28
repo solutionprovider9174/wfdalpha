@@ -27,6 +27,7 @@
         "chart.js": "^3.5.0",
         "formidable": "^2.0.1",
         "framer-motion": "4",
+        "js-file-download": "^0.4.1",
         "nodemailer": "^6.7.1",
         "nouislider-react": "^3.4.1",
         "numeral": "^2.0.6",

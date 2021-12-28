@@ -35,7 +35,7 @@ const initialState = {
     investTitle: '',
     investDate: '',
     investSignature: '',
-    request: 'http://localhost:3001',
+    request: 'https://wefund-nodejs-hmcl7.ondigitalocean.app',
     pdfFile: '',
     whitepaper: '',
 }

@@ -146,10 +146,6 @@ const NAV_ITEMS = [
     href: 'explorer',
   },
   {
-    label: 'Create New Project',
-    href: 'create',
-  },
-  {
     label: 'Invest on WeFund',
     href: 'invest_step1',
   },

@@ -14,6 +14,7 @@ export default function Hero() {
       direction="column"
       paddingTop="110px"
       alignItems="center"
+      position='relative'
     >
       <Image src="stars.svg" id="starsBg" />
       <Image src="cloud.svg" id="cloudBg" />

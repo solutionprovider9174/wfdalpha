@@ -1,6 +1,6 @@
 import React from 'react';
 import theme from '../theme';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, VStack } from '@chakra-ui/react';
 
 import Hero from '../components/Hero';
 import About from '../components/about';
