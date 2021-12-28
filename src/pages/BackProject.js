@@ -91,7 +91,7 @@ export default function BackProject() {
       showNotification("Please connect wallet first!", 'error', 6000);
       return;
     }
-
+console.log(connectedWallet);
     let _project_id = 1;
     if(project_id != null)
       _project_id = project_id;
@@ -155,27 +155,27 @@ export default function BackProject() {
   return (
     <ChakraProvider resetCSS theme={theme}>
       <div style={{background:"linear-gradient(90deg, #1F0021 0%, #120054 104.34%)", 
-      width:'100%', color:'white', fontSize:'18px', fontFamily:'Sk-Modernist', fontWeight:'500' }}>
+      width:'100%', color:'white', fontSize:'18px', fontFamily:'Sk-Modernist-Regular', fontWeight:'500' }}>
         <div style={{backgroundImage:"url('/createproject_banner_emphasis.svg')", 
-        width:'100%', zIndex:'10'}}>
-        <div style={{backgroundImage:"url('/createproject_banner.svg')", position:'absolute', top:'80px', 
-        boxShadow:"0px 30px 70px -30px #000000A6", width:'100%', width:'100%', zIndex:'11',backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',zIndex:'11'}}>
+        boxShadow:"0px 5px 50px 0px #000000A6", width:'100%', zIndex:'10'}}>
+        <div style={{backgroundImage:"url('/createproject_banner.svg')", width:'100%', width:'100%', zIndex:'11',backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',zIndex:'11'}}>
           <Flex pt='95px' justify="center">
             <Text fontSize='16px' fontWeight='normal' color={'rgba(255, 255, 255, 0.54)'}>Home &gt;&nbsp;</Text>
             <Text fontSize='16px' color={'rgba(255, 255, 255, 0.84)'}>Back the Project</Text>
           </Flex>
-          <Flex mt='11px' pb='55px' mb="75px" justify='center'
+          <Flex mt='11px' pb='150px' justify='center'
             style={{fontFamily:'PilatExtended-Bold'}}>
             <Text fontSize='40px' fontWeight={'900'}>Contribute to&nbsp;</Text>
             <Text fontSize='40px' color='#4790f5' fontWeight={'900'}>Project Pool</Text>
           </Flex>
         </div>
         </div>
-        <Flex width='100%' justify='center' mt='80px' px='175px'>
+        <Flex width='100%' justify='center' px='175px' mt='0px'>
         <Box width='900px' bg='#FFFFFF0D' px='50px' style={{fontFamily:'Sk-Modernist'}} >
           <Flex mt='83px' justify='center' align='center' direction='column'
             style={{fontFamily:'PilatExtended-Regular'}}>
-            <Text fontSize='22px' fontWeight={'300'} mt="270px">Back the Project</Text>
+            <Text fontSize='22px' fontWeight={'300'}>
+              Back the Project</Text>
             <Text fontSize='28px' color='#4790f5' fontWeight={'bold'}>
               {state.oneprojectData.project_name}
             </Text>
