@@ -1,17 +1,17 @@
-import React from 'react'
+import React from 'react';
 
-import { Image, Text, Flex } from '@chakra-ui/react'
-import { ButtonTransition } from '../components/ImageTransition'
+import { Image, Text, Flex, Box } from '@chakra-ui/react';
+import { ButtonTransition } from '../components/ImageTransition';
 
 export default function Email() {
   return (
     <Flex
       w="100%"
-      mx="115px"
-      mt="219px"
-      direction="column"
+      h="600px"
+      mt="150px"
       alignItems="center"
       position="relative"
+      flexDirection="column"
       justifyContent="center"
     >
       <Image src="/EmailBg.png" className="EmailBg" />
@@ -19,6 +19,7 @@ export default function Email() {
         h="350px"
         zIndex={5}
         width="80%"
+        position="relative"
         direction="column"
         bg="url(saft2.svg)"
         bgRepeat="no-repeat"
@@ -42,7 +43,7 @@ export default function Email() {
             Grow With Us Now
           </Text>
         </Flex>
-        <Flex mt="72px" mb="1000px" justify="center">
+        <Flex mt="50px" justify="center">
           <ButtonTransition
             unitid="investinwefund"
             selected={false}
@@ -58,5 +59,5 @@ export default function Email() {
         </Flex>
       </Flex>
     </Flex>
-  )
+  );
 }

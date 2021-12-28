@@ -4,17 +4,9 @@ import { ButtonBackTransition } from '../components/ImageTransition';
 
 export default function Aboutone() {
   return (
-    <Flex
-      pt="68"
-      px="115"
-      id="aboutSection"
-      direction="column"
-      bgRepeat="no-repeat"
-      backgroundSize="contain"
-      fontFamily="Sk-Modernist-Regular"
-      backgroundImage="url('/swirl.svg')"
-    >
-      <Flex direction="row">
+    <Flex id="aboutSection">
+      <Image src="swirl.svg" id="swirlIdImg" />
+      <Flex id="aboutFirstSection">
         <Box direction="column">
           <Flex direction="row">
             <Text
@@ -43,7 +35,7 @@ export default function Aboutone() {
               </Text>
             </Flex>
           </Flex>
-          <Flex mt="22px" w="75%">
+          <Flex mt="22px" w="80%">
             <Text fontSize="20px" fontWeight="400" lineHeight="30px">
               WeFund is Decentralized crowdfunding for the crypto-startup
               project industry and beyond implemented for a real-life use case.
@@ -68,146 +60,162 @@ export default function Aboutone() {
         </Flex>
       </Flex>
 
-      <Flex direction="row" mt="20px" width="100%">
-        <Flex
-          w="16.7%"
-          h="178px"
-          justify="center"
-          bg="#FFFFFF14"
-          alignItems="center"
-          borderTopLeftRadius="25px"
-          borderBottomLeftRadius="25px"
-        >
-          <Box>
-            <Image alt="Wefund" src="/gift.svg" h="60px" />
-            <Text
-              mt="15px"
-              fontSize="15px"
-              letterSpacing="1px"
-              fontWeight="700"
+      <Flex justify="center" w="100%">
+        <Flex id="aboutSecondSection">
+          <Flex id="YieldBenefit">
+            <ButtonBackTransition
+              width="100%"
+              height="100%"
+              rounded="200px"
+              selected={false}
+              unitid="YieldBenefitunitid"
             >
-              Yield Benefit for
-              <br />
-              Backers
-            </Text>
-          </Box>
-        </Flex>
-        <Flex
-          w="16.7%"
-          h="178px"
-          justify="center"
-          bg="#FFFFFF0D"
-          alignItems="center"
-        >
-          <Box>
-            <Image alt="phone" src="/phone.svg" h="60px" />
-            <Text
-              mt="15px"
-              fontSize="15px"
-              letterSpacing="1px"
-              fontWeight="700"
+              <Image alt="Wefund" src="/gift.svg" h="60px" />
+              <Text className="circleAboutText">
+                Yield Benefit
+                <br />
+                For Backers
+              </Text>
+            </ButtonBackTransition>
+          </Flex>
+          <Flex id="SecureStable">
+            <ButtonBackTransition
+              width="100%"
+              height="100%"
+              rounded="200px"
+              selected={false}
+              unitid="SecureStableunitid"
             >
-              Secure Stable
-              <br />
-              Deposits
-            </Text>
-          </Box>
-        </Flex>
-        <Flex
-          w="16.7%"
-          h="178px"
-          justify="center"
-          bg="#FFFFFF14"
-          alignItems="center"
-        >
-          <Box>
-            <Image alt="Wefund" src="/lowriskinvestment.svg" h="60px" />
-            <Text
-              mt="15px"
-              fontSize="15px"
-              letterSpacing="1px"
-              fontWeight="700"
+              <Image alt="Wefund" src="/phone.svg" h="60px" />
+              <Text className="circleAboutText">
+                Secure Stable
+                <br />
+                Deposits
+              </Text>
+            </ButtonBackTransition>
+          </Flex>
+          <Flex id="LowRisk">
+            <ButtonBackTransition
+              width="100%"
+              height="100%"
+              rounded="200px"
+              selected={false}
+              unitid="LowRiskunitid"
             >
-              Low Risk
-              <br />
-              investement
-            </Text>
-          </Box>
-        </Flex>
-        <Flex
-          w="16.7%"
-          h="178px"
-          justify="center"
-          bg="#FFFFFF0D"
-          alignItems="center"
-        >
-          <Box>
-            <Image alt="Wefund" src="/governance.svg" h="60px" />
-            <Text
-              mt="15px"
-              fontSize="15px"
-              letterSpacing="1px"
-              fontWeight="700"
+              <Image alt="Wefund" src="/lowriskinvestment.svg" h="60px" />
+              <Text className="circleAboutText">
+                Low Risk
+                <br />
+                investement
+              </Text>
+            </ButtonBackTransition>
+          </Flex>
+          <Flex id="GovernanceVoting">
+            <ButtonBackTransition
+              width="100%"
+              height="100%"
+              rounded="200px"
+              selected={false}
+              unitid="GovernanceVotingunitid"
             >
-              Governance
-              <br />
-              Voting Power
-            </Text>
-          </Box>
-        </Flex>
-        <Flex
-          w="16.7%"
-          h="178px"
-          bg="#FFFFFF14"
-          justify="center"
-          alignItems="center"
-        >
-          <Box>
-            <Image alt="Wefund" src="/deflationary.svg" h="60px" />
-            <Text
-              mt="15px"
-              fontSize="15px"
-              letterSpacing="1px"
-              fontWeight="700"
+              <Image alt="Wefund" src="/governance.svg" h="60px" />
+              <Text className="circleAboutText">
+                Governance
+                <br />
+                Voting Power
+              </Text>
+            </ButtonBackTransition>
+          </Flex>
+          <Flex id="DeflationaryToken">
+            <ButtonBackTransition
+              width="100%"
+              height="100%"
+              rounded="200px"
+              selected={false}
+              unitid="DeflationaryTokenunitid"
             >
-              Deflationary Token
-              <br />
-              Value
-            </Text>
-          </Box>
-        </Flex>
-        <Flex
-          w="16.7%"
-          h="178px"
-          bg="#FFFFFF0D"
-          justify="center"
-          alignItems="center"
-          borderTopRightRadius="25px"
-          borderBottomRightRadius="25px"
-        >
-          <Box>
-            <Image alt="Wefund" src="/nftmirror.svg" h="60px" />
-            <Text
-              mt="15px"
-              fontSize="15px"
-              letterSpacing="1px"
-              fontWeight="700"
+              <Image alt="Wefund" src="/deflationary.svg" h="60px" />
+              <Text className="circleAboutText">
+                Deflationary
+                <br />
+                Token Value
+              </Text>
+            </ButtonBackTransition>
+          </Flex>
+          <Flex id="NFTMirror">
+            <ButtonBackTransition
+              width="100%"
+              height="100%"
+              rounded="200px"
+              selected={false}
+              unitid="NFTMirrorunitid"
             >
-              NFT Mirror Real
+              <Image alt="Wefund" src="/nftmirror.svg" h="60px" />
+              <Text className="circleAboutText">
+                NFT Mirror Real
+                <br />
+                World Asset
+              </Text>
+            </ButtonBackTransition>
+          </Flex>
+          <Flex id="Section7">
+            <ButtonBackTransition
+              width="100%"
+              height="100%"
+              rounded="200px"
+              selected={false}
+              unitid="Section7unitid"
+            >
+              <Image alt="Wefund" src="/phone.svg" h="60px" />
+              <Text className="circleAboutText">
+                Secure Stable
+                <br />
+                Deposits
+              </Text>
+            </ButtonBackTransition>
+          </Flex>
+          <Flex id="Section8">
+            <ButtonBackTransition
+              width="100%"
+              height="100%"
+              rounded="200px"
+              selected={false}
+              unitid="Section8unitid"
+            >
+              <Image alt="Wefund" src="/lowriskinvestment.svg" h="60px" />
+              <Text className="circleAboutText">
+                Low Risk
+                <br />
+                investement
+              </Text>
+            </ButtonBackTransition>
+          </Flex>
+          <Flex
+            justify="center"
+            direction="column"
+            textAlign="center"
+            id="aboutSectionCircle"
+          >
+            <Image
+              src="/WeFund%20Logos%20only.png"
+              id="aboutSectionCircleImage"
+            />
+            <Text id="aboutSectionTitle">
+              Competitive
               <br />
-              World Asset
+              Advantages
             </Text>
-          </Box>
+          </Flex>
         </Flex>
       </Flex>
 
-      <Flex mt="30px" mb="59px">
+      <Flex mt="100px">
         <ButtonBackTransition
-          unitid="downwhitepaper"
-          selected={false}
           width="100%"
           height="55px"
           rounded="100px"
+          selected={false}
+          unitid="downwhitepaper"
         >
           <Flex justify="space-between" alignItems="center" w="100%" px="20px">
             <Box>Download Whitepaer</Box>

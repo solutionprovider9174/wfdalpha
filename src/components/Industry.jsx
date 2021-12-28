@@ -6,28 +6,38 @@ export default function Industry() {
   const [choice, setChoice] = useState(1);
 
   return (
-    <Box
-      px="115px"
+    <Flex
+      mt="50px"
       pt="47px"
+      pb="47px"
+      width="100%"
+      bg="#351939"
+      justify="center"
+      alignItems="center"
+      flexDirection="column"
       fontFamily="Sk-Modernist-Regular"
-      justifyContent="space-around"
-      alignItems="flex-start"
-      overflow="visible"
     >
       <Flex
+        width="85%"
         direction="row"
-        fontFamily="PilatExtended-Regular"
-        fontWeight="700"
         fontSize="35px"
+        fontWeight="bolder"
+        fontFamily="PilatExtended-Regular"
       >
         <Text color="#00A3FF">WeFund&nbsp;</Text>
         <Text>Supports All</Text>
       </Flex>
-      <Flex direction="row" mt="45px" position="sticky" top="0">
+      <Flex
+        direction="row"
+        mt="45px"
+        w="100%"
+        justifyContent="center"
+        alignItems="center"
+      >
         {/* ----------crypto startup industry--------------- */}
         <Box
-          w="242px"
-          h="161px"
+          w="17%"
+          h="165px"
           bg="#FFFFFF0D"
           borderRadius="10% 0 0 0"
           style={{ borderBottomWidth: choice == 0 ? '3px' : '0px' }}
@@ -49,8 +59,8 @@ export default function Industry() {
         </Box>
         {/* --------------Gaming industry-------------------------- */}
         <Box
-          w="242px"
-          h="161px"
+          w="17%"
+          h="165px"
           bg="#FFFFFF14"
           style={{ borderBottomWidth: choice == 1 ? '3px' : '0px' }}
           onClick={() => setChoice(1)}
@@ -71,8 +81,8 @@ export default function Industry() {
         </Box>
         {/* --------------Creatie industry------------------ */}
         <Box
-          w="242px"
-          h="161px"
+          w="17%"
+          h="165px"
           bg="#FFFFFF0D"
           onClick={() => setChoice(2)}
           style={{ borderBottomWidth: choice == 2 ? '3px' : '0px' }}
@@ -97,8 +107,8 @@ export default function Industry() {
         </Box>
         {/* ------------------sports industry------------------- */}
         <Box
-          w="242px"
-          h="161px"
+          w="17%"
+          h="165px"
           bg="#FFFFFF14"
           style={{ borderBottomWidth: choice == 3 ? '3px' : '0px' }}
           onClick={() => setChoice(3)}
@@ -119,10 +129,10 @@ export default function Industry() {
         </Box>
         {/* ------------------Real Estate industry------------------- */}
         <Box
-          w="242px"
-          h="161px"
-          bg="#FFFFFF0D"
+          w="17%"
+          h="165px"
           blur="5%"
+          bg="#FFFFFF0D"
           borderRadius="0 10% 0 0"
           style={{ borderBottomWidth: choice == 4 ? '3px' : '0px' }}
           onClick={() => setChoice(4)}
@@ -142,86 +152,95 @@ export default function Industry() {
           </a>
         </Box>
       </Flex>
-      <Flex mt="69px" w="1200px">
+      <Flex mt="70px" w="86%">
         <Flex
           id="projectpad"
           direction="column"
           position="relative"
           style={{ transition: 'transform 1s' }}
         >
-          {PROJECT_ITEMS.map((projectItem, index) => (
-            <Flex
-              id={projectItem.id}
-              direction="row"
-              w="1200px"
-              h="438px"
-              marginTop="2.5em"
-              marginBottom="2.5em"
-              key={index}
-            >
-              <Flex direction="column" w="50%" justify="space-between">
-                <Box>
-                  <Text
-                    fontFamily="PilatExtended-Regular"
-                    fontWeight="300"
-                    color="#FFFFFF8A"
-                    fontSize="18px"
+          {PROJECT_ITEMS.map((projectItem, index) => {
+            const isOdd = index % 2 == 1;
+            return (
+              <Flex
+                key={index}
+                className="PROJECT_ITEMS_ROW"
+                direction={isOdd ? 'row' : 'row-reverse'}
+              >
+                <Flex className="projectItemContentCol">
+                  <Box>
+                    <Text
+                      fontFamily="PilatExtended-Regular"
+                      fontWeight="300"
+                      color="#FFFFFF8A"
+                      className="projectLabel"
+                    >
+                      -{projectItem.label}
+                    </Text>
+                    <Text
+                      fontFamily="PilatExtended-Regular"
+                      className="projectTitle"
+                    >
+                      {projectItem.title}
+                    </Text>
+                    <Text
+                      fontFamily="Sk-Modernist-Regular"
+                      fontWeight="700"
+                      color="#FE8600"
+                      fontSize="18px"
+                      margin="10px 0"
+                    >
+                      {projectItem.state}
+                    </Text>
+                    <Text
+                      fontFamily="Sk-Modernist-Regular"
+                      fontWeight="400"
+                      fontSize="18px"
+                      className="projectDesc"
+                    >
+                      {projectItem.description}
+                    </Text>
+                  </Box>
+                  <ButtonTransition
+                    unitid={'cryptofunding' + index}
+                    selected={false}
+                    width="192px"
+                    height="50px"
+                    rounded="100px"
                   >
-                    -{projectItem.label}
-                  </Text>
-                  <Text
-                    fontFamily="PilatExtended-Regular"
-                    fontWeight="700"
-                    fontSize="40px"
-                  >
-                    {projectItem.title}
-                  </Text>
-                  <Text
-                    fontFamily="Sk-Modernist-Regular"
-                    fontWeight="700"
-                    color="#FE8600"
-                    fontSize="18px"
-                    margin="10px 0"
-                  >
-                    {projectItem.state}
-                  </Text>
-                  <Text
-                    fontFamily="Sk-Modernist-Regular"
-                    fontWeight="400"
-                    fontSize="18px"
-                    w="75%"
-                  >
-                    {projectItem.description}
-                  </Text>
+                    <Flex direction="row">
+                      {!isOdd && (
+                        <Image
+                          mr="10px"
+                          alt="startfunding"
+                          src="/handgo.svg"
+                          id="rotateHandGo"
+                        />
+                      )}
+                      Start Funding
+                      {isOdd && (
+                        <Image ml="10px" alt="startfunding" src="/handgo.svg" />
+                      )}
+                    </Flex>
+                  </ButtonTransition>
+                </Flex>
+                <Box className="projectItemImageCol">
+                  <Image
+                    alt="Crypto project"
+                    src={projectItem.imgsrc}
+                    w="100%"
+                    h="100%"
+                  />
                 </Box>
-                <ButtonTransition
-                  unitid={'cryptofunding' + index}
-                  selected={false}
-                  width="192px"
-                  height="50px"
-                  rounded="100px"
-                >
-                  <Flex direction="row">
-                    Start Funding
-                    <Image ml="10px" alt="startfunding" src="/handgo.svg" />
-                  </Flex>
-                </ButtonTransition>
               </Flex>
-              <Box w="50%">
-                <Image
-                  alt="Crypto project"
-                  src={projectItem.imgsrc}
-                  w="100%"
-                  h="100%"
-                />
-              </Box>
-            </Flex>
-          ))}
+            );
+          })}
         </Flex>
       </Flex>
-    </Box>
+    </Flex>
   );
 }
+
 const PROJECT_ITEMS = [
   {
     label: 'CRYPTO-STARTUP INDUSTRY',

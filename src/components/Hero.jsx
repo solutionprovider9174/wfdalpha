@@ -3,57 +3,43 @@ import {
   ButtonTransition,
   ButtonBackTransition,
 } from '../components/ImageTransition';
-import { Image, Flex, Text, Box } from '@chakra-ui/react';
-import { IoArrowForwardCircleOutline } from 'react-icons/io5';
+import { Image, Flex, Text } from '@chakra-ui/react';
 
 export default function Hero() {
   return (
-    <Flex
-      w="100%"
-      h="100vh"
-      direction="column"
-      paddingTop="110px"
-      alignItems="center"
-    >
+    <Flex id="heroSection" direction="column">
       <Image src="stars.svg" id="starsBg" />
       <Image src="cloud.svg" id="cloudBg" />
       <Image src="stage.png" id="stageBg" />
-      <Image src="horizontallogo.svg" />
-      <Text
-        fontFamily="PilatExtended-Regular"
-        fontWeight="bolder"
-        lineHeight="110%"
-        textAlign="center"
-        fontSize="50px"
-        mt="10px"
-      >
-        The foremost enabler of
+      <Image src="horizontallogo.svg" id="heroLogo" />
+      <Text id="heroHeading">
+        Community Crowdfunding
         <br />
-        crypto-blockchain
+        Incubator For Blockchain
         <br />
-        based crowdfunding
+        And Real-World
         <br />
-        launchpad
+        Projects.
       </Text>
 
       <Flex w="100%" mt="60px" justify="center" mb="65px">
         <ButtonBackTransition
           unitid="getstarted"
           selected={false}
-          width="178px"
-          height="50px"
-          rounded="33px"
+          width="190px"
+          height="55px"
+          rounded="50px"
         >
-          <Box variant="solid" color="white" justify="center" align="center">
+          <Text ml="10px" fontWeight="700" fontSize="17px" letterSpacing="1px">
             Get started
-          </Box>
+          </Text>
         </ButtonBackTransition>
         <ButtonTransition
           unitid="howitworks"
           selected={false}
-          width="178px"
-          height="50px"
-          rounded="33px"
+          width="190px"
+          height="55px"
+          rounded="50px"
           ml="20px"
         >
           <Flex
@@ -63,14 +49,21 @@ export default function Hero() {
             justify="center"
             align="center"
           >
-            <IoArrowForwardCircleOutline />
-            &nbsp;How it works?
+            <Image src="play.svg" />
+            <Text
+              ml="10px"
+              fontWeight="700"
+              fontSize="17px"
+              letterSpacing="1px"
+            >
+              How it works?
+            </Text>
           </Flex>
         </ButtonTransition>
       </Flex>
       <Flex id="ArrowDownButton">
         <a href="#aboutSection">
-          <Image src="ArrowDown.png" style={{ cursor: 'pointer' }} />
+          <Image src="ArrowDown.png" id="ArrowDownButtonImage" />
         </a>
       </Flex>
     </Flex>

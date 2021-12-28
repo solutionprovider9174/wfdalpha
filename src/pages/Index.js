@@ -7,7 +7,6 @@ import About from '../components/about';
 import Industry from '../components/Industry';
 import RoadMap from '../components/Roadmap';
 import Email from '../components/Email';
-import Projectfeature from '../components/Featured';
 import Footer from '../components/Footer';
 import { Container } from '../components/Container';
 import '../styles/transition.css';
@@ -21,7 +20,6 @@ export default () => {
         <Industry />
         <RoadMap />
         <Email />
-        <Projectfeature />
         <Footer />
       </Container>
     </ChakraProvider>
