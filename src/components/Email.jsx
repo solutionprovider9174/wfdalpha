@@ -15,17 +15,8 @@ export default function Email() {
       justifyContent="center"
     >
       <Image src="/EmailBg.png" className="EmailBg" />
-      <Flex
-        h="350px"
-        zIndex={5}
-        width="80%"
-        position="relative"
-        direction="column"
-        bg="url(saft2.svg)"
-        bgRepeat="no-repeat"
-        backgroundSize="contain"
-      >
-        <Flex mt="66px" justify="center">
+      <Flex id="emailInnerBox">
+        <Flex flexDirection="column" textAlign="center">
           <Text
             fontFamily="PilatExtended-Regular"
             fontWeight="400"
@@ -33,17 +24,17 @@ export default function Email() {
           >
             GET IN WEFUND
           </Text>
-        </Flex>
-        <Flex mt="14px" justify="center">
+
           <Text
             fontFamily="PilatExtended-Regular"
             fontWeight="700"
             fontSize="35px"
+            mt="10px"
           >
             Grow With Us Now
           </Text>
         </Flex>
-        <Flex mt="50px" justify="center">
+        <Flex justify="center">
           <ButtonTransition
             unitid="investinwefund"
             selected={false}

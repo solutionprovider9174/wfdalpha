@@ -2,6 +2,22 @@
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
 }
+#emailInnerBox {
+  width: 80%;
+  z-index: 5;
+  height: 350px;
+  display: flex;
+  padding: 70px 0;
+  align-self: center;
+  position: relative;
+  border-radius: 50px;
+  align-items: center;
+  flex-direction: column;
+  background-size: cover;
+  background-repeat: no-repeat;
+  justify-content: space-between;
+  background-image: url('/saft2.svg');
+}
 .projectTitle {
   font-weight: 700;
   font-size: 40px;
@@ -120,6 +136,7 @@
 }
 
 #sphere {
+  width: 50%;
   animation: sphere 1s infinite alternate;
   -webkit-animation: sphere 1s infinite alternate;
 }
@@ -250,6 +267,49 @@
   text-align: center;
 }
 
+.timeline {
+  width: 5px;
+  height: 100px;
+  background-color: white;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeline {
+  width: 5px;
+  height: 100px;
+  background-color: #e5e5e5;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  color: #150047;
+  font-weight: bold;
+  border-radius: 50%;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  background-color: #e5e5e5;
+  font-family: 'PilatExtended-Regular';
+}
+
+.circleWrapper {
+  position: relative;
+}
+
+.message {
+  top: 0;
+  left: 130%;
+  min-width: 400px;
+  font-weight: bold;
+  position: absolute;
+}
+
 @media only screen and (min-width: 1500px) {
   #aboutSecondSection {
     width: 80em;
@@ -296,6 +356,9 @@
 }
 
 @media only screen and (max-width: 1000px) {
+  #sphere {
+    width: 40%;
+  }
   #heroSection {
     height: 80vh;
   }
@@ -333,6 +396,9 @@
 }
 
 @media only screen and (max-width: 760px) {
+  #sphere {
+    display: none;
+  }
   #heroSection {
     height: 65vh;
   }
