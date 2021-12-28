@@ -429,8 +429,8 @@ export default function CreateProject()
                 onChange={(e)=>{setPrjCategory(e.target.value)}} 
               >
                 <option selected style={{backgroundColor:'#1B0645'}}>Crypto</option>
-                <option style={{backgroundColor:'#1B0645'}}>Charity</option>
-                <option style={{backgroundColor:'#1B0645'}}>Gamification</option>
+                <option style={{backgroundColor:'#1B0645'}}>Google</option>
+                <option style={{backgroundColor:'#1B0645'}}>Ecosystem</option>
               </Select>
             </InputTransition>
           </Box>
@@ -447,9 +447,13 @@ export default function CreateProject()
               <Select id="sub_category" style={{background: 'rgba(255, 255, 255, 0.05)', }} h='55px' name="sub_category" autoComplete="sub_category" focusBorderColor="purple.800" shadow="sm" size="sm" w="full" rounded="md"
                 value='' onChange={(e)=>{setPrjSubcategory(e.target.value)}} 
               >
-                <option selected style={{backgroundColor:'#1B0645'}}>Crypto</option>
+                <option selected style={{backgroundColor:'#1B0645'}}>Lending</option>
                 <option style={{backgroundColor:'#1B0645'}}>Charity</option>
-                <option style={{backgroundColor:'#1B0645'}}>Gamification</option>
+                <option style={{backgroundColor:'#1B0645'}}>Social</option>
+                <option style={{backgroundColor:'#1B0645'}}>IDO</option>
+                <option style={{backgroundColor:'#1B0645'}}>Finance</option>
+                <option style={{backgroundColor:'#1B0645'}}>NFT</option>
+                <option style={{backgroundColor:'#1B0645'}}>Game</option>
               </Select>
             </InputTransition>
           </Box>
@@ -466,9 +470,11 @@ export default function CreateProject()
               <Select id="sub_category" style={{background: 'rgba(255, 255, 255, 0.05)', }} h='55px' name="sub_category" autoComplete="sub_category" focusBorderColor="purple.800" shadow="sm" size="sm" w="full" rounded="md"
                 value='' onChange={(e)=>{setPrjChain(e.target.value)}} 
               >
-                <option selected style={{backgroundColor:'#1B0645'}}>Crypto</option>
-                <option style={{backgroundColor:'#1B0645'}}>Charity</option>
-                <option style={{backgroundColor:'#1B0645'}}>Gamification</option>
+                <option selected style={{backgroundColor:'#1B0645'}}>Terra</option>
+                <option style={{backgroundColor:'#1B0645'}}>Solana</option>
+                <option style={{backgroundColor:'#1B0645'}}>Ethereum</option>
+                <option style={{backgroundColor:'#1B0645'}}>Polygon</option>
+                <option style={{backgroundColor:'#1B0645'}}>Avalanche</option>
               </Select>
             </InputTransition>
           </Box>

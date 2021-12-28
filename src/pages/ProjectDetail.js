@@ -300,10 +300,13 @@ export default function ProjectDetail() {
                       justify={'center'}
                       >
               
-                    <Image
-                    src="sheep.svg"
-                    alt="avatar"
-                    />
+                      {state.oneprojectData.project_icon && 
+                        <Image 
+                        src={state.request+"/download?filename="+ state.oneprojectData.project_icon} alt="avatar" />
+                      }
+                      {!state.oneprojectData.project_icon && 
+                        <Image src="/sheep.svg" alt="avatar" />
+                      }
                     </Flex>
                     <Flex >
                       <ImageTransition

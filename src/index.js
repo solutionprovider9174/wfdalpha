@@ -31,11 +31,11 @@ if (typeof document !== 'undefined') {
     const target = document.getElementById('root')
 
     const renderMethod = ReactDOM.render
-    let inProduction = false
+    let inProduction = true
     const render = (Comp) => {
         renderMethod(
             <Wallet
-                defaultNetwork={testnet}
+                defaultNetwork={mainnet}
                 walletConnectChainIds={{
                     0: testnet,
                     1: mainnet,
