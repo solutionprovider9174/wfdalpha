@@ -71,7 +71,7 @@ export default function Invest_step4() {
   }
 
   useEffect(() => {
-    console.log("useEffect");
+    download_pdf();
   }, [])
 
   return (
