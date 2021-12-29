@@ -20,42 +20,5 @@ export default {
             path: '/',
             template: 'src/pages/Index',
         },
-        {
-            path: 'create',
-            template: 'src/pages/CreateProject',
-        },
-        {
-            path: 'back',
-            template: 'src/pages/BackProject',
-        },
-        {
-            path: 'explore',
-            template: 'src/pages/ExplorerProject',
-        },
-        {
-            path: 'detail',
-            template: 'src/pages/ProjectDetail',
-        },
-        // A 404 component
-        {
-            path: 'invest',
-            template: 'src/pages/Invest_step1',
-        },
-        {
-            path: 'invest2',
-            template: 'src/pages/Invest_step2',
-        },
-        {
-            path: 'invest3',
-            template: 'src/pages/Invest_step3',
-        },
-        {
-            path: 'invest4',
-            template: 'src/pages/Invest_step4',
-        },
-        {
-            path: '404',
-            template: 'src/pages/NotFound',
-        },
     ],
 }
