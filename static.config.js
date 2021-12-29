@@ -10,7 +10,7 @@ export default {
     silent: true,
     plugins: ['react-static-plugin-sass'],
     getSiteData: async ({ dev }) => ({
-        title: 'LoTerra is a lottery contract, buy tickets as a player or join the governance! DAO allows making decisions together! Manage the casino 🎰 Set the prize 🏆 Up the ticket price or go cheap 🏷 Extract max profits 🤑 Keep the vault secure at all times!',
+        title: 'WeFund is Decentralized crowdfunding for the crypto-startup project industry and beyond implemented for a real-life use case. The vision of WeFund is to become the connector of the blockchain ecosystem that exists on the market. to fulfill this vision, WeFund s initial development stage would be in the Terra ecosystem and will continue to use another ecosystem such as Solana, Etherium, Cardano, etc in near future',
         lastBuilt: Date.now(),
     }),
     //maxThreads: 1, // Remove this when you start doing any static generation
