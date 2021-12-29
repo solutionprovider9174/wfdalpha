@@ -1,13 +1,13 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from '../theme';
-import {chakra, Box, Flex,Text, Stack, Stat,StatNumber, StatLabel, Icon, Image, HStack, VStack} from "@chakra-ui/react";
+import {chakra, Box, Flex,Text, Stack, Stat,StatNumber, StatLabel, Icon, Image, HStack, VStack, CircularProgress, CircularProgressLabel, Progress} from "@chakra-ui/react";
 import React, {useEffect, useState,  useMemo} from 'react';
 import {WasmAPI, LCDClient, } from '@terra-money/terra.js'
-import {useStore} from '../store'
 import {MdOutlinePlace} from "react-icons/md";
 import {BsArrowUpRight,BsBookmarksFill, BsPerson, BsCashCoin} from "react-icons/bs"
 import { Router, Link } from '@reach/router'
 
+import {useStore} from '../store'
 import {ImageTransition} from "../components/ImageTransition";
 import Notification from '../components/Notification'
 import Footer from "../components/Footer"
@@ -21,7 +21,8 @@ if (typeof document !== 'undefined') {
 export default function ProjectDetail() 
 {
   const { state, dispatch } = useStore();
-  const [totalBackedMoney, setTotalBackedMoney] = useState(0)
+  const [totalBackedMoney, setTotalBackedMoney] = useState(0);
+  const [percent, setPercent] = useState(0);
 
   //------------extract project id----------------------------
   let queryString, urlParams, project_id;
@@ -90,7 +91,6 @@ export default function ProjectDetail()
     let _project_id = 1;
     if(project_id != null)
       _project_id = project_id;
-
     
     try {
       const projectData = await api.contractQuery(
@@ -116,6 +116,7 @@ export default function ProjectDetail()
       }
 
       totalBacked /= 10**6;
+      setPercent(70/parseInt(projectData.project_collected)*100);
       setTotalBackedMoney(totalBacked);
     } catch (e) {
         console.log(e)
@@ -190,17 +191,20 @@ export default function ProjectDetail()
                             {state.oneprojectData.project_category}
                           </chakra.h1>
                       </Flex>
-                      <Flex 
-                        alignSelf={'flex-start'}
-                        marginBottom={'40px !important'}>
-                      {/* The progress - Replace with functional ones*/}
-                        <Image  
-                            alt={'Progress'}
-                            src={
-                              'progressbar.svg'
-                            }
-                          />
+                      <VStack alignSelf={'flex-start'}>
+                        <Flex>
+                        <Text>Progress : {totalBackedMoney} out of {state.oneprojectData.project_collected} UST</Text>
+                        <Progress colorScheme='blue' size='lg' value={20} />
                         </Flex>
+                        <Flex 
+                          alignSelf={'flex-start'}
+                          marginBottom={'40px !important'}>
+                            <CircularProgress value={percent} size='120px' color='blue.600'>
+                            <CircularProgressLabel>{percent}%</CircularProgressLabel>
+                            </CircularProgress>
+                      {/* The progress - Replace with functional ones*/}
+                        </Flex>
+                    </VStack>
                       {/* The Buttons*/}
                       <HStack alignSelf={'flex-start'}>
                         <Flex>
