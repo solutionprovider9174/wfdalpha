@@ -5,7 +5,7 @@ import React, {useEffect, useState,  useMemo} from 'react';
 import {WasmAPI, LCDClient, } from '@terra-money/terra.js'
 import {MdOutlinePlace} from "react-icons/md";
 import {BsArrowUpRight,BsBookmarksFill, BsPerson, BsCashCoin} from "react-icons/bs"
-import { Router, Link } from '@reach/router'
+import { Router, Link, useNavigate } from '@reach/router'
 
 import {useStore} from '../store'
 import {ImageTransition} from "../components/ImageTransition";
@@ -24,6 +24,7 @@ export default function ProjectDetail()
   const [totalBackedMoney, setTotalBackedMoney] = useState(0);
   const [percent, setPercent] = useState(0);
 
+  const navigate = useNavigate();
   //------------extract project id----------------------------
   let queryString, urlParams, project_id;
   if(typeof window != 'undefined'){
@@ -74,7 +75,7 @@ export default function ProjectDetail()
         type: type,
         show: true,
     });
-    console.log(message + type + duration);
+
     // Disable after $var seconds
     setTimeout(() => {
         setNotification({
@@ -84,6 +85,13 @@ export default function ProjectDetail()
         })
         // console.log('disabled',notification)
     }, duration)
+  }
+  //------------back button-----------------------------------
+  function next(){
+    if(project_id == 2)
+      navigate("/invest_step1");
+    else
+      navigate("/back?project_id=" + state.oneprojectData.project_id);
   }
   //------------fectch project data------------------------------------
   async function fetchContractQuery() 
@@ -116,7 +124,12 @@ export default function ProjectDetail()
       }
 
       totalBacked /= 10**6;
+
+      if(project_id == 2)
+        totalBacked = 120000;
+
       let percent = parseInt(totalBacked/parseInt(projectData.project_collected)*100);
+
       setPercent(percent);
       setTotalBackedMoney(totalBacked);
     } catch (e) {
@@ -256,12 +269,10 @@ export default function ProjectDetail()
                               selected={false}
                               width='170px' height='50px' rounded='33px'
                             >
-                              <Link to={"/back?project_id=" + state.oneprojectData.project_id}>
-                                <Box variant="solid" color="white" justify='center' align='center'
-                                    onClick = {()=>{}} >
-                                  Back {state.oneprojectData.project_name}
-                                </Box>
-                              </Link>
+                              <Box variant="solid" color="white" justify='center' align='center'
+                                  onClick = {()=>{next()}} >
+                                Back {state.oneprojectData.project_name}
+                              </Box>
                           </ImageTransition>
                         </Flex>
                       </HStack>
