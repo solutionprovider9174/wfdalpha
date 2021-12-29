@@ -91,7 +91,21 @@ export default function BackProject() {
       showNotification("Please connect wallet first!", 'error', 6000);
       return;
     }
-console.log(connectedWallet);
+
+    if(connectedWallet.network.name == 'testnet'){
+      showNotification("Please switch to mainnet!", "error", 4000);
+      return;
+    }
+
+    if(backAmount != parseInt(backAmount).toString()){
+      showNotification("Invalid number format!", "error", 4000);
+      return;
+    }
+    if(parseInt(backAmount) < 100){
+      showNotification("Back money at least 100 UST", "error", 4000);
+      return;
+    }
+
     let _project_id = 1;
     if(project_id != null)
       _project_id = project_id;

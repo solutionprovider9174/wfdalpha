@@ -3,14 +3,12 @@ import theme from '../theme';
 import {Box, Flex, Text,Table,Thead,Tbody,Tr,Th,Td,TableCaption, VStack,Image, HStack, Img
   } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
-import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark } from 'react-icons/io5';
 import { navigate } from "@reach/router";
-// import download from "js-file-download";
-// import { post, get } from "axios";
 
 import { useStore } from '../store'
 import { ImageTransition, ButtonTransition } from "../components/ImageTransition";
 import Notification from '../components/Notification'
+import Faq from '../components/FAQ'
 
 export default function Invest_step4() {
   const {state, dispatch} = useStore();
@@ -158,26 +156,7 @@ export default function Invest_step4() {
               </Box>
             </ImageTransition>
           </Flex>
-          
-          {/* -----------------------sroadmap-------------------------------- */}
-          
-          <Flex pb='75px' mb="20px" justify='center' style={{fontFamily:'PilatExtended-Bold'}}>
-            <VStack>
-              <Flex>
-                <Text fontSize='22px'>Our Funding&nbsp;</Text>
-                <Text fontSize='22px' color='#4790f5'>Approach</Text>
-              </Flex>
-              <Flex>
-                <Image
-                  alignSelf={'center'}
-                    alt={'Wefund'}
-                    src={
-                      'saftroadmap.svg'
-                    }
-                  />
-              </Flex>  
-            </VStack>
-          </Flex>
+          <Faq/>
         </Box>
         </Flex>
         <Notification

@@ -42,8 +42,9 @@ export default function CreateProject()
 
   //---------------wallet connect-------------------------------------
   let connectedWallet = ''
+
   if (typeof document !== 'undefined') {
-      connectedWallet = useConnectedWallet()
+    connectedWallet = useConnectedWallet()
   }
 
   //---------------notification setting---------------------------------
@@ -121,8 +122,9 @@ export default function CreateProject()
   //---------------validate function-------------------------------
   function onChangePrjName(e){
     setPrjNameLen(e.target.value.length);
-    if(e.target.value.length < 100)
+    if(e.target.value.length < 100){
       setPrjName(e.target.value);
+    }
   }
   function onChangePrjDescription(e){
     setPrjDescriptionLen(e.target.value.length);
@@ -134,6 +136,13 @@ export default function CreateProject()
     if(e.target.value.length < 1000)
       setPrjTeamDescription(e.target.value);
   }
+  function onChangePrjAmount(e){
+    if(e.target.value != parseInt(e.target.value).toString()){
+      showNotification("Please input number only", "error", 4000);
+      return;
+    }
+    setPrjAmount(e.target.value);
+  }
   //---------------create project---------------------------------
   async function createProject()
   {
@@ -143,6 +152,22 @@ export default function CreateProject()
       return;
     }
 
+    console.log(connectedWallet);
+    if(connectedWallet.network.name == 'testnet'){
+      showNotification("Please switch to mainnet!", "error", 4000);
+      return;
+    }
+
+    if(prjNameLen == 0){
+      showNotification("Please fill project name!", "error", 4000);
+      return;
+    }
+  console.log(parseInt(prjAmount));    
+
+    if(parseInt(prjAmount) < 100){
+      showNotification("Collected money at least 100 UST", "error", 4000);
+      return;
+    }
     //----------upload whitepaper---------------------------------------
     let realWhitepaer = '';
     if(whitepaper != ''){
@@ -505,7 +530,7 @@ export default function CreateProject()
                 width='100%' height='55px' rounded='md'
               >      
                 <InputGroup size="sm" style={{background: 'rgba(255, 255, 255, 0.05' }}>
-                  <Input style={{border:'0', background:'transparent' }} type="text"  h='55px' placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value={prjAmount} onChange={(e)=>{setPrjAmount(e.target.value)}} />
+                  <Input style={{border:'0', background:'transparent' }} type="text"  h='55px' placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value={prjAmount} onChange={(e)=>{onChangePrjAmount(e.target.value)}} />
                   <InputRightElement style={{border:'0', background:'transparent'}} w='125px'  h='55px' pointerEvents='none' align='center' color="blue.200"
                   /> 
                   <Select id="peg" style={{border:'0', background:'transparent' }} h='55px' w='140px' name="peg" autoComplete="peg" focusBorderColor="purple.800" shadow="sm" size="sm" rounded="md" fontSize='16px' value='' onChange={(e)=>{setPrjChain(e.target.value)}} 
@@ -532,13 +557,11 @@ export default function CreateProject()
           </Flex>
         </div>
         </Flex>
-        <Flex>
         <Footer/>
         <Notification
             notification={notification}
             close={() => hideNotification()}
         />
-        </Flex>
       </div>
     </ChakraProvider>
   )

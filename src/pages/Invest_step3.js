@@ -4,12 +4,12 @@ import {chakra, Box, Flex, Text, Input, InputGroup,  VStack, Image, InputLeftEle
   } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
-import { IoCheckbox,  IoCloudUploadOutline } from 'react-icons/io5';
 import { navigate } from '@reach/router'
 
 import { useStore } from '../store'
 import { ImageTransition, ButtonTransition, InputTransition } from "../components/ImageTransition";
 import Notification from '../components/Notification'
+import Faq from '../components/FAQ'
 
 export default function Invest_step3() {
   const [signature, setSignature] = useState('');
@@ -274,20 +274,7 @@ console.log(data);
               </Box>
             </ImageTransition>
           </Flex>
-           {/* -----------------------sroadmap-------------------------------- */}
-          
-           <Flex pb='75px' mb="20px" justify='center'
-            style={{fontFamily:'PilatExtended-Bold'}}>
-              <VStack>
-                <Flex>
-                  <Text fontSize='22px'>Our Funding&nbsp;</Text>
-                  <Text fontSize='22px' color='#4790f5'>Approach</Text>
-                </Flex>
-                <Flex>
-                  <Image alignSelf={'center'} alt={'Wefund'} src={ 'saftroadmap.svg' } />
-                </Flex>  
-              </VStack>
-            </Flex>
+          <Faq/>
         </Box>
         </Flex>
         <Notification
