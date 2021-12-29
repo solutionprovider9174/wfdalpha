@@ -16,7 +16,11 @@ export default function NewProject() {
   const {state, dispatch} = useStore();
 
   function onChangeBackamount(e){
-    setWfdamount(e.target.value);
+    if(e.target.value != '' && e.target.value != parseInt(e.target.value).toString()){
+      showNotification("Please input number only", "error", 4000);
+      return;
+    }
+    setWfdamount(parseInt(parseInt(e.target.value)/0.06));
     setBackAmount(e.target.value);
   }
 

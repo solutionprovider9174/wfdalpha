@@ -25,15 +25,15 @@ export default function CreateProject()
   const [whitepaper, setWhitepaper] = useState('');
   const [logo, setLogo] = useState('');
 
-  const [prjCategory, setPrjCategory] = useState('');
+  const [prjCategory, setPrjCategory] = useState('Crypto');
   const [prjName, setPrjName] = useState('');
   const [prjDescription, setPrjDescription] = useState('');
   const [prjWebsite, setPrjWebsite] = useState('');
   const [prjTeamdescription, setPrjTeamDescription] = useState('');
   const [prjEmail, setPrjEmail] = useState('');
   const [prjAmount, setPrjAmount] = useState('');
-  const [prjSubcategory, setPrjSubcategory]= useState('');
-  const [prjChain, setPrjChain] = useState('');
+  const [prjSubcategory, setPrjSubcategory]= useState('Lending');
+  const [prjChain, setPrjChain] = useState('Terra');
 
 
   const [prjNameLen, setPrjNameLen] = useState(0);
@@ -128,16 +128,16 @@ export default function CreateProject()
   }
   function onChangePrjDescription(e){
     setPrjDescriptionLen(e.target.value.length);
-    if(e.target.value.length < 1000)
+    if(e.target.value.length < 3000)
       setPrjDescription(e.target.value);
   }
   function onChangePrjTeamDescription(e){
     setPrjTeamDescriptionLen(e.target.value.length);
-    if(e.target.value.length < 1000)
+    if(e.target.value.length < 5000)
       setPrjTeamDescription(e.target.value);
   }
   function onChangePrjAmount(e){
-    if(e.target.value != parseInt(e.target.value).toString()){
+    if(e.target.value != '' && e.target.value != parseInt(e.target.value).toString()){
       showNotification("Please input number only", "error", 4000);
       return;
     }
@@ -153,11 +153,15 @@ export default function CreateProject()
     }
 
     console.log(connectedWallet);
-    if(connectedWallet.network.name == 'testnet'){
+    if(state.net == 'mainnet' && connectedWallet.network.name == 'testnet'){
       showNotification("Please switch to mainnet!", "error", 4000);
       return;
     }
-
+    if(state.net == 'testnet' && connectedWallet.network.name == 'mainnet'){
+      showNotification("Please switch to testnet!", "error", 4000);
+      return;
+    }
+    
     if(prjNameLen == 0){
       showNotification("Please fill project name!", "error", 4000);
       return;
@@ -169,12 +173,14 @@ export default function CreateProject()
       return;
     }
     //----------upload whitepaper---------------------------------------
+    showNotification("Please wait", "success", 10000);
+    
     let realWhitepaer = '';
     if(whitepaper != ''){
       var formData = new FormData();
       formData.append("projectName", prjName);
       formData.append("file", state.whitepaper);
-  console.log(state.whitepaper);
+
       const requestOptions = {
         method: 'POST',
         body: formData,
@@ -197,7 +203,7 @@ export default function CreateProject()
       var formData = new FormData();
       formData.append("projectName", prjName);
       formData.append("file", state.logo);
-  console.log(state.logo);
+
       const requestOptions = {
         method: 'POST',
         body: formData,
@@ -351,7 +357,7 @@ export default function CreateProject()
           <Box mt='40px'>
             <Flex justify="space-between">
               <Text mb='20px'>Project Description</Text>
-              <Text fontSize='15px' opacity='0.5'>{prjDescriptionLen}/1000 words</Text>
+              <Text fontSize='15px' opacity='0.5'>{prjDescriptionLen}/3000 words</Text>
             </Flex>
             <InputTransition 
               unitid='projectdescription'
@@ -426,7 +432,7 @@ export default function CreateProject()
           <Box mt='40px'>
             <Flex justify="space-between">
               <Text mb='20px'>Project Team Description</Text>
-              <Text  fontSize='15px' opacity='0.5'>{prjTeamdescriptionLen}/1000 words</Text>
+              <Text  fontSize='15px' opacity='0.5'>{prjTeamdescriptionLen}/5000 words</Text>
             </Flex>
             <InputTransition 
               unitid='prjTeamdescription'
@@ -451,7 +457,7 @@ export default function CreateProject()
               width='100%' height='55px' rounded='md'
             >       
               <Select id="sub_category" style={{background: 'rgba(255, 255, 255, 0.05)', }} h='55px' name="sub_category" autoComplete="sub_category" focusBorderColor="purple.800" shadow="sm" size="sm" w="full" rounded="md"
-                onChange={(e)=>{setPrjCategory(e.target.value)}} 
+              onChange={(e)=>{setPrjCategory(e.target.value)}} 
               >
                 <option selected style={{backgroundColor:'#1B0645'}}>Crypto</option>
                 <option style={{backgroundColor:'#1B0645'}}>Google</option>
@@ -470,7 +476,7 @@ export default function CreateProject()
               width='100%' height='55px' rounded='md'
             >       
               <Select id="sub_category" style={{background: 'rgba(255, 255, 255, 0.05)', }} h='55px' name="sub_category" autoComplete="sub_category" focusBorderColor="purple.800" shadow="sm" size="sm" w="full" rounded="md"
-                value='' onChange={(e)=>{setPrjSubcategory(e.target.value)}} 
+              onChange={(e)=>{setPrjSubcategory(e.target.value)}} 
               >
                 <option selected style={{backgroundColor:'#1B0645'}}>Lending</option>
                 <option style={{backgroundColor:'#1B0645'}}>Charity</option>
@@ -493,7 +499,7 @@ export default function CreateProject()
               width='100%' height='55px' rounded='md' background= 'rgba(255, 255, 255, 0.05)'
             >       
               <Select id="sub_category" style={{background: 'rgba(255, 255, 255, 0.05)', }} h='55px' name="sub_category" autoComplete="sub_category" focusBorderColor="purple.800" shadow="sm" size="sm" w="full" rounded="md"
-                value='' onChange={(e)=>{setPrjChain(e.target.value)}} 
+              onChange={(e)=>{setPrjChain(e.target.value)}} 
               >
                 <option selected style={{backgroundColor:'#1B0645'}}>Terra</option>
                 <option style={{backgroundColor:'#1B0645'}}>Solana</option>
@@ -530,7 +536,7 @@ export default function CreateProject()
                 width='100%' height='55px' rounded='md'
               >      
                 <InputGroup size="sm" style={{background: 'rgba(255, 255, 255, 0.05' }}>
-                  <Input style={{border:'0', background:'transparent' }} type="text"  h='55px' placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value={prjAmount} onChange={(e)=>{onChangePrjAmount(e.target.value)}} />
+                  <Input style={{border:'0', background:'transparent' }} type="text"  h='55px' placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value={prjAmount} onChange={(e)=>{onChangePrjAmount(e)}} />
                   <InputRightElement style={{border:'0', background:'transparent'}} w='125px'  h='55px' pointerEvents='none' align='center' color="blue.200"
                   /> 
                   <Select id="peg" style={{border:'0', background:'transparent' }} h='55px' w='140px' name="peg" autoComplete="peg" focusBorderColor="purple.800" shadow="sm" size="sm" rounded="md" fontSize='16px' value='' onChange={(e)=>{setPrjChain(e.target.value)}} 

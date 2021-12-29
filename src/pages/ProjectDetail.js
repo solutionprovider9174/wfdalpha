@@ -116,7 +116,8 @@ export default function ProjectDetail()
       }
 
       totalBacked /= 10**6;
-      setPercent(70/parseInt(projectData.project_collected)*100);
+      let percent = parseInt(totalBacked/parseInt(projectData.project_collected)*100);
+      setPercent(percent);
       setTotalBackedMoney(totalBacked);
     } catch (e) {
         console.log(e)

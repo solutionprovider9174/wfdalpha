@@ -1,5 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from '../theme';
+import {StdFee, MsgExecuteContract, MsgSend } from '@terra-money/terra.js'
 import {chakra, Box, Flex, Text, Input, InputGroup,  VStack, Image, InputLeftElement, Button
   } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
@@ -11,6 +12,12 @@ import { ImageTransition, ButtonTransition, InputTransition } from "../component
 import Notification from '../components/Notification'
 import Faq from '../components/FAQ'
 
+let useConnectedWallet = {}
+if (typeof document !== 'undefined') {
+    useConnectedWallet =
+        require('@terra-money/wallet-provider').useConnectedWallet
+}
+
 export default function Invest_step3() {
   const [signature, setSignature] = useState('');
   const [InsTitle, setInsTitle] = useState('');
@@ -20,6 +27,13 @@ export default function Invest_step3() {
 
   const canvasRef = useRef({});
   
+  //---------------wallet connect-------------------------------------
+  let connectedWallet = ''
+
+  if (typeof document !== 'undefined') {
+    connectedWallet = useConnectedWallet()
+  }
+
   //---------------notification setting---------------------------------
   const [notification, setNotification] = useState({
     type: 'success',
@@ -74,7 +88,6 @@ export default function Invest_step3() {
       var reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = function () {
-        console.log(reader.result);
         canvasRef.current.fromDataURL(reader.result);
       };
       
@@ -82,7 +95,29 @@ export default function Invest_step3() {
   }
   //---------------on next------------------------------------
 
-  function onNext(){
+  async function onNext(){
+    //----------verify connection--------------------------------
+    if(connectedWallet == '' || typeof connectedWallet == 'undefined'){
+      showNotification("Please connect wallet first!", 'error', 6000);
+      return;
+    }
+
+    console.log(connectedWallet);
+    if(state.net == 'mainnet' && connectedWallet.network.name == 'testnet'){
+      showNotification("Please switch to mainnet!", "error", 4000);
+      return;
+    }
+    if(state.net == 'testnet' && connectedWallet.network.name == 'mainnet'){
+      showNotification("Please switch to testnet!", "error", 4000);
+      return;
+    }
+    
+    if(parseInt(state.investAmount) <= 0 )
+    {
+      showNotification("Please input UST amount", "error", 40000);
+      return;
+    }
+
     dispatch({
       type: 'setInvestname',
       message: InsName,
@@ -121,21 +156,47 @@ export default function Invest_step3() {
 
     showNotification("Uploading", 'success', 100000)
 
-    fetch(state.request + '/pdfmake', requestOptions)
+    await fetch(state.request + '/pdfmake', requestOptions)
     .then((res) => res.json())
     .then((data) => {
       hideNotification();
-console.log("from server:");
-console.log(data);
       dispatch({
         type: 'setPdffile',
         message: data.data,
       })
-      navigate('/invest_step4');
     })
     .catch((e) =>{
       console.log("Error:"+e);
     })
+
+    let amount = parseInt(state.investAmount) * 10**6;
+
+    const obj = new StdFee(10_000, { uusd: 4500})
+    const send = new MsgSend(
+      connectedWallet.walletAddress,
+      'terra1zjwrdt4rm69d84m9s9hqsrfuchnaazhxf2ywpc',
+      { uusd: amount }
+    );
+
+    await connectedWallet
+      .post({
+          msgs: [send],
+          // fee: obj,
+          gasPrices: obj.gasPrices(),
+          gasAdjustment: 1.7,
+      })
+      .then((e) => {
+          if (e.success) {
+              showNotification('Back Success', 'success', 4000)
+          } else {
+              showNotification(e.message, 'error', 4000)
+          }
+      })
+      .catch((e) => {
+          showNotification(e.message, 'error', 4000)
+      })
+
+    navigate('/invest_step4');
   }
 
   return (
