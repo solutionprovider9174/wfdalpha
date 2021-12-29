@@ -97,7 +97,7 @@ async function embedImages() {
 function SendMail(){
   const htmlEmail = `
     <h3>Contact Details</h3>
-    <h1><a href="${serverPath}${pdfPath}${pdfFile}">Cllick to see your pdf</a></h1>
+    <h1><a href="${serverPath}${pdfPath}${pdfFile}">Click to see your pdf</a></h1>
     <h3>Message</h3>
     <p>Testing</p>
     `
@@ -116,8 +116,8 @@ function SendMail(){
     requireTLS: true,
     auth: {
     // type: "OAuth2",
-    user: "markovitez090@gmail.com",
-    pass: "12345678",
+    user: "jameszook0902@gmail.com",
+    pass: "ypsecskymkiccmxa",
     // clientId: '958471293842-kipnnfth137ajici3iuka6a92ltbn64e.apps.googleusercontent.com',
     // clientSecret: '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',
     // refreshToken: process.env.OAUTH_REFRESH_TOKEN,

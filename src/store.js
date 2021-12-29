@@ -40,7 +40,7 @@ const initialState = {
     investDate: '',
     investSignature: '',
     // request: 'https://wefund-nodejs-hmcl7.ondigitalocean.app',
-    request: 'http://4c11-188-43-136-33.ngrok.io',
+    request: 'http://4b61-87-116-164-143.ngrok.io',
     pdfFile: '',
     whitepaper: '',
     logo: '',
