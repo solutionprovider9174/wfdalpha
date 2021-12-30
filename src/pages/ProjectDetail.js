@@ -88,7 +88,7 @@ export default function ProjectDetail()
   }
   //------------back button-----------------------------------
   function next(){
-    if(project_id == 2)
+    if(project_id == 2)//fake
       navigate("/invest_step1");
     else
       navigate("/back?project_id=" + state.oneprojectData.project_id);
@@ -125,7 +125,7 @@ export default function ProjectDetail()
 
       totalBacked /= 10**6;
 
-      if(project_id == 2)
+      if(project_id == 2)//fake
         totalBacked = 120000;
 
       let percent = parseInt(totalBacked/parseInt(projectData.project_collected)*100);
