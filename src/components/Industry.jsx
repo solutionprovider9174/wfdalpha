@@ -70,18 +70,36 @@ export default function Industry() {
                       {projectItem.description}
                     </Text>
                   </Box>
-                  <ButtonTransition
-                    unitid={'cryptofunding' + index}
-                    selected={false}
-                    width="192px"
-                    height="50px"
-                    rounded="100px"
-                  >
-                    <Flex direction="row">
-                      Start Funding
-                      <Image ml="10px" alt="startfunding" src="/handgo.svg" />
-                    </Flex>
-                  </ButtonTransition>
+                  <Flex id="displayNoneInMobile">
+                    <ButtonTransition
+                      unitid={'cryptofunding' + index}
+                      selected={false}
+                      width="192px"
+                      height="50px"
+                      rounded="100px"
+                    >
+                      <Flex direction="row">
+                        Start Funding
+                        <Image ml="10px" alt="startfunding" src="/handgo.svg" />
+                      </Flex>
+                    </ButtonTransition>
+                  </Flex>
+                  <Flex id="displayNoneInDesktop">
+                    <ButtonTransition
+                      unitid={'cryptofunding' + index}
+                      selected={false}
+                      width="150px"
+                      height="30px"
+                      rounded="100px"
+                    >
+                      <Flex direction="row">
+                        <Text color="white" fontSize="12px">
+                          Start Funding
+                        </Text>
+                        <Image ml="10px" alt="startfunding" src="/handgo.svg" />
+                      </Flex>
+                    </ButtonTransition>
+                  </Flex>
                 </Flex>
                 <Box className="projectItemImageCol">
                   <Image
