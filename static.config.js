@@ -38,19 +38,19 @@ export default {
         },
         // A 404 component
         {
-            path: 'invest',
+            path: 'invest_step1',
             template: 'src/pages/Invest_step1',
         },
         {
-            path: 'invest2',
+            path: 'invest_step2',
             template: 'src/pages/Invest_step2',
         },
         {
-            path: 'invest3',
+            path: 'invest_step3',
             template: 'src/pages/Invest_step3',
         },
         {
-            path: 'invest4',
+            path: 'invest_step4',
             template: 'src/pages/Invest_step4',
         },
         {
