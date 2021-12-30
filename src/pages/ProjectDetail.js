@@ -379,7 +379,13 @@ export default function ProjectDetail()
                           </Flex>
                           <Flex  px={'45px'} paddingTop={"35px"} mt="40px" width={'80%'} height={{lg:'570px'}} background={'rgba(255, 255, 255, 0.05)'}  border={'1.5px solid rgba(255, 255, 255, 0.15)'} borderRadius='25px'>
                             {/* ------------Description of Project------------ */}
-                              <chakra.p py={2} color={"rgba(255, 255, 255, 0.84)"} fontSize= {"18px"} lineHeight={"150%"}>
+                              <chakra.p 
+                                py={2} 
+                                color={"rgba(255, 255, 255, 0.84)"} 
+                                fontSize= {"18px"} 
+                                lineHeight={"150%"}
+                                w={{base:'400px', lg:'1000px'}}
+                              >
                               <span style={{color:"white",fontWeight:"900" ,fontSize:"18px" ,marginBottom:"20px"}}>
                                 Introducing
                               </span>
