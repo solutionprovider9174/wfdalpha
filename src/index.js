@@ -25,7 +25,6 @@ const testnet = {
 // Export your top level component as JSX (for static rendering)
 export default App
 
-
 // Render your app
 if (typeof document !== 'undefined') {
     const target = document.getElementById('root')
@@ -43,20 +42,19 @@ if (typeof document !== 'undefined') {
                 connectorOpts={{
                     bridge: inProduction
                         ? 'https://walletconnect.terra.dev/'
-                        : 'https://tequila-walletconnect.terra.dev/'
+                        : 'https://tequila-walletconnect.terra.dev/',
                 }}
             >
                 {/* <AppContainer> */}
-                    <Comp />
+                <Comp />
                 {/* </AppContainer> */}
             </Wallet>,
-            target
+            target,
         )
     }
 
     // Render!
     render(App)
-
 
     // Hot Module Replacement
     // if (module && module.hot) {

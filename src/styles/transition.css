@@ -1,9 +1,194 @@
+#comunityBackgroundHeight {
+  width: 100%;
+  height: 600px;
+  align-items: center;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+}
+.LeftRadiusAboutUs {
+  border-top-left-radius: 50px;
+}
+.RightRadiusAboutUs {
+  border-top-right-radius: 50px;
+}
+.aboutUsSectionBoxesTexts {
+  margin-top: 14px;
+  font-size: 15px;
+  font-weight: 700;
+}
+#displayNoneInDesktop {
+  display: none;
+}
+#aboutUsPageHeadingHead {
+  font-family: 'PilatExtended-Regular';
+  font-weight: 700;
+  font-size: 31px;
+  color: white;
+}
+#aboutUsPageHeadingDesc {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+}
+#aboutUsPageNumber1 {
+  height: 65px;
+}
+#aboutUsPageLable {
+  font-size: 18px;
+  font-weight: 400;
+  color: #ffffff8a;
+  font-family: 'PilatExtended-Regular';
+}
+#headingIndustry {
+  width: 100%;
+  font-size: 35px;
+  text-align: center;
+  font-weight: bolder;
+  align-items: center;
+  justify-content: center;
+  font-family: 'PilatExtended-Bold';
+}
+#projectpad {
+  width: 100%;
+  transition: 1s;
+  margin-top: 70px;
+  position: relative;
+  flex-direction: column;
+}
+#projectIndustryContainer {
+  width: 70em;
+  margin-top: 150px;
+  flex-direction: column;
+  justify-content: center;
+}
+.aboutUsSectionImages {
+  width: 60px;
+  height: 60px;
+}
+.aboutUsBox {
+  width: 220px;
+  height: 178px;
+  padding: 20px;
+  filter: blur(5);
+  text-align: left;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.aboutUsBoxLast {
+  width: 440px;
+  height: 178px;
+  padding: 20px;
+  filter: blur(5);
+  text-align: left;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+#RoadMapMobile {
+  display: none;
+}
+#RoadMapDesktop {
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.RoadmapContent {
+  width: 50%;
+  text-align: left;
+  padding-left: 1em;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.RoadmapContent2 {
+  width: 50%;
+  text-align: right;
+  padding-right: 1em;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.RoadmapHeading {
+  font-size: 22px;
+  color: #fe8600;
+  margin-top: -10px;
+  margin-bottom: 5px;
+  font-weight: bolder;
+  font-family: 'PilatExtended-Bold';
+}
+.RoadmapTitle {
+  color: white;
+  font-size: 18px;
+  margin-top: 5px;
+  font-weight: bolder;
+  margin-bottom: 20px;
+  font-family: 'Sk-Modernist-Bold';
+}
+.RoadmapDesc {
+  font-size: 18px;
+  color: #aea3b2;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  font-family: 'Sk-Modernist-Regular';
+}
+#roadmapBox1,
+#roadmapBox2,
+#roadmapBox3,
+#roadmapBox4,
+#roadmapBox5 {
+  width: 50em;
+  height: 25em;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+#roadmapBox1 {
+  top: 5%;
+}
+#circle1 {
+  width: 1em;
+  height: 1em;
+}
+#roadmapBox2 {
+  top: 25%;
+}
+#circle2 {
+  width: 1em;
+  height: 1em;
+}
+#roadmapBox3 {
+  top: 45%;
+}
+#circle3 {
+  width: 1em;
+  height: 1em;
+}
+#roadmapBox4 {
+  top: 65%;
+}
+#circle4 {
+  width: 1em;
+  height: 1em;
+}
+#roadmapBox5 {
+  top: 85%;
+}
+#circle5 {
+  width: 1em;
+  height: 1em;
+}
 #rotateHandGo {
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
 }
 #emailInnerBox {
-  width: 80%;
+  width: 70em;
   z-index: 5;
   height: 350px;
   display: flex;
@@ -18,50 +203,66 @@
   justify-content: space-between;
   background-image: url('/saft2.svg');
 }
+.emailInnerBoxTitle {
+  font-size: 25px;
+  font-weight: bolder;
+  font-family: 'PilatExtended-Bold';
+}
 .projectTitle {
   font-weight: 700;
+  line-height: 42px;
   font-size: 40px;
 }
 .projectDesc {
+  padding-top: 20px;
+  font-size: 18px;
+  font-weight: 400;
   width: 75%;
 }
 .projectLabel {
   font-size: 18px;
 }
 .projectItemContentCol {
-  width: 45%;
+  width: 50%;
   flex-direction: column;
   justify-content: space-between;
 }
 .projectItemImageCol {
-  width: 50%;
+  width: 45%;
 }
 #heroSection {
   width: 100%;
-  height: 100vh;
+  height: 50em;
   display: flex;
+  padding-top: 120px;
   position: relative;
   align-items: center;
-  justify-content: center;
 }
 #heroHeading {
   z-index: 2;
-  font-size: 50px;
+  font-size: 55px;
   margin-top: 20px;
   line-height: 70px;
   position: relative;
   font-weight: bolder;
   text-align: center;
-  font-family: 'PilatExtended-Regular';
+  font-family: 'PilatExtended-Bold';
 }
 #heroLogo {
-  width: 350px;
+  width: 12em;
 }
-.PROJECT_ITEMS_ROW {
+.PROJECT_ITEMS_ROW1 {
   width: 100%;
   height: 450px;
-  margin-top: 2.5em;
-  margin-bottom: 2.5em;
+  margin-bottom: 5em;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.PROJECT_ITEMS_ROW2 {
+  width: 100%;
+  height: 450px;
+  margin-bottom: 5em;
+  flex-direction: row-reverse;
   justify-content: space-between;
 }
 .EmailBg {
@@ -79,7 +280,7 @@
   position: absolute;
 }
 #cloudBg {
-  top: 0;
+  top: -100px;
   width: 100%;
   position: absolute;
 }
@@ -106,33 +307,33 @@
 
 #aboutSection {
   z-index: 2;
+  width: 100%;
+  margin-top: 120px;
   position: relative;
+  margin-bottom: 80px;
+  align-items: center;
   flex-direction: column;
-  padding: 70px 115px;
+  justify-content: center;
   font-family: 'Sk-Modernist-Regular';
 }
 
 #aboutFirstSection {
+  width: 70em;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
-#aboutSecondSection {
-  width: 100em;
-  height: 50em;
-  margin-top: 10em;
-  position: relative;
-  align-items: center;
+#aboutFirstSection1 {
+  width: 55%;
+  height: 100%;
   flex-direction: column;
-  justify-content: center;
 }
 
-#swirlIdImg {
-  top: 0;
-  right: 0;
-  z-index: -1;
-  width: 100%;
-  position: absolute;
+#aboutFirstSection2 {
+  width: 40%;
+  height: 100%;
+  flex-direction: column;
 }
 
 #sphere {
@@ -142,8 +343,9 @@
 }
 
 #rocket {
-  animation: sphere 1s infinite alternate;
-  -webkit-animation: sphere 1s infinite alternate;
+  height: 240px;
+  animation: sphere 2s infinite alternate;
+  -webkit-animation: sphere 2s infinite alternate;
 }
 
 @-webkit-keyframes rocket {
@@ -187,86 +389,104 @@
   position: absolute;
 }
 #aboutSectionCircleImage {
-  width: 200px;
+  width: 130px;
 }
 #aboutSectionTitle {
-  font-size: 30px;
+  font-size: 25px;
   margin-top: 10px;
   line-height: 35px;
 }
 
 .circleAboutText {
-  font-size: 15px;
-  margin-top: 10px;
-  font-weight: 700;
-  letter-spacing: 1px;
+  margin-top: 0;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 #YieldBenefit {
-  left: 17%;
+  left: 0;
   bottom: 25%;
-  width: 170px;
-  height: 170px;
+  width: 200px;
+  align-items: center;
   position: absolute;
   text-align: center;
+  flex-direction: column;
+  justify-content: center;
 }
 #LowRisk {
+  align-items: center;
   top: 25%;
-  left: 17%;
-  width: 170px;
-  height: 170px;
+  left: 14%;
+  width: 200px;
   position: absolute;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
 }
 #SecureStable {
   top: 0;
-  left: 33%;
-  width: 170px;
-  height: 170px;
+  left: 28%;
+  width: 200px;
+  align-items: center;
   position: absolute;
+  justify-content: center;
+  flex-direction: column;
   text-align: center;
 }
 #GovernanceVoting {
   top: 0;
-  right: 33%;
-  width: 170px;
-  height: 170px;
+  align-items: center;
+  right: 28%;
+  width: 200px;
+  justify-content: center;
   position: absolute;
+  flex-direction: column;
   text-align: center;
 }
 #DeflationaryToken {
   top: 25%;
-  right: 17%;
-  width: 170px;
-  height: 170px;
+  right: 14%;
+  align-items: center;
+  width: 200px;
+  justify-content: center;
   position: absolute;
+  flex-direction: column;
   text-align: center;
 }
 #NFTMirror {
-  right: 17%;
+  right: 0;
+  align-items: center;
   bottom: 25%;
-  width: 170px;
-  height: 170px;
+  width: 200px;
+  justify-content: center;
   position: absolute;
   text-align: center;
+  flex-direction: column;
 }
 #Section7 {
   bottom: 0;
-  left: 33%;
-  width: 170px;
-  height: 170px;
+  left: 25%;
+  width: 200px;
+  justify-content: center;
   position: absolute;
+  align-items: center;
+  flex-direction: column;
   text-align: center;
 }
 #Section8 {
   bottom: 0;
-  right: 33%;
-  width: 170px;
-  height: 170px;
+  right: 25%;
+  width: 200px;
   position: absolute;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  flex-direction: column;
 }
-
+.roundCirclesStyling {
+  width: 120px;
+  height: 120px;
+}
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -303,75 +523,104 @@
   position: absolute;
 }
 
-@media only screen and (min-width: 1500px) {
-  #aboutSecondSection {
-    width: 80em;
-    height: 50em;
-  }
-}
-
-@media only screen and (max-width: 1300px) {
-  #aboutSecondSection {
-    margin-top: 5em;
-  }
-  #YieldBenefit {
-    left: 0%;
-    bottom: 25%;
-  }
-  #LowRisk {
-    top: 25%;
-    left: 0%;
-  }
-  #SecureStable {
-    top: 0;
-    left: 23%;
-  }
-  #GovernanceVoting {
-    top: 0;
-    right: 23%;
-  }
-  #DeflationaryToken {
-    top: 25%;
-    right: 0%;
-  }
-  #NFTMirror {
-    right: 0%;
-    bottom: 25%;
-  }
-  #Section7 {
-    bottom: 0;
-    left: 23%;
-  }
-  #Section8 {
-    bottom: 0;
-    right: 23%;
-  }
-}
-
 @media only screen and (max-width: 1000px) {
+  #emailInnerBox {
+    width: 80%;
+    height: 250px;
+    padding: 40px 0;
+  }
+  .emailInnerBoxTitle {
+    font-size: 20px;
+    font-weight: bolder;
+    font-family: 'PilatExtended-Bold';
+  }
+  .aboutUsSectionImages {
+    width: 90px;
+    height: 90px;
+  }
+  #aboutFirstSection {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  #projectIndustryContainer {
+    width: 80%;
+  }
+  #rocket {
+    display: none;
+  }
+  #aboutFirstSection1 {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+  }
+  .PROJECT_ITEMS_ROW1,
+  .PROJECT_ITEMS_ROW2 {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 5em;
+    justify-content: space-between;
+  }
+  .projectItemContentCol {
+    width: 55%;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .projectItemImageCol {
+    width: 40%;
+  }
+  #aboutFirstSection2 {
+    width: 100%;
+    height: 100%;
+    margin-top: 50px;
+    flex-direction: column;
+  }
+  .aboutUsBox {
+    width: 50%;
+    height: 200px;
+    padding: 20px;
+    filter: blur(5);
+    text-align: left;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .aboutUsBoxLast {
+    width: 100%;
+    height: 200px;
+    padding: 20px;
+    filter: blur(5);
+    text-align: left;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  #roadmapBox1,
+  #roadmapBox2,
+  #roadmapBox3,
+  #roadmapBox4,
+  #roadmapBox5 {
+    width: 45em;
+    height: 25em;
+  }
   #sphere {
     width: 40%;
   }
   #heroSection {
-    height: 80vh;
+    height: 35em;
+    padding-top: 120px;
   }
   #heroHeading {
     font-size: 35px;
+    margin-top: 20px;
     line-height: 40px;
   }
   #heroLogo {
     width: 25%;
   }
-  #aboutSection {
-    padding: 68px;
-  }
-  #swirlIdImg {
-    top: 7%;
-  }
-  .PROJECT_ITEMS_ROW {
-    height: 350px;
-  }
   .projectTitle {
+    line-height: 27px;
     font-size: 25px;
   }
   .projectDesc {
@@ -380,160 +629,284 @@
   .projectLabel {
     font-size: 13px;
   }
-  .projectItemContentCol {
-    width: 50%;
-  }
-  .projectItemImageCol {
-    width: 45%;
+  #ArrowDownButtonImage {
+    width: 100px;
   }
 }
 
 @media only screen and (max-width: 760px) {
+  .emailInnerBoxTitle {
+    font-size: 17px;
+    font-weight: bolder;
+    font-family: 'PilatExtended-Bold';
+  }
+  #emailInnerBox {
+    height: 220px;
+    padding: 30px 0;
+  }
+  #roadmapBox1,
+  #roadmapBox2,
+  #roadmapBox3,
+  #roadmapBox4,
+  #roadmapBox5 {
+    width: 40em;
+    height: 25em;
+  }
   #sphere {
     display: none;
   }
   #heroSection {
-    height: 65vh;
+    height: 26em;
+    padding-top: 70px;
   }
   #heroHeading {
     font-size: 30px;
     line-height: 35px;
   }
   #heroLogo {
-    width: 30%;
+    width: 10em;
   }
   #ArrowDownButton {
-    bottom: 2%;
+    bottom: 0%;
   }
   #aboutSection {
     padding: 68px 40px;
   }
-  #swirlIdImg {
-    top: 15%;
-    width: 70%;
-  }
 
-  #aboutSecondSection {
-    height: 40em;
-  }
-  #YieldBenefit {
-    left: 0%;
-    bottom: 25%;
-    width: 140px;
-    height: 140px;
-  }
-  #LowRisk {
-    top: 25%;
-    left: 0%;
-    width: 140px;
-    height: 140px;
-  }
-  #SecureStable {
-    top: 0;
-    left: 22%;
-    width: 140px;
-    height: 140px;
-  }
-  #GovernanceVoting {
-    top: 0;
-    right: 22%;
-    width: 140px;
-    height: 140px;
-  }
-  #DeflationaryToken {
-    top: 25%;
-    right: 0%;
-    width: 140px;
-    height: 140px;
-  }
-  #NFTMirror {
-    right: 0%;
-    bottom: 25%;
-    width: 140px;
-    height: 140px;
-  }
-  #Section7 {
-    bottom: 0;
-    left: 22%;
-    width: 140px;
-    height: 140px;
-  }
-  #Section8 {
-    bottom: 0;
-    right: 22%;
-    width: 140px;
-    height: 140px;
-  }
-
-  #aboutSectionCircle {
-    top: 40%;
-    position: absolute;
-  }
-  #aboutSectionCircleImage {
-    width: 150px;
-  }
-  #aboutSectionTitle {
-    font-size: 20px;
-    margin-top: 10px;
-    line-height: 25px;
-  }
   .circleAboutText {
     font-size: 13px;
     margin-top: 5px;
     font-weight: 500;
     letter-spacing: 0;
   }
-  .PROJECT_ITEMS_ROW {
-    height: 300px;
-  }
   .projectTitle {
     font-size: 30px;
+    line-height: 32px;
   }
   .projectDesc {
     width: 100%;
+    margin-top: 10px;
+    margin-bottom: 30px;
   }
   .projectLabel {
     font-size: 15px;
   }
+  .PROJECT_ITEMS_ROW1,
+  .PROJECT_ITEMS_ROW2 {
+    width: 100%;
+    height: auto;
+    margin-bottom: 5em;
+    justify-content: flex-start;
+    flex-direction: column-reverse;
+  }
+
   .projectItemContentCol {
     width: 100%;
+    height: auto;
+    margin-top: 10px;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  #projectIndustryContainer {
+    margin-top: 70px;
   }
   .projectItemImageCol {
-    display: none;
+    width: 100%;
+  }
+  #headingIndustry {
+    font-size: 25px;
   }
 }
 
 @media only screen and (max-width: 650px) {
-  #heroSection {
-    height: 55vh;
+  .emailInnerBoxTitle {
+    font-size: 12px;
   }
-  #heroHeading {
-    font-size: 25px;
-    line-height: 30px;
+  #emailInnerBox {
+    height: 200px;
+    padding: 20px 0;
   }
-  #heroLogo {
-    width: 30%;
-  }
-  #ArrowDownButton {
-    bottom: 0;
-  }
-  #ArrowDownButtonImage {
-    width: 100px;
-  }
-  #aboutFirstSection {
-    flex-direction: column-reverse;
+  #RoadMapDesktop {
+    display: none;
   }
   #aboutSection {
-    padding: 120px 40px 68px 40px;
+    margin-top: 60px;
+    margin-bottom: 50px;
   }
-  #rocket {
-    right: 10%;
-    top: -100px;
-    width: 10em;
+  #RoadMapMobile {
+    width: 85%;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .RoadmapContent {
+    width: 100%;
+    text-align: left;
+    padding-right: 1em;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  #roadmapBox1,
+  #roadmapBox2,
+  #roadmapBox3,
+  #roadmapBox4,
+  #roadmapBox5 {
+    width: 100%;
+    height: 25em;
+    display: flex;
+    position: absolute;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  #heroHeading {
+    font-size: 25px;
+    margin-top: 15px;
+    line-height: 30px;
+  }
+  #ArrowDownButton {
+    bottom: 0%;
+  }
+  #ArrowDownButtonImage {
+    width: 80px;
+  }
+  #stageBg {
+    top: 30%;
+    width: 100%;
+    height: 70%;
     position: absolute;
   }
-  #swirlIdImg {
+  #heroSection {
+    width: 100%;
+    height: 30em;
+    display: flex;
+    padding-top: 120px;
+    position: relative;
+    align-items: center;
+  }
+  #cloudBg {
     top: 0;
     width: 100%;
+    position: absolute;
+  }
+  #aboutSection {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    margin-top: 3em;
+    margin-bottom: 50px;
+  }
+  #aboutFirstSection {
+    width: 90%;
+  }
+  #aboutFirstSection1 {
+    width: 100%;
+    height: 100%;
+  }
+  #aboutFirstSection2 {
+    width: 100%;
+    height: 100%;
+  }
+  #aboutUsPageLable {
+    font-size: 12px;
+  }
+  #aboutUsPageNumber1 {
+    height: 40px;
+  }
+  #aboutUsPageHeadingHead {
+    font-size: 18px;
+  }
+  #aboutUsPageHeadingDesc {
+    font-size: 13px;
+    line-height: 16px;
+  }
+  #displayNoneInMobile {
+    display: none;
+  }
+  #displayNoneInDesktop {
+    display: flex;
+  }
+  .aboutUsSectionImages {
+    width: auto;
+    height: 30px;
+  }
+  .aboutUsSectionBoxesTexts {
+    margin-top: 12px;
+    font-weight: 700;
+    font-size: 10px;
+  }
+  .aboutUsBox {
+    width: 50%;
+    height: 120px;
+    padding: 15px;
+    text-align: left;
+    backdrop-filter: 5px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .aboutUsBoxLast {
+    width: 100%;
+    height: 120px;
+    padding: 15px;
+    text-align: left;
+    backdrop-filter: 5px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .LeftRadiusAboutUs {
+    border-top-left-radius: 10px;
+  }
+  .RightRadiusAboutUs {
+    border-top-left-radius: 10px;
+  }
+  #headingIndustry {
+    font-size: 18px;
+  }
+  .projectTitle {
+    font-size: 16px;
+    line-height: 18px;
+  }
+  .projectDesc {
+    font-size: 13px;
+    padding-top: 5px;
+    margin-bottom: 10px;
+  }
+  #comunityBackgroundHeight {
+    width: 100%;
+    height: 150px;
+    position: relative;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #emailInnerBox {
+    width: 90%;
+    height: 100px;
+    padding: 20px 0;
+    border-radius: 10px;
+  }
+  .emailInnerBoxTitle {
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 10px;
+    margin: 0 !important;
+    font-family: 'PilatExtended-Bold';
+  }
+  .EmailBg {
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 150px;
+    position: absolute;
   }
 }

@@ -1,108 +1,173 @@
-import React from 'react';
-import ConnectWallet from './ConnectWallet';
+import React from 'react'
+import ConnectWallet from './ConnectWallet'
 //
-import { Container } from '../components/Container';
-import { ChakraProvider } from "@chakra-ui/react";
-import theme from '../theme';
-import { ButtonTransition, ImageTransition, InputTransition, ButtonBackTransition } from "../components/ImageTransition";
-import {chakra, Box} from "@chakra-ui/react";
+import { Container } from '../components/Container'
+import { ChakraProvider } from '@chakra-ui/react'
+import theme from '../theme'
+import { ButtonBackTransition } from '../components/ImageTransition'
+import { Box } from '@chakra-ui/react'
 
-import { Router, Link } from '@reach/router'
+import { Link } from '@reach/router'
 
+import '../styles/Navbar.css'
 
 export default function WithSubnavigation() {
-  // const { isOpen, onToggle } = useDisclosure();
-  const isOpen = true;
-  const onToggle = true;
-
   return (
     <ChakraProvider resetCSS theme={theme}>
       <Container>
-    <div style={{ display:'flex', width:'100%', height:'80px',background:'linear-gradient(90deg, #3608478A 0%, #18075B 104.34%)'
-    , backdropFilter: 'blur(54px)', zIndex:'99'}}>
-        <div style={{display:'flex', width:'70%'}}>
-          <Link className="navbar-brand" to="/">
-            <img
-              alt={'Wefund'}
-              src={'/WeFund%20Logos%20only.png'}
-              style={{position:'relative', left: '99px', top:'31.25%', width:'56px', height:'30px'}}
-            />
-          </Link>
-          <div style={{position:'absolute',width:'30px', left:'185px', top:'40px', border:'1px solid rgba(255,255,255, 0.2)',
-            transform:'rotate(90deg)'}}>
+        <div id="mainContainer">
+          <div style={{ display: 'flex', width: '70%' }}>
+            <Link className="navbar-brand" to="/">
+              <img
+                alt={'Wefund'}
+                src={'/WeFund%20Logos%20only.png'}
+                style={{
+                  position: 'relative',
+                  left: '99px',
+                  top: '31.25%',
+                  width: '56px',
+                  height: '30px',
+                }}
+              />
+            </Link>
+            <div
+              style={{
+                position: 'absolute',
+                width: '30px',
+                left: '185px',
+                top: '40px',
+                border: '1px solid rgba(255,255,255, 0.2)',
+                transform: 'rotate(90deg)',
+              }}
+            ></div>
+            <DesktopNav />
           </div>
-          <DesktopNav/>
-        </div>
-        <div style={{display:'flex', position: 'relative', top:'20px',alignItems:'right'}}>
-            <ButtonBackTransition unitid="Create Your Project"
+          <div
+            style={{
+              display: 'flex',
+              position: 'relative',
+              right: '5%',
+              top: '20px',
+              alignItems: 'right',
+            }}
+          >
+            <ButtonBackTransition
+              unitid="Create Your Project"
               selected={false}
-              width='197px' height='40px' rounded='33px'
+              width="197px"
+              height="40px"
+              rounded="33px"
             >
-              <Link to ='/create'>
-              <Box variant="solid" color="white" justify='center' align='center' >
-                Create Your Project
-              </Box>
+              <Link to="/create">
+                <Box
+                  variant="solid"
+                  color="white"
+                  justify="center"
+                  align="center"
+                >
+                  Create Your Project
+                </Box>
               </Link>
             </ButtonBackTransition>
-          
-          <div style={{marginLeft:'20px',marginRight:'20px', width:'130px'}}>
-          <ConnectWallet/>
+
+            <div
+              style={{
+                marginLeft: '20px',
+                marginRight: '20px',
+                width: '270px',
+              }}
+            >
+              <ConnectWallet />
+            </div>
           </div>
         </div>
-      </div>
       </Container>
     </ChakraProvider>
-  );
+  )
 }
 const DesktopNav = () => {
-
   return (
     <>
       {NAV_ITEMS.map((navItem, index) => (
-        <div key={index} className="btn-group" style={{cursor:'pointer', left:'185px'}}>
-          {!navItem.childitem &&
-            <Link 
-              to= {navItem.href} 
+        <div
+          key={index}
+          className="btn-group"
+          style={{ cursor: 'pointer', left: '185px' }}
+        >
+          {!navItem.childitem && (
+            <Link
+              to={navItem.href}
               className="btn btn-danger"
-              style={{color:'rgba(255, 255, 255, 0.84)', 
-                        height:'20px', top:'25px', 
-                        fontSize:'15px', lineHeight:'18px'
-                    }}
+              style={{
+                color: 'rgba(255, 255, 255, 0.84)',
+                height: '20px',
+                top: '25px',
+                fontSize: '15px',
+                lineHeight: '18px',
+              }}
             >
               {navItem.label}
             </Link>
-          }
-          {navItem.children &&
+          )}
+          {navItem.children && (
             <>
-              <div 
-                className={"btn btn-danger "+ (navItem.children ? "dropdown-toggle":"")} data-bs-toggle="dropdown" 
-                aria-expanded="false" 
-                style={{color:'rgba(255, 255, 255, 0.84)', 
-                          height:'20px', top:'25px', 
-                          fontSize:'15px', lineHeight:'18px'
-                      }}
+              <div
+                className={
+                  'btn btn-danger ' +
+                  (navItem.children ? 'dropdown-toggle' : '')
+                }
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                style={{
+                  color: 'rgba(255, 255, 255, 0.84)',
+                  height: '20px',
+                  top: '25px',
+                  fontSize: '15px',
+                  lineHeight: '18px',
+                }}
               >
                 {navItem.label}
               </div>
-              <ul className="dropdown-menu" style={{width:'380px', padding:'10px', backgroundColor:'black'}}>
+              <ul
+                className="dropdown-menu"
+                style={{
+                  width: '380px',
+                  padding: '10px',
+                  backgroundColor: 'black',
+                }}
+              >
                 {navItem.children.map((childitem, index) => (
                   <li key={index}>
-                    <div style={{margin:'20px'}} >
+                    <div style={{ margin: '20px' }}>
                       <Link to={childitem.href} className="navitem">
-                      <p style={{marginBottom:'5px', fontSie:'large'}}>{childitem.label}</p>
-                      <p style={{marginTop:'0px', fontSize:'small'}}>{childitem.subLabel}</p>
+                        <p
+                          style={{
+                            marginBottom: '5px',
+                            fontSie: 'large',
+                          }}
+                        >
+                          {childitem.label}
+                        </p>
+                        <p
+                          style={{
+                            marginTop: '0px',
+                            fontSize: 'small',
+                          }}
+                        >
+                          {childitem.subLabel}
+                        </p>
                       </Link>
                     </div>
                   </li>
                 ))}
               </ul>
             </>
-          }
+          )}
         </div>
       ))}
     </>
-  );
-};
+  )
+}
 
 const NAV_ITEMS = [
   // {
@@ -149,4 +214,4 @@ const NAV_ITEMS = [
     label: 'Invest on WeFund',
     href: 'invest_step1',
   },
-];
+]

@@ -1,5 +1,5 @@
-import { Flex, Image, Text } from '@chakra-ui/react';
-import React from 'react';
+import { Flex, Image, Text } from '@chakra-ui/react'
+import React from 'react'
 
 export default function Roadmaps() {
   return (
@@ -11,109 +11,169 @@ export default function Roadmaps() {
       direction="column"
       alignItems="center"
     >
-      <Flex w="85%" direction="column" fontFamily="Sk-Modernist-Regular">
-        <Text
-          fontFamily="PilatExtended-Regular"
-          fontWeight="400"
-          fontSize="22px"
-        >
-          RoadMap
+      <Flex
+        direction="column"
+        textAlign="center"
+        fontFamily="Sk-Modernist-Regular"
+      >
+        <Text fontWeight="400" fontSize="22px" color="gray">
+          ROADMAP
         </Text>
         <Flex
           mt="15px"
           mb="100px"
           direction="row"
-          fontFamily="PilatExtended-Regular"
-          fontWeight="700"
           fontSize="35px"
+          fontWeight="bolder"
+          fontFamily="Sk-Modernist-Bold"
         >
           <Text color="#00A3FF">WeFund&nbsp;</Text>
-          <Text>Technical RoadMap</Text>
+          <Text>RoadMap</Text>
         </Flex>
-        <Flex
-          flexDirection="row"
-          alignItems="flex-start"
-          justifyContent="space-between"
-        >
-          <Timeline className="timeline" />
-          <Flex
-            id="sphere"
-            position="relative"
-            style={{ transition: 'transform 0.5s' }}
-          >
-            <Image alt={'Wefund'} src="/sphere.svg" />
+      </Flex>
+
+      {/* Road Map For Desktop */}
+      <Flex id="RoadMapDesktop">
+        <Image src="/RoadmapLine.svg" />
+        <Flex id="roadmapBox1">
+          <Flex className="RoadmapContent2"></Flex>
+          <Image src="/circle.svg" id="circle1" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">V1 Q4 2021</Text>
+            <Image src="/beautifulDash.svg" />
+            <Text className="RoadmapTitle">Platform</Text>
+            <Text className="RoadmapDesc">
+              Make running the platform with the basic functionality, create a
+              project, back a project and stak the amount in Anchor, project
+              done and project fail + yield transfer, will be done in December
+              2021
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex id="roadmapBox2">
+          <Flex className="RoadmapContent2">
+            <Text className="RoadmapHeading">V2 Q4 2021</Text>
+            <Image src="/beautifulDash.svg" />
+            <Text className="RoadmapTitle">Whitepaper</Text>
+            <Text className="RoadmapDesc">
+              Set up the Core Team, in terms of knowledge, responsability, team
+              management and following the same vision, will be done in December
+              2021
+            </Text>
+          </Flex>
+          <Image src="/circle.svg" id="circle2" />
+          <Flex className="RoadmapContent"></Flex>
+        </Flex>
+        <Flex id="roadmapBox3">
+          <Flex className="RoadmapContent2"></Flex>
+          <Image src="/circle.svg" id="circle3" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">Q4 2021</Text>
+            <Image src="/beautifulDash.svg" />
+            <Text className="RoadmapTitle">Core Team Set-up</Text>
+            <Text className="RoadmapDesc">
+              Whitepaper 2.0, will be done in December 2021
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex id="roadmapBox4">
+          <Flex className="RoadmapContent2">
+            <Text className="RoadmapHeading">Q1 2022</Text>
+            <Image src="/beautifulDash.svg" />
+            <Text className="RoadmapTitle">Tokenomics</Text>
+            <Text className="RoadmapDesc">
+              Set up the tokenomics, the date for closing the seed, when and how
+              long for the Pre Sale and understand what kind of IDO we want to
+              apply and when, will be done in January 2022
+            </Text>
+          </Flex>
+          <Image src="/circle.svg" id="circle4" />
+          <Flex className="RoadmapContent"></Flex>
+        </Flex>
+        <Flex id="roadmapBox5">
+          <Flex className="RoadmapContent2"></Flex>
+          <Image src="/circle.svg" id="circle5" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">Q1 2022</Text>
+            <Image src="/beautifulDash.svg" />
+            <Text className="RoadmapTitle">Seed - Pre Sale - Ico</Text>
+            <Text className="RoadmapDesc">
+              Integrate the community voting power, equity crowdfunding system
+              and Investor Protection using Milestone System.
+            </Text>
+          </Flex>
+        </Flex>
+      </Flex>
+
+      {/* Road Map For Mobile */}
+
+      {/* Road Map For Desktop */}
+      <Flex id="RoadMapMobile">
+        <Image src="/RoadmapLine.svg" />
+        <Flex id="roadmapBox1">
+          <Image src="/circle.svg" id="circle1" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">V1 Q4 2021</Text>
+            <Image src="/beautifulDash.svg" />
+            <Text className="RoadmapTitle">Platform</Text>
+            <Text className="RoadmapDesc">
+              Make running the platform with the basic functionality, create a
+              project, back a project and stak the amount in Anchor, project
+              done and project fail + yield transfer, will be done in December
+              2021
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex id="roadmapBox2">
+          <Image src="/circle.svg" id="circle2" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">V2 Q4 2021</Text>
+            <Image src="/beautifulDash.svg" />
+            <Text className="RoadmapTitle">Whitepaper</Text>
+            <Text className="RoadmapDesc">
+              Set up the Core Team, in terms of knowledge, responsability, team
+              management and following the same vision, will be done in December
+              2021
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex id="roadmapBox3">
+          <Image src="/circle.svg" id="circle3" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">Q4 2021</Text>
+            <Image src="/beautifulDash.svg" />
+            <Text className="RoadmapTitle">Core Team Set-up</Text>
+            <Text className="RoadmapDesc">
+              Whitepaper 2.0, will be done in December 2021
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex id="roadmapBox4">
+          <Image src="/circle.svg" id="circle4" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">Q1 2022</Text>
+            <Image src="/beautifulDash.svg" />
+            <Text className="RoadmapTitle">Tokenomics</Text>
+            <Text className="RoadmapDesc">
+              Set up the tokenomics, the date for closing the seed, when and how
+              long for the Pre Sale and understand what kind of IDO we want to
+              apply and when, will be done in January 2022
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex id="roadmapBox5">
+          <Image src="/circle.svg" id="circle5" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">Q1 2022</Text>
+            <Image src="/beautifulDash.svg" />
+            <Text className="RoadmapTitle">Seed - Pre Sale - Ico</Text>
+            <Text className="RoadmapDesc">
+              Integrate the community voting power, equity crowdfunding system
+              and Investor Protection using Milestone System.
+            </Text>
           </Flex>
         </Flex>
       </Flex>
     </Flex>
-  );
+  )
 }
-
-const Timeline = () => {
-  return (
-    <div className="wrapper">
-      <div id="timeline1" className="timeline" />
-      <div className="circleWrapper">
-        <div id="circle1" className="circle">
-          1
-        </div>
-        <div className="message">
-          Make running the platform with the basic functionality, create a
-          project, back a project and stak the amount in Anchor, project done
-          and project fail + yield transfer, will be done in December 2021
-        </div>
-      </div>
-      <div id="timeline2" className="timeline" />
-      <div className="circleWrapper">
-        <div id="circle2" className="circle">
-          2
-        </div>
-        <div className="message">
-          Set up the Core Team, in terms of knowledge, responsability, team
-          management and following the same vision, will be done in December
-          2021
-        </div>
-      </div>
-      <div id="timeline3" className="timeline" />
-      <div className="circleWrapper">
-        <div id="circle3" className="circle">
-          3
-        </div>
-        <div className="message">
-          Whitepaper 2.0, will be done in December 2021
-        </div>
-      </div>
-      <div id="timeline4" className="timeline" />
-      <div className="circleWrapper">
-        <div id="circle4" className="circle">
-          4
-        </div>
-        <div className="message">
-          Set up the tokenomics, the date for closing the seed, when and how
-          long for the Pre Sale and understand what kind of IDO we want to apply
-          and when, will be done in January 2022
-        </div>
-      </div>
-      <div id="timeline5" className="timeline" />
-      <div className="circleWrapper">
-        <div id="circle5" className="circle">
-          5
-        </div>
-        <div className="message">
-          Have full functionality platform with all the function mentioned on
-          the Whitepaper2.0, on the TGE
-        </div>
-      </div>
-      <div id="timeline6" className="timeline" />
-      <div className="circleWrapper">
-        <div id="circle6" className="circle">
-          6
-        </div>
-        <div className="message">
-          Have full functionality platform with all the function mentioned on
-          the Whitepaper2.0, on the TGE
-        </div>
-      </div>
-    </div>
-  );
-};

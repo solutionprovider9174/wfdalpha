@@ -1,18 +1,19 @@
 import React from 'react'
-
 import { Image, Text, Flex } from '@chakra-ui/react'
-import { ButtonTransition } from '../components/ImageTransition'
+import { ButtonTransition } from './ImageTransition'
 
-export default function Email() {
+export default function Comunity() {
   return (
     <Flex id="comunityBackgroundHeight">
       <Image src="/EmailBg.png" className="EmailBg" />
       <Flex id="emailInnerBox">
         <Flex flexDirection="column" textAlign="center">
-          <Text className="emailInnerBoxTitle">GET IN WEFUND</Text>
-
-          <Text className="emailInnerBoxTitle" mt="10px">
-            Grow With Us Now
+          <Flex className="emailInnerBoxTitle">
+            <Text color="#bfdbeb">WeFund&nbsp;</Text>
+            <Text>was born from the community,</Text>
+          </Flex>
+          <Text mt="10px" className="emailInnerBoxTitle">
+            for the community.
           </Text>
         </Flex>
         <Flex justify="center" id="displayNoneInMobile">

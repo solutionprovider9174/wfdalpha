@@ -2,55 +2,55 @@
 
 p {
     margin: 0;
-  }
-  
-  .clip-contents {
+}
+
+.clip-contents {
     overflow: hidden;
-  }
-  
-  .flex-row {
+}
+
+.flex-row {
     display: flex;
     flex-direction: row;
-  }
-  
-  .flex-row-vcenter {
+}
+
+.flex-row-vcenter {
     display: flex;
     flex-direction: row;
     align-items: center;
-  }
-  
-  .flex-hend {
+}
+
+.flex-hend {
     justify-content: flex-end;
-  }
-  
-  .flex-hcenter {
+}
+
+.flex-hcenter {
     justify-content: center;
-  }
-  
-  .header {
+}
+
+.header {
     padding: 19px 100px 19px 98px;
     box-sizing: border-box;
     background: linear-gradient(
-      90deg,
-      rgba(54, 8, 71, 1) 100%,
-      rgba(24, 7, 91, 1) 4.34%
+        90deg,
+        rgba(54, 8, 71, 1) 100%,
+        rgba(24, 7, 91, 1) 4.34%
     );
     width: 1440px;
     height: 80px;
-  }
-  
-  .group-649 {
+}
+
+.group-649 {
     margin-right: 283px;
     box-sizing: border-box;
-  }
-  
-  .bitmap {
+}
+
+.bitmap {
     width: 56px;
     height: 30px;
     margin-right: 60px;
-  }
-  
-  .txt-448 {
+}
+
+.txt-448 {
     font-size: 15px;
     font-family: Sk-Modernist, sans-serif;
     font-weight: 400;
@@ -60,15 +60,15 @@ p {
     height: 20px;
     word-wrap: break-word;
     margin-right: 10px;
-  }
-  
-  .arrow-down-2 {
+}
+
+.arrow-down-2 {
     width: 10px;
     height: 5px;
     margin-right: 30px;
-  }
-  
-  .txt-017 {
+}
+
+.txt-017 {
     font-size: 15px;
     font-family: Sk-Modernist, sans-serif;
     font-weight: 400;
@@ -78,15 +78,15 @@ p {
     height: 20px;
     word-wrap: break-word;
     margin-right: 10px;
-  }
-  
-  .arrow-down-3 {
+}
+
+.arrow-down-3 {
     width: 10px;
     height: 5px;
     margin-right: 30px;
-  }
-  
-  .txt-1011 {
+}
+
+.txt-1011 {
     font-size: 15px;
     font-family: Sk-Modernist, sans-serif;
     font-weight: 400;
@@ -95,9 +95,9 @@ p {
     height: 20px;
     word-wrap: break-word;
     margin-right: 30px;
-  }
-  
-  .txt-996 {
+}
+
+.txt-996 {
     font-size: 15px;
     font-family: Sk-Modernist, sans-serif;
     font-weight: 400;
@@ -106,33 +106,33 @@ p {
     height: 20px;
     word-wrap: break-word;
     margin-right: 30px;
-  }
-  
-  .txt-447 {
+}
+
+.txt-447 {
     font-size: 15px;
     font-family: Sk-Modernist, sans-serif;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.84);
     height: 20px;
     word-wrap: break-word;
-  }
-  
-  .create-your-project {
+}
+
+.create-your-project {
     padding: 8.5px 32.5px 10.5px 31.5px;
     margin-right: 20px;
     box-sizing: border-box;
     border-radius: 33px;
     background: linear-gradient(
-      180deg,
-      rgba(0, 193, 255, 1) 0%,
-      rgba(0, 193, 255, 0) 100%
+        180deg,
+        rgba(0, 193, 255, 1) 0%,
+        rgba(0, 193, 255, 0) 100%
     );
     border: 1.5px solid rgba(0, 163, 255, 1);
     width: 15.9%;
     height: 100%;
-  }
-  
-  .txt-684 {
+}
+
+.txt-684 {
     font-size: 15px;
     font-family: Sk-Modernist, sans-serif;
     font-weight: 400;
@@ -141,23 +141,23 @@ p {
     width: 130px;
     height: 18px;
     word-wrap: break-word;
-  }
-  
-  .connect-wallet {
+}
+
+.connect-wallet {
     padding: 8.5px 26.5px 8.5px 25.5px;
     box-sizing: border-box;
     border-radius: 30px;
     background: linear-gradient(
-      180deg,
-      rgba(254, 134, 0, 1) 0%,
-      rgba(254, 134, 0, 0) 100%
+        180deg,
+        rgba(254, 134, 0, 1) 0%,
+        rgba(254, 134, 0, 0) 100%
     );
     border: 1.5px solid rgba(254, 134, 0, 1);
     width: 14%;
     height: 100%;
-  }
-  
-  .txt-516 {
+}
+
+.txt-516 {
     font-size: 15px;
     font-family: Sk-Modernist, sans-serif;
     font-weight: 400;
@@ -166,5 +166,18 @@ p {
     width: 119px;
     height: 20px;
     word-wrap: break-word;
-  }
-  
+}
+
+/* new stylings */
+
+#mainContainer {
+    z-index: 99;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    filter: blur(10);
+    position: relative;
+    backdrop-filter: blur(54px);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.103);
+    background: linear-gradient(90deg, #3608478a 0%, #18075b 104.34%);
+}
