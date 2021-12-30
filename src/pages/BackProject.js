@@ -77,6 +77,11 @@ export default function BackProject() {
 //----------------------change Amount--------------------------
   function changeAmount(e)
   {
+    if(e.target.value != '' && e.target.value != parseInt(e.target.value).toString()){
+      showNotification("Please input number only", "error", 4000);
+      return;
+    }
+    
     setBackAmount(e.target.value);
     let amount = parseInt(e.target.value) *5 / 100;
     if(amount > 0)
@@ -91,7 +96,26 @@ export default function BackProject() {
       showNotification("Please connect wallet first!", 'error', 6000);
       return;
     }
-console.log(connectedWallet);
+
+    console.log(connectedWallet);
+    if(state.net == 'mainnet' && connectedWallet.network.name == 'testnet'){
+      showNotification("Please switch to mainnet!", "error", 4000);
+      return;
+    }
+    if(state.net == 'testnet' && connectedWallet.network.name == 'mainnet'){
+      showNotification("Please switch to testnet!", "error", 4000);
+      return;
+    }
+    
+    if(backAmount != parseInt(backAmount).toString()){
+      showNotification("Invalid number format!", "error", 4000);
+      return;
+    }
+    if(parseInt(backAmount) < 100){
+      showNotification("Back money at least 100 UST", "error", 4000);
+      return;
+    }
+
     let _project_id = 1;
     if(project_id != null)
       _project_id = project_id;

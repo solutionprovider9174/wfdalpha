@@ -181,7 +181,7 @@ export default ()=> {
                 <>
                 <div style={{display:'flex', justifyContent:'center', backgroundColor:'rgb(109 209 243)',
                   width:'150px'}}>
-                  <SignatureCanvas ref={canvasRef} penColor='green'
+                  <SignatureCanvas ref={canvasRef} penColor='black'
                     canvasProps={{width: 150, height: 55}}/>
                 </div>
                 <div style={{cursor:'pointer', margin:'2px', display:'flex', alignItems:'end'}} onClick={()=>{canvasRef.current.clear()}}>
