@@ -1,28 +1,145 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from '../theme';
-import { Container } from '../components/Container';
-import {chakra, Box, Flex, SimpleGrid, GridItem, Heading, Text, Stack,Progress, Stat, Span,
-    Input, InputGroup,  StatNumber, StatLabel,CircularProgress, CircularProgressLabel, Textarea, Avatar, Icon, Button,  VisuallyHidden, Image, Select, Checkbox,  RadioGroup, Radio, HStack, VStack, InputLeftElement, InputRightElement, Img
-  } from "@chakra-ui/react";
-import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
-import { useStore } from '../store'
-import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark, IoCloudUploadOutline, IoCheckbox } from 'react-icons/io5';
+import {chakra, Box, Flex,Text, Stack, Stat,StatNumber, StatLabel, Icon, Image, HStack, VStack, CircularProgress, CircularProgressLabel, Progress} from "@chakra-ui/react";
+import React, {useEffect, useState,  useMemo} from 'react';
+import {WasmAPI, LCDClient, } from '@terra-money/terra.js'
+import {MdOutlinePlace} from "react-icons/md";
+import {BsArrowUpRight,BsBookmarksFill, BsPerson, BsCashCoin} from "react-icons/bs"
+import { Router, Link, useNavigate } from '@reach/router'
 
-import Pagination from "@choc-ui/paginator"
-import { MdHeadset, MdEmail, MdOutlinePlace, MdWork, MdOutlineAccountBalanceWallet, MdOutlineCategory } from "react-icons/md";
+import {useStore} from '../store'
+import {ImageTransition} from "../components/ImageTransition";
+import Notification from '../components/Notification'
+import Footer from "../components/Footer"
 
-import '../styles/CreateProject.css';
-import { BsArrowUpRight,BsBookmarksFill, BsBox, BsPerson, BsCashCoin } from "react-icons/bs"
-import { ImageTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
+let useConnectedWallet = {}
+if (typeof document !== 'undefined') {
+    useConnectedWallet =
+        require('@terra-money/wallet-provider').useConnectedWallet
+}
+
+export default function ProjectDetail() 
+{
+  const { state, dispatch } = useStore();
+  const [totalBackedMoney, setTotalBackedMoney] = useState(0);
+  const [percent, setPercent] = useState(0);
+
+  const navigate = useNavigate();
+  //------------extract project id----------------------------
+  let queryString, urlParams, project_id;
+  if(typeof window != 'undefined'){
+    queryString = window.location.search;
+    urlParams = new URLSearchParams(queryString);
+    project_id = urlParams.get('project_id')
+  }
 
 
-export default function NewProject() {
-  const [isUST, setIsUST] = useState(true);
-  const [submitPressed, setSubmitPressed] = useState(false);
-  const [whitepaper, setWhitepaper] = useState('');
-  const [prjCategory, setPrjCategory] = useState('');
-  const [prjName, setPrjName] = useState('');
+  //------------connect wallet ---------------------------------
+  let connectedWallet = ''
+  if (typeof document !== 'undefined') {
+      connectedWallet = useConnectedWallet()
+  }
 
+  //------------init api, lcd ----------------------------------------------------
+  const lcd = useMemo(() => {
+    if (!connectedWallet) {
+        return null
+    }
+    return new LCDClient({
+        URL: connectedWallet.network.lcd,
+        chainID: connectedWallet.network.chainID,
+    })
+  }, [connectedWallet]);
+
+  const api = new WasmAPI(state.lcd_client.apiRequester);
+
+  //------------notification setting---------------------------------
+  const [notification, setNotification] = useState({
+    type: 'success',
+    message: '',
+    show: false,
+  })
+
+  function hideNotification() {
+    setNotification({
+        message: notification.message,
+        type: notification.type,
+        show: false,
+    })
+  }
+
+  function showNotification(message, type, duration) {
+    // console.log('fired notification')
+    setNotification({
+        message: message,
+        type: type,
+        show: true,
+    });
+
+    // Disable after $var seconds
+    setTimeout(() => {
+        setNotification({
+            message: message,
+            type: type,
+            show: false,
+        })
+        // console.log('disabled',notification)
+    }, duration)
+  }
+  //------------back button-----------------------------------
+  function next(){
+    if(project_id == 2)//fake
+      navigate("/invest_step1");
+    else
+      navigate("/back?project_id=" + state.oneprojectData.project_id);
+  }
+  //------------fectch project data------------------------------------
+  async function fetchContractQuery() 
+  {
+    let _project_id = 1;
+    if(project_id != null)
+      _project_id = project_id;
+    
+    try {
+      const projectData = await api.contractQuery(
+        state.WEFundContractAddress,
+          {
+              get_project: {
+                project_id: `${_project_id}`
+              },
+          }
+      )
+      if(!projectData)
+        return;
+
+      dispatch({
+          type: 'setOneprojectdata',
+          message: projectData,
+      })
+  
+      let i, j
+      let totalBacked = 0;
+      for(j=0; j<projectData.backer_states.length; j++){
+          totalBacked += parseInt(projectData.backer_states[j].ust_amount.amount);
+      }
+
+      totalBacked /= 10**6;
+
+      if(project_id == 2)//fake
+        totalBacked = 120000;
+
+      let percent = parseInt(totalBacked/parseInt(projectData.project_collected)*100);
+
+      setPercent(percent);
+      setTotalBackedMoney(totalBacked);
+    } catch (e) {
+        console.log(e)
+    }
+  };
+
+  useEffect(() => {
+    fetchContractQuery();
+  }, [connectedWallet, lcd])
 
   return (
     <ChakraProvider resetCSS theme={theme}>
@@ -53,23 +170,28 @@ export default function NewProject() {
                             justify={'center'}
                             backdropFilter={'blur(54px)'}
                             >
-                          <Image
-                            marginTop={'50%'}
-                            height={'40%'}
-                            src="sheep.svg"
-                            alt="avatar"
-                          />
+                          {state.oneprojectData.project_icon && 
+                            <Image 
+                            src={state.request+"/download?filename="+ state.oneprojectData.project_icon} alt="avatar" />
+                          }
+                          {!state.oneprojectData.project_icon && 
+                            <Image src="/sheep.svg" alt="avatar" />
+                          }
                       </Flex>
                       <VStack width={{lg:'880px'}} height={{lg:'484px'}}  paddingLeft= {{lg:'55px'}} style={{ backdropFilter:'blur(54px)', paddingTop:'45px', background:'rgba(20, 0, 75, 0.74)', border:'2px solid rgba(255, 255, 255, 0.05)', borderRadius: '25px'}}>
                         <Flex alignSelf={{base:'center', md:'center', lg:'flex-start'}}>
                           <Text fontSize='16px' fontWeight='normal' color={'rgba(255, 255, 255, 0.54)'}>Home &gt;&nbsp;</Text>
                           <Text fontSize='16px' fontWeight='normal' color={'rgba(255, 255, 255, 0.54)'}>Projects &gt;&nbsp;</Text>
-                          <Text fontSize='16px' color={'rgba(255, 255, 255, 0.84)'}>Lynx</Text>
+                          <Text fontSize='16px' color={'rgba(255, 255, 255, 0.84)'}>
+                            {state.oneprojectData.project_name}
+                          </Text>
                         </Flex>
                         <Flex 
                           style={{fontFamily:'PilatExtended-Bold'}} 
                           alignSelf={{base:'center', md:'center', lg:'flex-start'}}>
-                          <Text fontSize='40px' fontWeight={'900'}>Lynx</Text>
+                          <Text fontSize='40px' fontWeight={'900'}>
+                            {state.oneprojectData.project_name}
+                          </Text>
                         </Flex>
                         <Flex alignSelf={{base:'center', md:'center', lg:'flex-start'}} marginBottom={'40px !important'}>
                             <chakra.p color={"gray.100"} fontSize="15px">
@@ -78,19 +200,20 @@ export default function NewProject() {
                             <Icon as={MdOutlinePlace} h={6} w={6} mr={2} ml={3} />
 
                             <chakra.h1 fontSize="sm" marginTop={"4px"}>
-                              Cardano
+                              {state.oneprojectData.project_category}
                             </chakra.h1>
                         </Flex>
                         <Flex alignSelf={{base:'center', md:'center', lg:'flex-start'}}>
                         {/* The progress - Replace with functional ones*/}
                         <VStack alignSelf={'flex-start'}>
                         <Flex>
-                        <Text>Backed Funds :  4 / 10 Millions UST</Text>
+                        <Text>Progress : {totalBackedMoney} out of {state.oneprojectData.project_collected} UST
+                        </Text>
                         </Flex>
                         <Flex 
                           alignSelf={{base:'center', md:'center', lg:'flex-start'}}>
                             <CircularProgress value={40} size='120px' color='#00A3FF;'>
-                            <CircularProgressLabel>40%</CircularProgressLabel>
+                            <CircularProgressLabel>{percent}%</CircularProgressLabel>
                             </CircularProgress>
                         {/* The progress - Replace with functional ones*/}
                           </Flex> 
@@ -111,7 +234,7 @@ export default function NewProject() {
                                 width='170px' height='50px' rounded='33px'
                             >
                               <Box variant="solid" color="white" justify='center' align='center'
-                                  onClick = {()=>{setSubmitPressed(!submitPressed)}} >
+                                  onClick = {()=>{}} >
                                 Visit Website  <Icon as={BsArrowUpRight} h={4} w={4} mr={3} />
                               </Box>
                             </ImageTransition>
@@ -129,7 +252,7 @@ export default function NewProject() {
                                 width='170px' height='50px' rounded='33px'
                               >
                           <Box variant="solid" color="white" justify='center' align='center'
-                              onClick = {()=>{setSubmitPressed(!submitPressed)}} >
+                              onClick = {()=>{}} >
                             See Whitepaper
                           </Box>
                         </ImageTransition>
@@ -147,8 +270,8 @@ export default function NewProject() {
                                 width='170px' height='50px' rounded='33px'
                               >
                               <Box variant="solid" color="white" justify='center' align='center'
-                                  onClick = {()=>{setSubmitPressed(!submitPressed)}} >
-                                Back Lynx
+                                   onClick = {()=>{next()}} >
+                                   Back {state.oneprojectData.project_name}
                               </Box>
                             </ImageTransition>
                           </Flex>
@@ -178,7 +301,7 @@ export default function NewProject() {
                                         </StatLabel>
                                       </HStack>
                                         <StatNumber fontSize={'2xl'} fontWeight={'bold'}>
-                                        2000
+                                        {totalBackedMoney}
                                         </StatNumber>
                                         
                                     </Box>
@@ -202,7 +325,7 @@ export default function NewProject() {
                                         </StatLabel>
                                       </HStack>
                                         <StatNumber fontSize={'2xl'} fontWeight={'bold'}>
-                                        20,000
+                                        {state.oneprojectData.project_collected}
                                         </StatNumber>
                                     </Box>
                                     </Flex>
@@ -224,7 +347,7 @@ export default function NewProject() {
                                         </StatLabel>
                                       </HStack>
                                         <StatNumber fontSize={'2xl'} fontWeight={'bold'}>
-                                        Charity
+                                        {state.oneprojectData.project_subcategory}
                                         </StatNumber>
                                     </Box>
                                     </Flex>
@@ -246,7 +369,7 @@ export default function NewProject() {
                                         </StatLabel>
                                       </HStack>
                                         <StatNumber fontSize={'2xl'} fontWeight={'bold'}>
-                                        Cardano
+                                        {state.oneprojectData.project_chain}
                                         </StatNumber>
                                     </Box>
                                     </Flex>
@@ -260,22 +383,7 @@ export default function NewProject() {
                               <span style={{color:"white",fontWeight:"900" ,fontSize:"18px" ,marginBottom:"20px"}}>
                                 Introducing
                               </span>
-                              <br/><br/>    
-                              Commodo labore ut nisi laborum amet eu qui magna ullamco ut labore. 
-                              Aliquip consectetur labore consectetur dolor exercitation est min quis. 
-                              Magna non irure qui ex est laborum nulla excepteur. Aliquip consectetur labore consectetur dolor exercitation est min quis. 
-                              Magna non irure qui ex est laborum nulla excepteur qui.Anim Lorem dolore cupidatat pariatur ex tempor. Duis ea excepteur proident ex commodo irure est. <br/><br/>
-
-                              Nisi commodo qui pariatur enim sint laborum consequat enim in officia. Officia fugiat incididunt commodo et mollit aliqua non aute.
-                              Enim dolor eiusmod aliqua amet ipsum in enim eiusmod. Quis exercitation sit velit duis.Anim Lorem dolore cupidatat pariatur ex tempor. Duis ea excepteur proident ex commodo irure est.<br/><br/>
-
-                              Commodo labore ut nisi laborum amet eu qui magna ullamco ut labore. 
-                              Aliquip consectetur labore consectetur dolor exercitation est min quis. 
-                              Magna non irure qui ex est laborum nulla excepteur. Aliquip consectetur labore consectetur dolor exercitation est min quis. 
-                              Magna non irure qui ex est laborum nulla excepteur qui.Anim Lorem dolore cupidatat pariatur ex tempor. Duis ea excepteur proident ex commodo irure est.<br/><br/>
-
-                              Nisi commodo qui pariatur enim sint laborum consequat enim in officia. Officia fugiat incididunt commodo et mollit aliqua non aute.
-                              Enim dolor eiusmod aliqua amet ipsum in enim eiusmod. Quis exercitation sit velit duis.Anim Lorem dolore cupidatat pariatur ex tempor. Duis ea excepteur proident ex commodo irure est.<br/><br/>
+                              {state.oneprojectData.project_description}
                               </chakra.p>
                           </Flex>
                           <Flex as={Stack} paddingTop={"35px"} mt="40px" width={'80%'} mb={'50px'} height={{lg:'325px'}}>
