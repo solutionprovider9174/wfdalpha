@@ -160,23 +160,21 @@ export default function ProjectDetail()
                 <VStack>
                       <Flex alignContent={'center'} direction={{base:'column',md:'column',lg:'row'}}>
                       <Flex 
-                            width={{lg:'300px'}}
-                            marginRight={{lg:'25px'}}
-                            height={"490px"}
-                            bg="rgba(20, 0, 75, 0.74)"
-                            boxShadow={"0px 2px 10px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.25)"}
-                            border='2px solid rgba(255, 255, 255, 0.05)'
-                            borderRadius={"2xl"}
-                            justify={'center'}
-                            backdropFilter={'blur(54px)'}
-                            >
-                          {state.oneprojectData.project_icon && 
+                        width={{lg:'300px'}}
+                        marginRight={{lg:'25px'}}
+                        height={"490px"}
+                        bg="rgba(20, 0, 75, 0.74)"
+                        boxShadow={"0px 2px 10px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.25)"}
+                        border='2px solid rgba(255, 255, 255, 0.05)'
+                        borderRadius={"2xl"}
+                        justify={'center'}
+                        backdropFilter={'blur(54px)'}
+                        align='center'
+                        >
+                          <object data="/logo.png" style={{width:'200px', height:'200px'}} type="image/png">
                             <Image 
-                            src={state.request+"/download?filename="+ state.oneprojectData.project_icon} alt="avatar" />
-                          }
-                          {!state.oneprojectData.project_icon && 
-                            <Image src="/sheep.svg" alt="avatar" />
-                          }
+                            src={state.request+"/download?filename="+ state.oneprojectData.project_icon} />
+                          </object>
                       </Flex>
                       <VStack width={{lg:'880px'}} height={{lg:'484px'}}  paddingLeft= {{lg:'55px'}} style={{ backdropFilter:'blur(54px)', paddingTop:'45px', background:'rgba(20, 0, 75, 0.74)', border:'2px solid rgba(255, 255, 255, 0.05)', borderRadius: '25px'}}>
                         <Flex alignSelf={{base:'center', md:'center', lg:'flex-start'}}>

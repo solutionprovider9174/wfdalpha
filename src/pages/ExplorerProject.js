@@ -222,7 +222,7 @@ console.log(projectData);
                         <HStack w= "100%">
                           <Flex  my={"6px"} mx={"6px"} width="400px" height="270px" bg="#FFFFFF"
                           boxShadow={"0px 2px 10px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.25)"}
-                          borderRadius={"2xl"} px="20px" py="10px">
+                          borderRadius={"2xl"} px="20px" py="10px" align='center' justify='center'>
                             <object data="/logo.png" style={{width:'200px', height:'200px'}} type="image/png">
                             <Image 
                               src={state.request+"/download?filename="+ projectItem.project_icon}
