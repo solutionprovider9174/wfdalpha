@@ -15,9 +15,9 @@ import {
 const StoreContext = createContext()
 
 const initialState = {
-    net: 'testnet',
-    WEFundContractAddress: "terra1hsvqrzda46k80ca28h282dnhmr0k8eff3m9krz", //testnet
-    // WEFundContractAddress: "terra1qcm9957c2gyghkaqgsk0h5mw6xf6ym4xdu7kmu",
+    net: 'mainnet',
+    // WEFundContractAddress: "terra1hsvqrzda46k80ca28h282dnhmr0k8eff3m9krz", //testnet
+    WEFundContractAddress: "terra1qcm9957c2gyghkaqgsk0h5mw6xf6ym4xdu7kmu",
     projectData: '',
     oneprojectData: '',
     wallet: {},    
@@ -25,14 +25,14 @@ const initialState = {
     config: {},
     ustBalance: 0,
     contractBalance: {},
-    lcd_client: new LCDClient({ //testnet
-        URL: 'https://bombay-lcd.terra.dev/',
-        chainID: 'bombay-12',
-    }),
-    // lcd_client: new LCDClient({
-    //     URL: 'https://lcd.terra.dev',
-    //     chainID: 'columbus-4',
+    // lcd_client: new LCDClient({ //testnet
+    //     URL: 'https://bombay-lcd.terra.dev/',
+    //     chainID: 'bombay-12',
     // }),
+    lcd_client: new LCDClient({
+        URL: 'https://lcd.terra.dev',
+        chainID: 'columbus-4',
+    }),
     investAmount: '',
     investWfdamount: '',
     investName: '',
@@ -40,8 +40,8 @@ const initialState = {
     investTitle: '',
     investDate: '',
     investSignature: '',
-    // request: 'https://wefund-nodejs-hmcl7.ondigitalocean.app',
-    request: 'http://bfb2-188-43-136-33.ngrok.io',
+    request: 'https://wefund-nodejs-hmcl7.ondigitalocean.app',
+    // request: 'http://508d-87-116-164-143.ngrok.io',
     pdfFile: '',
     whitepaper: '',
     logo: '',
