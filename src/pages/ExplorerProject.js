@@ -356,6 +356,7 @@ console.log(projectData);
                             <Flex my={"6px"} mx={"6px"} w="72px" minW='72px' h="320px" bg="#FFFFFF"
                               boxShadow={"0px 2px 10px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.25)"}
                               borderRadius={"2xl"}
+                              align='center'
                             >
                               <object data="/logo.png" style={{width:'72px', height:'72px', alignItems:'center'}} type="image/png">
                               <Image 

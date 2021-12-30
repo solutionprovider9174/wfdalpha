@@ -29,7 +29,7 @@ export default {
             template: 'src/pages/BackProject',
         },
         {
-            path: 'explore',
+            path: 'explorer',
             template: 'src/pages/ExplorerProject',
         },
         {
