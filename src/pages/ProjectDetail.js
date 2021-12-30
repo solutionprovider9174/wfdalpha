@@ -216,7 +216,6 @@ export default function ProjectDetail()
                             <CircularProgress value={percent} size='120px' color='blue.600'>
                             <CircularProgressLabel>{percent}%</CircularProgressLabel>
                             </CircularProgress>
-                      {/* The progress - Replace with functional ones*/}
                         </Flex>
                     </VStack>
                       {/* The Buttons*/}

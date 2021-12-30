@@ -34,7 +34,7 @@ if (typeof document !== 'undefined') {
     const render = (Comp) => {
         renderMethod(
             <Wallet
-                defaultNetwork={mainnet}
+                defaultNetwork={testnet}
                 walletConnectChainIds={{
                     0: testnet,
                     1: mainnet,
