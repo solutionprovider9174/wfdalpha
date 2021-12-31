@@ -57,8 +57,16 @@ export default function NewProject() {
         <Box width='900px' bg='#FFFFFF0D' px='50px' style={{fontFamily:'Sk-Modernist-Regular'}} >
           <Flex mt='83px' justify='center' align='center' direction='column'
             style={{fontFamily:'PilatExtended-Regular'}}>
-            <Text fontSize='22px' fontWeight={'300'}>Input your investment amount</Text>
-            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'}>
+            <Text fontSize='22px' fontWeight={'300'} textAlign='center'>
+              Input your investment amount
+            </Text>
+            <Text 
+              fontSize='16px' 
+              color='rgba(255, 255, 255, 0.54)' 
+              fontWeight={'normal'}
+              w={{base:'300px', lg:'100%'}}
+              textAlign='center'
+            >
               Please enter your UST amount and we will convert the WFD amount for you
             </Text>
           </Flex>
@@ -70,14 +78,28 @@ export default function NewProject() {
           <InputTransition 
             unitid='backamount'
             selected={backAmount==''?false:true}
-            width='600px' height='55px' rounded='md' mb='42px'
+            width={{base:'300px', lg:'600px'}} 
+            height='55px' rounded='md' mb='42px'
           >      
-            <InputGroup size="sm" style={{border:'0', background: 'rgba(255, 255, 255, 0.05)'}}>
-              <Input type="text"  h='55px' style={{border:'0', background:'transparent',  paddingLeft:'25px'}} placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value={backAmount} 
-              onChange={(e)=>onChangeBackamount(e)} />
-              <InputRightElement w='60px'  h='55px' pointerEvents='none' children={<Text>UST</Text>} 
-              />          
-            </InputGroup>
+            <InputGroup 
+              size={{base:'200px', lg:'sm'}} 
+              style={{border:'0', background: 'rgba(255, 255, 255, 0.05)'}}
+            >
+              <Input type="text"  h='55px' 
+                style={{border:'0', background:'transparent',  paddingLeft:'25px'}} 
+                placeholder="Type here" 
+                focusBorderColor="purple.800" 
+                rounded="md"  
+                value={backAmount} 
+                onChange={(e)=>onChangeBackamount(e)}
+              />
+                <InputRightElement 
+                  w={{base:'40px', lg:'60px'}}
+                  h='55px' 
+                  pointerEvents='none' 
+                  children={<Text>UST</Text>} 
+                />          
+              </InputGroup>
           </InputTransition>
           <Flex alignSelf={'flex-start'} marginLeft={'10%'}>
             <Text mb='20px' >WFD Tokens You Will Receive</Text>
@@ -85,14 +107,28 @@ export default function NewProject() {
           <InputTransition 
             unitid='WFDamount'
             selected={backAmount==''?false:true}
-            width='600px' height='55px' rounded='md'
+            width={{base:'300px', lg:'600px'}} 
+            height='55px' rounded='md'
           >      
-            <InputGroup size="sm" style={{border:'0', background:'rgba(255, 255, 255, 0.05)'}}>
-              <Input type="text"  h='55px' style={{border:'0', background:'transparent', paddingLeft:'25px'}} placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value={wfdAmount}
-              onChange={(e)=>{}} />
-              <InputRightElement w='60px'  h='55px' pointerEvents='none' children={<Text>WFD</Text>} 
-              />          
-            </InputGroup>
+            <InputGroup 
+              size={{base:'200px', lg:'sm'}} 
+              style={{border:'0', background: 'rgba(255, 255, 255, 0.05)'}}
+            >
+              <Input type="text"  h='55px' 
+                style={{border:'0', background:'transparent', paddingLeft:'25px'}} 
+                placeholder="Type here" 
+                focusBorderColor="purple.800" 
+                rounded="md"  
+                value={wfdAmount}
+                onChange={(e)=>{}} 
+              />
+                <InputRightElement 
+                  w={{base:'40px', lg:'60px'}}
+                  h='55px' 
+                  pointerEvents='none' 
+                  children={<Text>WFD</Text>} 
+                />                    
+              </InputGroup>
           </InputTransition>
 
          

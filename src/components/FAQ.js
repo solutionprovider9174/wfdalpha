@@ -22,7 +22,7 @@ export default function NewProject() {
       <Flex pb='75px' mb="20px" justify='center'
         style={{fontFamily:'PilatExtended-Bold'}}>
         <VStack>
-          <Flex>
+          <Flex direction={{base:'column', lg:'row'}}>
             <Text fontSize='22px'>Our Funding&nbsp;</Text>
             <Text fontSize='22px' color='#4790f5'>Approach</Text>
           </Flex>
