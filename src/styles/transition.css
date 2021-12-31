@@ -56,13 +56,6 @@
   justify-content: center;
   font-family: 'PilatExtended-Bold';
 }
-#projectpad {
-  width: 100%;
-  transition: 1s;
-  margin-top: 70px;
-  position: relative;
-  flex-direction: column;
-}
 #projectIndustryContainer {
   width: 70em;
   margin-top: 150px;
@@ -280,6 +273,13 @@
 #heroLogo {
   width: 12em;
 }
+#projectpad {
+  width: 100%;
+  transition: 1s;
+  margin-top: 70px;
+  position: relative;
+  flex-direction: column;
+}
 .projectTitle {
   font-weight: 700;
   line-height: 35px;
@@ -294,13 +294,7 @@
 .projectLabel {
   font-size: 16px;
 }
-.projectItemContentCol1 {
-  width: 63%;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-}
-.projectItemContentCol2 {
+.projectItemContentCol {
   width: 63%;
   align-items: flex-end;
   flex-direction: column;
@@ -978,7 +972,7 @@
   }
   #RoadMapMobile {
     margin-top: 2em;
-    margin-bottom: 5em;
+    margin-bottom: 0;
   }
   .projectLabel {
     font-size: 10px;
@@ -1061,5 +1055,126 @@
     width: 100%;
     height: 250px;
     position: absolute;
+  }
+  #projectpad {
+    width: 100%;
+    transition: 1s;
+    margin-top: 50px;
+    position: relative;
+    margin-bottom: -100px;
+    flex-direction: column;
+  }
+  .PROJECT_ITEMS_ROW1,
+  .PROJECT_ITEMS_ROW2 {
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    text-align: left;
+    margin-bottom: 1em;
+    border-radius: 5px;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  .projectItemContentCol {
+    width: 100%;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .projectItemImageCol {
+    width: 100%;
+    height: 250px;
+  }
+  .projectItemImageCol img {
+    border-radius: 10px !important;
+    object-fit: cover !important;
+  }
+  .projectTitle {
+    font-weight: 700;
+    line-height: 15px;
+    font-size: 13px;
+    margin-bottom: -5px;
+  }
+  .projectDesc {
+    margin-top: -5px;
+    font-size: 11px !important;
+    line-height: 13px;
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+  .projectState {
+    font-size: 9px !important;
+    line-height: 10px;
+    font-weight: 400;
+  }
+  .projectLabel {
+    font-size: 11px;
+  }
+  #roadMapLineId {
+    height: 70em;
+  }
+  #roadmapBox1,
+  #roadmapBox2,
+  #roadmapBox3,
+  #roadmapBox4,
+  #roadmapBox5,
+  #roadmapBox6,
+  #roadmapBox7 {
+    width: 100%;
+    height: 10em;
+    display: flex;
+    position: absolute;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  #roadmapBox1 {
+    top: 4%;
+  }
+  #circle1 {
+    width: .8em;
+    height: .8em;
+  }
+  #roadmapBox2 {
+    top: 22%;
+  }
+  #circle2 {
+    width: .8em;
+    height: .8em;
+  }
+  #roadmapBox3 {
+    top: 36%;
+  }
+  #circle3 {
+    width: .8em;
+    height: .8em;
+  }
+  #roadmapBox4 {
+    top: 47%;
+  }
+  #circle4 {
+    width: .8em;
+    height: .8em;
+  }
+  #roadmapBox5 {
+    top: 63%;
+  }
+  #circle5 {
+    width: .8em;
+    height: .8em;
+  }
+  #roadmapBox6 {
+    top: 77%;
+  }
+  #circle6 {
+    width: .8em;
+    height: .8em;
+  }
+  #roadmapBox7 {
+    top: 88%;
+  }
+  #circle7 {
+    width: .8em;
+    height: .8em;
   }
 }

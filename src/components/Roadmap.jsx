@@ -123,12 +123,11 @@ export default function Roadmaps() {
 
       {/* {/ Road Map For Desktop /} */}
       <Flex id="RoadMapMobile">
-        <Image src="/RoadmapLine.svg" />
+        <Image src="/RoadmapLine.svg" id="roadMapLineId" />
         <Flex id="roadmapBox1">
           <Image src="/circle.svg" id="circle1" />
           <Flex className="RoadmapContent">
             <Text className="RoadmapHeading">V1 Q4 2021</Text>
-            <Image src="/beautifulDash.svg" />
             <Text className="RoadmapTitle">Platform</Text>
             <Text className="RoadmapDesc">
               Make running the platform with the basic functionality, create a
@@ -142,7 +141,6 @@ export default function Roadmaps() {
           <Image src="/circle.svg" id="circle2" />
           <Flex className="RoadmapContent">
             <Text className="RoadmapHeading">V2 Q4 2021</Text>
-            <Image src="/beautifulDash.svg" />
             <Text className="RoadmapTitle">Whitepaper</Text>
             <Text className="RoadmapDesc">
               Set up the Core Team, in terms of knowledge, responsability, team
@@ -155,7 +153,6 @@ export default function Roadmaps() {
           <Image src="/circle.svg" id="circle3" />
           <Flex className="RoadmapContent">
             <Text className="RoadmapHeading">Q4 2021</Text>
-            <Image src="/beautifulDash.svg" />
             <Text className="RoadmapTitle">Core Team Set-up</Text>
             <Text className="RoadmapDesc">
               Whitepaper 2.0, will be done in December 2021
@@ -166,7 +163,6 @@ export default function Roadmaps() {
           <Image src="/circle.svg" id="circle4" />
           <Flex className="RoadmapContent">
             <Text className="RoadmapHeading">Q1 2022</Text>
-            <Image src="/beautifulDash.svg" />
             <Text className="RoadmapTitle">Tokenomics</Text>
             <Text className="RoadmapDesc">
               Set up the tokenomics, the date for closing the seed, when and how
@@ -179,7 +175,6 @@ export default function Roadmaps() {
           <Image src="/circle.svg" id="circle5" />
           <Flex className="RoadmapContent">
             <Text className="RoadmapHeading">Q1 2022</Text>
-            <Image src="/beautifulDash.svg" />
             <Text className="RoadmapTitle">Seed - Pre Sale - Ico</Text>
             <Text className="RoadmapDesc">
               Integrate the community voting power, equity crowdfunding system
@@ -191,7 +186,6 @@ export default function Roadmaps() {
           <Image src="/circle.svg" id="circle6" />
           <Flex className="RoadmapContent">
             <Text className="RoadmapHeading">2022</Text>
-            <Image src="/beautifulDash.svg" />
             <Text className="RoadmapTitle">Whitepaper V3</Text>
             <Text className="RoadmapDesc">
               Whitepaper 3.0 completed in 2022
@@ -202,7 +196,6 @@ export default function Roadmaps() {
           <Image src="/circle.svg" id="circle7" />
           <Flex className="RoadmapContent">
             <Text className="RoadmapHeading">Q1 2022</Text>
-            <Image src="/beautifulDash.svg" />
             <Text className="RoadmapTitle">Seed - Pre Sale - Ico</Text>
             <Text className="RoadmapDesc">
               Release a demo platform to create projects, back projects, and

@@ -36,11 +36,7 @@ export default function Industry() {
                 key={index}
                 className={isOdd ? 'PROJECT_ITEMS_ROW1' : 'PROJECT_ITEMS_ROW2'}
               >
-                <Flex
-                  className={
-                    isOdd ? 'projectItemContentCol1' : 'projectItemContentCol2'
-                  }
-                >
+                <Flex className="projectItemContentCol">
                   <Box>
                     <Text
                       fontFamily="PilatExtended-Regular"
@@ -62,6 +58,7 @@ export default function Industry() {
                       color={
                         projectItem.state === 'Ongoing' ? '#2BC54D' : '#FE8600'
                       }
+                      className="projectState"
                       fontSize="18px"
                       mt="10px"
                     >
@@ -93,11 +90,11 @@ export default function Industry() {
                         <ButtonTransition
                           unitid={'cryptofunding' + index}
                           selected={false}
-                          width="150px"
+                          width="120px"
                           height="30px"
-                          rounded="100px"
+                          rounded="5px"
                         >
-                          <Text color="white" fontSize="12px">
+                          <Text color="white" fontSize="13px">
                             Start Funding
                           </Text>
                         </ButtonTransition>
