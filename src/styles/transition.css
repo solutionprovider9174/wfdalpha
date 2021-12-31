@@ -1,8 +1,9 @@
 #comunityBackgroundHeight {
   width: 100%;
   height: 600px;
-  align-items: center;
+  margin: 150px 0;
   position: relative;
+  align-items: center;
   flex-direction: column;
   justify-content: center;
 }
@@ -140,46 +141,62 @@
 #roadmapBox2,
 #roadmapBox3,
 #roadmapBox4,
-#roadmapBox5 {
+#roadmapBox5,
+#roadmapBox6,
+#roadmapBox7 {
   width: 50em;
-  height: 25em;
+  height: 14em;
   display: flex;
   position: absolute;
   align-items: flex-start;
   justify-content: space-between;
 }
 #roadmapBox1 {
-  top: 5%;
+  top: 4%;
 }
 #circle1 {
   width: 1em;
   height: 1em;
 }
 #roadmapBox2 {
-  top: 25%;
+  top: 18%;
 }
 #circle2 {
   width: 1em;
   height: 1em;
 }
 #roadmapBox3 {
-  top: 45%;
+  top: 32%;
 }
 #circle3 {
   width: 1em;
   height: 1em;
 }
 #roadmapBox4 {
-  top: 65%;
+  top: 46%;
 }
 #circle4 {
   width: 1em;
   height: 1em;
 }
 #roadmapBox5 {
-  top: 85%;
+  top: 60%;
 }
 #circle5 {
+  width: 1em;
+  height: 1em;
+}
+#roadmapBox6 {
+  top: 74%;
+}
+#circle6 {
+  width: 1em;
+  height: 1em;
+}
+#roadmapBox7 {
+  top: 88%;
+}
+#circle7 {
   width: 1em;
   height: 1em;
 }
@@ -600,9 +617,11 @@
   #roadmapBox2,
   #roadmapBox3,
   #roadmapBox4,
-  #roadmapBox5 {
+  #roadmapBox5,
+  #roadmapBox6,
+  #roadmapBox7 {
     width: 45em;
-    height: 25em;
+    /* height: 25em; */
   }
   #sphere {
     width: 40%;
@@ -648,9 +667,11 @@
   #roadmapBox2,
   #roadmapBox3,
   #roadmapBox4,
-  #roadmapBox5 {
+  #roadmapBox5,
+  #roadmapBox6,
+  #roadmapBox7 {
     width: 40em;
-    height: 25em;
+    /* height: 25em; */
   }
   #sphere {
     display: none;
@@ -753,9 +774,11 @@
   #roadmapBox2,
   #roadmapBox3,
   #roadmapBox4,
-  #roadmapBox5 {
+  #roadmapBox5,
+  #roadmapBox6,
+  #roadmapBox7 {
     width: 100%;
-    height: 25em;
+    /* height: 25em; */
     display: flex;
     position: absolute;
     align-items: flex-start;
@@ -763,7 +786,7 @@
   }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 450px) {
   #heroHeading {
     font-size: 25px;
     margin-top: 15px;
@@ -866,7 +889,7 @@
     border-top-left-radius: 10px;
   }
   .RightRadiusAboutUs {
-    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
   }
   #headingIndustry {
     font-size: 18px;
@@ -908,5 +931,40 @@
     width: 100%;
     height: 150px;
     position: absolute;
+  }
+  #roadmapBox1,
+  #roadmapBox2,
+  #roadmapBox3,
+  #roadmapBox4,
+  #roadmapBox5,
+  #roadmapBox6,
+  #roadmapBox7 {
+    width: 100%;
+    display: flex;
+    position: absolute;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .RoadmapHeading {
+    font-size: 13px;
+  }
+  .RoadmapTitle {
+    font-size: 13px;
+  }
+  .RoadmapDesc {
+    font-size: 12px;
+  }
+  #RoadMapMobile {
+    margin-top: 2em;
+    margin-bottom: 5em;
+  }
+  .projectLabel {
+    font-size: 10px;
+  }
+  .projectDesc {
+    padding-top: 10px;
+    margin-top: 0px;
+    font-size: 10px;
+    width: 100%;
   }
 }
