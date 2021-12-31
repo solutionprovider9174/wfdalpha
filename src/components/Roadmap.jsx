@@ -6,7 +6,8 @@ export default function Roadmaps() {
     <Flex
       w="100%"
       pt="47px"
-      mt="117px"
+      mt="100px"
+      mb="200px"
       justify="center"
       direction="column"
       alignItems="center"

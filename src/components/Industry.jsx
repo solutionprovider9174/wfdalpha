@@ -36,7 +36,11 @@ export default function Industry() {
                 key={index}
                 className={isOdd ? 'PROJECT_ITEMS_ROW1' : 'PROJECT_ITEMS_ROW2'}
               >
-                <Flex className="projectItemContentCol">
+                <Flex
+                  className={
+                    isOdd ? 'projectItemContentCol1' : 'projectItemContentCol2'
+                  }
+                >
                   <Box>
                     <Text
                       fontFamily="PilatExtended-Regular"
@@ -55,9 +59,11 @@ export default function Industry() {
                     <Text
                       fontFamily="Sk-Modernist-Regular"
                       fontWeight="700"
-                      color="#FE8600"
+                      color={
+                        projectItem.state === 'Ongoing' ? '#2BC54D' : '#FE8600'
+                      }
                       fontSize="18px"
-                      margin="10px 0"
+                      mt="10px"
                     >
                       {projectItem.state}
                     </Text>
@@ -70,40 +76,39 @@ export default function Industry() {
                       {projectItem.description}
                     </Text>
                   </Box>
-                  <Flex id="displayNoneInMobile">
-                    <ButtonTransition
-                      unitid={'cryptofunding' + index}
-                      selected={false}
-                      width="192px"
-                      height="50px"
-                      rounded="100px"
-                    >
-                      <Flex direction="row">
-                        Start Funding
-                        <Image ml="10px" alt="startfunding" src="/handgo.svg" />
-                      </Flex>
-                    </ButtonTransition>
-                  </Flex>
-                  <Flex id="displayNoneInDesktop">
-                    <ButtonTransition
-                      unitid={'cryptofunding' + index}
-                      selected={false}
-                      width="150px"
-                      height="30px"
-                      rounded="100px"
-                    >
-                      <Flex direction="row">
-                        <Text color="white" fontSize="12px">
+                  {projectItem.state === 'Ongoing' && (
+                    <Box>
+                      <Flex id="displayNoneInMobile">
+                        <ButtonTransition
+                          unitid={'cryptofunding' + index}
+                          selected={false}
+                          width="192px"
+                          height="50px"
+                          rounded="100px"
+                        >
                           Start Funding
-                        </Text>
-                        <Image ml="10px" alt="startfunding" src="/handgo.svg" />
+                        </ButtonTransition>
                       </Flex>
-                    </ButtonTransition>
-                  </Flex>
+                      <Flex id="displayNoneInDesktop">
+                        <ButtonTransition
+                          unitid={'cryptofunding' + index}
+                          selected={false}
+                          width="150px"
+                          height="30px"
+                          rounded="100px"
+                        >
+                          <Text color="white" fontSize="12px">
+                            Start Funding
+                          </Text>
+                        </ButtonTransition>
+                      </Flex>
+                    </Box>
+                  )}
                 </Flex>
                 <Box className="projectItemImageCol">
                   <Image
                     alt="Crypto project"
+                    style={{ objectFit: 'cover', borderRadius: '20px' }}
                     src={projectItem.imgsrc}
                     w="100%"
                     h="100%"
@@ -123,8 +128,9 @@ const PROJECT_ITEMS = [
     label: 'CRYPTO-STARTUP INDUSTRY',
     title: 'Crypto Cross Chain Project',
     state: 'Ongoing',
+
     description:
-      'WeFund supports both crypto and non-crypto projects. We are passionate about blockchain technology and its limitless potential. WeFund is designed to democratize the fundraising process.',
+      'WeFund is an incubator of projects from all chains, with the aim of helping the project at every stage "Convert an idea into a project"  "Prepare the project for fundraising"  "Plan the development of the project with Milestone"  "Complete the project We want to make projects 100% winning"',
     imgsrc: '/CryptoProject.png',
   },
   {
