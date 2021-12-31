@@ -33,11 +33,11 @@ export default function Comunity() {
           <ButtonTransition
             unitid="investinwefund"
             selected={false}
-            width="120px"
-            height="20px"
+            width="140px"
+            height="30px"
             rounded="100px"
           >
-            <Text fontSize="10px">Invest in WeFund</Text>
+            <Text fontSize="12px">Invest in WeFund</Text>
           </ButtonTransition>
         </Flex>
       </Flex>
