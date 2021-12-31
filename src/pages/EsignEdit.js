@@ -1,4 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
+
+import {chakra, Box, Flex, Text, VStack, Image, Img
+} from "@chakra-ui/react";
+
 import { Document, Page, pdfjs } from "react-pdf";
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry";
 import SignatureCanvas from 'react-signature-canvas';
@@ -94,18 +98,9 @@ export default ()=> {
   }
 
   return (
-    <>
-      {/* <div style={{backgroundColor:'#b1adad', height:'40px', display:'flex', justifyContent:'center', alignItems:'center', position:'fixed', width:'100%', zIndex:'999'}}>
-        <div id="loading" style={{position:'absolute', left:'0', top:'0', zIndex:'999'}} >
-          <h5>Loading...</h5>
-          <h6>Please wait..</h6>
-        </div>
-        <div style={{width:'120px', borderRadius:'34px',height:'80%', backgroundColor:'rgb(42 76 43)', cursor:'pointer', display:'flex', justifyContent:'center'}}
-        onClick={()=>{confirm()}}
-        >
-          <h5>Confirm</h5>
-        </div>
-      </div> */}
+    <Flex direction='column'>
+
+       <VStack display={{base:'none', md:'none', lg:'block'}} maxW={{base:'0px',md:'0px',lg:'2560px'}} maxH={{base:'0px',md:'0px',lg:'9999px'}}>
       <div style={{display:'flex', flexDirection:'row', width:'100%'}}>
         {/* <div style={{width:"30%"}}>
           <span style={{width:"100%"}}></span>
@@ -192,6 +187,63 @@ export default ()=> {
           </div>             
         </div> */}
       </div>
-    </>
+      </VStack>
+      <VStack display={{base:'block', md:'block', lg:'none'}} maxW='300px'>
+      <div style={{display:'flex', flexDirection:'row', width:'100%'}}>
+        <div>
+          <div style={{display:'flex', flexDirection:'column', width:'100%'}}>
+            <div style={{display:'flex', justifyContent:'center'}}>
+              <Document
+                file={PDFTEMPLATE}
+                onLoadSuccess={onDocumentLoadSuccess}
+              >
+                <Page pageNumber={1} scale="0.5"/>
+              </Document>
+            </div>
+            <div style={{display:'flex', justifyContent:'center', marginTop:"20px"}}>
+              <Document
+                file={PDFTEMPLATE}
+                onLoadSuccess={onDocumentLoadSuccess}
+              >
+                <Page pageNumber={2} scale="0.5" />
+              </Document>
+            </div>
+            <div style={{display:'flex', justifyContent:'center', marginTop:"20px"}}>
+              <Document
+                file={PDFTEMPLATE}
+                onLoadSuccess={onDocumentLoadSuccess}
+              >
+                <Page pageNumber={3} scale="0.5" />
+              </Document>
+            </div>
+            <div style={{display:'flex', justifyContent:'center', marginTop:"20px"}}>
+              <Document
+                file={PDFTEMPLATE}
+                onLoadSuccess={onDocumentLoadSuccess}
+              >
+                <Page pageNumber={4} scale="0.5" />
+              </Document>
+            </div>
+            <div style={{display:'flex', justifyContent:'center', marginTop:"20px"}}>
+              <Document
+                file={PDFTEMPLATE}
+                onLoadSuccess={onDocumentLoadSuccess}
+              >
+                <Page pageNumber={5} scale="0.5" />
+              </Document>
+            </div>
+            <div style={{display:'flex', justifyContent:'center', marginTop:"20px"}}>
+              <Document
+                file={PDFTEMPLATE}
+                onLoadSuccess={onDocumentLoadSuccess}
+              >
+                <Page pageNumber={6} scale="0.5" />
+              </Document>
+            </div>
+          </div>
+        </div>
+      </div>
+      </VStack>      
+    </Flex>
   )
 }
