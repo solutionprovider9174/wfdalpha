@@ -118,25 +118,17 @@ export default function Aboutone() {
           </Flex>
 
           <Flex alignItems="center" justifyContent="center">
-            <Flex className="aboutUsBox" bg="#291554">
+            <Flex className="aboutUsBox LeftBottomRadiusAboutUs" bg="#291554">
               <Image alt="Crypto Industry" src="/voting.svg" />
               <Text className="aboutUsSectionBoxesTexts">
                 Community Voting Power
               </Text>
             </Flex>
-            <Flex className="aboutUsBox" bg="#200E55">
+            <Flex className="aboutUsBox RightBottomRadiusAboutUs" bg="#200E55">
               <Image alt="Crypto Industry" src="/lowriskinvestment.svg" />
               <Text className="aboutUsSectionBoxesTexts">
-                Secure & Refundable Deposits
-              </Text>
-            </Flex>
-          </Flex>
-
-          <Flex alignItems="center" justifyContent="center">
-            <Flex bg="#FFFFFF0D" className="aboutUsBoxLast">
-              <Image alt="Crypto Industry" src="/nftmirror.svg" />
-              <Text className="aboutUsSectionBoxesTexts">
-                Money Release With Milestone and Investor Vote Approval
+                Money release with Milestone system after Investor Voting
+                approval
               </Text>
             </Flex>
           </Flex>

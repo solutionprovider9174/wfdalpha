@@ -23,7 +23,7 @@ export default function Roadmaps() {
         </Flex>
       </Flex>
 
-      {/* Road Map For Desktop */}
+      {/* {/ Road Map For Desktop /} */}
       <Flex id="RoadMapDesktop">
         <Image src="/RoadmapLine.svg" />
         <Flex id="roadmapBox1">
@@ -72,7 +72,7 @@ export default function Roadmaps() {
             <Text className="RoadmapTitle">Tokenomics</Text>
             <Text className="RoadmapDesc">
               Finalized tokenomics, seed round closing date, pre-sale timeline,
-              and IDO strategy will be completed in January 2022
+              and IWO strategy will be completed in January 2022
             </Text>
           </Flex>
           <Image src="/circle.svg" id="circle4" />
@@ -118,9 +118,9 @@ export default function Roadmaps() {
         </Flex>
       </Flex>
 
-      {/* Road Map For Mobile */}
+      {/* {/ Road Map For Mobile /} */}
 
-      {/* Road Map For Desktop */}
+      {/* {/ Road Map For Desktop /} */}
       <Flex id="RoadMapMobile">
         <Image src="/RoadmapLine.svg" />
         <Flex id="roadmapBox1">
