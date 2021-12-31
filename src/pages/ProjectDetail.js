@@ -180,7 +180,7 @@ export default function ProjectDetail()
                         <Flex alignSelf={{base:'center', md:'center', lg:'flex-start'}}>
                           <Text fontSize='16px' fontWeight='normal' color={'rgba(255, 255, 255, 0.54)'}>Home &gt;&nbsp;</Text>
                           <Text fontSize='16px' fontWeight='normal' color={'rgba(255, 255, 255, 0.54)'}>Projects &gt;&nbsp;</Text>
-                          <Text fontSize='16px' color={'rgba(255, 255, 255, 0.84)'}>
+                          <Text fontSize='16px' color={'rgba(255, 255, 255, 0.84)'} textAlign='center'>
                             {state.oneprojectData.project_name}
                           </Text>
                         </Flex>
