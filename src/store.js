@@ -15,7 +15,9 @@ import {
 const StoreContext = createContext()
 
 const initialState = {
+    // net: 'testnet',
     net: 'mainnet',
+
     // WEFundContractAddress: "terra1hsvqrzda46k80ca28h282dnhmr0k8eff3m9krz", //testnet
     WEFundContractAddress: "terra1qcm9957c2gyghkaqgsk0h5mw6xf6ym4xdu7kmu",
     projectData: '',

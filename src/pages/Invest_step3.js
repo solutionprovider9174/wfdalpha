@@ -1,7 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from '../theme';
 import {StdFee, MsgExecuteContract, MsgSend } from '@terra-money/terra.js'
-import {chakra, Box, Flex, Text, Input, InputGroup,  VStack, Image, InputLeftElement, Button
+import {chakra, Box, Flex, Text, Input, InputGroup,  Stack, Image, InputLeftElement, Button
   } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
@@ -218,13 +218,24 @@ export default function Invest_step3() {
         </div>
         </div>
         <Flex width='100%' justify='center' mt='-80px' px='175px'>
-        <Box width='900px' bg='#FFFFFF0D' px='50px' style={{fontFamily:'Sk-Modernist-Regular'}} >
+        <Flex width='900px' bg='#FFFFFF0D' px='50px' 
+          direction='column'
+          style={{fontFamily:'Sk-Modernist-Regular'}}
+          justify='center'
+        >
           <Flex mt='83px' justify='center' align='center' direction='column'
             style={{fontFamily:'PilatExtended-Regular'}}>
-                <Text fontSize='22px' fontWeight={'300'}>Input your investment amount</Text>
-            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'}>Please enter your UST amount and we will convert the WFD amount for you</Text>
+              <Text fontSize='22px' fontWeight={'300'} textAlign='center'>
+                Input your investment amount
+              </Text>
+            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' 
+              fontWeight={'normal'} textAlign='center'
+              w={{base:'300px', lg:'100%'}}
+            >
+              Please enter your UST amount and we will convert the WFD amount for you
+            </Text>
           </Flex>
-          <Flex direction='row' mt='40px' justify="center">
+          <Stack direction={{base:'column',lg:'row'}} mt='40px' space='40px' justify="center">
             <Box w='100%'>
               <Flex justify="space-between">
                 <Text mb='20px'>Name</Text>
@@ -255,9 +266,9 @@ export default function Invest_step3() {
                 </InputGroup>
               </InputTransition>
             </Box>
-          </Flex>
+          </Stack>
           
-          <Flex direction='row' mt='40px' justify="center">
+          <Stack direction={{base:'column', lg:'row'}} mt='40px' space='40px' justify="center">
             <Box w='100%'>
               <Flex justify="space-between">
                 <Text mb='20px'>Email</Text>
@@ -299,22 +310,8 @@ export default function Invest_step3() {
               </Box>
               <input type='file' id="fileSelector" name='userFile' style={{display:'none'}}
                 onChange={(e)=>onChangeSignature(e)}/>
-              {/* 
-              {signature == '' && 
-                <InputGroup size="sm" width='290px'>
-                  <InputLeftElement width='290px' h='55px' pointerEvents='none' children={<IoCloudUploadOutline color='#00A3FF' width='30px' height='30px'/>} />
-                  <Input type="text" h='55px' bg='#FFFFFF' borderColor="#FFFFFF33" placeholder="Upload here" focusBorderColor="purple.800"  rounded="md"  
-                  onClick={()=>{openUpload()}}  /> 
-                </InputGroup>}
-              {signature != '' && 
-                <InputGroup size="sm" width='290px'>
-                  <InputLeftElement h='55px' pointerEvents='none' children={<IoCheckbox color='00A3FF'  width='30px' height='30px' />} />
-                  <Input type="text" h='55px' bg='#FFFFFF' borderColor="#FFFFFF33" placeholder={signature} focusBorderColor="purple.800"  rounded="md"  
-                  onClick={()=>{openUpload()}} /> 
-                </InputGroup>}
-               */}
             </Box>
-          </Flex>
+          </Stack>
           {/* -----------------Back Project----------------- */}
           <Flex w='100%' mt='60px'justify='center' mb='170px'>
             <ImageTransition 
@@ -336,7 +333,7 @@ export default function Invest_step3() {
             </ImageTransition>
           </Flex>
           <Faq/>
-        </Box>
+        </Flex>
         </Flex>
         <Notification
             notification={notification}

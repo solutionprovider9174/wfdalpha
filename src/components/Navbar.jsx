@@ -1,55 +1,51 @@
 import React from 'react'
 import ConnectWallet from './ConnectWallet'
-//
-import { Container } from '../components/Container'
-import { ChakraProvider } from '@chakra-ui/react'
+import { Link } from '@reach/router'
+import { ChakraProvider, Image, Flex, Box, Text } from '@chakra-ui/react'
+
 import theme from '../theme'
 import { ButtonBackTransition } from '../components/ImageTransition'
-import { Box } from '@chakra-ui/react'
-
-import { Link } from '@reach/router'
-
+import { Container } from '../components/Container'
 import '../styles/Navbar.css'
 
-export default function WithSubnavigation() {
+export default function Navbar() {
   return (
     <ChakraProvider resetCSS theme={theme}>
       <Container>
-        <div id="mainContainer">
-          <div style={{ display: 'flex', width: '70%' }}>
-            <Link className="navbar-brand" to="/">
-              <img
-                alt={'Wefund'}
-                src={'/WeFund%20Logos%20only.png'}
-                style={{
-                  position: 'relative',
-                  left: '99px',
-                  top: '31.25%',
-                  width: '56px',
-                  height: '30px',
-                }}
-              />
-            </Link>
-            <div
-              style={{
-                position: 'absolute',
-                width: '30px',
-                left: '185px',
-                top: '40px',
-                border: '1px solid rgba(255,255,255, 0.2)',
-                transform: 'rotate(90deg)',
-              }}
-            ></div>
+        <Flex 
+          id="mainContainer"
+          direction={{base:'column', md:'column', lg:'row'}}
+          justify={{base:'center', md:'center', lg:'space-between'}}
+          h={{base:'150px', md:'150px', lg:'80px'}}
+        >
+          <Flex 
+            w={{base:'100%', md:'100%', lg:'40%'}}
+            h={{base:'50%', md:'50%', lg:'100%'}}
+            align='center'
+            justify={{base:'center', md:'center', lg:'space-between'}}
+          >
+            <Flex ml='20px'>
+              <Link className="navbar-brand" to="/">
+                <Image
+                  alt={'Wefund'}
+                  src={'/WeFund%20Logos%20only.png'}
+                  width={'56px'}
+                />
+              </Link>
+            </Flex>
+            <Flex
+              width= '30px'
+              transform= 'rotate(90deg)'
+              border= '1px solid rgba(255,255,255, 0.2)'
+            />
             <DesktopNav />
-          </div>
-          <div
-            style={{
-              display: 'flex',
-              position: 'relative',
-              right: '5%',
-              top: '20px',
-              alignItems: 'right',
-            }}
+          </Flex>
+          <Flex
+            mr='20px'
+            align='center'
+            justify='center'
+            w={{base:'100%', md:'100%', lg:'40%'}}
+            h={{base:'50%', md:'50%', lg:'100%'}}
           >
             <ButtonBackTransition
               unitid="Create Your Project"
@@ -70,17 +66,11 @@ export default function WithSubnavigation() {
               </Link>
             </ButtonBackTransition>
 
-            <div
-              style={{
-                marginLeft: '20px',
-                marginRight: '20px',
-                width: '270px',
-              }}
-            >
+            <Flex w='197px' ml='20px'>
               <ConnectWallet />
-            </div>
-          </div>
-        </div>
+            </Flex>
+          </Flex>
+        </Flex>
       </Container>
     </ChakraProvider>
   )
@@ -89,24 +79,25 @@ const DesktopNav = () => {
   return (
     <>
       {NAV_ITEMS.map((navItem, index) => (
-        <div
+        <Flex
           key={index}
           className="btn-group"
-          style={{ cursor: 'pointer', left: '185px' }}
+          cursor='pointer'
+          ml = {{base:'50px', md:'50px', lg:'0px'}}
+          align = 'center'
         >
           {!navItem.childitem && (
             <Link
               to={navItem.href}
               className="btn btn-danger"
-              style={{
-                color: 'rgba(255, 255, 255, 0.84)',
-                height: '20px',
-                top: '25px',
-                fontSize: '15px',
-                lineHeight: '18px',
-              }}
             >
+              <Text 
+                color='rgba(255, 255, 255, 0.84)'
+                fontSize='15px'
+                lineHeight='18px'
+              >
               {navItem.label}
+              </Text>
             </Link>
           )}
           {navItem.children && (
@@ -163,7 +154,7 @@ const DesktopNav = () => {
               </ul>
             </>
           )}
-        </div>
+        </Flex>
       ))}
     </>
   )

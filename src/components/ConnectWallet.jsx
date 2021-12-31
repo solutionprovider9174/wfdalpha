@@ -94,6 +94,7 @@ export default function ConnectWallet() {
         />
         {bank ? (
           <>
+            &nbsp;&nbsp;
             <Check
               size={16}
               // color="#0F0038"
@@ -105,6 +106,7 @@ export default function ConnectWallet() {
                 marginLeft: '-5px',
               }}
             />
+            &nbsp;&nbsp;
           </>
         ) : (
           <div className="spinner-border spinner-border-sm" role="status">
@@ -136,68 +138,15 @@ export default function ConnectWallet() {
 
   return (
     <>
-      <div className="navbar-nav ms-auto" style={{ flexDirection: 'row' }}>
+      <div className="navbar-nav" style={{ flexDirection: 'row', width: '100%' }}>
         {!connected && (
           <>
-            <div className="btn-group" style={{ width: '185px' }}>
-              <button
-                className="btn btn-orange  nav-item dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                width="150px"
-                style={{
-                  color: 'white',
-                  backGroundColor: 'red',
-                  width: '100%',
-                  background:
-                    'linear-gradient(180deg, rgba(254, 134, 0, 0.2) 0%, rgba(254, 134, 0, 0) 100%)',
-                  backdropFilter: 'blur(54px)',
-                  borderRadius: '30px',
-                }}
-              >
-                Connect Wallet +&nbsp;
-              </button>
-              <ul
-                className="dropdown-menu dropdown-menu-end"
-                aria-labelledby="dropdownMenuButton1"
-              >
-                <button
-                  onClick={() => connectTo('extension')}
-                  className="dropdown-item"
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                  }}
-                >
-                  <CaretRight size={16} /> Terra Station (extension/mobile)
-                </button>
-                <button
-                  onClick={() => connectTo('mobile')}
-                  className="dropdown-item"
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                  }}
-                >
-                  <CaretRight size={16} /> Terra Station (mobile for desktop)
-                </button>
-              </ul>
-            </div>
-          </>
-        )}
-        {connected && (
-          <>
             <button
-              className="btn btn-orange nav-item dropdown-toggle"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
+              className="btn btn-orange  nav-item dropdown-toggle"
               type="button"
               id="dropdownMenuButton1"
-              width="150px"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
               style={{
                 color: 'white',
                 backGroundColor: 'red',
@@ -208,7 +157,56 @@ export default function ConnectWallet() {
                 borderRadius: '30px',
               }}
             >
-              {returnBank() ? returnBank() : 'loading'}
+              Connect Wallet +&nbsp;
+            </button>
+            <ul
+              className="dropdown-menu dropdown-menu-end"
+              aria-labelledby="dropdownMenuButton1"
+            >
+              <button
+                onClick={() => connectTo('extension')}
+                className="dropdown-item"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}
+              >
+                <CaretRight size={16} /> Terra Station (extension/mobile)
+              </button>
+              <button
+                onClick={() => connectTo('mobile')}
+                className="dropdown-item"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}
+              >
+                <CaretRight size={16} /> Terra Station (mobile for desktop)
+              </button>
+            </ul>
+          </>
+        )}
+        {connected && (
+          <>
+            <button
+              className="btn btn-orange nav-item dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              type="button"
+              id="dropdownMenuButton1"
+              style={{
+                color: 'white',
+                backGroundColor: 'red',
+                width: '100%',
+                background:
+                  'linear-gradient(180deg, rgba(254, 134, 0, 0.2) 0%, rgba(254, 134, 0, 0) 100%)',
+                backdropFilter: 'blur(54px)',
+                borderRadius: '30px',
+              }}
+            >
+              &nbsp;&nbsp;{returnBank() ? returnBank() : 'loading'}&nbsp;&nbsp;
             </button>
             <ul
               className="dropdown-menu dropdown-menu-end"

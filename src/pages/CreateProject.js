@@ -364,7 +364,7 @@ export default function CreateProject()
               selected={prjDescription==''?false:true}
               width='100%' height='175px' rounded='md'
             >
-              <Textarea style={{background: 'rgba(255, 255, 255, 0.05)', }} value={prjDescription} 
+              <Textarea style={{border:'0', background: 'transparent'}} value={prjDescription} 
               onChange={(e)=>{onChangePrjDescription(e)}} rounded="md"
                 placeholder='Type here' size='sm' h='175px' />
             </InputTransition>
@@ -381,8 +381,8 @@ export default function CreateProject()
                 width='100%' height='55px' rounded='md'
               >              
                 <InputGroup size="sm" style={{background: 'rgba(255, 255, 255, 0.05)', }}>
-                  <InputLeftAddon h='55px' style={{background: 'rgba(255, 255, 255, 0.05)', }} children="http://" color='white' rounded="md" />
-                  <Input type="text" h='55px'style={{background: 'rgba(255, 255, 255, 0.05)', }} placeholder="Type here" rounded="md"  
+                  <InputLeftAddon h='55px' style={{background: 'transparent', border:'0'}} children="http://" color='white' rounded="md" />
+                  <Input type="text" h='55px'style={{background: 'transparent', border:'0'}} placeholder="Type here" rounded="md"  
                   value={prjWebsite} onChange={(e)=>{setPrjWebsite(e.target.value)}} />
                 </InputGroup>
               </InputTransition>
@@ -456,7 +456,7 @@ export default function CreateProject()
               selected={prjCategory==''?false:true}
               width='100%' height='55px' rounded='md'
             >       
-              <Select id="sub_category" style={{background: 'rgba(255, 255, 255, 0.05)', }} h='55px' name="sub_category" autoComplete="sub_category" focusBorderColor="purple.800" shadow="sm" size="sm" w="full" rounded="md"
+              <Select id="sub_category" style={{background: 'transparent', border:'0'}} h='55px' name="sub_category" autoComplete="sub_category" focusBorderColor="purple.800" shadow="sm" size="sm" w="full" rounded="md"
               onChange={(e)=>{setPrjCategory(e.target.value)}} 
               >
                 <option selected style={{backgroundColor:'#1B0645'}}>Crypto</option>
@@ -475,7 +475,7 @@ export default function CreateProject()
               selected={prjSubcategory==''?false:true}
               width='100%' height='55px' rounded='md'
             >       
-              <Select id="sub_category" style={{background: 'rgba(255, 255, 255, 0.05)', }} h='55px' name="sub_category" autoComplete="sub_category" focusBorderColor="purple.800" shadow="sm" size="sm" w="full" rounded="md"
+              <Select id="sub_category" style={{background: 'transparent', border:'0'}} h='55px' name="sub_category" autoComplete="sub_category" focusBorderColor="purple.800" shadow="sm" size="sm" w="full" rounded="md"
               onChange={(e)=>{setPrjSubcategory(e.target.value)}} 
               >
                 <option selected style={{backgroundColor:'#1B0645'}}>Lending</option>
@@ -498,7 +498,7 @@ export default function CreateProject()
               selected={prjChain==''?false:true}
               width='100%' height='55px' rounded='md' background= 'rgba(255, 255, 255, 0.05)'
             >       
-              <Select id="sub_category" style={{background: 'rgba(255, 255, 255, 0.05)', }} h='55px' name="sub_category" autoComplete="sub_category" focusBorderColor="purple.800" shadow="sm" size="sm" w="full" rounded="md"
+              <Select id="sub_category" style={{background: 'parent', border:'0'}} h='55px' name="sub_category" autoComplete="sub_category" focusBorderColor="purple.800" shadow="sm" size="sm" w="full" rounded="md"
               onChange={(e)=>{setPrjChain(e.target.value)}} 
               >
                 <option selected style={{backgroundColor:'#1B0645'}}>Terra</option>
@@ -521,8 +521,8 @@ export default function CreateProject()
                 width='100%' height='55px' rounded='md'
               >      
                 <InputGroup size="sm" style={{background: 'rgba(255, 255, 255, 0.05)'}}>
-                  <InputLeftElement style={{background: 'transparent', }} pointerEvents='none' color='gray.300' fontSize='1.2em' children=' ' />
-                  <Input style={{ }} type="email" h='55px'placeholder="example@email.com" focusBorderColor="purple.800" rounded="md"  value={prjEmail} onChange={(e)=>{setPrjEmail(e.target.value)}} />
+                  <InputLeftElement style={{background: 'transparent', border:'0' }} pointerEvents='none' color='gray.300' fontSize='1.2em' children=' ' />
+                  <Input style={{background: 'transparent', border: '0'}} type="email" h='55px'placeholder="example@email.com" focusBorderColor="purple.800" rounded="md"  value={prjEmail} onChange={(e)=>{setPrjEmail(e.target.value)}} />
                 </InputGroup>
               </InputTransition>
             </Box>
@@ -536,7 +536,7 @@ export default function CreateProject()
                 width='100%' height='55px' rounded='md'
               >      
                 <InputGroup size="sm" style={{background: 'rgba(255, 255, 255, 0.05' }}>
-                  <Input style={{border:'0', background:'transparent' }} type="text"  h='55px' placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value={prjAmount} onChange={(e)=>{onChangePrjAmount(e)}} />
+                  <Input style={{border:'0', background:'transparent'}} type="text"  h='55px' placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value={prjAmount} onChange={(e)=>{onChangePrjAmount(e)}} />
                   <InputRightElement style={{border:'0', background:'transparent'}} w='125px'  h='55px' pointerEvents='none' align='center' color="blue.200"
                   /> 
                   <Select id="peg" style={{border:'0', background:'transparent' }} h='55px' w='140px' name="peg" autoComplete="peg" focusBorderColor="purple.800" shadow="sm" size="sm" rounded="md" fontSize='16px' value='' onChange={(e)=>{setPrjChain(e.target.value)}} 

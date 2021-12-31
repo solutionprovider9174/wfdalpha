@@ -173,7 +173,6 @@ p {
 #mainContainer {
     z-index: 99;
     width: 100%;
-    height: 80px;
     display: flex;
     filter: blur(10);
     position: relative;

@@ -42,8 +42,11 @@ export default function NewProject() {
           <Flex mt='83px' justify='center' align='center' direction='column'
             style={{fontFamily:'PilatExtended-Regular'}}>
             <Text fontSize='22px' fontWeight={'300'}>SAFT Form</Text>
-            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'}>Please check and confirm the form and go next to share us next informations</Text>
-            
+            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'}
+              w={{base:'300px', lg:'100%'}}
+            >
+              Please check and confirm the form and go next to share us next informations
+            </Text>
           </Flex>
           {/* --------amount to back----------- */}
           <Flex mt='83px' justify='center' align='center' direction='column'>
@@ -87,22 +90,6 @@ export default function NewProject() {
                 </Box>
             </ImageTransition>
           </Flex>
-          
-          {/* -----------------------sroadmap-------------------------------- */}
-          
-          <Flex pb='75px' mb="20px" justify='center'
-            style={{fontFamily:'PilatExtended-Bold'}}>
-            <VStack>
-              <Flex>
-                <Text fontSize='22px'>Our Funding&nbsp;</Text>
-                <Text fontSize='22px' color='#4790f5'>Approach</Text>
-              </Flex>
-              <Flex>
-                <Image alignSelf={'center'} alt={'Wefund'} src={ 'saftroadmap.svg' } />
-              </Flex>  
-            </VStack>
-          </Flex>
-
           <Faq/>
         </Box>
         </Flex>
