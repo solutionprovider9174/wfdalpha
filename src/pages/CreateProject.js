@@ -460,8 +460,18 @@ export default function CreateProject()
               onChange={(e)=>{setPrjCategory(e.target.value)}} 
               >
                 <option selected style={{backgroundColor:'#1B0645'}}>Crypto</option>
-                <option style={{backgroundColor:'#1B0645'}}>Google</option>
-                <option style={{backgroundColor:'#1B0645'}}>Ecosystem</option>
+                <option style={{backgroundColor:'#1B0645'}}>Sport Industry</option>
+                <option style={{backgroundColor:'#1B0645'}}>Pro Enviroment Projects</option>
+                <option style={{backgroundColor:'#1B0645'}}>Game Industry</option>
+                <option style={{backgroundColor:'#1B0645'}}>Charity Projects</option>
+                <option style={{backgroundColor:'#1B0645'}}>Real Estate Industry</option>
+                <option style={{backgroundColor:'#1B0645'}}>Creative Industry</option>
+                <option style={{backgroundColor:'#1B0645'}}>Others</option>
+
+
+
+
+
               </Select>
             </InputTransition>
           </Box>
@@ -478,13 +488,13 @@ export default function CreateProject()
               <Select id="sub_category" style={{background: 'transparent', border:'0'}} h='55px' name="sub_category" autoComplete="sub_category" focusBorderColor="purple.800" shadow="sm" size="sm" w="full" rounded="md"
               onChange={(e)=>{setPrjSubcategory(e.target.value)}} 
               >
-                <option selected style={{backgroundColor:'#1B0645'}}>Lending</option>
-                <option style={{backgroundColor:'#1B0645'}}>Charity</option>
-                <option style={{backgroundColor:'#1B0645'}}>Social</option>
-                <option style={{backgroundColor:'#1B0645'}}>IDO</option>
+                <option selected style={{backgroundColor:'#1B0645'}}>Protocol</option>
+                <option style={{backgroundColor:'#1B0645'}}>Dao</option>
+                <option style={{backgroundColor:'#1B0645'}}>Community</option>
+                <option style={{backgroundColor:'#1B0645'}}>Launchped/Incubator</option>
                 <option style={{backgroundColor:'#1B0645'}}>Finance</option>
                 <option style={{backgroundColor:'#1B0645'}}>NFT</option>
-                <option style={{backgroundColor:'#1B0645'}}>Game</option>
+                <option style={{backgroundColor:'#1B0645'}}>Game/Metaverse</option>
               </Select>
             </InputTransition>
           </Box>
@@ -506,6 +516,8 @@ export default function CreateProject()
                 <option style={{backgroundColor:'#1B0645'}}>Ethereum</option>
                 <option style={{backgroundColor:'#1B0645'}}>Polygon</option>
                 <option style={{backgroundColor:'#1B0645'}}>Avalanche</option>
+                <option style={{backgroundColor:'#1B0645'}}>Others</option>
+
               </Select>
             </InputTransition>
           </Box>
