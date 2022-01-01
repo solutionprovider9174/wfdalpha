@@ -55,8 +55,11 @@ export default function ExplorerProject() {
       const projectData = await api.contractQuery(
         state.WEFundContractAddress,
         {
-            get_all_project: {
-            },
+            
+
+            get_project:{
+              project_id:2
+              },
         }
       )
       
