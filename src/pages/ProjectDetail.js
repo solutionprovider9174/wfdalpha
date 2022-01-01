@@ -385,21 +385,8 @@ export default function ProjectDetail()
                                 w={{base:'400px', lg:'1000px'}}
                               >
                               <span style={{color:"white",fontWeight:"900" ,fontSize:"18px" ,marginBottom:"20px"}}>
-                                Introducing
-                              </span>
-                              {state.oneprojectData.project_description}
-                              </chakra.p>
-                          </Flex>
-                          <Flex as={Stack} paddingTop={"35px"} mt="40px" width={'80%'} mb={'50px'} height={{lg:'325px'}}>
-                            {/* ------------Descriptions on Founder of project------------ */}
-                            <Text fontSize='28px' fontWeight={'900'} lineHeight={'36px'} mb={'20px'}>Project <span style={{color:'#00A3FF'}} mb='25px'>Founder Speaks</span></Text>
-                            <Box background="rgba(255, 255, 255, 0.05)" border="1.5px solid rgba(255, 255, 255, 0.15)" boxSizing="border-box" borderRadius="10px" mt={'30px'}>
-                              <Box px={'45px'} paddingTop={"35px"} paddingBottom={"35px"} >
-                              <Text fontSize={'18px'} fontWeight={'bold'}>WeFund Mission</Text>
-                              <br/>
-                              <Text color= {"rgba(255, 255, 255, 0.54)"}>
-
-                              WeFund's mission is to improve and ultimately solve these key aspects of crowdfunding:
+                             
+                              WeFund's mission is to improve and ultimately solve these key aspects of crowdfunding: 
 
 Projects and project-related events are approved by the community:  This helps to give backers what they want, and allows greater agility for projects to adjust and follow market trends.
 
@@ -415,6 +402,20 @@ Crowdfunding works when done with fairness, therefore we created a system to max
 WeFund changes the game:  Protects backers and at the same time protects project creators, making the whole process more secure and transparent.
 
 WeFund was born from the community, for the community.
+                              </span>
+                              {state.oneprojectData.project_description}
+                              </chakra.p>
+                          </Flex>
+                          <Flex as={Stack} paddingTop={"35px"} mt="40px" width={'80%'} mb={'50px'} height={{lg:'325px'}}>
+                            {/* ------------Descriptions on Founder of project------------ */}
+                            <Text fontSize='28px' fontWeight={'900'} lineHeight={'36px'} mb={'20px'}>Project <span style={{color:'#00A3FF'}} mb='25px'>Founder Speaks</span></Text>
+                            <Box background="rgba(255, 255, 255, 0.05)" border="1.5px solid rgba(255, 255, 255, 0.15)" boxSizing="border-box" borderRadius="10px" mt={'30px'}>
+                              <Box px={'45px'} paddingTop={"35px"} paddingBottom={"35px"} >
+                              <Text fontSize={'18px'} fontWeight={'bold'}>WeFund Team</Text>
+                              <br/>
+                              <Text color= {"rgba(255, 255, 255, 0.54)"}>
+
+                           
                                 
                               </Text>
                               </Box>

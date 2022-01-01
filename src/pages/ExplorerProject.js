@@ -151,55 +151,8 @@ console.log(projectData);
           <Box style={{fontFamily:'Sk-Modernist-Regular'}} >
             <Flex width={{lg:'100%'}} justify='center'  px='175px' zIndex={'1'}>
               <VStack paddingBottom={"50px"}>
-                <Flex direction={{base:'column',md:'column',lg:'row'}} alignContent={'center'} spacing={10} mb={'40px'}>
-                  {/* ------------------project category---------- */}
-                  <Flex width={{lg:'50%'}}  ml={{base:'0px', md:'0px', lg:'20px'}}>
-                    <InputTransition 
-                      unitid='projectcategory'
-                      selected={prjCategory==''?false:true}
-                      width='290px' height='55px' rounded='md'
-                    >       
-                      <Select id="sub_category" style={{background: 'rgba(255, 255, 255, 0.05)', }} h='55px' name="sub_category" autoComplete="sub_category" focusBorderColor="purple.800" shadow="sm" size="sm" w="full" rounded="md"
-                        value='' onChange={(e)=>{setPrjCategory(e.target.value)}} 
-                      >
-                        <option selected style={{backgroundColor:'#1B0645'}}>Filter by</option>
-                        <option style={{backgroundColor:'#1B0645'}}>Crypto Projects</option>
-                        <option style={{backgroundColor:'#1B0645'}}>Charity</option>
-                        <option style={{backgroundColor:'#1B0645'}}>Gamification</option>
-                      </Select>
-                    </InputTransition>
-                  </Flex>
-                  <Flex ml={{base:'0px', md:'0px', lg:'20px'}} mt={{base:'20px', md:'20px', lg:'0px'}} >
-                    {/* ------------------project search---------- */}
-                    <InputTransition 
-                      unitid='projectname'
-                      selected={prjName==''?false:true}
-                      width={{base:'290px', md:'290px',lg:'670px'}} mt={{base:'20px', md:'20px', lg:'0px'}} height='55px' rounded='md'
-                    >
-                      <InputGroup style={{background: 'rgba(255, 255, 255, 0.05)', }} size="sm" border='0px'>
-                        <Input style={{border:'0', background:'transparent' }} type="text" h='55px'  rounded="md"  value={prjName} placeholder='Search'  />
-                      </InputGroup>
-                    </InputTransition>
-                  </Flex>
-                  <Flex width={{lg:'200px'}} justify='center' ml={{base:'0px', md:'0px', lg:'20px'}} mt={{base:'20px', md:'20px', lg:'0px'}}>
-                    <ImageTransition 
-                      unitid='submit'
-                      border1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)' 
-                      background1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
-                      border2='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
-                      background2='linear-gradient(180deg, #1A133E 0%, #1A133E 100%)'
-                      border3="linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)"
-                      background3="linear-gradient(180deg, #171347 0%, #171347 100%)"
-                      selected={false}
-                      width='200px' height='50px' rounded='33px'
-                    >
-                      <Box variant="solid" color="white" justify='center' align='center'
-                          onClick = {()=>{setSubmitPressed(!submitPressed)}} >
-                        Search Projects
-                      </Box>
-                    </ImageTransition>
-                  </Flex>
-                </Flex>
+               
+           
                 <Flex width={{lg:'1225px'}} style={{ background: 'rgba(255, 255, 255, 0.05)', borderRadius:'3xl',borderTopColor: 'transparent', fontFamily:'Sk-Modernist-Regular', paddingLeft:'20px', paddingRight:'20px'}} >
                   {/* ------------------project desktop---------- */}
                   <VStack visibility={{base:'hidden', md:'hidden', lg:'visible'}} maxW={{base:'0px',md:'0px',lg:'2560px'}} maxH={{base:'0px',md:'0px',lg:'9999px'}}>
@@ -238,13 +191,14 @@ console.log(projectData);
                             </chakra.p>
                             <HStack space={10} align='self-start'>
                               <chakra.p py={2} color={"gray.400"} w='600px'>
-                                {projectItem.project_description.substr(0, 300)}
-                                <span style={{color:'#00A3FF'}}>...more</span>
+                                {projectItem.project_description.substr(0, 250)}
+                               
                               </chakra.p>
                               <CircularProgress 
                                 value={projectItem.percent} 
-                                size='120px' 
+                                size='150px' 
                                 color='blue.600'
+                                
                               >
                                 <CircularProgressLabel>
                                   {projectItem.percent}%
@@ -268,7 +222,7 @@ console.log(projectData);
                                 <Icon as={MdOutlineAccountBalanceWallet} h={6} w={6} mr={2} />
                                 <chakra.h1 px={2} fontSize="sm">
                                   ${projectItem.project_collected}
-                                  <span style={{color:'#00A3FF'}}>Fundraising Amount</span>
+                                  <span style={{color:'#00A3FF'}}>  Fundraising Amount</span>
                                 </chakra.h1>
                               </Flex>
                               <HStack style={{width:'330px', spacing:10}}>
