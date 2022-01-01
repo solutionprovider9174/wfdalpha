@@ -72,6 +72,6 @@
         "tailwindcss": "npm:@tailwindcss/postcss7-compat"
     },
     "engines": {
-        "node": "12.x"
+        "node": "15.x"
     }
 }

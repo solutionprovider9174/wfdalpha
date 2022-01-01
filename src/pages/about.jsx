@@ -38,7 +38,7 @@ export default function Aboutone() {
               <Image h="200px" src="/rocket.svg" />
             </Flex>
 
-            <a href="/Litepaper Wefund 12.29.21.pdf">
+            <a href="/Litepaper.pptx">
               <Flex w="100%" mt="30px" id="displayNoneInMobile">
                 <ButtonBackTransition
                   width="100%"
@@ -47,6 +47,7 @@ export default function Aboutone() {
                   selected={false}
                   unitid="downwhitepaper"
                 >
+                  
                   <Flex
                     w="100%"
                     pl="25px"
