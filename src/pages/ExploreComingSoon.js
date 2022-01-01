@@ -134,16 +134,16 @@ console.log(projectData);
     <ChakraProvider resetCSS theme={theme}>
       <div style={{background:"linear-gradient(90deg, #1F0021 0%, #120054 104.34%)", 
       width:'100%', color:'white', fontSize:'18px', fontFamily:'Sk-Modernist-Regular', fontWeight:'500' }}>
-        <div boxShadow={{lg:"0px 5px 50px 0px #000000A6"}} style={{ width:'100%', zIndex:'10'}}>
-        <div style={{backgroundImage:"url('/createproject_banner.svg')", width:'100%', width:'100%', zIndex:'11',backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',zIndex:'11'}}>
+        <div style={{boxShadow:"0px 5px 50px 0px #000000A6", width:'100%', zIndex:'10'}}>
+        <div style={{backgroundImage:"url('/createproject_banner.svg')", width:'100%',  zIndex:'11',backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover'}}>
           <Flex pt='64px' justify="center">
             <Text fontSize='16px' fontWeight='normal' color={'rgba(255, 255, 255, 0.54)'}>Home &gt;&nbsp;</Text>
             <Text fontSize='16px' color={'rgba(255, 255, 255, 0.84)'}>Projects</Text>
           </Flex>
           <Flex mt='11px' pb='75px' mb="75px" justify='center'
             style={{fontFamily:'PilatExtended-Bold'}} >
-            <Text fontSize={{base:'25px',md:'25px',lg:'40px'}} fontWeight={'900'}>Explore&nbsp;</Text>
-            <Text fontSize={{base:'25px',md:'25px',lg:'40px'}} color='#4790f5' fontWeight={'900'}>Projects</Text>
+            <Text fontSize='40px' fontWeight={'900'}>Explore&nbsp;</Text>
+            <Text fontSize='40px' color='#4790f5' fontWeight={'900'}>Projects</Text>
           </Flex>
         </div>
         </div>
@@ -352,21 +352,21 @@ console.log(projectData);
                           mb='20px'
                         >
                           {/* ------------------project image---------- */}
-                          <Flex width={'300px'} direction={'column'} alignSelf={'center'}>
-                            <Flex my={"6px"} mx={"6px"} minW='72px' bg="#FFFFFF" padding={'10px'}
-                              boxShadow={"0px 2px 10px rgba(0, 0, 0, 015), 0px 4px 4px rgba(0, 0, 0, 0.25)"}
+                          <Flex width={'300px'}>
+                            <Flex my={"6px"} mx={"6px"} w="72px" minW='72px' h="320px" bg="#FFFFFF"
+                              boxShadow={"0px 2px 10px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.25)"}
                               borderRadius={"2xl"}
                               align='center'
                             >
-                              <object data="/logo.png" style={{width:'100%', maxHeight:'200px', alignItems:'center'}} type="image/png">
-                              <Image alignSelf={'center'}
+                              <object data="/logo.png" style={{width:'72px', height:'72px', alignItems:'center'}} type="image/png">
+                              <Image 
                                 src={state.request+"/download?filename="+ projectItem.project_icon}
                                 w='72px'
                               />
                               </object>
                             </Flex>
                           {/* ------------------project Detail---------- */}
-                            <Flex pt={2} px={2} w='240px' direction='column' alignSelf={'end'}>
+                            <Flex pt={2} px={2} w='240px' direction='column'>
                               <chakra.h1 color="white" fontWeight="bold" fontSize="lg">
                                 {projectItem.project_name}
                               </chakra.h1>
@@ -374,7 +374,7 @@ console.log(projectData);
                               Date - <span style={{color:"#FE8600"}}>31 Dec, 2021</span>
                               </chakra.p>
                               {/* ------------------project synopsis---------- */}
-                              <chakra.p pt={2} color={"gray.400"} fontSize="15px" h='auto' overflow='hidden' textAlign={'center'} justify={'center'}>
+                              <chakra.p pt={2} color={"gray.400"} fontSize="15px" h='270px' overflow='hidden'>
                                 {projectItem.project_description.substr(0,300)}
                               </chakra.p>
                             </Flex>

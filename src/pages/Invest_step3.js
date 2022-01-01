@@ -1,28 +1,39 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from '../theme';
-import { Container } from '../components/Container';
-import {chakra, Box, Flex, Text, Stack, FormControl, FormLabel,
-    Input, InputGroup,  VStack, Image, InputLeftElement,Img
+import { CheckIcon } from "@chakra-ui/icons";
+import {StdFee, MsgExecuteContract, MsgSend } from '@terra-money/terra.js'
+import {chakra, Box, Flex, Text, Input, InputGroup,  Stack, Image, InputLeftElement, Button, HStack, VStack, Img
   } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
-import { useStore } from '../store'
-import { IoChevronUpOutline, IoChevronDownOutline, IoCheckbox,  IoCloudUploadOutline } from 'react-icons/io5';
+import SignatureCanvas from 'react-signature-canvas';
 import { navigate } from '@reach/router'
-import { ImageTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
+
+import { useStore } from '../store'
+import { ImageTransition, ButtonTransition, InputTransition } from "../components/ImageTransition";
 import Notification from '../components/Notification'
+import Faq from '../components/FAQ'
+
+let useConnectedWallet = {}
+if (typeof document !== 'undefined') {
+    useConnectedWallet =
+        require('@terra-money/wallet-provider').useConnectedWallet
+}
 
 export default function Invest_step3() {
-  const [blog1, setBlog1] = useState(false);
-  const [blog2, setBlog2] = useState(false);
-  const [blog3, setBlog3] = useState(false);
-  const [blog4, setBlog4] = useState(false);
-  const [blog5, setBlog5] = useState(false);
-
   const [signature, setSignature] = useState('');
   const [InsTitle, setInsTitle] = useState('');
   const [InsName, setInsName] = useState('');
   const [InsEmail, setInsEmail] = useState('');
   const {state, dispatch} = useStore();
+
+  const canvasRef = useRef({});
+  
+  //---------------wallet connect-------------------------------------
+  let connectedWallet = ''
+
+  if (typeof document !== 'undefined') {
+    connectedWallet = useConnectedWallet()
+  }
 
   //---------------notification setting---------------------------------
   const [notification, setNotification] = useState({
@@ -64,6 +75,7 @@ export default function Invest_step3() {
       fileSelector.click();
     }
   }
+
   function onChangeSignature(e){
     if(typeof document !== 'undefined') {
       let fileSelector = document.getElementById('fileSelector')
@@ -73,11 +85,40 @@ export default function Invest_step3() {
         type: 'setInvestsignature',
         message: e.target.files[0],
       })
+
+      var reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = function () {
+        canvasRef.current.fromDataURL(reader.result);
+      };
+      
     }    
   }
   //---------------on next------------------------------------
 
-  function onNext(){
+  async function onNext(){
+    //----------verify connection--------------------------------
+    if(connectedWallet == '' || typeof connectedWallet == 'undefined'){
+      showNotification("Please connect wallet first!", 'error', 6000);
+      return;
+    }
+
+    console.log(connectedWallet);
+    if(state.net == 'mainnet' && connectedWallet.network.name == 'testnet'){
+      showNotification("Please switch to mainnet!", "error", 4000);
+      return;
+    }
+    if(state.net == 'testnet' && connectedWallet.network.name == 'mainnet'){
+      showNotification("Please switch to testnet!", "error", 4000);
+      return;
+    }
+    
+    if(parseInt(state.investAmount) <= 0 )
+    {
+      showNotification("Please input UST amount", "error", 40000);
+      return;
+    }
+
     dispatch({
       type: 'setInvestname',
       message: InsName,
@@ -106,65 +147,109 @@ export default function Invest_step3() {
     formData.append("investEmail", InsEmail);
     formData.append("investAmount", state.investAmount);
     formData.append("investDate", date);
-
-    formData.append("file", state.investSignature);
+    formData.append("investSignature", canvasRef.current.toDataURL());
+    // formData.append("file", state.investSignature);
 
     const requestOptions = {
       method: 'POST',
       body: formData,
     };
 
-    showNotification("Uploading", 'success', 4000)
+    showNotification("Uploading", 'success', 100000)
 
-    fetch(state.request + '/pdfmake', requestOptions)
+    await fetch(state.request + '/pdfmake', requestOptions)
     .then((res) => res.json())
     .then((data) => {
       hideNotification();
-console.log("from server:");
-console.log(data);
       dispatch({
         type: 'setPdffile',
         message: data.data,
       })
-      navigate('/invest_step4');
     })
     .catch((e) =>{
       console.log("Error:"+e);
     })
+
+    let amount = parseInt(state.investAmount) * 10**6;
+
+    const obj = new StdFee(10_000, { uusd: 4500})
+    const send = new MsgSend(
+      connectedWallet.walletAddress,
+      'terra1zjwrdt4rm69d84m9s9hqsrfuchnaazhxf2ywpc',
+      { uusd: amount }
+    );
+
+    await connectedWallet
+      .post({
+          msgs: [send],
+          // fee: obj,
+          gasPrices: obj.gasPrices(),
+          gasAdjustment: 1.7,
+      })
+      .then((e) => {
+          if (e.success) {
+              showNotification('Back Success', 'success', 4000)
+          } else {
+              showNotification(e.message, 'error', 4000)
+          }
+      })
+      .catch((e) => {
+          showNotification(e.message, 'error', 4000)
+      })
+
+    navigate('/invest_step4');
   }
 
   return (
     <ChakraProvider resetCSS theme={theme}>
       <div style={{background:"linear-gradient(90deg, #1F0021 0%, #120054 104.34%)", 
       width:'100%', color:'white', fontSize:'18px', fontFamily:'Sk-Modernist-Regular', fontWeight:'500' }}>
-        <div style={{backgroundImage:"url('/createproject_banner_emphasis.svg')", 
-        boxShadow:"0px 5px 50px 0px #000000A6", width:'100%', zIndex:'10'}}>
-        <div style={{backgroundImage:"url('/createproject_banner.svg')", width:'100%', width:'100%', zIndex:'11',backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',zIndex:'11'}}>
-          <Flex pt='64px' justify="center">
+        <div style={{backgroundImage:"url('/createproject_banner_emphasis.svg')", width:'100%', zIndex:'10'}}>
+        <div  style={{backgroundImage:"url('/createproject_banner.svg')", position:'absolute', top:'80px',  width:'100%', width:'100%', zIndex:'11',backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',zIndex:'11'}}>
+          <Flex pt='95px' justify="center">
             <Text fontSize='16px' fontWeight='normal' color={'rgba(255, 255, 255, 0.54)'}>Home &gt;&nbsp;</Text>
-            <Text fontSize='16px' color={'rgba(255, 255, 255, 0.84)'}>Back the Project</Text>
+            <Text fontSize='16px' color={'rgba(255, 255, 255, 0.84)'}>Invest in WeFund</Text>
           </Flex>
-          <Flex mt='11px' pb='75px' mb="20px" justify='center'
+          <Flex mt='11px' pb='55px' mb="20px" justify='center'
             style={{fontFamily:'PilatExtended-Bold'}}>
-            <Text fontSize='40px' color='#4790f5'>Invest</Text>
-            <Text fontSize='40px'>&nbsp;in WeFund</Text>
+            <Text fontSize={{base:'25px',md:'25px',lg:'40px'}}  color='#4790f5'>Invest</Text>
+            <Text fontSize={{base:'25px',md:'25px',lg:'40px'}}>&nbsp;in WeFund</Text>
           </Flex>
         </div>
         </div>
-        <Flex width='100%' justify='center' mt='-80px' px='175px'>
-        <Box width='900px' bg='#FFFFFF0D' px='50px' style={{fontFamily:'Sk-Modernist-Regular'}} >
+        <Flex width='100%' justify='center' mt='80px' px='175px'>
+        <Box width='900px' bg='#FFFFFF0D' px='50px' style={{fontFamily:'Sk-Modernist'}} >
+
           <Flex mt='83px' justify='center' align='center' direction='column'
-            style={{fontFamily:'PilatExtended-Regular'}}>
-                <Text fontSize='22px' fontWeight={'300'}>Input your investment amount</Text>
-            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'}>Please enter your UST amount and we will convert the WFD amount for you</Text>
+            style={{fontFamily:'PilatExtended'}}>
+              <HStack  mt='150px' mb='50px'>
+                <Box style={{paddingTop: '3px', paddingLeft:'3px', height: '24px', width: '24px', border: '3px solid #3BE489', backgroundColor: ' #3BE489', borderRadius: '50%', display:'inline-block'}}>
+                <CheckIcon color="#250E3F" w={3} h={3} marginBottom={'20px'}/>
+                </Box>
+                <Text>Step 1</Text>
+                <Box style={{height: '0x', width: '63px', border: '2px solid #3BE489', background: ' #3BE489'}}></Box>
+                <Box style={{paddingTop: '3px', paddingLeft:'3px', height: '24px', width: '24px', border: '3px solid #3BE489', backgroundColor: ' #3BE489', borderRadius: '50%', display:'inline-block'}}>
+                <CheckIcon color="#250E3F" w={3} h={3} marginBottom={'20px'}/>
+                </Box>
+                <Text>Step 2</Text>
+                <Box style={{height: '4px', width: '63px', background: 'linear-gradient(90deg, #3BE489 0%, rgba(59, 228, 137, 0) 100%)'}}></Box>
+                <Box style={{height: '24px', width: '24px', border: '3px solid rgba(255, 255, 255, 0.3799999952316284)', borderRadius: '50%', display:'inline-block'}}></Box>
+                <Text>Final Step</Text>
+              </HStack>
+                <Text fontSize='22px' fontWeight={'300'}><span style={{color:'#00A3FF'}}>Share Us</span> These Information</Text>
+            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'} mt={'20px'} textAlign={'center'}>Please fill up everything in order to finalize the SAFT form for you</Text>
+            
+            
           </Flex>
-          <Flex direction='row' mt='40px' justify="center">
-            <Box w='100%'>
-              <Flex justify="space-between">
+          
+          {/* -----------------Name and Title----------------- */}
+          <Flex direction={{base:'column',md:'column',lg:'row'}} ml='0px' mt='40px' justify="center" align='center'>
+            <Box align='center'>
+              <Flex ml={{base:'0px',md:'0px',lg:'0px'}}>
                 <Text mb='20px'>Name</Text>
               </Flex>
               <InputTransition 
-                unitid='projectemail'
+                unitid='investorname'
                 selected={InsName==''?false:true}
                 width='100%' height='55px' rounded='md' width='290px'
               >      
@@ -174,12 +259,12 @@ console.log(data);
                 </InputGroup>
               </InputTransition>
             </Box>
-            <Box ml='20px' w='100%'>
-              <Flex justify="space-between">
+            <Box align='center' ml={{base:'0px',md:'0px',lg:'30px'}}>
+              <Flex ml={{base:'0px',md:'0px',lg:'0px'}} mt={{base:'40px', md:'40px', lg:'0px'}}>
                 <Text mb='20px'>Title</Text>
               </Flex>
               <InputTransition 
-                unitid='projectemail'
+                unitid='investortitle'
                 selected={InsTitle==''?false:true}
                 width='100%' height='55px' rounded='md' width='290px'
               >      
@@ -191,13 +276,14 @@ console.log(data);
             </Box>
           </Flex>
           
-          <Flex direction='row' mt='40px' justify="center">
-            <Box w='100%'>
-              <Flex justify="space-between">
+          {/* -----------------Email and Signature----------------- */}
+          <Flex direction={{base:'column',md:'column',lg:'row'}} ml='0px' mt='40px' justify="center"  align='center'>
+            <Box   align='center'>
+              <Flex ml={{base:'0px',md:'0px',lg:'0px'}}>
                 <Text mb='20px'>Email</Text>
               </Flex>
               <InputTransition 
-                unitid='projectemail'
+                unitid='investoremail'
                 selected={InsEmail==''?false:true}
                 width='100%' height='55px' rounded='md' width='290px'
               >      
@@ -207,27 +293,35 @@ console.log(data);
                 </InputGroup>
               </InputTransition>
             </Box>
-            <Box ml='20px' w='100%'>
-              <Flex justify="space-between">
+            <Box align='center' ml={{base:'0px',md:'0px',lg:'30px'}}>
+              <Flex ml={{base:'0px',md:'0px',lg:'0px'}} mt={{base:'40px', md:'40px', lg:'0px'}}>
                 <Text mb='20px'>Signature</Text>
               </Flex>
-              {signature == '' && 
-                <InputGroup size="sm" width='290px'>
-                  <InputLeftElement width='290px' h='55px' pointerEvents='none' children={<IoCloudUploadOutline color='#00A3FF' width='30px' height='30px'/>} />
-                  <Input type="text" h='55px' bg='#FFFFFF' borderColor="#FFFFFF33" placeholder="Upload here" focusBorderColor="purple.800"  rounded="md"  
-                  onClick={()=>{openUpload()}}  /> 
-                </InputGroup>}
-              {signature != '' && 
-                <InputGroup size="sm" width='290px'>
-                  <InputLeftElement h='55px' pointerEvents='none' children={<IoCheckbox color='00A3FF'  width='30px' height='30px' />} />
-                  <Input type="text" h='55px' bg='#FFFFFF' borderColor="#FFFFFF33" placeholder={signature} focusBorderColor="purple.800"  rounded="md"  
-                  onClick={()=>{openUpload()}} /> 
-                </InputGroup>}
+              <Box>
+                <Flex justify = 'center' w='300px' rounded="md" bg='white' >
+                  <SignatureCanvas ref={canvasRef} penColor='black'
+                    canvasProps={{width: 300, height: 100}}/>
+                </Flex>
+                <Flex style={{cursor:'pointer'}} mt='20px' justify='left' fontSize='14px'>
+                  <ButtonTransition unitid="clear"
+                    selected={false}
+                    width='100px' height='40px' rounded='20px'
+                  >
+                    <Box onClick={()=>{canvasRef.current.clear()}}>Clear</Box>
+                  </ButtonTransition>
+                  <ButtonTransition unitid="Open Signature"
+                    selected={false}
+                    width='150px' height='40px' rounded='20px' ml='40px'
+                  >
+                    <Box onClick={()=>openUpload()}>Open Signature</Box>
+                  </ButtonTransition>
+                </Flex>
+              </Box>
               <input type='file' id="fileSelector" name='userFile' style={{display:'none'}}
-                onChange={(e)=>onChangeSignature(e)}/>
+                onChange={()=>changeSignature()}/>
             </Box>
           </Flex>
-          {/* -----------------Back Project----------------- */}
+          {/* -----------------Investt----------------- */}
           <Flex w='100%' mt='60px'justify='center' mb='170px'>
             <ImageTransition 
               unitid='submit'
@@ -240,9 +334,8 @@ console.log(data);
               selected={false}
               width='200px' height='50px' rounded='33px'
             >
-              <Box variant="solid" color="white" justify='center' align='center' 
-                onClick={()=>onNext()}
-              >
+              <Box variant="solid" color="white" justify='center' align='center'
+                  onClick = {()=>{}} >
                 Submit
               </Box>
             </ImageTransition>
@@ -272,125 +365,9 @@ console.log(data);
 
           {/* ---------------------------blog------------------------------ */}
 
-          <Flex fontSize='15px' w='100%' direction='column' fontWeight='500' justify='center'>
-            <Flex mt='37px' fontFamily='PilatExtended-Bold' fontSize='22px' justify='center'>FAQ</Flex>
-             <InputTransitiongrey 
-              unitid='wefundabout'
-              selected={blog1} onClick={()=>{setBlog1(!blog1)}}
-              width='100%' height={blog1?'250px':'55px'} rounded='md' mt='25px'
-            >
-              <Flex direction='column' w='100%'  >
-                  <Flex justify="space-between" align='center'  w='100%' h='55px'>
-                    <Box ml='25px' ><Text>What is WeFund About?</Text></Box>
-                    <Box mr='25px'>
-                      {blog1 && <IoChevronUpOutline />}
-                      {!blog1 && <IoChevronDownOutline/>}
-                    </Box>
-                  </Flex>
-                  {blog1 && 
-                  <>
-                    <Img mt='17px' mx='35px' height='1px' objectFit='cover' src='/line.svg' alt='UST Avatar'/>
-                    <Text fontSize='15px' mt='17px' mb='22px' px='25px' fontWeight='400' w='100%' h='auto'>
-                      WFD Tokens will be used to operate WeFund Platforms. Projects for example converts 1% of their funding into WFD tokens. WFD Tokens also used as governance tokens for voting and govern the project trajectory.
-                    </Text>
-                  </>}
-              </Flex>
-            </InputTransitiongrey>             
-            <InputTransitiongrey 
-              unitid='howback'
-              selected={blog2} onClick={()=>{setBlog2(!blog2)}}
-              width='100%' height={blog2?'250px':'55px'} rounded='md' mt='25px'
-            >
-              <Flex direction='column' w='100%'>
-                  <Flex justify="space-between" align='center'  w='100%' h='55px'>
-                    <Box ml='25px'><Text>How does one back a Project?</Text></Box>
-                    <Box mr='25px'>
-                      {blog2 && <IoChevronUpOutline />}
-                      {!blog2 && <IoChevronDownOutline/>}
-                    </Box>
-                  </Flex>
-                  {blog2 && 
-                  <>
-                    <Img mt='17px' mx='35px' height='1px' objectFit='cover' src='/line.svg' alt='UST Avatar'/>
-                    <Text fontSize='15px' mt='17px' mb='22px' px='25px' fontWeight='400' w='100%' h='auto'>
-                      WFD Tokens will be used to operate WeFund Platforms. Projects for example converts 1% of their funding into WFD tokens. WFD Tokens also used as governance tokens for voting and govern the project trajectory.
-                    </Text>
-                  </>}
-              </Flex>
-            </InputTransitiongrey> 
-            <InputTransitiongrey 
-              unitid='backerget'
-              selected={blog3} onClick={()=>{setBlog3(!blog3)}}
-              width='100%' height={blog3?'250px':'55px'} rounded='md' mt='25px'
-            >
-              <Flex direction='column' w='100%'>
-                  <Flex justify="space-between" align='center'  w='100%' h='55px'>
-                    <Box ml='25px'><Text>What do backer get?</Text></Box>
-                    <Box mr='25px'>
-                      {blog3 && <IoChevronUpOutline />}
-                      {!blog3 && <IoChevronDownOutline/>}
-                    </Box>
-                  </Flex>
-                  {blog3 && 
-                  <>
-                    <Img mt='17px' mx='35px' height='1px' objectFit='cover' src='/line.svg' alt='UST Avatar'/>
-                    <Text fontSize='15px' mt='17px' mb='22px' px='25px' fontWeight='400' w='100%' h='auto'>
-                      WFD Tokens will be used to operate WeFund Platforms. Projects for example converts 1% of their funding into WFD tokens. WFD Tokens also used as governance tokens for voting and govern the project trajectory.
-                    </Text>
-                  </>}
-              </Flex>
-            </InputTransitiongrey>            
-            <InputTransitiongrey 
-              unitid='ustothertoken'
-              selected={blog4} onClick={()=>{setBlog4(!blog4)}}
-              width='100%' height={blog4?'250px':'55px'} rounded='md' mt='25px'
-            >
-              <Flex direction='column' w='100%'>
-                  <Flex justify="space-between" align='center'  w='100%' h='55px'>
-                    <Box ml='25px'><Text>What my UST or other tokens will be used for?</Text></Box>
-                    <Box mr='25px'>
-                      {blog4 && <IoChevronUpOutline />}
-                      {!blog4 && <IoChevronDownOutline/>}
-                    </Box>
-                  </Flex>
-                  {blog4 && 
-                  <>
-                    <Img mt='17px' mx='35px' height='1px' objectFit='cover' src='/line.svg' alt='UST Avatar'/>
-                    <Text fontSize='15px' mt='17px' mb='22px' px='25px' fontWeight='400' w='100%' h='auto'>
-                      WFD Tokens will be used to operate WeFund Platforms. Projects for example converts 1% of their funding into WFD tokens. WFD Tokens also used as governance tokens for voting and govern the project trajectory.
-                    </Text>
-                  </>}
-              </Flex>
-            </InputTransitiongrey>
-            <InputTransitiongrey 
-              unitid='whatwfdfee'
-              selected={blog5} onClick={()=>{setBlog5(!blog5)}}
-              width='100%' height={blog5?'250px':'55px'} rounded='md' mt='25px' mb='210px'
-            >
-              <Flex direction='column' w='100%'>
-                  <Flex justify="space-between" align='center'  w='100%' h='55px'>
-                    <Box ml='25px'><Text>What is WFD Fees?</Text></Box>
-                    <Box mr='25px'>
-                      {blog5 && <IoChevronUpOutline />}
-                      {!blog5 && <IoChevronDownOutline/>}
-                    </Box>
-                  </Flex>
-                  {blog5 && 
-                  <>
-                    <Img mt='17px' mx='35px' height='1px' objectFit='cover' src='/line.svg' alt='UST Avatar'/>
-                    <Text fontSize='15px' mt='17px' mb='22px' px='25px' fontWeight='400' w='100%' h='auto'>
-                      WFD Tokens will be used to operate WeFund Platforms. Projects for example converts 1% of their funding into WFD tokens. WFD Tokens also used as governance tokens for voting and govern the project trajectory.
-                    </Text>
-                  </>}
-              </Flex>
-            </InputTransitiongrey>
-          </Flex>
+          
         </Box>
         </Flex>
-        <Notification
-            notification={notification}
-            close={() => hideNotification()}
-        />
       </div>
     </ChakraProvider>
   )

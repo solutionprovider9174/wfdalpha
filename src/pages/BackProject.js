@@ -3,7 +3,7 @@ import {StdFee, MsgExecuteContract, WasmAPI, LCDClient } from '@terra-money/terr
 import { Box, Flex, Text, Input, InputGroup, InputRightElement, Img } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
 import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark } from 'react-icons/io5';
-import { ButtonTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
+import { ButtonTransition, InputTransition, InputTransitiongrey, ImageTransition } from "../components/ImageTransition";
 import theme from '../theme';
 import Footer from "../components/Footer"
 import { useStore } from '../store'
@@ -77,6 +77,11 @@ export default function BackProject() {
 //----------------------change Amount--------------------------
   function changeAmount(e)
   {
+    if(e.target.value != '' && e.target.value != parseInt(e.target.value).toString()){
+      showNotification("Please input number only", "error", 4000);
+      return;
+    }
+    
     setBackAmount(e.target.value);
     let amount = parseInt(e.target.value) *5 / 100;
     if(amount > 0)
@@ -91,7 +96,26 @@ export default function BackProject() {
       showNotification("Please connect wallet first!", 'error', 6000);
       return;
     }
-console.log(connectedWallet);
+
+    console.log(connectedWallet);
+    if(state.net == 'mainnet' && connectedWallet.network.name == 'testnet'){
+      showNotification("Please switch to mainnet!", "error", 4000);
+      return;
+    }
+    if(state.net == 'testnet' && connectedWallet.network.name == 'mainnet'){
+      showNotification("Please switch to testnet!", "error", 4000);
+      return;
+    }
+    
+    if(backAmount != parseInt(backAmount).toString()){
+      showNotification("Invalid number format!", "error", 4000);
+      return;
+    }
+    if(parseInt(backAmount) < 100){
+      showNotification("Back money at least 100 UST", "error", 4000);
+      return;
+    }
+
     let _project_id = 1;
     if(project_id != null)
       _project_id = project_id;
@@ -155,24 +179,24 @@ console.log(connectedWallet);
   return (
     <ChakraProvider resetCSS theme={theme}>
       <div style={{background:"linear-gradient(90deg, #1F0021 0%, #120054 104.34%)", 
-      width:'100%', color:'white', fontSize:'18px', fontFamily:'Sk-Modernist-Regular', fontWeight:'500' }}>
-        <div style={{backgroundImage:"url('/createproject_banner_emphasis.svg')", 
-        boxShadow:"0px 5px 50px 0px #000000A6", width:'100%', zIndex:'10'}}>
-        <div style={{backgroundImage:"url('/createproject_banner.svg')", width:'100%', width:'100%', zIndex:'11',backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',zIndex:'11'}}>
+      width:'100%', color:'white', fontSize:'18px', fontFamily:'Sk-Modernist', fontWeight:'700' }}>
+        <div style={{backgroundImage:"url('/createproject_banner_emphasis.svg')", width:'100%', zIndex:'10'}}>
+        <div style={{backgroundImage:"url('/createproject_banner.svg')", position:'absolute', top:'80px', 
+        width:'100%', zIndex:'11',backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover'}}>
           <Flex pt='95px' justify="center">
             <Text fontSize='16px' fontWeight='normal' color={'rgba(255, 255, 255, 0.54)'}>Home &gt;&nbsp;</Text>
             <Text fontSize='16px' color={'rgba(255, 255, 255, 0.84)'}>Back the Project</Text>
           </Flex>
-          <Flex mt='11px' pb='150px' justify='center'
+          <Flex mt='11px' pb='55px' mb="75px" justify='center'
             style={{fontFamily:'PilatExtended-Bold'}}>
-            <Text fontSize='40px' fontWeight={'900'}>Contribute to&nbsp;</Text>
-            <Text fontSize='40px' color='#4790f5' fontWeight={'900'}>Project Pool</Text>
+            <Text fontSize={{base:'25px',md:'25px',lg:'40px'}}>Contribute to &nbsp;</Text>
+            <Text fontSize={{base:'25px',md:'25px',lg:'40px'}} color='#4790f5'>Project</Text>
           </Flex>
         </div>
         </div>
-        <Flex width='100%' justify='center' px='175px' mt='0px'>
-        <Box width='900px' bg='#FFFFFF0D' px='50px' style={{fontFamily:'Sk-Modernist'}} >
-          <Flex mt='83px' justify='center' align='center' direction='column'
+        <Flex width='100%' justify='center' mt='80px' px='175px'>
+        <Box width='900px' marginTop='200px' bg='#FFFFFF0D' px='50px' style={{fontFamily:'Sk-Modernist'}} >
+          <Flex mt='65px' justify='center' align='center' direction='column'
             style={{fontFamily:'PilatExtended-Regular'}}>
             <Text fontSize='22px' fontWeight={'300'}>
               Back the Project</Text>
@@ -181,14 +205,12 @@ console.log(connectedWallet);
             </Text>
           </Flex>
           {/* --------amount to back----------- */}
-          <Flex mt='83px' justify='center' align='center' direction='column'>
-          <Flex alignSelf={'flex-start'} marginLeft={'25%'}>
-                <Text mb='20px'>Select Tokens and Entry Amount to back</Text>
-              </Flex>
+          <Flex mt='83px' textAlign={'left'} justify="space-between" align='center' direction='column'>
+                <Text mb='20px' textAlign={'center'} justify={'center'}>Select Tokens and Entry Amount to back</Text>
           <InputTransition 
             unitid='backamount'
             selected={backAmount==''?false:true}
-            width='380px' height='55px' rounded='md' mb='42px'
+            width='300px' height='55px' rounded='md' mb='42px'
           >      
             <InputGroup size="sm" style={{border:'0', background: 'rgba(255, 255, 255, 0.05)'}}>
               <Input type="text"  h='55px' style={{border:'0', background:'transparent',  paddingLeft:'25px'}} placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value={backAmount} 
@@ -197,18 +219,16 @@ console.log(connectedWallet);
               />          
             </InputGroup>
           </InputTransition>
-          <Flex alignSelf={'flex-start'} marginLeft={'25%'}>
-              <Text mb='20px' >WFD Fees</Text>
-              </Flex>
+                <Text mb='20px' textAlign={'left'}>WFD Fees</Text>
           <InputTransition 
             unitid='WFDamount'
             selected={backAmount==''?false:true}
-            width='380px' height='55px' rounded='md'
+            width='300px' height='55px' rounded='md'
           >      
             <InputGroup size="sm" style={{border:'0', background:'rgba(255, 255, 255, 0.05)'}}>
-              <Input type="text"  h='55px' style={{border:'0', background:'transparent', paddingLeft:'25px'}} placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value={wfdAmount}
+              <Input type="text"  h='55px' style={{border:'0', background:'transparent', paddingLeft:'25px'}} placeholder="Type here" focusBorderColor="purple.800" rounded="md"  value=''
               onChange={(e)=>{}} />
-              <InputRightElement w='60px' h='55px' pointerEvents='none' children={<Text>WFD</Text>} 
+              <InputRightElement w='60px'  h='55px' pointerEvents='none' children={<Text>WFD</Text>} 
               />          
             </InputGroup>
           </InputTransition>
@@ -233,11 +253,17 @@ console.log(connectedWallet);
           <Flex w='100%' mt='60px'justify='center' mb='170px'>
             <ButtonTransition 
               unitid='backproject'
+              border1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)' 
+              background1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
+              border2='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
+              background2='linear-gradient(180deg, #1A133E 0%, #1A133E 100%)'
+              border3="linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)"
+              background3="linear-gradient(180deg, #171347 0%, #171347 100%)"
               selected={false}
               width='200px' height='50px' rounded='33px'
             >
               <Box variant="solid" color="white" justify='center' align='center'
-                  onClick = {()=>backProject()} >
+                  onClick = {()=>{}} >
                 Back Project
               </Box>
             </ButtonTransition>
@@ -247,126 +273,13 @@ console.log(connectedWallet);
 
           {/* ---------------------------blog------------------------------ */}
 
-          <Flex fontSize='15px' w='100%' direction='column' fontWeight='500' justify='center'>
-            <Flex mt='37px' fontFamily='PilatExtended-Bold' fontSize='22px' justify='center'>FAQ</Flex>
-             <InputTransitiongrey 
-              unitid='wefundabout'
-              selected={blog1} onClick={()=>{setBlog1(!blog1)}}
-              width='100%' height={blog1?'250px':'55px'} rounded='md' mt='25px'
-            >
-              <Flex direction='column' w='100%'  >
-                  <Flex justify="space-between" align='center'  w='100%' h='55px'>
-                    <Box ml='25px' ><Text>What is WeFund About?</Text></Box>
-                    <Box mr='25px'>
-                      {blog1 && <IoChevronUpOutline />}
-                      {!blog1 && <IoChevronDownOutline/>}
-                    </Box>
-                  </Flex>
-                  {blog1 && 
-                  <>
-                    <Img mt='17px' mx='35px' height='1px' objectFit='cover' src='/line.svg' alt='UST Avatar'/>
-                    <Text fontSize='15px' mt='17px' mb='22px' px='25px' fontWeight='400' w='100%' h='auto'>
-                      WFD Tokens will be used to operate WeFund Platforms. Projects for example converts 1% of their funding into WFD tokens. WFD Tokens also used as governance tokens for voting and govern the project trajectory.
-                    </Text>
-                  </>}
-              </Flex>
-            </InputTransitiongrey>             
-            <InputTransitiongrey 
-              unitid='howback'
-              selected={blog2} onClick={()=>{setBlog2(!blog2)}}
-              width='100%' height={blog2?'250px':'55px'} rounded='md' mt='25px'
-            >
-              <Flex direction='column' w='100%'>
-                  <Flex justify="space-between" align='center'  w='100%' h='55px'>
-                    <Box ml='25px'><Text>How does one back a Project?</Text></Box>
-                    <Box mr='25px'>
-                      {blog2 && <IoChevronUpOutline />}
-                      {!blog2 && <IoChevronDownOutline/>}
-                    </Box>
-                  </Flex>
-                  {blog2 && 
-                  <>
-                    <Img mt='17px' mx='35px' height='1px' objectFit='cover' src='/line.svg' alt='UST Avatar'/>
-                    <Text fontSize='15px' mt='17px' mb='22px' px='25px' fontWeight='400' w='100%' h='auto'>
-                      WFD Tokens will be used to operate WeFund Platforms. Projects for example converts 1% of their funding into WFD tokens. WFD Tokens also used as governance tokens for voting and govern the project trajectory.
-                    </Text>
-                  </>}
-              </Flex>
-            </InputTransitiongrey> 
-            <InputTransitiongrey 
-              unitid='backerget'
-              selected={blog3} onClick={()=>{setBlog3(!blog3)}}
-              width='100%' height={blog3?'250px':'55px'} rounded='md' mt='25px'
-            >
-              <Flex direction='column' w='100%'>
-                  <Flex justify="space-between" align='center'  w='100%' h='55px'>
-                    <Box ml='25px'><Text>What do backer get?</Text></Box>
-                    <Box mr='25px'>
-                      {blog3 && <IoChevronUpOutline />}
-                      {!blog3 && <IoChevronDownOutline/>}
-                    </Box>
-                  </Flex>
-                  {blog3 && 
-                  <>
-                    <Img mt='17px' mx='35px' height='1px' objectFit='cover' src='/line.svg' alt='UST Avatar'/>
-                    <Text fontSize='15px' mt='17px' mb='22px' px='25px' fontWeight='400' w='100%' h='auto'>
-                      WFD Tokens will be used to operate WeFund Platforms. Projects for example converts 1% of their funding into WFD tokens. WFD Tokens also used as governance tokens for voting and govern the project trajectory.
-                    </Text>
-                  </>}
-              </Flex>
-            </InputTransitiongrey>            
-            <InputTransitiongrey 
-              unitid='ustothertoken'
-              selected={blog4} onClick={()=>{setBlog4(!blog4)}}
-              width='100%' height={blog4?'250px':'55px'} rounded='md' mt='25px'
-            >
-              <Flex direction='column' w='100%'>
-                  <Flex justify="space-between" align='center'  w='100%' h='55px'>
-                    <Box ml='25px'><Text>What my UST or other tokens will be used for?</Text></Box>
-                    <Box mr='25px'>
-                      {blog4 && <IoChevronUpOutline />}
-                      {!blog4 && <IoChevronDownOutline/>}
-                    </Box>
-                  </Flex>
-                  {blog4 && 
-                  <>
-                    <Img mt='17px' mx='35px' height='1px' objectFit='cover' src='/line.svg' alt='UST Avatar'/>
-                    <Text fontSize='15px' mt='17px' mb='22px' px='25px' fontWeight='400' w='100%' h='auto'>
-                      WFD Tokens will be used to operate WeFund Platforms. Projects for example converts 1% of their funding into WFD tokens. WFD Tokens also used as governance tokens for voting and govern the project trajectory.
-                    </Text>
-                  </>}
-              </Flex>
-            </InputTransitiongrey>
-            <InputTransitiongrey 
-              unitid='whatwfdfee'
-              selected={blog5} onClick={()=>{setBlog5(!blog5)}}
-              width='100%' height={blog5?'250px':'55px'} rounded='md' mt='25px' mb='210px'
-            >
-              <Flex direction='column' w='100%'>
-                  <Flex justify="space-between" align='center'  w='100%' h='55px'>
-                    <Box ml='25px'><Text>What is WFD Fees?</Text></Box>
-                    <Box mr='25px'>
-                      {blog5 && <IoChevronUpOutline />}
-                      {!blog5 && <IoChevronDownOutline/>}
-                    </Box>
-                  </Flex>
-                  {blog5 && 
-                  <>
-                    <Img mt='17px' mx='35px' height='1px' objectFit='cover' src='/line.svg' alt='UST Avatar'/>
-                    <Text fontSize='15px' mt='17px' mb='22px' px='25px' fontWeight='400' w='100%' h='auto'>
-                      WFD Tokens will be used to operate WeFund Platforms. Projects for example converts 1% of their funding into WFD tokens. WFD Tokens also used as governance tokens for voting and govern the project trajectory.
-                    </Text>
-                  </>}
-              </Flex>
-            </InputTransitiongrey>
-          </Flex>
         </Box>
         </Flex>
         <Footer/>
-        <Notification
-            notification={notification}
-            close={() => hideNotification()}
-        />
+        <Notification 
+          notification={notification}
+          close={() => hideNotification()}
+          />
       </div>
     </ChakraProvider>
   )
