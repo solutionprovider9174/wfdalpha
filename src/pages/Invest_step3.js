@@ -11,7 +11,6 @@ import { navigate } from '@reach/router'
 import { useStore } from '../store'
 import { ImageTransition, ButtonTransition, InputTransition } from "../components/ImageTransition";
 import Notification from '../components/Notification'
-import Faq from '../components/FAQ'
 
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {

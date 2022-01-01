@@ -8,7 +8,6 @@ import { navigate } from '@reach/router'
 
 import { ImageTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
 import { useStore } from '../store'
-import Faq from '../components/FAQ';
 
 export default function NewProject() {
   const [backAmount, setBackAmount] = useState('');

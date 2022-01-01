@@ -8,7 +8,6 @@ import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark } from 'react-ico
 
 import { ImageTransition, InputTransition, InputTransitiongrey } from "../components/ImageTransition";
 import ESign from './EsignEdit';
-import Faq from '../components/FAQ';
 
 export default function NewProject() {
   const [condition, setCondition] = useState(false);
@@ -98,7 +97,7 @@ export default function NewProject() {
                 </Box>
             </ImageTransition>
           </Flex>
-          <Faq/>
+          
         </Box>
         </Flex>
       </div>

@@ -9,7 +9,6 @@ import { navigate } from "@reach/router";
 import { useStore } from '../store'
 import { ImageTransition, ButtonTransition } from "../components/ImageTransition";
 import Notification from '../components/Notification'
-import Faq from '../components/FAQ'
 
 export default function Invest_step4() {
   const {state, dispatch} = useStore();
