@@ -1,147 +1,209 @@
-import { Flex, Image, Text } from '@chakra-ui/react';
-import React, { useState, useEffect } from 'react';
+import { Flex, Image, Text } from '@chakra-ui/react'
+import React from 'react'
 
 export default function Roadmaps() {
-  const [down_position, setdown_position] = useState(-1);
-
-  useEffect(() => {
-    window.addEventListener('scroll', (event) => {
-      var movingpad = document.getElementById('roadmappad');
-      if (window.scrollY > 4600 && window.scrollY < 4650) {
-        movingpad.style.transform = 'translateY(-200px)';
-      } else if (window.scrollY > 4650 && window.scrollY < 4700) {
-        movingpad.style.transform = 'translateY(-600px)';
-      } else if (window.scrollY > 4700 && window.scrollY < 4750) {
-        movingpad.style.transform = 'translateY(-900px)';
-      } else if (window.scrollY > 4900) {
-        movingpad.style.transform = 'translateY(-1200px)';
-      } else if (window.scrollY > 5000) {
-        movingpad.style.transform = 'translateY(-1000px)';
-      } else if (window.scrollY > 5100) {
-        movingpad.style.transform = 'translateY(-1200px)';
-      } else if (window.scrollY > 5200) {
-        movingpad.style.transform = 'translateY(-1400px)';
-      } else if (window.scrollY > 5300) {
-        movingpad.style.transform = 'translateY(-1600px)';
-      } else movingpad.style.transform = 'translateY(0px)';
-      console.log('window.scrollY', window.scrollY);
-    });
-  }, []);
-
-  // function movingroadmappadDown(e) {
-  //   setdown_position(e.pageY);
-  // }
-
-  // function movingroadmappadUp(e) {
-  //   setdown_position(-1);
-  //   movingroadmappadMove(e);
-  // }
-
-  // function movingroadmappadMove(e) {
-  //   // if (down_position != -1) {
-  //   var parentPos = document
-  //     .getElementById('parentroadmappad')
-  //     .getBoundingClientRect();
-  //   var childPos = document
-  //     .getElementById('roadmappad')
-  //     .getBoundingClientRect();
-  //   var top = childPos.top - parentPos.top;
-  //   var offset = e.pageY - down_position;
-  //   console.log(
-  //     '🚀 ~ file: Roadmap.jsx ~ line 33 ~ movingroadmappadMove ~ offset',
-  //     offset
-  //   );
-  //   console.log(
-  //     '🚀 ~ file: Roadmap.jsx ~ line 26 ~ movingroadmappadMove ~ down_position',
-  //     down_position
-  //   );
-  //   console.log(
-  //     '🚀 ~ file: Roadmap.jsx ~ line 26 ~ movingroadmappadMove ~ e.pageY',
-  //     e.pageY
-  //   );
-
-  //   var movingpad = document.getElementById('roadmappad');
-  //   movingpad.style.transform = 'translateY(' + (top + offset) + 'px)';
-  //   if (top + offset > 0) movingpad.style.transform = 'translateY(0px)';
-  //   // }
-  // }
-
   return (
     <Flex
-      mt="117px"
-      direction="column"
       w="100%"
-      px="115px"
       pt="47px"
-      fontFamily="Sk-Modernist-Regular"
+      mt="100px"
+      mb="200px"
+      justify="center"
+      direction="column"
+      alignItems="center"
     >
-      <Text fontFamily="PilatExtended-Regular" fontWeight="400" fontSize="22px">
-        RoadMap
-      </Text>
       <Flex
-        mt="15px"
-        direction="row"
-        fontFamily="PilatExtended-Regular"
-        fontWeight="700"
-        fontSize="35px"
+        direction="column"
+        textAlign="center"
+        fontFamily="Sk-Modernist-Regular"
       >
-        <Text color="#00A3FF">WeFund&nbsp;</Text>
-        <Text>RoadMap</Text>
+        <Text id="aboutUsPageLable">ROADMAP</Text>
+        <Flex id="headingIndustry">
+          <Text color="#00A3FF">WeFund&nbsp;</Text>
+          <Text>RoadMap</Text>
+        </Flex>
       </Flex>
-      <Flex
-        mt="45px"
-        direction="row"
-        cursor="pointer"
-        // onMouseMove={movingroadmappadMove}
-        // onMouseDown={movingroadmappadDown}
-        // onMouseUp={movingroadmappadUp}
-      >
-        <Flex
-          id="parentroadmappad"
-          direction="column"
-          w="50%"
-          overflow="hidden"
-          userSelect="none"
-          pointerEvents="none"
-          position="relative"
-        >
-          <Flex
-            overflow="hidden"
-            position="absolute"
-            h="20px"
-            align="baseline"
-            zIndex="2"
-            style={{ backgroundImage: 'inherit' }}
-          >
-            <Image
-              alt={'Wefund'}
-              src="/RoadMap_Horz.svg"
-              w="100%"
-              objectFit="cover"
-            />
-          </Flex>
-          <Flex
-            id="roadmappad"
-            overflow="hidden"
-            position="absolute"
-            style={{ transition: 'transform 1s' }}
-          >
-            <Image
-              alt={'Wefund'}
-              src="/RoadMap_Horz.svg"
-              w="100%"
-              objectFit="cover"
-            />
+
+      {/* {/ Road Map For Desktop /} */}
+      <Flex id="RoadMapDesktop">
+        <Image src="/RoadmapLine.svg" />
+        <Flex id="roadmapBox1">
+          <Flex className="RoadmapContent2"></Flex>
+          <Image src="/circle.svg" id="circle1" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">Q4 2021</Text>
+            <Image src="/beautifulDash.svg" />
+            <Text className="RoadmapTitle">Platform V1</Text>
+            <Text className="RoadmapDesc">
+              Release a demo platform to create projects, back projects, and
+              stake in Anchor will be completed in December 2021
+            </Text>
           </Flex>
         </Flex>
-        <Flex
-          id="sphere"
-          position="relative"
-          style={{ transition: 'transform 0.5s' }}
-        >
-          <Image alt={'Wefund'} src="/sphere.svg" />
+        <Flex id="roadmapBox2">
+          <Flex className="RoadmapContent2">
+            <Text className="RoadmapHeading">Q4 2021</Text>
+            <Image src="/beautifulDash.svg" />
+            <Text className="RoadmapTitle">Core Team Setup</Text>
+            <Text className="RoadmapDesc">
+              Establish a strong core team with strong knowledge,
+              responsibility, team management, and holds a similar vision will
+              be completed in December 2021.
+            </Text>
+          </Flex>
+          <Image src="/circle.svg" id="circle2" />
+          <Flex className="RoadmapContent"></Flex>
+        </Flex>
+        <Flex id="roadmapBox3">
+          <Flex className="RoadmapContent2"></Flex>
+          <Image src="/circle.svg" id="circle3" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">Q4 2021</Text>
+            <Image src="/beautifulDash.svg" />
+            <Text className="RoadmapTitle">Whitepaper V2</Text>
+            <Text className="RoadmapDesc">
+              Whitepaper 2.0 completed in December 2021
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex id="roadmapBox4">
+          <Flex className="RoadmapContent2">
+            <Text className="RoadmapHeading">Q1 2022</Text>
+            <Image src="/beautifulDash.svg" />
+            <Text className="RoadmapTitle">Tokenomics</Text>
+            <Text className="RoadmapDesc">
+              Finalized tokenomics, seed round closing date, pre-sale timeline,
+              and IWO strategy will be completed in January 2022
+            </Text>
+          </Flex>
+          <Image src="/circle.svg" id="circle4" />
+          <Flex className="RoadmapContent"></Flex>
+        </Flex>
+        <Flex id="roadmapBox5">
+          <Flex className="RoadmapContent2"></Flex>
+          <Image src="/circle.svg" id="circle5" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">2022</Text>
+            <Image src="/beautifulDash.svg" />
+            <Text className="RoadmapTitle">Platform V2</Text>
+            <Text className="RoadmapDesc">
+              Have a full functionality platform with all functions mentioned in
+              the Whitepaper 2.0 completed by the TGE
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex id="roadmapBox6">
+          <Flex className="RoadmapContent2">
+            <Text className="RoadmapHeading">2022</Text>
+            <Image src="/beautifulDash.svg" />
+            <Text className="RoadmapTitle">Whitepaper V3</Text>
+            <Text className="RoadmapDesc">
+              Whitepaper 3.0 completed in 2022
+            </Text>
+          </Flex>
+          <Image src="/circle.svg" id="circle6" />
+          <Flex className="RoadmapContent"></Flex>
+        </Flex>
+        <Flex id="roadmapBox7">
+          <Flex className="RoadmapContent2"></Flex>
+          <Image src="/circle.svg" id="circle7" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">Q1 2022</Text>
+            <Image src="/beautifulDash.svg" />
+            <Text className="RoadmapTitle">Seed - Pre Sale - Ico</Text>
+            <Text className="RoadmapDesc">
+              Release a demo platform to create projects, back projects, and
+              stake in Anchor will be completed in December 2021
+            </Text>
+          </Flex>
+        </Flex>
+      </Flex>
+
+      {/* {/ Road Map For Mobile /} */}
+
+      {/* {/ Road Map For Desktop /} */}
+      <Flex id="RoadMapMobile">
+        <Image src="/RoadmapLine.svg" id="roadMapLineId" />
+        <Flex id="roadmapBox1">
+          <Image src="/circle.svg" id="circle1" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">V1 Q4 2021</Text>
+            <Text className="RoadmapTitle">Platform</Text>
+            <Text className="RoadmapDesc">
+              Make running the platform with the basic functionality, create a
+              project, back a project and stak the amount in Anchor, project
+              done and project fail + yield transfer, will be done in December
+              2021
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex id="roadmapBox2">
+          <Image src="/circle.svg" id="circle2" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">V2 Q4 2021</Text>
+            <Text className="RoadmapTitle">Whitepaper</Text>
+            <Text className="RoadmapDesc">
+              Set up the Core Team, in terms of knowledge, responsability, team
+              management and following the same vision, will be done in December
+              2021
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex id="roadmapBox3">
+          <Image src="/circle.svg" id="circle3" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">Q4 2021</Text>
+            <Text className="RoadmapTitle">Core Team Set-up</Text>
+            <Text className="RoadmapDesc">
+              Whitepaper 2.0, will be done in December 2021
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex id="roadmapBox4">
+          <Image src="/circle.svg" id="circle4" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">Q1 2022</Text>
+            <Text className="RoadmapTitle">Tokenomics</Text>
+            <Text className="RoadmapDesc">
+              Set up the tokenomics, the date for closing the seed, when and how
+              long for the Pre Sale and understand what kind of IDO we want to
+              apply and when, will be done in January 2022
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex id="roadmapBox5">
+          <Image src="/circle.svg" id="circle5" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">Q1 2022</Text>
+            <Text className="RoadmapTitle">Seed - Pre Sale - Ico</Text>
+            <Text className="RoadmapDesc">
+              Integrate the community voting power, equity crowdfunding system
+              and Investor Protection using Milestone System.
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex id="roadmapBox6">
+          <Image src="/circle.svg" id="circle6" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">2022</Text>
+            <Text className="RoadmapTitle">Whitepaper V3</Text>
+            <Text className="RoadmapDesc">
+              Whitepaper 3.0 completed in 2022
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex id="roadmapBox7">
+          <Image src="/circle.svg" id="circle7" />
+          <Flex className="RoadmapContent">
+            <Text className="RoadmapHeading">Q1 2022</Text>
+            <Text className="RoadmapTitle">Seed - Pre Sale - Ico</Text>
+            <Text className="RoadmapDesc">
+              Release a demo platform to create projects, back projects, and
+              stake in Anchor will be completed in December 2021
+            </Text>
+          </Flex>
         </Flex>
       </Flex>
     </Flex>
-  );
+  )
 }

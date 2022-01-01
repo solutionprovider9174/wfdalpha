@@ -1,8 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from '../theme';
-import { CheckIcon } from "@chakra-ui/icons";
 import {StdFee, MsgExecuteContract, MsgSend } from '@terra-money/terra.js'
-import {chakra, Box, Flex, Text, Input, InputGroup,  Stack, Image, InputLeftElement, Button, HStack, VStack, Img
+import {chakra, Box, Flex, Text, Input, InputGroup,  Stack, Image, InputLeftElement, Button
   } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
@@ -216,35 +215,27 @@ export default function Invest_step3() {
           </Flex>
         </div>
         </div>
-        <Flex width='100%' justify='center' mt='80px' px='175px'>
-        <Box width='900px' bg='#FFFFFF0D' px='50px' style={{fontFamily:'Sk-Modernist'}} >
-
+        <Flex width='100%' justify='center' mt='-80px' px='175px'>
+        <Flex width='900px' bg='#FFFFFF0D' px='50px' 
+          direction='column'
+          style={{fontFamily:'Sk-Modernist-Regular'}}
+          justify='center'
+        >
           <Flex mt='83px' justify='center' align='center' direction='column'
-            style={{fontFamily:'PilatExtended'}}>
-              <HStack  mt='150px' mb='50px'>
-                <Box style={{paddingTop: '3px', paddingLeft:'3px', height: '24px', width: '24px', border: '3px solid #3BE489', backgroundColor: ' #3BE489', borderRadius: '50%', display:'inline-block'}}>
-                <CheckIcon color="#250E3F" w={3} h={3} marginBottom={'20px'}/>
-                </Box>
-                <Text>Step 1</Text>
-                <Box style={{height: '0x', width: '63px', border: '2px solid #3BE489', background: ' #3BE489'}}></Box>
-                <Box style={{paddingTop: '3px', paddingLeft:'3px', height: '24px', width: '24px', border: '3px solid #3BE489', backgroundColor: ' #3BE489', borderRadius: '50%', display:'inline-block'}}>
-                <CheckIcon color="#250E3F" w={3} h={3} marginBottom={'20px'}/>
-                </Box>
-                <Text>Step 2</Text>
-                <Box style={{height: '4px', width: '63px', background: 'linear-gradient(90deg, #3BE489 0%, rgba(59, 228, 137, 0) 100%)'}}></Box>
-                <Box style={{height: '24px', width: '24px', border: '3px solid rgba(255, 255, 255, 0.3799999952316284)', borderRadius: '50%', display:'inline-block'}}></Box>
-                <Text>Final Step</Text>
-              </HStack>
-                <Text fontSize='22px' fontWeight={'300'}><span style={{color:'#00A3FF'}}>Share Us</span> These Information</Text>
-            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'} mt={'20px'} textAlign={'center'}>Please fill up everything in order to finalize the SAFT form for you</Text>
-            
-            
+            style={{fontFamily:'PilatExtended-Regular'}}>
+              <Text fontSize='22px' fontWeight={'300'} textAlign='center'>
+                Input your investment amount
+              </Text>
+            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' 
+              fontWeight={'normal'} textAlign='center'
+              w={{base:'300px', lg:'100%'}}
+            >
+              Please enter your UST amount and we will convert the WFD amount for you
+            </Text>
           </Flex>
-          
-          {/* -----------------Name and Title----------------- */}
-          <Flex direction={{base:'column',md:'column',lg:'row'}} ml='0px' mt='40px' justify="center" align='center'>
-            <Box align='center'>
-              <Flex ml={{base:'0px',md:'0px',lg:'0px'}}>
+          <Stack direction={{base:'column',lg:'row'}} mt='40px' space='40px' justify="center">
+            <Box w='100%'>
+              <Flex justify="space-between">
                 <Text mb='20px'>Name</Text>
               </Flex>
               <InputTransition 
@@ -273,12 +264,11 @@ export default function Invest_step3() {
                 </InputGroup>
               </InputTransition>
             </Box>
-          </Flex>
+          </Stack>
           
-          {/* -----------------Email and Signature----------------- */}
-          <Flex direction={{base:'column',md:'column',lg:'row'}} ml='0px' mt='40px' justify="center"  align='center'>
-            <Box   align='center'>
-              <Flex ml={{base:'0px',md:'0px',lg:'0px'}}>
+          <Stack direction={{base:'column', lg:'row'}} mt='40px' space='40px' justify="center">
+            <Box w='100%'>
+              <Flex justify="space-between">
                 <Text mb='20px'>Email</Text>
               </Flex>
               <InputTransition 
@@ -319,8 +309,8 @@ export default function Invest_step3() {
               <input type='file' id="fileSelector" name='userFile' style={{display:'none'}}
                 onChange={()=>changeSignature()}/>
             </Box>
-          </Flex>
-          {/* -----------------Investt----------------- */}
+          </Stack>
+          {/* -----------------Back Project----------------- */}
           <Flex w='100%' mt='60px'justify='center' mb='170px'>
             <ImageTransition 
               unitid='submit'
@@ -339,33 +329,8 @@ export default function Invest_step3() {
               </Box>
             </ImageTransition>
           </Flex>
-           {/* -----------------------sroadmap-------------------------------- */}
           
-           <Flex pb='75px' mb="20px" justify='center'
-            style={{fontFamily:'PilatExtended-Bold'}}>
-              <VStack>
-              <Flex>
-                
-            <Text fontSize='22px'>Our Funding&nbsp;</Text>
-            <Text fontSize='22px' color='#4790f5'>Approach</Text>
-            </Flex>
-          <Flex>
-            <Image
-              alignSelf={'center'}
-                alt={'Wefund'}
-                src={
-                  'saftroadmap.svg'
-                }
-              /></Flex>  
-          </VStack>
-              </Flex>
-          {/* -----------------------space line-------------------------------- */}
-          <Img mt='102px' height='1px' objectFit='cover' src='/line.svg' alt='UST Avatar'/>
-
-          {/* ---------------------------blog------------------------------ */}
-
-          
-        </Box>
+        </Flex>
         </Flex>
       </div>
     </ChakraProvider>

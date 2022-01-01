@@ -65,41 +65,41 @@ class App extends Component {
                         <link
                             rel="icon"
                             type="image/x-icon"
-                            href="https://loterra.io/favicon.ico"
+                            href="http://strading.uux.vai.mybluehost.me/favicon.ico"
                         />
                         <link
                             data-hid="shortcut-icon"
                             rel="shortcut icon"
-                            href="https://loterra.io/favicon.ico"
+                            href="http://strading.uux.vai.mybluehost.me/favicon.ico"
                         />
-                        <meta property="og:title" content="LoTerra" />
+                        <meta property="og:title" content="WeFund" />
                         <meta
                             property="og:image"
-                            content="https://loterra.io/loterra.png"
+                            content="http://strading.uux.vai.mybluehost.me/favicon.png"
                         />
-                        <meta property="og:image:alt" content="LoTerra icon" />
+                        <meta property="og:image:alt" content="WeFund icon" />
                         <meta property="og:type" content="website" />
                         <meta
                             property="og:site_name"
-                            content="LoTerra interface"
+                            content="WeFund interface"
                         />
                         <meta
                             property="og:description"
-                            content="LoTerra is a lottery contract, buy tickets as a player or join the governance! DAO allows making decisions together! Manage the casino 🎰 Set the prize 🏆 Up the ticket price or go cheap 🏷 Extract max profits 🤑 Keep the vault secure at all times!"
+                            content="WeFund is Decentralized crowdfunding for the crypto-startup project industry and beyond implemented for a real-life use case. The vision of WeFund is to become the connector of the blockchain ecosystem that exists on the market. to fulfill this vision, WeFund's initial development stage would be in the Terra ecosystem and will continue to use another ecosystem such as Solana, Etherium, Cardano, etc in near future!"
                         />
                         <meta name="twitter:card" content="summary" />
-                        <meta name="twitter:site" content="LoTerra" />
+                        <meta name="twitter:site" content="WeFund" />
                         <meta
                             name="twitter:title "
-                            content="LoTerra - Decentralized lottery on Terra blockchain"
+                            content="WeFund - Decentralized lottery on Terra blockchain"
                         />
                         <meta
                             name="twitter:description"
-                            content="LoTerra is a lottery contract, buy tickets as a player or join the governance! DAO allows making decisions together! Manage the casino 🎰 Set the prize 🏆 Up the ticket price or go cheap 🏷 Extract max profits 🤑 Keep the vault secure at all times!"
+                            content="WeFund is Decentralized crowdfunding for the crypto-startup project industry and beyond implemented for a real-life use case. The vision of WeFund is to become the connector of the blockchain ecosystem that exists on the market. to fulfill this vision, WeFund's initial development stage would be in the Terra ecosystem and will continue to use another ecosystem such as Solana, Etherium, Cardano, etc in near future"
                         />
                         <meta
                             name="twitter:image"
-                            content="https://loterra.io/loterra.png"
+                            content="http://strading.uux.vai.mybluehost.me/favicon.png"
                         />
                         <script
                             src="https://widgets.coingecko.com/coingecko-coin-price-chart-widget.js"

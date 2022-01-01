@@ -15,6 +15,9 @@ import {
 const StoreContext = createContext()
 
 const initialState = {
+    // net: 'testnet',
+    net: 'mainnet',
+
     // WEFundContractAddress: "terra1hsvqrzda46k80ca28h282dnhmr0k8eff3m9krz", //testnet
     WEFundContractAddress: "terra1qcm9957c2gyghkaqgsk0h5mw6xf6ym4xdu7kmu",
     projectData: '',
@@ -40,7 +43,7 @@ const initialState = {
     investDate: '',
     investSignature: '',
     request: 'https://wefund-nodejs-hmcl7.ondigitalocean.app',
-    // request: 'http://a9b4-188-43-136-33.ngrok.io',
+    // request: 'http://508d-87-116-164-143.ngrok.io',
     pdfFile: '',
     whitepaper: '',
     logo: '',

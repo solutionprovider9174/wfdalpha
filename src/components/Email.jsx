@@ -5,44 +5,17 @@ import { ButtonTransition } from '../components/ImageTransition'
 
 export default function Email() {
   return (
-    <Flex
-      w="100%"
-      mx="115px"
-      mt="219px"
-      direction="column"
-      alignItems="center"
-      position="relative"
-      justifyContent="center"
-    >
+    <Flex id="comunityBackgroundHeight">
       <Image src="/EmailBg.png" className="EmailBg" />
-      <Flex
-        h="350px"
-        zIndex={5}
-        width="80%"
-        direction="column"
-        bg="url(saft2.svg)"
-        bgRepeat="no-repeat"
-        backgroundSize="contain"
-      >
-        <Flex mt="66px" justify="center">
-          <Text
-            fontFamily="PilatExtended-Regular"
-            fontWeight="400"
-            fontSize="22px"
-          >
-            GET IN WEFUND
-          </Text>
-        </Flex>
-        <Flex mt="14px" justify="center">
-          <Text
-            fontFamily="PilatExtended-Regular"
-            fontWeight="700"
-            fontSize="35px"
-          >
+      <Flex id="emailInnerBox">
+        <Flex flexDirection="column" textAlign="center">
+          <Text className="emailInnerBoxTitle">GET IN WEFUND</Text>
+
+          <Text className="emailInnerBoxTitle" mt="10px">
             Grow With Us Now
           </Text>
         </Flex>
-        <Flex mt="72px" mb="1000px" justify="center">
+        <Flex justify="center" id="displayNoneInMobile">
           <ButtonTransition
             unitid="investinwefund"
             selected={false}
@@ -53,6 +26,19 @@ export default function Email() {
             <Flex direction="row">
               Invest in WeFund
               <Image ml="10px" alt="startfunding" src="/investface.svg" />
+            </Flex>
+          </ButtonTransition>
+        </Flex>
+        <Flex justify="center" id="displayNoneInDesktop">
+          <ButtonTransition
+            unitid="investinwefund"
+            selected={false}
+            width="120px"
+            height="20px"
+            rounded="100px"
+          >
+            <Flex direction="row" fontSize="10px">
+              Invest in WeFund
             </Flex>
           </ButtonTransition>
         </Flex>

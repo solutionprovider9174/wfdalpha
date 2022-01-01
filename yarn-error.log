@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @choc-ui/paginator
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js install
 
 PATH: 
   C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files (x86)\NetSarang\Xmanager 7\;C:\Program Files (x86)\NetSarang\Xshell 7\;C:\Program Files (x86)\NetSarang\Xftp 7\;C:\Program Files (x86)\NetSarang\Xlpd 7\;C:\Users\Webdeveloper\AppData\Roaming\npm;C:\Users\Webdeveloper\AppData\Roaming\Composer\vendor\bin;C:\Program Files\PuTTY\;C:\ProgramData\chocolatey\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Go\bin;C:\Program Files\dotnet\;C:\MinGW\bin1;C:\Program Files (x86)\GnuWin32\bin;C:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin;C:\Program Files (x86)\Smart Projects\IsoBuster;C:\Program Files\nodejs;C:\Python27;C:\Program Files\nodejs\;C:\Users\Webdeveloper\.cargo\bin;C:\Ruby27-x64\bin;C:\Users\Webdeveloper\AppData\Local\Microsoft\WindowsApps;C:\Users\Webdeveloper\AppData\Local\Yarn\bin;C:\Users\Webdeveloper\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Webdeveloper\AppData\Local\GitHubDesktop\bin;C:\Users\Webdeveloper\AppData\Roaming\Composer\vendor\bin;C:\Users\Webdeveloper\AppData\Local\GitHubDesktop\bin;C:\Users\Web developer\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Webdeveloper\go\bin;C:\Program Files\nodejs;C:\Python27;C:\Users\Webdeveloper\AppData\Roaming\npm
@@ -14,8 +14,12 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com
-      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:66:26)
+  SyntaxError: D:\work\Terra\wfdalpha\package.json: Unexpected token } in JSON at position 2619
+      at JSON.parse (<anonymous>)
+      at C:\Program Files (x86)\Yarn\lib\cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (C:\Program Files (x86)\Yarn\lib\cli.js:310:30)
+      at C:\Program Files (x86)\Yarn\lib\cli.js:321:13
 
 npm manifest: 
   {
@@ -33,6 +37,7 @@ npm manifest:
       "dependencies": {
           "@chakra-ui/icons": "^1.1.1",
           "@chakra-ui/react": "^1.7.3",
+          "@choc-ui/paginator": "^3.2.2",
           "@emotion/react": "11",
           "@emotion/styled": "11",
           "@popperjs/core": "^2.9.2",
@@ -44,7 +49,9 @@ npm manifest:
           "babel-plugin-transform-remove-console": "^6.9.4",
           "bootstrap": "^5.0.2",
           "chart.js": "^3.5.0",
+          "formidable": "^2.0.1",
           "framer-motion": "4",
+          "js-file-download": "^0.4.1",
           "nodemailer": "^6.7.1",
           "nouislider-react": "^3.4.1",
           "numeral": "^2.0.6",
@@ -69,6 +76,7 @@ npm manifest:
           "react-static-plugin-sitemap": "^7.5.1",
           "react-static-plugin-source-filesystem": "^7.5.1",
           "react-timer-hook": "^3.0.4",
+          "reactjs-popup": "^2.0.5",
           "tslib": "^2.3.1"
       },
       "devDependencies": {
@@ -86,7 +94,8 @@ npm manifest:
           "react-static-plugin-tailwindcss": "^0.1.3",
           "serve": "^11.3.2",
           "tailwindcss": "npm:@tailwindcss/postcss7-compat"
-      }
+      },
+      "engines": { "node": "12.x" },
   }
 
 yarn manifest: 
@@ -1660,6 +1669,11 @@ Lockfile:
     dependencies:
       "@chakra-ui/utils" "1.9.1"
   
+  "@choc-ui/paginator@^3.2.2":
+    version "3.2.2"
+    resolved "https://registry.yarnpkg.com/@choc-ui/paginator/-/paginator-3.2.2.tgz#c96562ef63e4d2b17e6941fa006dffb4976fa882"
+    integrity sha512-BSm+0XMNRMMOQW39BpdzfHpWegG2mSv3tRCfKRoU7TNrIDmPjv/LKShmBnXFd93dosBqicuKOUS5gjWt+Tmagg==
+  
   "@ctrl/tinycolor@^3.4.0":
     version "3.4.0"
     resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-3.4.0.tgz#c3c5ae543c897caa9c2a68630bed355be5f9990f"
@@ -2887,6 +2901,11 @@ Lockfile:
     version "0.0.7"
     resolved "https://registry.npmjs.org/arraybuffer.slice/-/arraybuffer.slice-0.0.7.tgz"
     integrity sha512-wGUIVQXuehL5TCqQun8OW81jGzAWycqzFF8lFp+GOM5BXLYj3bKNsYC4daB7n6XjCqxQA/qgTJ+8ANR3acjrog==
+  
+  asap@^2.0.0:
+    version "2.0.6"
+    resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
+    integrity sha1-5QNHYR1+aQlDIIu9r+vLwvuGbUY=
   
   asn1.js@^5.2.0:
     version "5.4.1"
@@ -4829,6 +4848,14 @@ Lockfile:
       defined "^1.0.0"
       minimist "^1.1.1"
   
+  dezalgo@1.0.3:
+    version "1.0.3"
+    resolved "https://registry.yarnpkg.com/dezalgo/-/dezalgo-1.0.3.tgz#7f742de066fc748bc8db820569dddce49bf0d456"
+    integrity sha1-f3Qt4Gb8dIvI24IFad3c5Jvw1FY=
+    dependencies:
+      asap "^2.0.0"
+      wrappy "1"
+  
   dfa@1.1.0:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/dfa/-/dfa-1.1.0.tgz#d30218bd10d030fa421df3ebbc82285463a31781"
@@ -6015,6 +6042,16 @@ Lockfile:
       combined-stream "^1.0.6"
       mime-types "^2.1.12"
   
+  formidable@^2.0.1:
+    version "2.0.1"
+    resolved "https://registry.yarnpkg.com/formidable/-/formidable-2.0.1.tgz#4310bc7965d185536f9565184dee74fbb75557ff"
+    integrity sha512-rjTMNbp2BpfQShhFbR3Ruk3qk2y9jKpvMW78nJgx8QKtxjDVrwbZG+wvDOmVbifHyOUOQJXxqEy6r0faRrPzTQ==
+    dependencies:
+      dezalgo "1.0.3"
+      hexoid "1.0.0"
+      once "1.4.0"
+      qs "6.9.3"
+  
   forwarded@~0.1.2:
     version "0.1.2"
     resolved "https://registry.npmjs.org/forwarded/-/forwarded-0.1.2.tgz"
@@ -6505,6 +6542,11 @@ Lockfile:
     version "1.1.0"
     resolved "https://registry.npmjs.org/hex-color-regex/-/hex-color-regex-1.1.0.tgz"
     integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
+  
+  hexoid@1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/hexoid/-/hexoid-1.0.0.tgz#ad10c6573fb907de23d9ec63a711267d9dc9bc18"
+    integrity sha512-QFLV0taWQOZtvIRIAdBChesmogZrtuXvVWsFHZTk2SU+anspqZ2vMnoLg7IE1+Uk16N19APic1BuF8bC8c2m5g==
   
   hey-listen@^1.0.8:
     version "1.0.8"
@@ -7289,6 +7331,11 @@ Lockfile:
     version "2.6.4"
     resolved "https://registry.npmjs.org/js-base64/-/js-base64-2.6.4.tgz"
     integrity sha512-pZe//GGmwJndub7ZghVHz7vjb2LgC1m8B07Au3eYqeqv9emhESByMXxaEgkUkEqJe87oBbSniGYoQNIBklc7IQ==
+  
+  js-file-download@^0.4.1:
+    version "0.4.12"
+    resolved "https://registry.yarnpkg.com/js-file-download/-/js-file-download-0.4.12.tgz#10c70ef362559a5b23cdbdc3bd6f399c3d91d821"
+    integrity sha512-rML+NkoD08p5Dllpjo0ffy4jRHeY6Zsapvr/W86N7E0yuzAO6qa5X9+xog6zQNlH102J7IXljNY2FtS6Lj3ucg==
   
   js-sha3@0.8.0:
     version "0.8.0"
@@ -8438,7 +8485,7 @@ Lockfile:
     resolved "https://registry.npmjs.org/on-headers/-/on-headers-1.0.2.tgz"
     integrity sha512-pZAE+FJLoyITytdqK0U5s+FIpjN0JP3OzFi/u8Rx+EV5/W+JTWGXG8xFzevE7AjBfDqHv/8vL8qQsIhHnqRkrA==
   
-  once@^1.3.0, once@^1.3.1, once@^1.4.0:
+  once@1.4.0, once@^1.3.0, once@^1.3.1, once@^1.4.0:
     version "1.4.0"
     resolved "https://registry.npmjs.org/once/-/once-1.4.0.tgz"
     integrity sha1-WDsap3WWHUsROsF9nFC6753Xa9E=
@@ -9504,6 +9551,11 @@ Lockfile:
     resolved "https://registry.npmjs.org/qs/-/qs-6.7.0.tgz"
     integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
   
+  qs@6.9.3:
+    version "6.9.3"
+    resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.3.tgz#bfadcd296c2d549f1dffa560619132c977f5008e"
+    integrity sha512-EbZYNarm6138UKKq46tdx08Yo/q9ZhFoAXAI1meAFd2GtbRDhbZY2WQSICskT0c5q99aFzLG1D4nvTk9tqfXIw==
+  
   qs@~6.5.2:
     version "6.5.2"
     resolved "https://registry.npmjs.org/qs/-/qs-6.5.2.tgz"
@@ -9942,6 +9994,11 @@ Lockfile:
       loose-envify "^1.1.0"
       object-assign "^4.1.1"
       prop-types "^15.6.2"
+  
+  reactjs-popup@^2.0.5:
+    version "2.0.5"
+    resolved "https://registry.yarnpkg.com/reactjs-popup/-/reactjs-popup-2.0.5.tgz#588a74966bb126699429d739948e3448d7771eac"
+    integrity sha512-b5hv9a6aGsHEHXFAgPO5s1Jw1eSkopueyUVxQewGdLgqk2eW0IVXZrPRpHR629YcgIpC2oxtX8OOZ8a7bQJbxA==
   
   read-pkg-up@^1.0.1:
     version "1.0.1"
