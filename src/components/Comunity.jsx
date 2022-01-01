@@ -37,7 +37,9 @@ export default function Comunity() {
             height="30px"
             rounded="100px"
           >
+            <Link to="/invest_step1" className="btn btn-danger">
             <Text fontSize="12px">Invest in WeFund</Text>
+            </Link>
           </ButtonTransition>
         </Flex>
       </Flex>
