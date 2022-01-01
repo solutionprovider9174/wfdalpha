@@ -390,7 +390,7 @@ export default function CreateProject()
             {/* ---------------upload---------------------------------- */}
             <Box ml='24px' w='100%'>
               <Flex justify="space-between">
-                <Text mb='20px'>Project WhitePaper</Text>
+                <Text mb='20px'>Project Whitepaper</Text>
               </Flex>
               {whitepaper == '' && 
                 <InputGroup size="sm">
