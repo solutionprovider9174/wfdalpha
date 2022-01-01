@@ -297,7 +297,7 @@ export default function CreateProject()
         <Flex width='100%' justify='center' px='175px' zIndex={'1'}>
         <div style={{width:'900px', background: 'rgba(255, 255, 255, 0.05)', border: '1.5px solid rgba(255, 255, 255, 0.15)',borderTopColor: 'transparent', fontFamily:'Sk-Modernist-Regular', paddingLeft:'50px', paddingRight:'50px', zIndex:'1'}} >
           {/* --------Select UST or WFD------------------ */}
-          <Text fontSize='18px' pt='50px'>Select Back on</Text>
+          <Text fontSize='18px' pt='50px'>Select Payment Method</Text>
 
           <Flex direction="row" mt='40px'>
             {/* ------------UST---------------------- */}
@@ -501,7 +501,7 @@ export default function CreateProject()
           {/* ------------------------blockchain category----------------- */}
           <Box mt='40px' w='50%'>
             <Flex justify="space-between">
-              <Text mb='20px'>Blockchain category</Text>
+              <Text mb='20px'>Blockchain</Text>
             </Flex>
             <InputTransition 
               unitid='projectchain'
