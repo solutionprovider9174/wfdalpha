@@ -60,7 +60,7 @@ export default function Aboutone() {
                 </ButtonBackTransition>
               </Flex>
             </a>
-            <a href="/Whitepaper_2.0.docx">
+            <a href="/Litepaper.pptx">
               <Flex w="100%" mt="30px" id="displayNoneInDesktop">
                 <ButtonBackTransition
                   width="100%"
@@ -77,7 +77,7 @@ export default function Aboutone() {
                     justify="space-between"
                   >
                     <Text color="white" fontSize="12px">
-                      Download Whitepaper{' '}
+                      Download Litepaper{' '}
                     </Text>
                     <Image src="Download.svg" height="12px" />
                   </Flex>
