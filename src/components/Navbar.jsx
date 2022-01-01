@@ -109,7 +109,7 @@ export default function Navbar() {
                 fontSize="11px"
                 lineHeight="18px"
               >
-                Invest on WeFund
+                Invest in WeFund
               </Text>
             </Link>
           </Flex>
@@ -229,7 +229,7 @@ const NAV_ITEMS = [
     href: 'explorer',
   },
   {
-    label: 'Invest on WeFund',
+    label: 'Invest in WeFund',
     href: 'invest_step1',
   },
 ]

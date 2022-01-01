@@ -195,7 +195,7 @@ console.log(projectData);
                     >
                       <Box variant="solid" color="white" justify='center' align='center'
                           onClick = {()=>{setSubmitPressed(!submitPressed)}} >
-                        Search Project
+                        Search Projects
                       </Box>
                     </ImageTransition>
                   </Flex>
@@ -206,7 +206,7 @@ console.log(projectData);
                       {/* ------------------project list---------- */}
                       <Flex marginTop={'26px'} marginBottom={'26px'} alignSelf={{lg:'flex-start'}} direction={{base:'row',md:'row',lg:'row'}} >
                         <Flex alignSelf={'flex-start'} width={{lg:'950px'}} >
-                          <Text fontSize={{base:'15px',md:'15px',lg:'22px'}}>Projects Incubates</Text>
+                          <Text fontSize={{base:'15px',md:'15px',lg:'22px'}}>Projects Incubated</Text>
                         </Flex>
                         <Flex alignSelf={'flex-end'} marginLeft={'73px'}>
                           <Text fontSize={{base:'15px',md:'15px',lg:'22px'}} width={'100px'}>
@@ -329,7 +329,7 @@ console.log(projectData);
                       direction={{base:'row',md:'row',lg:'row'}} 
                     >
                       <Flex alignSelf={'flex-start'} width={{lg:'950px'}} >
-                        <Text fontSize={{base:'15px',md:'15px',lg:'22px'}}>Projects Incubates</Text>
+                        <Text fontSize={{base:'15px',md:'15px',lg:'22px'}}>Projects Incubated</Text>
                       </Flex>
                       <Flex alignSelf={'flex-end'} marginLeft={'98px'}>
                         <Text fontSize={{base:'15px',md:'15px',lg:'22px'}}>
