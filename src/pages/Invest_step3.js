@@ -238,8 +238,6 @@ export default function Invest_step3() {
               </HStack>
                 <Text fontSize='22px' fontWeight={'300'}>Please <span style={{color:'#00A3FF'}}>share with us</span> this information</Text>
             <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'} mt={'20px'} textAlign={'center'}>Please fill in all fields to finalize the SAFT process</Text>
-            
-            
           </Flex>
           
           {/* -----------------Name and Title----------------- */}
