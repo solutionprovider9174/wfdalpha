@@ -52,17 +52,17 @@ export default function ExplorerProject() {
   async function fetchContractQuery() 
   {
     try {
-      const projectData = await api.contractQuery(
+      const oneprojectData = await api.contractQuery(
         state.WEFundContractAddress,
         {
-            
-
             get_project:{
-              project_id:2
+              project_id: '2'
               },
         }
       )
-      
+      let projectData=[];
+      projectData[0] = oneprojectData;
+
       if(projectData == ''){
         showNotification("Can't fetch Project Data", 'error', 6000);
         return;
