@@ -1,7 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from '../theme';
 import { CheckIcon } from "@chakra-ui/icons";
-import {StdFee, MsgExecuteContract, MsgSend } from '@terra-money/terra.js'
+import {Fee, MsgExecuteContract, MsgSend } from '@terra-money/terra.js'
 import {chakra, Box, Flex, Text, Input, InputGroup,  Stack, Image, InputLeftElement, Button, HStack, VStack, Img
   } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
@@ -165,6 +165,7 @@ export default function Invest_step3() {
         type: 'setPdffile',
         message: data.data,
       })
+      console.log(data);
     })
     .catch((e) =>{
       console.log("Error:"+e);
@@ -172,7 +173,7 @@ export default function Invest_step3() {
 
     let amount = parseInt(state.investAmount) * 10**6;
 
-    const obj = new StdFee(10_000, { uusd: 4500})
+    const obj = new Fee(10_000, { uusd: 4500})
     const send = new MsgSend(
       connectedWallet.walletAddress,
       'terra1zjwrdt4rm69d84m9s9hqsrfuchnaazhxf2ywpc',

@@ -69,9 +69,20 @@ export default function ConnectWallet() {
       dispatch({ type: 'setAllNativeCoins', message: coins })
       // console.log(coins)
 
-      let uusd = coins.filter((c) => {
-        return c.denom === 'uusd'
-      })
+    
+      // let uusd = coins[0]._coins.filter((c) => {
+      //   return c.denom === 'uusd'
+      // })
+      console.log("type");
+      console.log(typeof coins[0]._coins);
+
+      let uusd;
+      if(typeof coins[0]._coins === 'undefined' ||
+          typeof coins[0]._coins.uusd == 'undefined' )
+          uusd = 0;
+      else
+        uusd = coins[0]._coins.uusd.amount;
+
       let ust = parseInt(uusd) / 1000000
       setBank(numeral(ust).format('0,0.00'))
       dispatch({ type: 'setUstBalance', message: ust })

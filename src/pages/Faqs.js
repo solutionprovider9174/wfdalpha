@@ -1,5 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import {StdFee, MsgExecuteContract } from '@terra-money/terra.js'
+import {Fee, MsgExecuteContract } from '@terra-money/terra.js'
 import { Box, Flex, Text, Input, InputGroup,  InputLeftAddon,  Textarea, Select, 
     InputLeftElement, InputRightElement, Img  } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
@@ -192,7 +192,7 @@ export default function Faqs()
     //---------------execute contract----------------------------------
     let wefundContractAddress = state.WEFundContractAddress;
 
-    const obj = new StdFee(10_000, { uusd: 4500})
+    const obj = new Fee(10_000, { uusd: 4500})
 
     let AddProjectMsg = {
         add_project: {
