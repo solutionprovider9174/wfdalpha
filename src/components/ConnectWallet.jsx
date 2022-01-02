@@ -172,7 +172,7 @@ export default function ConnectWallet() {
                   alignItems: 'center',
                 }}
               >
-                <CaretRight size={16} /> Terra Station 
+                <CaretRight size={16} /> Terra Station (extension/mobile)
               </button>
               <button
                 onClick={() => connectTo('mobile')}
@@ -183,6 +183,7 @@ export default function ConnectWallet() {
                   alignItems: 'center',
                 }}
               >
+                <CaretRight size={16} /> Terra Station (mobile for desktop)
               </button>
             </ul>
           </>
