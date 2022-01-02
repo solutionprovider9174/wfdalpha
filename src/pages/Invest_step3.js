@@ -236,8 +236,8 @@ export default function Invest_step3() {
                 <Box style={{height: '24px', width: '24px', border: '3px solid rgba(255, 255, 255, 0.3799999952316284)', borderRadius: '50%', display:'inline-block'}}></Box>
                 <Text>Final Step</Text>
               </HStack>
-                <Text fontSize='22px' fontWeight={'300'}><span style={{color:'#00A3FF'}}>Share Us</span> These Information</Text>
-            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'} mt={'20px'} textAlign={'center'}>Please fill up everything in order to finalize the SAFT form for you</Text>
+                <Text fontSize='22px' fontWeight={'300'}>Please <span style={{color:'#00A3FF'}}>share with us</span> this information</Text>
+            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'} mt={'20px'} textAlign={'center'}>Please fill in all fields to finalize the SAFT process</Text>
             
             
           </Flex>
