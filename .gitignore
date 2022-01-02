@@ -4,5 +4,8 @@ node_modules
 artifacts/
 dist/
 .next
-.DS_Store
+**/.DS_Store
 tmp/
+package-lock.json
+yarn.lock
+yarn-error.log
