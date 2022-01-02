@@ -1,7 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from '../theme';
 import {StdFee, MsgExecuteContract, MsgSend } from '@terra-money/terra.js'
-import {chakra, Box, Flex, Text, Input, InputGroup,  Stack, Image, InputLeftElement, Button
+import {chakra, Box, Flex, Text, Input, InputGroup,  VStack, Image, InputLeftElement, Button
   } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
@@ -10,6 +10,7 @@ import { navigate } from '@reach/router'
 import { useStore } from '../store'
 import { ImageTransition, ButtonTransition, InputTransition } from "../components/ImageTransition";
 import Notification from '../components/Notification'
+import Faq from '../components/FAQ'
 
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
@@ -202,44 +203,34 @@ export default function Invest_step3() {
     <ChakraProvider resetCSS theme={theme}>
       <div style={{background:"linear-gradient(90deg, #1F0021 0%, #120054 104.34%)", 
       width:'100%', color:'white', fontSize:'18px', fontFamily:'Sk-Modernist-Regular', fontWeight:'500' }}>
-        <div style={{backgroundImage:"url('/createproject_banner_emphasis.svg')", width:'100%', zIndex:'10'}}>
-        <div  style={{backgroundImage:"url('/createproject_banner.svg')", position:'absolute', top:'80px',  width:'100%', width:'100%', zIndex:'11',backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',zIndex:'11'}}>
-          <Flex pt='95px' justify="center">
+        <div style={{backgroundImage:"url('/createproject_banner_emphasis.svg')", 
+        boxShadow:"0px 5px 50px 0px #000000A6", width:'100%', zIndex:'10'}}>
+        <div style={{backgroundImage:"url('/createproject_banner.svg')", width:'100%', width:'100%', zIndex:'11',backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',zIndex:'11'}}>
+          <Flex pt='64px' justify="center">
             <Text fontSize='16px' fontWeight='normal' color={'rgba(255, 255, 255, 0.54)'}>Home &gt;&nbsp;</Text>
-            <Text fontSize='16px' color={'rgba(255, 255, 255, 0.84)'}>Invest in WeFund</Text>
+            <Text fontSize='16px' color={'rgba(255, 255, 255, 0.84)'}>Back the Project</Text>
           </Flex>
-          <Flex mt='11px' pb='55px' mb="20px" justify='center'
+          <Flex mt='11px' pb='75px' mb="20px" justify='center'
             style={{fontFamily:'PilatExtended-Bold'}}>
-            <Text fontSize={{base:'25px',md:'25px',lg:'40px'}}  color='#4790f5'>Invest</Text>
-            <Text fontSize={{base:'25px',md:'25px',lg:'40px'}}>&nbsp;in WeFund</Text>
+            <Text fontSize='40px' color='#4790f5'>Invest</Text>
+            <Text fontSize='40px'>&nbsp;in WeFund</Text>
           </Flex>
         </div>
         </div>
         <Flex width='100%' justify='center' mt='-80px' px='175px'>
-        <Flex width='900px' bg='#FFFFFF0D' px='50px' 
-          direction='column'
-          style={{fontFamily:'Sk-Modernist-Regular'}}
-          justify='center'
-        >
+        <Box width='900px' bg='#FFFFFF0D' px='50px' style={{fontFamily:'Sk-Modernist-Regular'}} >
           <Flex mt='83px' justify='center' align='center' direction='column'
             style={{fontFamily:'PilatExtended-Regular'}}>
-              <Text fontSize='22px' fontWeight={'300'} textAlign='center'>
-                Input your investment amount
-              </Text>
-            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' 
-              fontWeight={'normal'} textAlign='center'
-              w={{base:'300px', lg:'100%'}}
-            >
-              Please enter your UST amount and we will convert the WFD amount for you
-            </Text>
+                <Text fontSize='22px' fontWeight={'300'}>Input your investment amount</Text>
+            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'}>Please enter your UST amount and we will convert the WFD amount for you</Text>
           </Flex>
-          <Stack direction={{base:'column',lg:'row'}} mt='40px' space='40px' justify="center">
+          <Flex direction='row' mt='40px' justify="center">
             <Box w='100%'>
               <Flex justify="space-between">
                 <Text mb='20px'>Name</Text>
               </Flex>
               <InputTransition 
-                unitid='investorname'
+                unitid='projectemail'
                 selected={InsName==''?false:true}
                 width='100%' height='55px' rounded='md' width='290px'
               >      
@@ -249,12 +240,12 @@ export default function Invest_step3() {
                 </InputGroup>
               </InputTransition>
             </Box>
-            <Box align='center' ml={{base:'0px',md:'0px',lg:'30px'}}>
-              <Flex ml={{base:'0px',md:'0px',lg:'0px'}} mt={{base:'40px', md:'40px', lg:'0px'}}>
+            <Box ml='20px' w='100%'>
+              <Flex justify="space-between">
                 <Text mb='20px'>Title</Text>
               </Flex>
               <InputTransition 
-                unitid='investortitle'
+                unitid='projectemail'
                 selected={InsTitle==''?false:true}
                 width='100%' height='55px' rounded='md' width='290px'
               >      
@@ -264,15 +255,15 @@ export default function Invest_step3() {
                 </InputGroup>
               </InputTransition>
             </Box>
-          </Stack>
+          </Flex>
           
-          <Stack direction={{base:'column', lg:'row'}} mt='40px' space='40px' justify="center">
+          <Flex direction='row' mt='40px' justify="center">
             <Box w='100%'>
               <Flex justify="space-between">
                 <Text mb='20px'>Email</Text>
               </Flex>
               <InputTransition 
-                unitid='investoremail'
+                unitid='projectemail'
                 selected={InsEmail==''?false:true}
                 width='100%' height='55px' rounded='md' width='290px'
               >      
@@ -282,8 +273,8 @@ export default function Invest_step3() {
                 </InputGroup>
               </InputTransition>
             </Box>
-            <Box align='center' ml={{base:'0px',md:'0px',lg:'30px'}}>
-              <Flex ml={{base:'0px',md:'0px',lg:'0px'}} mt={{base:'40px', md:'40px', lg:'0px'}}>
+            <Box ml='20px' w='100%'>
+              <Flex justify="space-between">
                 <Text mb='20px'>Signature</Text>
               </Flex>
               <Box>
@@ -307,9 +298,23 @@ export default function Invest_step3() {
                 </Flex>
               </Box>
               <input type='file' id="fileSelector" name='userFile' style={{display:'none'}}
-                onChange={()=>changeSignature()}/>
+                onChange={(e)=>onChangeSignature(e)}/>
+              {/* 
+              {signature == '' && 
+                <InputGroup size="sm" width='290px'>
+                  <InputLeftElement width='290px' h='55px' pointerEvents='none' children={<IoCloudUploadOutline color='#00A3FF' width='30px' height='30px'/>} />
+                  <Input type="text" h='55px' bg='#FFFFFF' borderColor="#FFFFFF33" placeholder="Upload here" focusBorderColor="purple.800"  rounded="md"  
+                  onClick={()=>{openUpload()}}  /> 
+                </InputGroup>}
+              {signature != '' && 
+                <InputGroup size="sm" width='290px'>
+                  <InputLeftElement h='55px' pointerEvents='none' children={<IoCheckbox color='00A3FF'  width='30px' height='30px' />} />
+                  <Input type="text" h='55px' bg='#FFFFFF' borderColor="#FFFFFF33" placeholder={signature} focusBorderColor="purple.800"  rounded="md"  
+                  onClick={()=>{openUpload()}} /> 
+                </InputGroup>}
+               */}
             </Box>
-          </Stack>
+          </Flex>
           {/* -----------------Back Project----------------- */}
           <Flex w='100%' mt='60px'justify='center' mb='170px'>
             <ImageTransition 
@@ -323,15 +328,20 @@ export default function Invest_step3() {
               selected={false}
               width='200px' height='50px' rounded='33px'
             >
-              <Box variant="solid" color="white" justify='center' align='center'
-                  onClick = {()=>{}} >
+              <Box variant="solid" color="white" justify='center' align='center' 
+                onClick={()=>onNext()}
+              >
                 Submit
               </Box>
             </ImageTransition>
           </Flex>
-          
+          <Faq/>
+        </Box>
         </Flex>
-        </Flex>
+        <Notification
+            notification={notification}
+            close={() => hideNotification()}
+        />
       </div>
     </ChakraProvider>
   )
