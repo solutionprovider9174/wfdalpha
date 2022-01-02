@@ -334,7 +334,6 @@ export default function Invest_step3() {
                */}
             </Box>
           </Flex>
-          {/* -----------------Back Project----------------- */}
           <Flex w='100%' mt='60px'justify='center' mb='170px'>
             <ImageTransition 
               unitid='submit'
@@ -347,8 +346,9 @@ export default function Invest_step3() {
               selected={false}
               width='200px' height='50px' rounded='33px'
             >
-              <Box variant="solid" color="white" justify='center' align='center'
-                  onClick = {()=>{}} >
+              <Box variant="solid" color="white" justify='center' align='center' 
+                onClick={()=>onNext()}
+              >
                 Submit
               </Box>
             </ImageTransition>
@@ -356,6 +356,10 @@ export default function Invest_step3() {
           <Faq/>
         </Box>
         </Flex>
+        <Notification
+            notification={notification}
+            close={() => hideNotification()}
+        />
       </div>
     </ChakraProvider>
   )
