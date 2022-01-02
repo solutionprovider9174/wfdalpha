@@ -53,8 +53,7 @@ export default function NewProject() {
                     <Text>Final Step</Text>
                 </HStack>
               <Text fontSize='22px' fontWeight={'300'}>SAFT Form</Text>
-              <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'} mt={'20px'} textAlign={'center'}>Please check and confirm the form and go next to share us next informations</Text>
-              
+              <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'} mt={'20px'} textAlign={'center'}>Please check and confirm the form and go next step</Text>
             </Flex>
           {/* --------amount to back----------- */}
           <Flex mt='83px' justify='center' align='center' direction='column'>
@@ -76,7 +75,7 @@ export default function NewProject() {
                 }
               </InputTransition>
 
-              <Text ml='10px' fontSize='14px' fontWeight='400'>I agree will all condition of this Project and WeFund</Text>
+              <Text ml='10px' fontSize='14px' fontWeight='400'>I agree with all conditions of this Project and WeFund</Text>
             </Flex>
           </Flex>
           {/* -----------------Back Project----------------- */}

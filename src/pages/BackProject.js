@@ -246,7 +246,7 @@ export default function BackProject() {
               }
             </InputTransition>
 
-            <Text ml='10px' fontSize='14px' fontWeight='400'>I agree will all condition of this Project and WeFund</Text>
+            <Text ml='10px' fontSize='14px' fontWeight='400'>I agree with all conditions of this Project and WeFund</Text>
           </Flex>
           </Flex>
           {/* -----------------Back Project----------------- */}
