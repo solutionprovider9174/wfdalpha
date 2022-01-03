@@ -190,6 +190,7 @@ export default function Invest_step3() {
       .then((e) => {
           if (e.success) {
               showNotification('Back Success', 'success', 4000)
+              navigate('/invest_step4');
           } else {
               showNotification(e.message, 'error', 4000)
           }
@@ -197,8 +198,6 @@ export default function Invest_step3() {
       .catch((e) => {
           showNotification(e.message, 'error', 4000)
       })
-
-    navigate('/invest_step4');
   }
 
   return (
