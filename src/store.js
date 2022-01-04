@@ -5,7 +5,6 @@ import React, {
     useCallback,
 } from 'react'
 import {
-    StdFee,
     MsgExecuteContract,
     LCDClient,
     WasmAPI,
@@ -42,7 +41,7 @@ const initialState = {
     investTitle: '',
     investDate: '',
     investSignature: '',
-    request: 'https://wefund-nodejs-hmcl7.ondigitalocean.app',
+    request: 'https://wefund-nodejs-gwb6v.ondigitalocean.app',
     // request: 'http://508d-87-116-164-143.ngrok.io',
     pdfFile: '',
     whitepaper: '',

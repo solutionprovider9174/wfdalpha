@@ -1,5 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import {StdFee, MsgExecuteContract } from '@terra-money/terra.js'
+import {Fee, MsgExecuteContract } from '@terra-money/terra.js'
 import { Box, Flex, Text, Input, InputGroup,  InputLeftAddon,  Textarea, Select, 
     InputLeftElement, InputRightElement, Img  } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
@@ -223,7 +223,7 @@ export default function CreateProject()
     //---------------execute contract----------------------------------
     let wefundContractAddress = state.WEFundContractAddress;
 
-    const obj = new StdFee(10_000, { uusd: 4500})
+    const obj = new Fee(10_000, { uusd: 4500})
 
     let AddProjectMsg = {
         add_project: {
@@ -297,7 +297,7 @@ export default function CreateProject()
         <Flex width='100%' justify='center' px='175px' zIndex={'1'}>
         <div style={{width:'900px', background: 'rgba(255, 255, 255, 0.05)', border: '1.5px solid rgba(255, 255, 255, 0.15)',borderTopColor: 'transparent', fontFamily:'Sk-Modernist-Regular', paddingLeft:'50px', paddingRight:'50px', zIndex:'1'}} >
           {/* --------Select UST or WFD------------------ */}
-          <Text fontSize='18px' pt='50px'>Select Back on</Text>
+          <Text fontSize='18px' pt='50px'>Select Payment Method</Text>
 
           <Flex direction="row" mt='40px'>
             {/* ------------UST---------------------- */}
@@ -390,7 +390,7 @@ export default function CreateProject()
             {/* ---------------upload---------------------------------- */}
             <Box ml='24px' w='100%'>
               <Flex justify="space-between">
-                <Text mb='20px'>Project WhitePaper</Text>
+                <Text mb='20px'>Project Whitepaper</Text>
               </Flex>
               {whitepaper == '' && 
                 <InputGroup size="sm">
@@ -460,8 +460,18 @@ export default function CreateProject()
               onChange={(e)=>{setPrjCategory(e.target.value)}} 
               >
                 <option selected style={{backgroundColor:'#1B0645'}}>Crypto</option>
-                <option style={{backgroundColor:'#1B0645'}}>Google</option>
-                <option style={{backgroundColor:'#1B0645'}}>Ecosystem</option>
+                <option style={{backgroundColor:'#1B0645'}}>Sport Industry</option>
+                <option style={{backgroundColor:'#1B0645'}}>Pro Enviroment Projects</option>
+                <option style={{backgroundColor:'#1B0645'}}>Game Industry</option>
+                <option style={{backgroundColor:'#1B0645'}}>Charity Projects</option>
+                <option style={{backgroundColor:'#1B0645'}}>Real Estate Industry</option>
+                <option style={{backgroundColor:'#1B0645'}}>Creative Industry</option>
+                <option style={{backgroundColor:'#1B0645'}}>Others</option>
+
+
+
+
+
               </Select>
             </InputTransition>
           </Box>
@@ -478,20 +488,20 @@ export default function CreateProject()
               <Select id="sub_category" style={{background: 'transparent', border:'0'}} h='55px' name="sub_category" autoComplete="sub_category" focusBorderColor="purple.800" shadow="sm" size="sm" w="full" rounded="md"
               onChange={(e)=>{setPrjSubcategory(e.target.value)}} 
               >
-                <option selected style={{backgroundColor:'#1B0645'}}>Lending</option>
-                <option style={{backgroundColor:'#1B0645'}}>Charity</option>
-                <option style={{backgroundColor:'#1B0645'}}>Social</option>
-                <option style={{backgroundColor:'#1B0645'}}>IDO</option>
+                <option selected style={{backgroundColor:'#1B0645'}}>Protocol</option>
+                <option style={{backgroundColor:'#1B0645'}}>Dao</option>
+                <option style={{backgroundColor:'#1B0645'}}>Community</option>
+                <option style={{backgroundColor:'#1B0645'}}>Launchped/Incubator</option>
                 <option style={{backgroundColor:'#1B0645'}}>Finance</option>
                 <option style={{backgroundColor:'#1B0645'}}>NFT</option>
-                <option style={{backgroundColor:'#1B0645'}}>Game</option>
+                <option style={{backgroundColor:'#1B0645'}}>Game/Metaverse</option>
               </Select>
             </InputTransition>
           </Box>
           {/* ------------------------blockchain category----------------- */}
           <Box mt='40px' w='50%'>
             <Flex justify="space-between">
-              <Text mb='20px'>Blockchain category</Text>
+              <Text mb='20px'>Blockchain</Text>
             </Flex>
             <InputTransition 
               unitid='projectchain'
@@ -506,6 +516,8 @@ export default function CreateProject()
                 <option style={{backgroundColor:'#1B0645'}}>Ethereum</option>
                 <option style={{backgroundColor:'#1B0645'}}>Polygon</option>
                 <option style={{backgroundColor:'#1B0645'}}>Avalanche</option>
+                <option style={{backgroundColor:'#1B0645'}}>Others</option>
+
               </Select>
             </InputTransition>
           </Box>
@@ -542,8 +554,7 @@ export default function CreateProject()
                   <Select id="peg" style={{border:'0', background:'transparent' }} h='55px' w='140px' name="peg" autoComplete="peg" focusBorderColor="purple.800" shadow="sm" size="sm" rounded="md" fontSize='16px' value='' onChange={(e)=>{setPrjChain(e.target.value)}} 
                   >
                     <option selected style={{backgroundColor:'#1B0645'}}>($)UST</option>
-                    <option style={{backgroundColor:'#1B0645'}}>($)UST</option>
-                    <option style={{backgroundColor:'#1B0645'}}>($)UST</option>
+                 
                   </Select>
                 </InputGroup>
               </InputTransition>

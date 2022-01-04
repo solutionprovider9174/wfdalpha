@@ -56,7 +56,7 @@ export default function NewProject() {
               <>
                 <Img mt='17px' mx='35px' height='1px' objectFit='cover' src='/line.svg' alt='UST Avatar'/>
                 <Text fontSize='15px' mt='17px' mb='22px' px='25px' fontWeight='400' w='100%' h='auto'>
-                  WFD Tokens will be used to operate WeFund Platforms. Projects for example converts 1% of their funding into WFD tokens. WFD Tokens also used as governance tokens for voting and govern the project trajectory.
+                  WFD Tokens will be used to operate WeFund Platforms. Projects convert 1% of their funding into WFD tokens. WFD Tokens are also used as governance tokens for voting and governance of projects.
                 </Text>
               </>}
           </Flex>
@@ -90,7 +90,7 @@ export default function NewProject() {
         >
           <Flex direction='column' w='100%'>
               <Flex justify="space-between" align='center'  w='100%' h='55px'>
-                <Box ml='25px'><Text>What do backer get?</Text></Box>
+                <Box ml='25px'><Text>What do backers get?</Text></Box>
                 <Box mr='25px'>
                   {blog3 && <IoChevronUpOutline />}
                   {!blog3 && <IoChevronDownOutline/>}
@@ -112,7 +112,7 @@ export default function NewProject() {
         >
           <Flex direction='column' w='100%'>
               <Flex justify="space-between" align='center'  w='100%' h='55px'>
-                <Box ml='25px'><Text>What my UST or other tokens will be used for?</Text></Box>
+                <Box ml='25px'><Text>What will my UST or other tokens be used for?</Text></Box>
                 <Box mr='25px'>
                   {blog4 && <IoChevronUpOutline />}
                   {!blog4 && <IoChevronDownOutline/>}
@@ -134,7 +134,7 @@ export default function NewProject() {
         >
           <Flex direction='column' w='100%'>
               <Flex justify="space-between" align='center'  w='100%' h='55px'>
-                <Box ml='25px'><Text>What is WFD Fees?</Text></Box>
+                <Box ml='25px'><Text>What are WFD fees?</Text></Box>
                 <Box mr='25px'>
                   {blog5 && <IoChevronUpOutline />}
                   {!blog5 && <IoChevronDownOutline/>}
@@ -144,7 +144,7 @@ export default function NewProject() {
               <>
                 <Img mt='17px' mx='35px' height='1px' objectFit='cover' src='/line.svg' alt='UST Avatar'/>
                 <Text fontSize='15px' mt='17px' mb='22px' px='25px' fontWeight='400' w='100%' h='auto'>
-                  WFD Tokens will be used to operate WeFund Platforms. Projects for example converts 1% of their funding into WFD tokens. WFD Tokens also used as governance tokens for voting and govern the project trajectory.
+                  WFD Tokens will be used to operate WeFund Platforms. Projects for example converts 1% of their funding into WFD tokens. WFD Tokens are also used as governance tokens for voting and governane of projects.
                 </Text>
               </>}
           </Flex>

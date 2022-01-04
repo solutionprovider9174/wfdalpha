@@ -1,5 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import {StdFee, MsgExecuteContract, WasmAPI, LCDClient } from '@terra-money/terra.js'
+import {Fee, MsgExecuteContract, WasmAPI, LCDClient } from '@terra-money/terra.js'
 import { Box, Flex, Text, Input, InputGroup, InputRightElement, Img } from "@chakra-ui/react";
 import React, { useEffect, useState,  useCallback, useContext, useRef, } from 'react';
 import { IoChevronUpOutline, IoChevronDownOutline, IoCheckmark } from 'react-icons/io5';
@@ -141,7 +141,7 @@ export default function BackProject() {
 
     let wefundContractAddress = state.WEFundContractAddress;
 
-    const obj = new StdFee(10_000, { uusd: 4500})
+    const obj = new Fee(10_000, { uusd: 4500})
     let BackProjectMsg = {
         back2_project: {
           backer_wallet: connectedWallet.walletAddress,
@@ -246,7 +246,7 @@ export default function BackProject() {
               }
             </InputTransition>
 
-            <Text ml='10px' fontSize='14px' fontWeight='400'>I agree will all condition of this Project and WeFund</Text>
+            <Text ml='10px' fontSize='14px' fontWeight='400'>I agree with all conditions of this Project and WeFund</Text>
           </Flex>
           </Flex>
           {/* -----------------Back Project----------------- */}

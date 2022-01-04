@@ -12,19 +12,19 @@ export default function Navbar() {
   return (
     <ChakraProvider resetCSS theme={theme}>
       <Container>
-        <Flex
+        <Flex 
           id="mainContainer"
-          direction={{ base: 'column', md: 'column', lg: 'row' }}
-          justify={{ base: 'center', md: 'center', lg: 'space-between' }}
-          h={{ base: '150px', md: '150px', lg: '80px' }}
+          direction={{base:'column', md:'column', lg:'row'}}
+          justify={{base:'center', md:'center', lg:'space-between'}}
+          h={{base:'150px', md:'150px', lg:'80px'}}
         >
-          <Flex
-            w={{ base: '100%', md: '100%', lg: '40%' }}
-            h={{ base: '50%', md: '50%', lg: '100%' }}
-            align="center"
-            justify={{ base: 'center', md: 'center', lg: 'space-between' }}
+          <Flex 
+            w={{base:'100%', md:'100%', lg:'40%'}}
+            h={{base:'50%', md:'50%', lg:'100%'}}
+            align='center'
+            justify={{base:'center', md:'center', lg:'space-between'}}
           >
-            <Flex ml="20px">
+            <Flex ml='20px'>
               <Link className="navbar-brand" to="/">
                 <Image
                   alt={'Wefund'}
@@ -34,19 +34,18 @@ export default function Navbar() {
               </Link>
             </Flex>
             <Flex
-              width="30px"
-              transform="rotate(90deg)"
-              border="1px solid rgba(255,255,255, 0.2)"
+              width= '30px'
+              transform= 'rotate(90deg)'
+              border= '1px solid rgba(255,255,255, 0.2)'
             />
             <DesktopNav />
           </Flex>
           <Flex
-            mr="20px"
-            id="navbarStyling"
-            align="center"
-            justify="center"
-            w={{ base: '100%', md: '100%', lg: '40%' }}
-            h={{ base: '50%', md: '50%', lg: '100%' }}
+            mr='20px'
+            align='center'
+            justify='center'
+            w={{base:'100%', md:'100%', lg:'40%'}}
+            h={{base:'50%', md:'50%', lg:'100%'}}
           >
             <ButtonBackTransition
               unitid="Create Your Project"
@@ -67,68 +66,7 @@ export default function Navbar() {
               </Link>
             </ButtonBackTransition>
 
-            <Flex w="197px" ml="20px">
-              <ConnectWallet />
-            </Flex>
-          </Flex>
-        </Flex>
-        <Flex id="mobileNavContainer">
-          <Flex id="mobileNavContainerInner">
-            <Image
-              alt={'Wefund'}
-              src={'/WeFund%20Logos%20only.png'}
-              height="15px"
-            />
-
-            <Flex
-              width="15px"
-              transform="rotate(90deg)"
-              border="1px solid rgba(255,255,255, 0.2)"
-            />
-            <Link to="/" className="btn btn-danger">
-              <Text
-                color="rgba(255, 255, 255, 0.84)"
-                fontSize="11px"
-                lineHeight="18px"
-              >
-                Home
-              </Text>
-            </Link>
-            <Link to="/explorer" className="btn btn-danger">
-              <Text
-                color="rgba(255, 255, 255, 0.84)"
-                fontSize="11px"
-                lineHeight="18px"
-              >
-                Projects
-              </Text>
-            </Link>
-            <Link to="/invest_step1" className="btn btn-danger">
-              <Text
-                color="rgba(255, 255, 255, 0.84)"
-                fontSize="11px"
-                lineHeight="18px"
-              >
-                Invest on WeFund
-              </Text>
-            </Link>
-          </Flex>
-          <Flex id="mobileNavContainerInner" marginTop="5px">
-            <ButtonBackTransition
-              unitid="Create Your Project"
-              selected={false}
-              width="150px"
-              height="30px"
-              rounded="33px"
-            >
-              <Link to="/create">
-                <Text color="white" fontSize="12px">
-                  Create Your Project
-                </Text>
-              </Link>
-            </ButtonBackTransition>
-
-            <Flex w="150px" ml="10px">
+            <Flex w='197px' ml='20px'>
               <ConnectWallet />
             </Flex>
           </Flex>
@@ -144,18 +82,21 @@ const DesktopNav = () => {
         <Flex
           key={index}
           className="btn-group"
-          cursor="pointer"
-          ml={{ base: '50px', md: '50px', lg: '0px' }}
-          align="center"
+          cursor='pointer'
+          ml = {{base:'50px', md:'50px', lg:'0px'}}
+          align = 'center'
         >
           {!navItem.childitem && (
-            <Link to={navItem.href} className="btn btn-danger">
-              <Text
-                color="rgba(255, 255, 255, 0.84)"
-                fontSize="15px"
-                lineHeight="18px"
+            <Link
+              to={navItem.href}
+              className="btn btn-danger"
+            >
+              <Text 
+                color='rgba(255, 255, 255, 0.84)'
+                fontSize='15px'
+                lineHeight='18px'
               >
-                {navItem.label}
+              {navItem.label}
               </Text>
             </Link>
           )}
@@ -220,6 +161,38 @@ const DesktopNav = () => {
 }
 
 const NAV_ITEMS = [
+  // {
+  //   label: 'Projects',
+  //   children: [
+  //     {
+  //       label: 'Explore Project',
+  //       subLabel: 'Explore Project that you might be passionate about!',
+  //       href: '/explorer',
+  //     },
+  //     {
+  //       label: 'See Our Guidelines on Creating A Project',
+  //       subLabel: 'Wnat to fund your project? Or open up investment opportunities for your project? See here',
+  //       href: '/create',
+  //     },
+  //   ],
+  //   href: '',
+  // },
+  // {
+  //   label: 'Career',
+  //   children: [
+  //     {
+  //       label: 'Job Board',
+  //       subLabel: 'Join our team',
+  //       href: '#',
+  //     },
+  //     {
+  //       label: 'Freelance Projects',
+  //       subLabel: 'An exclusive list for contract work, 1-4 weeks',
+  //       href: '#',
+  //     },
+  //   ],
+  //   href: '',
+  // },
   {
     label: 'Home',
     href: '/',
@@ -229,7 +202,7 @@ const NAV_ITEMS = [
     href: 'explorer',
   },
   {
-    label: 'Invest on WeFund',
+    label: 'Invest in WeFund',
     href: 'invest_step1',
   },
 ]

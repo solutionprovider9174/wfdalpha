@@ -1,6 +1,11 @@
 .idea
 .env
 node_modules
-artifacts
-dist
+artifacts/
+dist/
 .next
+**/.DS_Store
+tmp/
+package-lock.json
+yarn.lock
+yarn-error.log
