@@ -85,7 +85,7 @@ class App extends Component {
             <meta name="twitter:site" content="WeFund" />
             <meta
               name="twitter:title "
-              content="WeFund - Decentralized lottery on Terra blockchain"
+              content="WeFund - Back to Our Project on Terra blockchain"
             />
             <meta
               name="twitter:description"
