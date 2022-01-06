@@ -12,7 +12,7 @@ export default function Aboutone() {
           </Flex>
           <Flex direction="row" mt="20px">
             <Flex align="center" mr="15px">
-              <Image alt="Wefund" src="/onegoal.svg" id="aboutUsPageNumber1" />
+              <Image alt="WeFund" src="/onegoal.svg" id="aboutUsPageNumber1" />
             </Flex>
             <Flex>
               <Text id="aboutUsPageHeadingHead">

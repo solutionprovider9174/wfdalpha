@@ -12,7 +12,7 @@ export default function Aboutone() {
           </Flex>
           <Flex direction="row" mt="20px">
             <Flex align="center" mr="15px">
-              <Image alt="Wefund" src="/onegoal.svg" id="aboutUsPageNumber1" />
+              <Image alt="WeFund" src="/onegoal.svg" id="aboutUsPageNumber1" />
             </Flex>
             <Flex>
               <Text id="aboutUsPageHeadingHead">
@@ -38,7 +38,7 @@ export default function Aboutone() {
               <Image h="200px" src="/rocket.svg" />
             </Flex>
 
-            <a href="/Litepaper.pptx">
+            <a href="/Litepaper_Wefund.pdf">
               <Flex w="100%" mt="30px" id="displayNoneInMobile">
                 <ButtonBackTransition
                   width="100%"
@@ -60,7 +60,7 @@ export default function Aboutone() {
                 </ButtonBackTransition>
               </Flex>
             </a>
-            <a href="/Litepaper.pptx">
+            <a href="/Litepaper_Wefund.pdf">
               <Flex w="100%" mt="30px" id="displayNoneInDesktop">
                 <ButtonBackTransition
                   width="100%"

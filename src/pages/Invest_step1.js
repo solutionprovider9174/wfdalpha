@@ -58,7 +58,7 @@ export default function NewProject() {
           {/* --------amount to back----------- */}
           <Flex mt='83px' justify='center' align='center' direction='column'>
             <Flex >
-              {/* <Image alignSelf={'flex-start'} alt={'Wefund'} src={ 'saft.svg' } /> */}
+              {/* <Image alignSelf={'flex-start'} alt={'WeFund'} src={ 'saft.svg' } /> */}
               <ESign/>
             </Flex>
 

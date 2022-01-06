@@ -27,7 +27,7 @@ export default function NewProject() {
             <Text fontSize='22px' color='#4790f5'>Approach</Text>
           </Flex>
           <Flex>
-            <Image alignSelf={'center'} alt={'Wefund'} src={ 'saftroadmap.svg' } />
+            <Image alignSelf={'center'} alt={'WeFund'} src={ 'saftroadmap.svg' } />
           </Flex>  
         </VStack>
       </Flex>
