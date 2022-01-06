@@ -38,7 +38,7 @@ export default function Aboutone() {
               <Image h="200px" src="/rocket.svg" />
             </Flex>
 
-            <a href="/Litepaper.pptx">
+            <a href="/Litepaper_Wefund.pdf">
               <Flex w="100%" mt="30px" id="displayNoneInMobile">
                 <ButtonBackTransition
                   width="100%"
