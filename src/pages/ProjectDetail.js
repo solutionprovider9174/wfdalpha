@@ -16,9 +16,11 @@ import {
   CircularProgress,
   CircularProgressLabel,
 } from '@chakra-ui/react'
-import React, { useEffect, useState, useMemo } from 'react'
 import { WasmAPI, LCDClient } from '@terra-money/terra.js'
+import React, { useEffect, useState, useMemo } from 'react'
 import { MdOutlinePlace } from 'react-icons/md'
+import { ButtonTransition } from '../components/ImageTransition'
+import { IoIosArrowForward } from 'react-icons/io'
 import {
   BsArrowUpRight,
   BsBookmarksFill,
@@ -28,7 +30,10 @@ import {
 import { useNavigate } from '@reach/router'
 
 import { useStore } from '../store'
-import { ImageTransition } from '../components/ImageTransition'
+import {
+  ButtonBackTransition,
+  ImageTransition,
+} from '../components/ImageTransition'
 import Notification from '../components/Notification'
 import Footer from '../components/Footer'
 
@@ -104,6 +109,7 @@ export default function ProjectDetail() {
       // console.log('disabled',notification)
     }, duration)
   }
+
   //------------back button-----------------------------------
   function next() {
     if (project_id == 2)
@@ -159,24 +165,23 @@ export default function ProjectDetail() {
   return (
     <ChakraProvider resetCSS theme={theme}>
       <Image src="/projectDetailHeaderCover.svg" />
-      <div
-        style={{
-          width: '100%',
-          color: 'white',
-          fontSize: '18px',
-          fontWeight: '500',
-          fontFamily: 'Sk-Modernist-Regular',
-          background: 'linear-gradient(90deg, #1F0021 0%, #120054 104.34%)',
-        }}
-      >
-        <Flex width="100%" justify="center" mt="50px">
+      <div>
+        <Flex
+          width="100%"
+          color="white"
+          mt={'-200px'}
+          justify="center"
+          fontSize={{ lg: '18px' }}
+          fontWeight={{ lg: '500' }}
+          fontFamily="Sk-Modernist-Regular"
+          background="linear-gradient(90deg, #1F0021 0%, #120054 104.34%)"
+        >
           <Box style={{ fontFamily: 'Sk-Modernist-Regular' }}>
             <Flex
               width="100%"
+              zIndex={'1'}
               justify="center"
               alignItems={'center'}
-              zIndex={'1'}
-              mt={'-180px'}
             >
               <VStack>
                 <Flex
@@ -197,19 +202,15 @@ export default function ProjectDetail() {
                     backdropFilter={'blur(54px)'}
                     align="center"
                   >
-                    <object
-                      data="/logo.png"
-                      style={{ width: '200px', height: '200px' }}
-                      type="image/png"
-                    >
-                      <Image
-                        src={
-                          state.request +
-                          '/download?filename=' +
-                          state.oneprojectData.project_icon
-                        }
-                      />
-                    </object>
+                    <Image
+                      src={
+                        state.request +
+                        '/download?filename=' +
+                        state.oneprojectData.project_icon
+                      }
+                      width={{ lg: '200px' }}
+                      objectFit="contain"
+                    />
                   </Flex>
                   <VStack
                     width={{ lg: '880px' }}
@@ -224,47 +225,51 @@ export default function ProjectDetail() {
                     }}
                   >
                     <Flex
-                      alignSelf={{
-                        base: 'center',
-                        md: 'center',
-                        lg: 'flex-start',
-                      }}
+                      alignItems="center"
+                      justifyContent="center"
+                      alignSelf={{ md: 'center', lg: 'flex-start' }}
                     >
                       <Text
                         fontSize="16px"
                         fontWeight="normal"
                         color={'rgba(255, 255, 255, 0.54)'}
                       >
-                        Home &gt;&nbsp;
+                        Home
                       </Text>
+                      <IoIosArrowForward
+                        height={'5px'}
+                        color={'rgba(255, 255, 255, 0.54)'}
+                      />
                       <Text
                         fontSize="16px"
                         fontWeight="normal"
                         color={'rgba(255, 255, 255, 0.54)'}
                       >
-                        Projects &gt;&nbsp;
+                        Projects
                       </Text>
+                      <IoIosArrowForward
+                        height={'5px'}
+                        color={'rgba(255, 255, 255, 0.54)'}
+                      />
                       <Text
+                        color="white"
                         fontSize="16px"
-                        color={'rgba(255, 255, 255, 0.84)'}
+                        fontWeight="bold"
                         textAlign="center"
                       >
                         {state.oneprojectData.project_name}
                       </Text>
                     </Flex>
                     <Flex
-                      style={{ fontFamily: 'PilatExtended-Bold' }}
-                      alignSelf={{
-                        base: 'center',
-                        md: 'center',
-                        lg: 'flex-start',
-                      }}
+                      color="white"
+                      fontSize="40px"
+                      fontFamily="PilatExtended-Bold"
+                      alignSelf={{ base: 'center', lg: 'flex-start' }}
                     >
-                      <Text fontSize="40px" fontWeight={'900'}>
-                        {state.oneprojectData.project_name}
-                      </Text>
+                      <Text>{state.oneprojectData.project_name}</Text>
                     </Flex>
                     <Flex
+                      fontWeight="bold"
                       alignSelf={{
                         base: 'center',
                         md: 'center',
@@ -282,38 +287,36 @@ export default function ProjectDetail() {
                         {state.oneprojectData.project_category}
                       </chakra.h1>
                     </Flex>
-                    <Flex
-                      alignSelf={{
-                        base: 'center',
-                        md: 'center',
-                        lg: 'flex-start',
-                      }}
-                    >
-                      <VStack alignSelf={'flex-start'}>
+                    <Flex alignSelf={{ base: 'center', lg: 'flex-start' }}>
+                      <ButtonTransition>
+                        <Flex>
+                          <Flex>
+                            <Text>Backed Money - $1.5M/$5M</Text>
+                          </Flex>
+                          <Flex>
+                            <CircularProgress
+                              value={40}
+                              size="120px"
+                              color="#00A3FF;"
+                            >
+                              <CircularProgressLabel>
+                                {percent}%
+                              </CircularProgressLabel>
+                            </CircularProgress>
+                          </Flex>
+                        </Flex>
+                      </ButtonTransition>
+                      {/* <VStack alignSelf={'flex-start'}>
                         <Flex>
                           <Text>
                             Progress : {totalBackedMoney} out of{' '}
                             {state.oneprojectData.project_collected} UST
                           </Text>
                         </Flex>
-                        <Flex
-                          alignSelf={{
-                            base: 'center',
-                            md: 'center',
-                            lg: 'flex-start',
-                          }}
-                        >
-                          <CircularProgress
-                            value={40}
-                            size="120px"
-                            color="#00A3FF;"
-                          >
-                            <CircularProgressLabel>
-                              {percent}%
-                            </CircularProgressLabel>
-                          </CircularProgress>
+                        <Flex alignSelf={{base: 'center',lg: 'flex-start'}}>
+                          
                         </Flex>
-                      </VStack>
+                      </VStack> */}
                     </Flex>
 
                     <Flex
