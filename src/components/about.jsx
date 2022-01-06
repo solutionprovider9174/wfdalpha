@@ -60,7 +60,7 @@ export default function Aboutone() {
                 </ButtonBackTransition>
               </Flex>
             </a>
-            <a href="/Litepaper.pptx">
+            <a href="/Litepaper_Wefund.pdf">
               <Flex w="100%" mt="30px" id="displayNoneInDesktop">
                 <ButtonBackTransition
                   width="100%"
