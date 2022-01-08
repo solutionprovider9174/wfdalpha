@@ -192,8 +192,9 @@ console.log(projectData);
                             <chakra.p py={2} color={"gray.400"} fontSize="15px">
                             Date - <span style={{color:"#FE8600"}}>31 Dec, 2021</span>
                             </chakra.p>
-                            <HStack space={10} align='self-start'>
-                              <chakra.p py={2} color={"gray.400"} w='600px'>
+                            {/* -------It works, This margin will push it up by 40px and then added padding (same val + 10) for desc so it stays down---- */}
+                            <HStack align='self-start' marginTop={'-45px'} marginBottom={'20px'}>
+                              <chakra.p py={2} color={"gray.400"} w='600px' paddingTop={'55px'} paddingRight={'20px'}>
                                 {projectItem.project_description.substr(0, 250)}
                                
                               </chakra.p>

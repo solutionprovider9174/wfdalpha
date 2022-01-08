@@ -99,6 +99,7 @@ export default function NewProject() {
                 <InputRightElement 
                   w={{base:'40px', lg:'60px'}}
                   h='55px' 
+                  pr={{base:'15px', lg:'5px'}}
                   pointerEvents='none' 
                   children={<Text>UST</Text>} 
                 />          
@@ -127,6 +128,7 @@ export default function NewProject() {
                 <InputRightElement 
                   w={{base:'40px', lg:'60px'}}
                   h='55px' 
+                  pr={{base:'15px', lg:'5px'}}
                   pointerEvents='none' 
                   children={<Text>WFD</Text>} 
                 />                    
