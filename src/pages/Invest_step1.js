@@ -23,14 +23,13 @@ export default function NewProject() {
     <ChakraProvider resetCSS theme={theme}>
       <div style={{background:"linear-gradient(90deg, #1F0021 0%, #120054 104.34%)", 
       width:'100%', color:'white', fontSize:'18px', fontFamily:'Sk-Modernist-Regular', fontWeight:'500' }}>
-        <div style={{backgroundImage:"url('/createproject_banner_emphasis.svg')", 
-        boxShadow:"0px 5px 50px 0px #000000A6", width:'100%', zIndex:'10'}}>
-        <div style={{backgroundImage:"url('/createproject_banner.svg')", width:'100%', width:'100%', zIndex:'11',backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',zIndex:'11'}}>
-          <Flex pt='64px' justify="center">
+        <div style={{backgroundImage:"url('/createproject_banner_emphasis.svg')", width:'100%', zIndex:'10'}}>
+        <div style={{backgroundImage:"url('/createproject_banner.svg')", position:'absolute', top:'80px',  width:'100%', width:'100%', zIndex:'11',backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover',zIndex:'11'}}>
+          <Flex pt='95px' justify="center">
             <Text fontSize='16px' fontWeight='normal' color={'rgba(255, 255, 255, 0.54)'}>Home &gt;&nbsp;</Text>
             <Text fontSize='16px' color={'rgba(255, 255, 255, 0.84)'}>Back the Project</Text>
           </Flex>
-          <Flex mt='11px' pb='75px' mb="20px" justify='center'
+          <Flex mt='11px' pb='55px' mb="20px" justify='center'
             style={{fontFamily:'PilatExtended-Bold'}}>
             <Text fontSize={{base:'25px',md:'25px',lg:'40px'}} color='#4790f5'>Invest</Text>
             <Text fontSize={{base:'25px',md:'25px',lg:'40px'}}>&nbsp;in WeFund</Text>
@@ -54,15 +53,8 @@ export default function NewProject() {
                 </HStack>
               <Text fontSize='22px' fontWeight={'300'}>SAFT Form</Text>
               <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'} mt={'20px'} textAlign={'center'}>Please check and confirm the form and go next step</Text>
-            </Flex>
-          {/* --------amount to back----------- */}
-          <Flex mt='83px' justify='center' align='center' direction='column'>
-            <Flex >
-              {/* <Image alignSelf={'flex-start'} alt={'WeFund'} src={ 'saft.svg' } /> */}
-              <ESign/>
-            </Flex>
-
-            <Flex mt='25px' direction="row">
+              <Text ml='10px' fontSize='14px' fontWeight='400'>I agree with all conditions of this Project and WeFund</Text>
+              <Flex mt='25px' direction="row">
               {/* <Input type="checkbox"  h='55px' bg='#FFFFFF0D' borderColor="#FFFFFF33" placeholder="Type here" focusBorderColor="purple.800" rounded="md"  onChange={(e)=>{}} /> */}
               <InputTransition 
                 unitid='conditioncheck'
@@ -75,20 +67,18 @@ export default function NewProject() {
                 }
               </InputTransition>
 
-              <Text ml='10px' fontSize='14px' fontWeight='400'>I agree with all conditions of this Project and WeFund</Text>
             </Flex>
-          </Flex>
-          {/* -----------------Back Project----------------- */}
-          <Flex w='100%' mt='60px'justify='center' mb='170px'>
-            <ImageTransition 
-              unitid='investnext'
-              border1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)' 
-              background1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
-              border2='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
-              background2='linear-gradient(180deg, #1A133E 0%, #1A133E 100%)'
-              border3="linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)"
-              background3="linear-gradient(180deg, #171347 0%, #171347 100%)"
-              selected={false}
+             {/* -----------------Back Project----------------- */}
+             <Flex w='100%' mt='60px'justify='center' mb='170px'>
+               <ImageTransition 
+                  unitid='investnext'
+                 border1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)' 
+                 background1='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
+                  border2='linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)'
+                  background2='linear-gradient(180deg, #1A133E 0%, #1A133E 100%)'
+                 border3="linear-gradient(180deg, #00A3FF 0%, #0047FF 100%)"
+                 background3="linear-gradient(180deg, #171347 0%, #171347 100%)"
+               selected={false}
               width='200px' height='50px' rounded='33px'
             >
                 <Box variant="solid" color="white" justify='center' align='center'
@@ -97,6 +87,18 @@ export default function NewProject() {
                 </Box>
             </ImageTransition>
           </Flex>
+          
+            </Flex>
+          {/* --------amount to back----------- */}
+          <Flex mt='83px' justify='center' align='center' direction='column'>
+            <Flex >
+              {/* <Image alignSelf={'flex-start'} alt={'WeFund'} src={ 'saft.svg' } /> */}
+              <ESign/>
+            </Flex>
+
+      
+          </Flex>
+          
           
         </Box>
         </Flex>

@@ -221,7 +221,7 @@ export default function Invest_step3() {
         <Box width='900px' bg='#FFFFFF0D' px='50px' style={{fontFamily:'Sk-Modernist'}} >
 
           <Flex mt='83px' justify='center' align='center' direction='column'
-            style={{fontFamily:'PilatExtended'}}>
+            style={{fontFamily:'PilatExtended-Regular'}}>
               <HStack  mt='150px' mb='50px'>
                 <Box style={{paddingTop: '3px', paddingLeft:'3px', height: '24px', width: '24px', border: '3px solid #3BE489', backgroundColor: ' #3BE489', borderRadius: '50%', display:'inline-block'}}>
                 <CheckIcon color="#250E3F" w={3} h={3} marginBottom={'20px'}/>
@@ -236,8 +236,8 @@ export default function Invest_step3() {
                 <Box style={{height: '24px', width: '24px', border: '3px solid rgba(255, 255, 255, 0.3799999952316284)', borderRadius: '50%', display:'inline-block'}}></Box>
                 <Text>Final Step</Text>
               </HStack>
-                <Text fontSize='22px' fontWeight={'300'}>Please <span style={{color:'#00A3FF'}}>share with us</span> this information</Text>
-            <Text fontSize='16px' color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'} mt={'20px'} textAlign={'center'}>Please fill in all fields to finalize the SAFT process</Text>
+                <Text fontSize={{base:'16px',md:'16px',lg:'22px'}} fontWeight={'300'}>Please <span style={{color:'#00A3FF'}}>share with us</span> this information</Text>
+            <Text fontSize={{base:'14px',md:'14px',lg:'16px'}} color='rgba(255, 255, 255, 0.54)' fontWeight={'normal'} mt={'20px'} textAlign={'center'}>Please fill in all fields to finalize the SAFT process</Text>
           </Flex>
           
           {/* -----------------Name and Title----------------- */}
@@ -274,9 +274,9 @@ export default function Invest_step3() {
             </Box>
           </Flex>
           
-          <Flex direction='row' mt='40px' justify="center">
-          <Box align='center' ml={{base:'0px',md:'0px',lg:'30px'}}>
-              <Flex justify="space-between">
+          <Flex direction={{base:'column',md:'column',lg:'row'}} mt='40px' justify="center" align='center'>
+          <Box align='center' ml={{base:'0px',md:'0px',lg:'0px'}} mt={{base:'0px',md:'0px',lg:'-100px'}}>
+              <Flex>
                 <Text mb='20px'>Email</Text>
               </Flex>
               <InputTransition 
@@ -291,7 +291,7 @@ export default function Invest_step3() {
               </InputTransition>
             </Box>
             <Box align='center' ml={{base:'0px',md:'0px',lg:'30px'}}>
-              <Flex ml={{base:'0px',md:'0px',lg:'0px'}} mt={{base:'40px', md:'40px', lg:'0px'}}>
+              <Flex mt={{base:'40px', md:'40px', lg:'0px'}}>
                 <Text mb='20px'>Signature</Text>
               </Flex>
               <Box>
