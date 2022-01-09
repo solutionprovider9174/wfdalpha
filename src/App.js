@@ -60,50 +60,46 @@ class App extends Component {
                             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
                         />
                         <title>
-                            WeFund - Back to Our Project on Terra blockchain
+                            WeFund - Community Crowdfunding Cross-Chain Incubator
                         </title>
                         <link
                             rel="icon"
                             type="image/x-icon"
-                            href="http://strading.uux.vai.mybluehost.me/favicon.ico"
+                            href="/favicon.ico"
                         />
                         <link
                             data-hid="shortcut-icon"
                             rel="shortcut icon"
-                            href="http://strading.uux.vai.mybluehost.me/favicon.ico"
+                            href="/favicon.ico"
                         />
                         <meta property="og:title" content="WeFund" />
                         <meta
                             property="og:image"
-                            content="http://strading.uux.vai.mybluehost.me/favicon.png"
+                            content="/favicon.png"
                         />
                         <meta property="og:image:alt" content="WeFund icon" />
                         <meta property="og:type" content="website" />
                         <meta
                             property="og:site_name"
-                            content="WeFund interface"
+                            content="WeFund Interface"
                         />
                         <meta
                             property="og:description"
-                            content="WeFund is Decentralized crowdfunding for the crypto-startup project industry and beyond implemented for a real-life use case. The vision of WeFund is to become the connector of the blockchain ecosystem that exists on the market. to fulfill this vision, WeFund's initial development stage would be in the Terra ecosystem and will continue to use another ecosystem such as Solana, Etherium, Cardano, etc in near future!"
+                            content="WeFund is decentralized crowdfunding for the crypto-startup project industry and beyond, implemented for real-life use cases. The vision of WeFund is to become the connector of the blockchain ecosystem that exists on the market. to fulfill this vision, WeFund's initial development stage would be in the Terra ecosystem and will continue to use another ecosystem such as Solana, Ethereum, Cardano, etc in the near future!"
                         />
                         <meta name="twitter:card" content="summary" />
                         <meta name="twitter:site" content="WeFund" />
                         <meta
-                            name="twitter:title "
-                            content="WeFund - Back to Our Project on Terra blockchain"
+                            name="twitter:title"
+                            content="WeFund - Community Crowdfunding Cross-Chain Incubator"
                         />
                         <meta
                             name="twitter:description"
-                            content="WeFund is Decentralized crowdfunding for the crypto-startup project industry and beyond implemented for a real-life use case. The vision of WeFund is to become the connector of the blockchain ecosystem that exists on the market. to fulfill this vision, WeFund's initial development stage would be in the Terra ecosystem and will continue to use another ecosystem such as Solana, Etherium, Cardano, etc in near future"
+                            content="WeFund is decentralized crowdfunding for the crypto-startup project industry and beyond, implemented for real-life use cases. The vision of WeFund is to become the connector of the blockchain ecosystem that exists on the market. to fulfill this vision, WeFund's initial development stage would be in the Terra ecosystem and will continue to use another ecosystem such as Solana, Ethereum, Cardano, etc in the near future"
                         />
                         <meta
                             name="twitter:image"
-                            content="http://strading.uux.vai.mybluehost.me/favicon.png"
-                        />
-                        <script
-                            src="https://widgets.coingecko.com/coingecko-coin-price-chart-widget.js"
-                            async
+                            content="/favicon.png"
                         />
                     </Head>
                     <StoreProvider>
