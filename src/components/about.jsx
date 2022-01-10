@@ -28,9 +28,9 @@ export default function Aboutone() {
               blockchain and real-world projects.
               <br />
               <br />
-              WeFund’s mission is to host high-quality projects that align with
-              WeFund’s investor community, community-driven decision making for
-              100% transparency, and manage funds exclusively on Terra’s Anchor
+              WeFund's mission is to host high-quality projects that align with
+              WeFund's investor community, community-driven decision making for
+              100% transparency, and manage funds exclusively on Terra's Anchor
               protocol using smart contracts for investor security.
             </Text>
 
